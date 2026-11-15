@@ -1,0 +1,154 @@
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: rgba(250, 249, 246, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $color-surface-border;
+  transition: all 0.2s ease-in-out;
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $header-height;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+
+  .brandLogo {
+    width: 36px;
+    height: 36px;
+    background-color: $color-brand-primary;
+    border-radius: $radius-xs;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.05em;
+  }
+
+  .brandText {
+    display: flex;
+    flex-direction: column;
+
+    .brandName {
+      font-family: $font-sans;
+      font-size: $text-md;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: $color-text-primary;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .brandTagline {
+      font-family: $font-sans;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: $color-brand-primary;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+  }
+}
+
+.navDesktop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+
+  @include responsive(md) {
+    display: none;
+  }
+
+  .navLink {
+    font-family: $font-sans;
+    font-size: $text-base;
+    font-weight: 500;
+    color: $color-text-secondary;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-brand-primary;
+    }
+
+    &.active {
+      color: $color-text-primary;
+      font-weight: 600;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $color-brand-primary;
+        border-radius: $radius-xs;
+      }
+    }
+  }
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .hotlineLink {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    @include responsive(lg) {
+      display: none;
+    }
+
+    .hotlineLabel {
+      font-size: 11px;
+      color: $color-text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hotlineNumber {
+      font-family: $font-mono;
+      font-size: $text-base;
+      font-weight: 700;
+      color: $color-brand-dark;
+    }
+  }
+
+  .ctaButton {
+    @include responsive(sm) {
+      display: none;
+    }
+  }
+
+  .mobileMenuButton {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-sm;
+    color: $color-text-primary;
+    background-color: $color-surface-card;
+    border: 1px solid $color-surface-border;
+
+    @include responsive(md) {
+      display: inline-flex;
+    }
+  }
+}
