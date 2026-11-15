@@ -1,0 +1,11 @@
+.container {
+  @include container;
+
+  &.narrow {
+    max-width: 960px;
+  }
+
+  &.wide {
+    max-width: 1440px;
+  }
+}

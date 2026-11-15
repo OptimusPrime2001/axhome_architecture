@@ -1,0 +1,37 @@
+@use "./reset";
+@use "@styles/utils/variables" as *;
+
+:root {
+  --color-brand-primary: #{$color-brand-primary};
+  --color-brand-light: #{$color-brand-light};
+  --color-brand-dark: #{$color-brand-dark};
+
+  --color-surface-bg: #{$color-surface-bg};
+  --color-surface-card: #{$color-surface-card};
+  --color-surface-muted: #{$color-surface-muted};
+  --color-surface-border: #{$color-surface-border};
+
+  --color-text-primary: #{$color-text-primary};
+  --color-text-secondary: #{$color-text-secondary};
+  --color-text-muted: #{$color-text-muted};
+}
+
+body {
+  background-color: $color-surface-bg;
+  color: $color-text-primary;
+  font-family: var(--font-be-vietnam-pro), $font-sans;
+  font-size: $text-md;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+::selection {
+  background-color: $color-brand-light;
+  color: $color-text-primary;
+}

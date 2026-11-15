@@ -1,0 +1,227 @@
+.footer_wrapper {
+  background-color: $color-surface-dark;
+  color: $color-text-inverse;
+  padding-top: 72px;
+  padding-bottom: 32px;
+  border-top: 1px solid rgba(231, 225, 217, 0.1);
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 48px;
+  margin-bottom: 56px;
+
+  @include responsive(lg) {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  @include responsive(sm) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .brandLogo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .logoIcon {
+      width: 40px;
+      height: 40px;
+      background-color: $color-brand-primary;
+      border-radius: $radius-xs;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+      color: #ffffff;
+    }
+
+    .brandTitle {
+      font-size: $text-lg;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+  }
+
+  .slogan {
+    font-size: $text-base;
+    color: $color-brand-light;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .description {
+    font-size: $text-sm;
+    color: #a49b92;
+    line-height: 1.6;
+    max-width: 360px;
+  }
+
+  .socialRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+
+    .socialLink {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: $radius-sm;
+      background-color: rgba(255, 255, 255, 0.06);
+      color: $color-brand-light;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: $color-brand-primary;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.navCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .colTitle {
+    font-size: $text-base;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 12px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 28px;
+      height: 2px;
+      background-color: $color-brand-primary;
+    }
+  }
+
+  .linkList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .linkItem {
+      font-size: $text-sm;
+      color: #a49b92;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: $color-brand-light;
+      }
+    }
+  }
+}
+
+.contactCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .colTitle {
+    font-size: $text-base;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 12px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 28px;
+      height: 2px;
+      background-color: $color-brand-primary;
+    }
+  }
+
+  .officeInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .officeItem {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .officeName {
+        font-size: $text-sm;
+        font-weight: 600;
+        color: #e5ded5;
+      }
+
+      .officeAddress {
+        font-size: $text-xs;
+        color: #a49b92;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .hotlineBox {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: $radius-sm;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .hotlineLabel {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: $color-brand-light;
+    }
+
+    .hotlineNumber {
+      font-family: $font-mono;
+      font-size: $text-lg;
+      font-weight: 700;
+      color: #ffffff;
+    }
+  }
+}
+
+.bottomBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: $text-xs;
+  color: #7b736b;
+
+  @include responsive(sm) {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}

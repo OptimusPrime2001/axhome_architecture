@@ -1,0 +1,85 @@
+// ==============================================================================
+// Axhome Architecture - Design System Tokens
+// Extracted from Figma: Axhome_Architecture (Key: DSzrCfaZrm5NL29HQawzhN)
+// ==============================================================================
+
+// 1. Brand Colors (Màu thương hiệu - Gỗ và đất nung)
+$color-brand-primary:   #8a7159; // Nâu chính (Buttons, highlights, active nav)
+$color-brand-light:     #bba58c; // Nâu sáng (Hover states, badges, viền trang trí)
+$color-brand-dark:      #594638; // Nâu đậm (Text nhấn mạnh, icons đặc biệt)
+
+// 2. Surfaces & Structure (Nền & Bề mặt)
+$color-surface-bg:      #faf9f6; // Nền chính toàn trang (Off-white ấm)
+$color-surface-card:    #ffffff; // Nền card, form, modal (Trắng tinh khiết)
+$color-surface-muted:   #f4f1ea; // Nền phụ (Thanh công cụ, ô nhập liệu)
+$color-surface-border:  #e7e1d9; // Viền ngăn cách (Border mỏng thanh lịch 1px)
+$color-surface-dark:    #221e1a; // Bề mặt tối (Footer, banner đặc biệt)
+
+// 3. Typography Colors (Văn bản)
+$color-text-primary:    #302c28; // Tiêu đề, chữ chính (Đen nâu than củi)
+$color-text-secondary:  #81776d; // Đoạn văn, nhãn phụ, thông số
+$color-text-muted:      #b9b0a5; // Placeholder, disabled, ghi chú nhỏ
+$color-text-inverse:    #faf9f6; // Chữ trên nền tối
+
+// 4. Semantic Status Badges (Trạng thái hệ thống)
+$color-status-published-bg:     #ebf5ed;
+$color-status-published-text:   #2d6a4f;
+$color-status-published-border: #c7e6cd;
+
+$color-status-draft-bg:         #f2efea;
+$color-status-draft-text:       #685f56;
+$color-status-draft-border:     #ded8cf;
+
+$color-status-pending-bg:       #fef8ec;
+$color-status-pending-text:     #a26b14;
+$color-status-pending-border:   #fce6b7;
+
+$color-status-progress-bg:      #eef4fa;
+$color-status-progress-text:    #2563eb;
+$color-status-progress-border:  #c9def4;
+
+$color-status-completed-bg:     #ebf7ee;
+$color-status-completed-text:   #15803d;
+$color-status-completed-border: #bbf7d0;
+
+$color-status-cancelled-bg:     #fdf2f2;
+$color-status-cancelled-text:   #dc2626;
+$color-status-cancelled-border: #fecaca;
+
+// 5. Typography Specs
+$font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-mono: 'Liberation Mono', Menlo, Monaco, Consolas, monospace;
+
+// Font sizes
+$text-xs:   0.6875rem; // 11px
+$text-sm:   0.75rem;   // 12px
+$text-base: 0.8125rem; // 13px
+$text-md:   0.875rem;  // 14px
+$text-lg:   1rem;      // 16px
+$text-xl:   1.25rem;   // 20px
+$text-2xl:  1.5rem;    // 24px
+$text-3xl:  1.75rem;   // 28px
+$text-4xl:  2.25rem;   // 36px
+$text-5xl:  3rem;      // 48px
+
+// 6. Dimensions & Layout
+$max-width-content: 1280px;
+$header-height: 80px;
+
+// 7. Spacing & Radius
+$radius-xs: 2px;
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-full: 9999px;
+
+// 8. Box Shadows (Tối giản kiến trúc)
+$shadow-sm: 0 1px 2px rgba(48, 44, 40, 0.04);
+$shadow-md: 0 4px 12px rgba(48, 44, 40, 0.06);
+$shadow-lg: 0 12px 24px -4px rgba(48, 44, 40, 0.08);
+
+// 9. Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;

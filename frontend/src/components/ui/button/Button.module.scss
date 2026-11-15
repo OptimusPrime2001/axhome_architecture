@@ -1,0 +1,99 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: $font-sans;
+  font-weight: 600;
+  border-radius: $radius-sm;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Sizes
+  &.size-sm {
+    height: 36px;
+    padding: 0 14px;
+    font-size: $text-xs;
+    letter-spacing: 0.02em;
+  }
+
+  &.size-md {
+    height: 44px;
+    padding: 0 20px;
+    font-size: $text-base;
+  }
+
+  &.size-lg {
+    height: 52px;
+    padding: 0 28px;
+    font-size: $text-md;
+  }
+
+  // Variants
+  &.variant-primary {
+    background-color: $color-brand-primary;
+    color: #ffffff;
+    border: 1px solid transparent;
+
+    &:hover:not(:disabled) {
+      background-color: $color-brand-dark;
+      box-shadow: $shadow-md;
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
+
+  &.variant-secondary {
+    background-color: transparent;
+    color: $color-brand-primary;
+    border: 1px solid $color-brand-light;
+
+    &:hover:not(:disabled) {
+      background-color: $color-surface-muted;
+      border-color: $color-brand-primary;
+    }
+  }
+
+  &.variant-dark {
+    background-color: $color-brand-dark;
+    color: #ffffff;
+    border: 1px solid transparent;
+
+    &:hover:not(:disabled) {
+      background-color: lighten($color-brand-dark, 5%);
+    }
+  }
+
+  &.variant-ghost {
+    background-color: transparent;
+    color: $color-text-primary;
+    border: 1px solid transparent;
+
+    &:hover:not(:disabled) {
+      background-color: $color-surface-muted;
+    }
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-size: 1.1em;
+  }
+}
