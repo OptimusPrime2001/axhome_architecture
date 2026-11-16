@@ -1,0 +1,169 @@
+// Section 9 — CTA + Form tư vấn (Figma node 1:1941)
+// Padding dọc 96px theo metadata; panel tối nằm trọn trong content của Container.
+
+.section {
+  padding: 96px 0;
+  background-color: $color-surface-bg;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+.panel {
+  position: relative;
+  padding: 96px;
+  overflow: hidden;
+  background-color: $color-surface-dark;
+  border-radius: $radius-lg;
+  color: $color-text-inverse;
+
+  @include media-breakpoint-down(lg) {
+    padding: 64px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 40px 24px;
+  }
+}
+
+// Ambient glow góc trên bên phải — Figma node 1:1943 (384 × 384, x=832, y=-96)
+.glow {
+  position: absolute;
+  top: -96px;
+  right: -96px;
+  width: 384px;
+  height: 384px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba($color-brand-primary, 0.4) 0%,
+    rgba($color-brand-primary, 0) 70%
+  );
+  pointer-events: none;
+}
+
+// 363.33fr / 524.67fr + gap 40px = tỉ lệ 928px nội dung của panel
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 363.33fr) minmax(0, 524.67fr);
+  gap: 40px;
+  align-items: center;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+  font-size: $text-xs;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-light;
+}
+
+.title {
+  @include text-heading-2;
+  color: $color-text-inverse;
+  margin-bottom: 16px;
+}
+
+.lead {
+  margin-bottom: 40px;
+  font-size: 15px;
+  line-height: 24px;
+  color: rgba($color-text-inverse, 0.78);
+
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 32px;
+  }
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.contactIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: $color-brand-light;
+  background-color: rgba($color-text-inverse, 0.08);
+  border-radius: $radius-md;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.contactText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.contactLabel {
+  font-size: $text-xs;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba($color-text-inverse, 0.6);
+}
+
+.contactHotline {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: $color-text-inverse;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-brand-light;
+  }
+}
+
+.contactEmail {
+  font-size: $text-lg;
+  font-weight: 500;
+  line-height: 24px;
+  color: $color-text-inverse;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-brand-light;
+  }
+}

@@ -1,13 +1,13 @@
 // ==============================================================================
-// Axhome Architecture - Central Company Constants
+// Architectura - Central Company Constants
 // Easy to modify information in one centralized file
+//
+// Nguồn sự thật: Figma Axhome_Architecture (node Footer 1:2021, Header 1:2096)
 // ==============================================================================
 
 export interface CompanyOffice {
   title: string;
   address: string;
-  phone: string;
-  email: string;
   isMain?: boolean;
 }
 
@@ -18,43 +18,35 @@ export interface MetricRibbonItem {
 }
 
 export const COMPANY_INFO = {
-  brandName: "AXHOME ARCHITECTURE",
-  shortName: "Axhome",
+  brandName: "ARCHITECTURA",
+  shortName: "Architectura",
   tagline: "Kiến trúc & Xây dựng cao cấp",
+  // Dòng phụ dưới wordmark ở Header (CSS tự uppercase)
+  logoTagline: "Studio & Construction",
   slogan: "Bản vẽ chuẩn — Tối ưu chi phí — Thi công trọn gói",
   description:
-    "Công ty kiến trúc và xây dựng chuyên nghiệp, tiên phong trong thiết kế nhà phố, biệt thự vườn và thi công trọn gói với tiêu chuẩn kiểm soát sai số ≤ 3% và cam kết không phát sinh chi phí.",
+    "Văn phòng kiến trúc và tổng thầu xây dựng các công trình biệt thự, tư gia và không gian nghỉ dưỡng cao cấp tại Việt Nam. Tinh hoa kết cấu và vật liệu tự nhiên.",
 
   hotline: "0908 123 456",
-  hotlineFormatted: "0908.123.456",
-  landline: "028 3822 9999",
-  email: "tuvan@axhome.vn",
-  website: "https://axhome.vn",
+  hotlineFormatted: "+84 (0) 908 123 456",
+  email: "contact@architectura.vn",
+  website: "https://architectura.vn",
   workingHours: "Thứ Hai – Thứ Bảy: 08:00 – 18:00 (Hỗ trợ Hotline 24/7)",
 
   offices: [
     {
-      title: "Trụ Sở & Văn Phòng Thiết Kế",
-      address: "128 Nguyễn Văn Hưởng, Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh",
-      phone: "0908 123 456",
-      email: "contact@axhome.vn",
+      title: "Hà Nội Studio",
+      address:
+        "Tầng 18, Tòa nhà Heritage Center, 68 Quang Trung, Quận Hoàn Kiếm",
       isMain: true,
     },
     {
-      title: "Xưởng Sản Xuất & Gia Công Nội Thất",
-      address: "Đường Số 7, KCN Cát Lái, TP. Thủ Đức, TP. Hồ Chí Minh",
-      phone: "0908 123 789",
-      email: "workshop@axhome.vn",
+      title: "TP. Hồ Chí Minh Atelier",
+      address:
+        "Villa 12, Khu Thảo Điền Riverside, Phường Thảo Điền, TP. Thủ Đức",
       isMain: false,
     },
   ] as CompanyOffice[],
-
-  socialLinks: {
-    facebook: "https://facebook.com/axhome.architecture",
-    zalo: "https://zalo.me/0908123456",
-    youtube: "https://youtube.com/@axhome_architecture",
-    instagram: "https://instagram.com/axhome.architecture",
-  },
 
   // Floating metrics in Hero section
   metrics: [

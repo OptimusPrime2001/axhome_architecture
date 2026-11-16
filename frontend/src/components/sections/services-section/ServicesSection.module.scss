@@ -1,0 +1,217 @@
+// ==============================================================================
+// Section 3 — Services Section (Figma node 1:1416, 1280 × 927.48)
+// - Header: 1120px flex justify-between (Left: Eyebrow + H2, Right: 448px lead)
+// - Grid: 3 cards × 346.67px, gap 40px = 1120px
+// ==============================================================================
+
+.section {
+  padding: 96px 0;
+  background-color: $color-surface-muted;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.title {
+  @include text-heading-2;
+
+  @include media-breakpoint-down(sm) {
+    line-height: 1.3;
+  }
+}
+
+.lead {
+  max-width: 448px;
+  font-size: 15px;
+  line-height: 24px;
+  color: $color-text-secondary;
+
+  @include media-breakpoint-down(md) {
+    max-width: 100%;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 64px;
+  padding: 0;
+  list-style: none;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+    border-color: $color-brand-light;
+
+    .cardImage {
+      transform: scale(1.04);
+    }
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  background-color: $color-surface-muted;
+}
+
+.badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 4px 12px;
+  border-radius: $radius-sm;
+  background-color: rgba($color-surface-dark, 0.72);
+  backdrop-filter: blur(8px);
+  color: $color-text-inverse;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+}
+
+.cardTitle {
+  @include text-heading-3;
+  margin-bottom: 12px;
+}
+
+.cardDescription {
+  font-size: $text-md;
+  line-height: 1.6;
+  color: $color-text-secondary;
+  margin-bottom: 24px;
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: $text-base;
+  line-height: 20px;
+  color: $color-text-primary;
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: $color-brand-primary;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.arrowIcon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.cardLink {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid $color-surface-border;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: $text-base;
+  font-weight: 600;
+  color: $color-brand-primary;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-brand-dark;
+
+    .arrowIcon {
+      transform: translateX(4px);
+    }
+  }
+}
