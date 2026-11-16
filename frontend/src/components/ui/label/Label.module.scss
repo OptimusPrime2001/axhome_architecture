@@ -1,0 +1,18 @@
+// shadcn/ui Label — convert từ Tailwind sang Sass theo rule 05 §6.
+// Khớp Figma Section 9 (node 1:1983): 11px, uppercase, line-height 16px.
+.label {
+  display: inline-block;
+  font-family: $font-sans;
+  font-size: $text-xs; // 11px
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $color-text-secondary;
+
+  &[data-disabled],
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

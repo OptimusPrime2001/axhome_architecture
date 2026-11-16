@@ -1,0 +1,262 @@
+// ==============================================================================
+// Section 2 — Company Introduction (Figma node 1:1342, 1280 × 1125)
+// - Top 2-col grid: 540px story / 540px image (gap 40px = 1120px)
+// - Bottom stats grid: 4 cards × 262px (gap 24px = 1120px)
+// ==============================================================================
+
+.section {
+  padding: 96px 0;
+  background-color: $color-surface-bg;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+.topGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  align-items: center;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+
+.storyColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.title {
+  @include text-heading-2;
+  line-height: 45px;
+  margin-bottom: 24px;
+}
+
+.paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.paragraph {
+  font-size: 15px;
+  line-height: 1.65;
+  color: $color-text-secondary;
+}
+
+.quotationBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  margin: 0;
+  background-color: $color-surface-muted;
+  border-left: 3px solid $color-brand-primary;
+  border-radius: 0 $radius-md $radius-md 0;
+}
+
+.quoteIcon {
+  flex-shrink: 0;
+  color: $color-brand-primary;
+  margin-top: 2px;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.quoteBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quoteText {
+  font-family: $font-serif;
+  font-size: $text-lg;
+  font-style: italic;
+  line-height: 1.55;
+  color: $color-text-primary;
+}
+
+.quoteAuthor {
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-brand-dark;
+}
+
+.imageColumn {
+  position: relative;
+  padding-bottom: 24px;
+
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 0;
+  }
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+  height: 640px;
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-lg;
+  background-color: $color-surface-muted;
+
+  @include media-breakpoint-down(lg) {
+    height: 480px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    height: 360px;
+  }
+}
+
+.studioImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.floatingCard {
+  position: absolute;
+  left: -24px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+  max-width: 320px;
+
+  @include media-breakpoint-down(lg) {
+    left: 16px;
+    bottom: 8px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-top: 16px;
+    max-width: 100%;
+  }
+}
+
+.floatingIcon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  background-color: $color-surface-muted;
+  color: $color-brand-primary;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.floatingText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.floatingTitle {
+  font-size: $text-md;
+  font-weight: 700;
+  line-height: 20px;
+  color: $color-text-primary;
+}
+
+.floatingSubtitle {
+  font-size: $text-sm;
+  line-height: 16px;
+  color: $color-text-secondary;
+}
+
+// 4 Key Metrics Stats Banner (Figma node 1:1379)
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 80px;
+  padding: 0;
+  list-style: none;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 56px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+}
+
+.statValue {
+  font-family: $font-serif;
+  font-size: $text-4xl;
+  font-weight: 700;
+  line-height: 44px;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-family: $font-sans;
+  font-size: $text-lg;
+  font-weight: 600;
+  line-height: 24px;
+  color: $color-text-primary;
+  margin-bottom: 4px;
+}
+
+.statDescription {
+  font-size: $text-sm;
+  line-height: 20px;
+  color: $color-text-secondary;
+}

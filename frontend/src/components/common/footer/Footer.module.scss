@@ -1,4 +1,4 @@
-.footer_wrapper {
+.footerWrapper {
   background-color: $color-surface-dark;
   color: $color-text-inverse;
   padding-top: 72px;
@@ -12,12 +12,12 @@
   gap: 48px;
   margin-bottom: 56px;
 
-  @include responsive(lg) {
+  @include media-breakpoint-down(lg) {
     grid-template-columns: 1fr 1fr;
     gap: 40px;
   }
 
-  @include responsive(sm) {
+  @include media-breakpoint-down(sm) {
     grid-template-columns: 1fr;
     gap: 32px;
   }
@@ -47,6 +47,7 @@
     }
 
     .brandTitle {
+      font-family: $font-serif;
       font-size: $text-lg;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -67,30 +68,6 @@
     color: #a49b92;
     line-height: 1.6;
     max-width: 360px;
-  }
-
-  .socialRow {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 8px;
-
-    .socialLink {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: $radius-sm;
-      background-color: rgba(255, 255, 255, 0.06);
-      color: $color-brand-light;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background-color: $color-brand-primary;
-        color: #ffffff;
-      }
-    }
   }
 }
 
@@ -219,7 +196,7 @@
   font-size: $text-xs;
   color: #7b736b;
 
-  @include responsive(sm) {
+  @include media-breakpoint-down(sm) {
     flex-direction: column;
     gap: 12px;
     text-align: center;

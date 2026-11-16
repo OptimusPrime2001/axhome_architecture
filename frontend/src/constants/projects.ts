@@ -1,5 +1,5 @@
 // ==============================================================================
-// Axhome Architecture - Central Mock Projects Data
+// Architectura - Central Mock Projects Data
 // ==============================================================================
 
 import type { Project } from "@/shared-types/project";
@@ -29,7 +29,7 @@ export const MOCK_PROJECTS: Project[] = [
       "Biệt thự ven sông phong cách hiện đại tối giản với hệ lam gỗ sồi chịu nước và vách kính mở rộng kết nối trọn vẹn cảnh quan thiên nhiên.",
     contentHtml: `
       <p>Tọa lạc tại khu vực ven sông Thảo Điền, công trình là sự kết hợp hài hòa giữa hình khối kiến trúc mạnh mẽ và các giải pháp vi khí hậu bản địa. Điểm nhấn là không gian thông tầng mở rộng với hệ vách kính Low-E cản nhiệt, mang trọn vẹn gió trời và tầm nhìn mặt nước vào từng góc sống.</p>
-      <p>Quá trình thi công đặt ra thách thức lớn về xử lý nền đất yếu sát bờ kè sông Sài Gòn. Đội ngũ kỹ sư Axhome đã áp dụng giải pháp ép cọc ly tâm D500 kết hợp hệ giằng móng kiên cố và tường chắn cừ Larsen, kiểm soát độ lún tuyệt đối trong phạm vi tiêu chuẩn.</p>
+      <p>Quá trình thi công đặt ra thách thức lớn về xử lý nền đất yếu sát bờ kè sông Sài Gòn. Đội ngũ kỹ sư Architectura đã áp dụng giải pháp ép cọc ly tâm D500 kết hợp hệ giằng móng kiên cố và tường chắn cừ Larsen, kiểm soát độ lún tuyệt đối trong phạm vi tiêu chuẩn.</p>
     `,
     technicalChallenges:
       "Địa chất đất bùn sát mép sông yêu cầu hệ móng sâu và biện pháp chống thấm tầng ngầm tuyệt đối.",
@@ -40,7 +40,7 @@ export const MOCK_PROJECTS: Project[] = [
       author: "Anh Nguyễn Minh Tuấn",
       role: "Chủ đầu tư Villa Thảo Điền Riverside",
       quote:
-        "Điều tôi ấn tượng nhất ở Axhome là tính chính xác. Từ bản vẽ 3D đến khi bàn giao thực tế không hề có sự sai lệch. Dự toán ban đầu gần như trùng khớp hoàn toàn với quyết toán, không phát sinh chi phí.",
+        "Điều tôi ấn tượng nhất ở Architectura là tính chính xác. Từ bản vẽ 3D đến khi bàn giao thực tế không hề có sự sai lệch. Dự toán ban đầu gần như trùng khớp hoàn toàn với quyết toán, không phát sinh chi phí.",
     },
 
     coverImage:
@@ -219,7 +219,7 @@ export const MOCK_PROJECTS: Project[] = [
     excerpt:
       "Dinh thự tân cổ điển chuẩn mực với tỷ lệ thức cột Hy Lạp kinh điển, vật liệu đá Marble tự nhiên ốp nguyên khối và sân vườn phong cách châu Âu hoàng gia.",
     contentHtml: `
-      <p>The Horizon Mansion là công trình trọng điểm trong năm 2024 của Axhome, được thi công với tiêu chuẩn khắt khe nhất dành cho phân khúc siêu sang. Toàn bộ đá ốp mặt tiền là đá cẩm thạch Travertine nhập khẩu nguyên khối từ Ý.</p>
+      <p>The Horizon Mansion là công trình trọng điểm trong năm 2024 của Architectura, được thi công với tiêu chuẩn khắt khe nhất dành cho phân khúc siêu sang. Toàn bộ đá ốp mặt tiền là đá cẩm thạch Travertine nhập khẩu nguyên khối từ Ý.</p>
       <p>Hiện công trình đang bước vào giai đoạn hoàn thiện tinh với sự giám sát chặt chẽ của các chuyên gia kết cấu và nghệ nhân điêu khắc đá.</p>
     `,
 

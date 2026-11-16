@@ -1,5 +1,5 @@
 // ==============================================================================
-// Axhome Architecture - Project Domain Types
+// Architectura - Project Domain Types
 // ==============================================================================
 
 export type ProjectType = "concept" | "under_construction" | "completed";

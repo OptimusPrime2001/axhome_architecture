@@ -5,6 +5,7 @@
 ## 1. Vai trò và phạm vi
 
 Frontend là website công ty kiến trúc & xây dựng Axhome, gồm:
+
 - Website public giới thiệu công ty, dịch vụ, mẫu thiết kế, công trình và form liên hệ.
 - Admin CMS mức cơ bản để quản lý nội dung và yêu cầu liên hệ.
 
@@ -21,7 +22,7 @@ Frontend là website công ty kiến trúc & xây dựng Axhome, gồm:
 
 ## 3. Quy trình bắt buộc trước khi sửa code
 
-1. Đọc file rule liên quan trong `.agents/rules/`.
+1. Đọc file rule liên quan trong `.agent/rules/` (`frontend-*.md`).
 2. Kiểm tra cấu trúc thư mục, convention và code hiện có; ưu tiên tái sử dụng.
 3. Tóm tắt mục tiêu, phạm vi, giả định và các điểm chưa rõ.
 4. Liệt kê file dự kiến tạo/sửa và acceptance criteria.
@@ -34,15 +35,16 @@ Không tuyên bố test/build thành công nếu chưa chạy hoặc chưa có b
 
 Đọc và tuân thủ các tài liệu sau tùy theo task:
 
-- `.agents/rules/01-project-context.md` — Bối cảnh sản phẩm, định hướng UI/UX.
-- `.agents/rules/02-folder-structure.md` — Cấu trúc thư mục và nơi đặt file.
-- `.agents/rules/03-coding-conventions.md` — Quy ước TypeScript, naming, giới hạn file.
-- `.agents/rules/04-components-and-react.md` — Component, hooks và trách nhiệm UI.
-- `.agents/rules/05-styling.md` — Sass Modules và ngoại lệ inline style.
-- `.agents/rules/06-api-and-tanstack-query.md` — API functions, Axios và TanStack Query.
-- `.agents/rules/07-typescript-types.md` — Tổ chức types tập trung theo module.
-- `.agents/rules/08-forms-and-validation.md` — Form và validation.
-- `.agents/rules/09-quality-and-testing.md` — Chất lượng, accessibility, responsive và kiểm thử.
+- `.agent/rules/frontend-01-project-context.md` — Bối cảnh sản phẩm, định hướng UI/UX.
+- `.agent/rules/frontend-02-folder-structure.md` — Cấu trúc thư mục và nơi đặt file.
+- `.agent/rules/frontend-03-coding-conventions.md` — Quy ước TypeScript, naming, giới hạn file.
+- `.agent/rules/frontend-04-components-and-react.md` — Component, hooks và trách nhiệm UI.
+- `.agent/rules/frontend-05-styling.md` — Sass Modules và ngoại lệ inline style.
+- `.agent/rules/frontend-06-api-and-tanstack-query.md` — API functions, Axios và TanStack Query.
+- `.agent/rules/frontend-07-typescript-types.md` — Tổ chức types tập trung theo module.
+- `.agent/rules/frontend-08-forms-and-validation.md` — Form và validation.
+- `.agent/rules/frontend-09-quality-and-testing.md` — Chất lượng, accessibility, responsive và kiểm thử.
+- `.agent/rules/frontend-animate-ui.md` — Quy tắc sử dụng Animate UI (Icons, Components, Backgrounds & Effects).
 
 Nếu task liên quan nhiều mảng, phải đọc tất cả rule tương ứng, không chỉ đọc một file.
 
@@ -50,7 +52,7 @@ Nếu task liên quan nhiều mảng, phải đọc tất cả rule tương ứn
 
 Theo bối cảnh hiện tại, Frontend đang sử dụng Next.js, TypeScript, Sass, shadcn/ui, TanStack Query và Axios. Trước khi thay đổi package hoặc cấu hình, kiểm tra `package.json` và code thực tế.
 
-Quy ước styling của dự án được chốt riêng trong `.agents/rules/05-styling.md`: Sass Modules là cách styling mặc định; inline style chỉ được dùng trong ngoại lệ có kiểm soát. Không dùng Tailwind CSS.
+Quy ước styling của dự án được chốt riêng trong `.agent/rules/frontend-05-styling.md`: Sass Modules là cách styling mặc định; inline style chỉ được dùng trong ngoại lệ có kiểm soát. Không dùng Tailwind CSS.
 
 Không tự nâng cấp framework, thay thư viện, thêm dependency hoặc thay đổi kiến trúc nếu chưa nêu lý do và được chấp thuận.
 
@@ -63,6 +65,7 @@ Không tự nâng cấp framework, thay thư viện, thêm dependency hoặc tha
 ## 7. Báo cáo sau mỗi task
 
 Báo cáo ngắn gọn:
+
 - Đã thay đổi gì.
 - File nào được tạo/sửa.
 - Các quyết định kỹ thuật đáng chú ý.

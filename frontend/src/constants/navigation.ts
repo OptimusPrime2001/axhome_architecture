@@ -1,5 +1,5 @@
 // ==============================================================================
-// Axhome Architecture - Navigation Links
+// Architectura - Navigation Links
 // ==============================================================================
 
 export interface NavItem {

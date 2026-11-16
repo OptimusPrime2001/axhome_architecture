@@ -1,0 +1,159 @@
+// shadcn/ui Select — convert từ Tailwind sang Sass theo rule 05 §6.
+// Khớp Figma Section 9 (node 1:2007): cao 40px, padding 10px 16px, chữ 15px.
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  padding: 10px 16px;
+  gap: 8px;
+  font-family: $font-sans;
+  font-size: 15px;
+  line-height: 19px;
+  color: $color-text-primary;
+  text-align: left;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  // Text bị truncate thay cho Tailwind "[&>span]:line-clamp-1"
+  > span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba($color-brand-primary, 0.18);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &[data-placeholder] > span,
+  &[data-placeholder] {
+    color: $color-text-muted;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $color-error;
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px rgba($color-error, 0.18);
+    }
+  }
+}
+
+.triggerIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.content {
+  position: relative;
+  z-index: 50;
+  max-height: var(--radix-select-content-available-height, 320px);
+  min-width: 8rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: $font-sans;
+  font-size: $text-md;
+  color: $color-text-primary;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+}
+
+.contentPopper {
+  transform-origin: var(--radix-select-content-transform-origin, top);
+}
+
+.viewport {
+  padding: 4px;
+
+  .contentPopper & {
+    height: var(--radix-select-trigger-height, auto);
+    width: 100%;
+    min-width: var(--radix-select-trigger-width, auto);
+  }
+}
+
+.scrollButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 4px 0;
+  cursor: default;
+}
+
+.scrollIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.groupLabel {
+  padding: 6px 8px 6px 32px;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-secondary;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 6px 8px 6px 32px;
+  border-radius: $radius-sm;
+  cursor: default;
+  user-select: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:focus-visible,
+  &[data-highlighted] {
+    outline: none;
+    background-color: $color-surface-muted;
+    color: $color-brand-dark;
+  }
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.itemIndicator {
+  position: absolute;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+}
+
+.itemCheck {
+  width: 16px;
+  height: 16px;
+}
+
+.separator {
+  height: 1px;
+  margin: 4px -4px;
+  background-color: $color-surface-border;
+}
