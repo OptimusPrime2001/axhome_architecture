@@ -1,0 +1,113 @@
+.section {
+  padding: 88px 0;
+  background-color: $color-surface-muted;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+.header {
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 32px;
+  }
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.title {
+  @include text-heading-2;
+  margin-bottom: 10px;
+}
+
+.lead {
+  font-size: 15px;
+  line-height: 26px;
+  color: $color-text-secondary;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: $color-brand-light;
+    box-shadow: $shadow-md;
+  }
+}
+
+.iconBox {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  background-color: $color-surface-muted;
+  color: $color-brand-primary;
+  margin-bottom: 20px;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+
+  .card:hover & {
+    background-color: $color-surface-dark;
+    color: $color-text-inverse;
+  }
+}
+
+.cardTitle {
+  @include text-heading-3;
+  font-size: $text-xl;
+  line-height: 26px;
+  margin-bottom: 10px;
+}
+
+.cardDesc {
+  font-size: $text-md;
+  line-height: 22px;
+  color: $color-text-secondary;
+}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@styles/index.scss";
-import { Footer, Header } from "@components";
+import { BackToTop, Footer, Header } from "@components";
+import { MotionProvider } from "@components/animate-ui";
 import {
   beVietnamPro,
   COMPANY_INFO,
@@ -46,9 +47,12 @@ export default async function RootLayout({
     <html lang="vi" className={cn(playfair.variable, space_grotesk.variable)}>
       <head />
       <body className={beVietnamPro.className}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <BackToTop />
+        </MotionProvider>
       </body>
     </html>
   );

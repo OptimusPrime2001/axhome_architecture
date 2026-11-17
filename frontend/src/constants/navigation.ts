@@ -10,8 +10,8 @@ export interface NavItem {
 
 export const MAIN_NAV_ITEMS: NavItem[] = [
   { label: "Trang Chủ", href: "/" },
-  { label: "Giới Thiệu", href: "/about" },
   { label: "Dự Án", href: "/projects" },
+  { label: "Giới Thiệu", href: "/about" },
   { label: "Liên Hệ", href: "/contact" },
 ];
 

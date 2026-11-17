@@ -1,12 +1,22 @@
 "use client";
 
 import { AnimateIcon } from "@animate-ui/react/icons";
-import { Button, Container } from "@components";
+import {
+  Highlight,
+  HighlightItem,
+} from "@animate-ui/react/primitives/effects/highlight";
+import {
+  ScrollProgress,
+  ScrollProgressProvider,
+} from "@animate-ui/react/primitives/scroll-progress";
+import { Menu } from "@components/animate-ui";
+import { Button, Container } from "@components/ui";
 import { COMPANY_INFO, MAIN_NAV_ITEMS } from "@constants";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu } from "@/components/animate-ui/icons/menu";
+import Logo from "../logo/Logo";
 import { MobileDrawer } from "../mobile-drawer";
 import styles from "./Header.module.scss";
 
@@ -21,41 +31,37 @@ export const Header: React.FC = () => {
     return pathname.startsWith(href);
   };
 
+  const activeNavHref =
+    MAIN_NAV_ITEMS.find((item) => isActive(item.href))?.href ?? null;
+
   return (
     <>
       <header className={styles.headerWrapper}>
         <Container>
           <div className={styles.headerInner}>
-            {/* Brand Logo */}
-            <Link
-              href="/"
-              className={styles.brand}
-              aria-label={`${COMPANY_INFO.brandName} Trang Chủ`}
-            >
-              <div className={styles.brandLogo} aria-hidden="true">
-                A
-              </div>
-              <div className={styles.brandText}>
-                <span className={styles.brandName}>
-                  {COMPANY_INFO.brandName}
-                </span>
-                <span className={styles.brandTagline}>
-                  {COMPANY_INFO.logoTagline}
-                </span>
-              </div>
-            </Link>
-
-            {/* Desktop Navigation */}
+            <Logo />
+            {/* Desktop Navigation with Animate-UI Highlight */}
             <nav className={styles.navDesktop} aria-label="Điều hướng chính">
-              {MAIN_NAV_ITEMS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`${styles.navLink} ${isActive(item.href) ? styles.active : ""}`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              <Highlight
+                mode="parent"
+                controlledItems
+                hover
+                value={activeNavHref}
+                className={styles.navHighlight}
+                containerClassName={styles.navList}
+                transition={{ type: "spring", stiffness: 380, damping: 32 }}
+              >
+                {MAIN_NAV_ITEMS.map((item) => (
+                  <HighlightItem key={item.href} value={item.href} asChild>
+                    <Link
+                      href={item.href}
+                      className={`${styles.navLink} ${isActive(item.href) ? styles.active : ""}`}
+                    >
+                      {item.label}
+                    </Link>
+                  </HighlightItem>
+                ))}
+              </Highlight>
             </nav>
 
             {/* Header Actions */}
@@ -92,6 +98,14 @@ export const Header: React.FC = () => {
             </div>
           </div>
         </Container>
+        <ScrollProgressProvider global>
+          <div className={styles.scrollProgressTrack} aria-hidden="true">
+            <ScrollProgress
+              mode="scaleX"
+              className={styles.scrollProgressBar}
+            />
+          </div>
+        </ScrollProgressProvider>
       </header>
 
       {/* Mobile Drawer */}

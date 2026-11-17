@@ -29,25 +29,29 @@ export const COMPANY_INTRO_CONTENT: CompanyIntroContent = {
 export const COMPANY_STATS: CompanyStatItem[] = [
   {
     id: "experience",
-    value: "12+",
+    value: 12,
+    type: "plus",
     label: "Năm kinh nghiệm",
     description: "Tiên phong phân khúc biệt thự & dinh thự",
   },
   {
     id: "projects",
-    value: "280+",
+    value: 280,
+    type: "plus",
     label: "Công trình hoàn thiện",
     description: "Hiện diện tại khắp các tỉnh thành cả nước",
   },
   {
     id: "satisfaction",
-    value: "99%",
+    value: 99,
+    type: "percent",
     label: "Khách hàng hài lòng",
     description: "Chất lượng thẩm mỹ và độ chuẩn xác thi công",
   },
   {
     id: "budget-commitment",
-    value: "100%",
+    value: 100,
+    type: "percent",
     label: "Không phát sinh",
     description: "Cam kết theo hợp đồng tổng thầu trọn gói",
   },

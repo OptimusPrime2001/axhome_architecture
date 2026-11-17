@@ -12,11 +12,19 @@ export type ArchitecturalStyle =
 
 export type ProjectCategory = "villa" | "townhouse" | "mansion";
 
+export type GallerySpaceCategory =
+  | "exterior_day"
+  | "exterior_night"
+  | "living_room"
+  | "pool_garden"
+  | "interior_other";
+
 export interface ProjectImage {
   id: string;
   url: string;
   caption: string;
   type: "render_3d" | "real_photo";
+  spaceCategory?: GallerySpaceCategory;
   isCover?: boolean;
 }
 
@@ -26,6 +34,12 @@ export interface FloorPlan {
   imageUrl: string;
   description: string;
   areaSquareMeters: number;
+  rooms?: string[];
+}
+
+export interface ProjectHighlight {
+  title: string;
+  description: string;
 }
 
 export interface ProjectMilestone {
@@ -63,6 +77,7 @@ export interface Project {
   // Content & Editorial
   excerpt: string;
   contentHtml: string;
+  highlights?: ProjectHighlight[];
   technicalChallenges?: string;
   technicalSolutions?: string;
   clientTestimonial?: {

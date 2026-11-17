@@ -1,5 +1,5 @@
 // ==============================================================================
-// Architectura - Central Company Constants
+// Axhome Architecture - Central Company Constants
 // Easy to modify information in one centralized file
 //
 // Nguồn sự thật: Figma Axhome_Architecture (node Footer 1:2021, Header 1:2096)
@@ -12,53 +12,59 @@ export interface CompanyOffice {
 }
 
 export interface MetricRibbonItem {
-  value: string;
+  value: number | string;
   label: string;
+  suffix: string;
   subLabel?: string;
 }
 
 export const COMPANY_INFO = {
-  brandName: "ARCHITECTURA",
-  shortName: "Architectura",
+  brandName: "AXHOME",
+  shortName: "Axhome",
   tagline: "Kiến trúc & Xây dựng cao cấp",
   // Dòng phụ dưới wordmark ở Header (CSS tự uppercase)
-  logoTagline: "Studio & Construction",
+  logoTagline: "Architecture",
   slogan: "Bản vẽ chuẩn — Tối ưu chi phí — Thi công trọn gói",
   description:
     "Văn phòng kiến trúc và tổng thầu xây dựng các công trình biệt thự, tư gia và không gian nghỉ dưỡng cao cấp tại Việt Nam. Tinh hoa kết cấu và vật liệu tự nhiên.",
 
-  hotline: "0908 123 456",
-  hotlineFormatted: "+84 (0) 908 123 456",
-  email: "contact@architectura.vn",
-  website: "https://architectura.vn",
+  hotline: "0947712626",
+  hotlineFormatted: "0947 712 626",
+  email: "Kientrucaxhome@gmail.com",
+  website: "https://axhome.vn",
   workingHours: "Thứ Hai – Thứ Bảy: 08:00 – 18:00 (Hỗ trợ Hotline 24/7)",
 
   offices: [
     {
-      title: "Hà Nội Studio",
-      address:
-        "Tầng 18, Tòa nhà Heritage Center, 68 Quang Trung, Quận Hoàn Kiếm",
+      title: "Văn phòng Hà Nội",
+      address: "D20 TT14 Khu Đô Thị Văn Quán - Hà Đông, Hà Nội, Việt Nam",
       isMain: true,
-    },
-    {
-      title: "TP. Hồ Chí Minh Atelier",
-      address:
-        "Villa 12, Khu Thảo Điền Riverside, Phường Thảo Điền, TP. Thủ Đức",
-      isMain: false,
     },
   ] as CompanyOffice[],
 
   // Floating metrics in Hero section
   metrics: [
-    { value: "150+", label: "Biệt thự cao cấp", subLabel: "Đã bàn giao" },
     {
-      value: "100%",
+      value: 150,
+      suffix: "+",
+      label: "Biệt thự cao cấp",
+      subLabel: "Đã bàn giao",
+    },
+    {
+      value: 100,
+      suffix: "%",
       label: "Đúng tiến độ thi công",
       subLabel: "Cam kết hợp đồng",
     },
-    { value: "0%", label: "Chi phí phát sinh", subLabel: "Dự toán chuẩn xác" },
     {
-      value: "10 Năm",
+      value: 0,
+      suffix: "%",
+      label: "Chi phí phát sinh",
+      subLabel: "Dự toán chuẩn xác",
+    },
+    {
+      value: 10,
+      suffix: "Năm",
       label: "Bảo hành kết cấu",
       subLabel: "Bảo dưỡng trọn đời",
     },

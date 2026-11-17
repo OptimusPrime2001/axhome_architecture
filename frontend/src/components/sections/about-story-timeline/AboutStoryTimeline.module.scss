@@ -1,0 +1,214 @@
+.section {
+  padding: 96px 0;
+  background-color: $color-surface-muted;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 56px;
+  align-items: start;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+}
+
+.storyCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 10px;
+}
+
+.title {
+  @include text-heading-2;
+  margin-bottom: 24px;
+}
+
+.paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.paragraph {
+  font-size: 15px;
+  line-height: 26px;
+  color: $color-text-secondary;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid $color-surface-border;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statValue {
+  font-family: $font-serif;
+  font-size: $text-4xl;
+  font-weight: 600;
+  line-height: 1.1;
+  color: $color-text-primary;
+}
+
+.statLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-text-secondary;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: 96px 20px minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+}
+
+.yearCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: right;
+  gap: 2px;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 10px;
+  }
+}
+
+.year {
+  font-family: $font-serif;
+  font-size: $text-xl;
+  font-weight: 700;
+  line-height: 1.2;
+  color: $color-text-primary;
+}
+
+.milestoneTag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+}
+
+.markerCol {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    width: 1px;
+    background-color: $color-surface-border;
+  }
+
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+
+.dot {
+  position: relative;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $color-surface-card;
+  border: 2px solid $color-brand-primary;
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card {
+  padding: 20px 24px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+}
+
+.timelineItem:hover {
+  .dot {
+    background-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.2);
+  }
+
+  .card {
+    background-color: #f8f3ec;
+    border-color: $color-brand-light;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.cardTitle {
+  @include text-heading-3;
+  font-size: $text-lg;
+  line-height: 24px;
+  margin-bottom: 6px;
+}
+
+.cardDesc {
+  font-size: $text-md;
+  line-height: 22px;
+  color: $color-text-secondary;
+}

@@ -32,26 +32,24 @@
     display: flex;
     align-items: center;
     gap: 12px;
-
-    .logoIcon {
-      width: 40px;
-      height: 40px;
-      background-color: $color-brand-primary;
-      border-radius: $radius-xs;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 20px;
-      color: #ffffff;
+    .logoWrapper {
+      position: relative;
+      height: 60px;
+      width: 120px;
+      .logoImage {
+        width: auto;
+        height: 48px;
+        object-fit: contain;
+        flex-shrink: 0;
+        position: absolute;
+      }
     }
 
     .brandTitle {
       font-family: $font-serif;
       font-size: $text-lg;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
       color: #ffffff;
     }
   }

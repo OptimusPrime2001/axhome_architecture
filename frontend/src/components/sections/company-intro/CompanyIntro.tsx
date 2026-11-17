@@ -1,10 +1,15 @@
-import { Container } from "@components";
+import { CountingNumber } from "@animate-ui/react/primitives/texts/counting-number";
+import {
+  Container,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+} from "@components";
 import { COMPANY_INTRO_CONTENT, COMPANY_STATS } from "@constants";
 import { Award, Quote } from "lucide-react";
 import Image from "next/image";
 import type React from "react";
 import styles from "./CompanyIntro.module.scss";
-
 export const CompanyIntro: React.FC = () => {
   const { eyebrow, title, paragraphs, quote, image, floatingBadge } =
     COMPANY_INTRO_CONTENT;
@@ -14,7 +19,7 @@ export const CompanyIntro: React.FC = () => {
       <Container>
         <div className={styles.topGrid}>
           {/* Left: Story Column (Figma node 1:1345) */}
-          <div className={styles.storyColumn}>
+          <ScrollReveal className={styles.storyColumn}>
             <p className={styles.eyebrow}>{eyebrow}</p>
             <h2 id="company-intro-heading" className={styles.title}>
               {title}
@@ -37,10 +42,10 @@ export const CompanyIntro: React.FC = () => {
                 <footer className={styles.quoteAuthor}>{quote.author}</footer>
               </div>
             </blockquote>
-          </div>
+          </ScrollReveal>
 
           {/* Right: Architectural Image Column (Figma node 1:1366) */}
-          <div className={styles.imageColumn}>
+          <ScrollReveal delay={0.1} className={styles.imageColumn}>
             <div className={styles.imageFrame}>
               <Image
                 src={image.url}
@@ -63,19 +68,22 @@ export const CompanyIntro: React.FC = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Bottom: 4 Key Metrics Stats Banner (Figma node 1:1379) */}
-        <ul className={styles.statsGrid}>
+        <StaggerGroup className={styles.statsGrid}>
           {COMPANY_STATS.map((stat) => (
-            <li key={stat.id} className={styles.statCard}>
-              <span className={styles.statValue}>{stat.value}</span>
+            <StaggerItem key={stat.id} className={styles.statCard}>
+              <span className={styles.statValue}>
+                <CountingNumber number={stat.value} inView />
+                {stat.type === "percent" ? "%" : "+"}
+              </span>
               <h3 className={styles.statLabel}>{stat.label}</h3>
               <p className={styles.statDescription}>{stat.description}</p>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </StaggerGroup>
       </Container>
     </section>
   );

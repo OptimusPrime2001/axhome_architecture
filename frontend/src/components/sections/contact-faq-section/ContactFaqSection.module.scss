@@ -1,0 +1,127 @@
+.section {
+  padding: 88px 0;
+  background-color: $color-surface-muted;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+.header {
+  max-width: 680px;
+  margin: 0 auto 48px;
+  text-align: center;
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 32px;
+  }
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.title {
+  @include text-heading-2;
+  margin-bottom: 10px;
+}
+
+.lead {
+  font-size: 15px;
+  line-height: 26px;
+  color: $color-text-secondary;
+}
+
+.faqList {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faqCard {
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  &:hover {
+    border-color: $color-brand-light;
+    box-shadow: $shadow-md;
+  }
+}
+
+.faqCardOpen {
+  border-color: rgba(187, 165, 140, 0.7);
+}
+
+.faqTrigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 28px;
+  text-align: left;
+
+  @include media-breakpoint-down(sm) {
+    padding: 18px 20px;
+  }
+}
+
+.faqQuestion {
+  font-size: $text-lg;
+  font-weight: 700;
+  line-height: 24px;
+  color: $color-text-primary;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: $color-text-secondary;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+  color: $color-brand-primary;
+}
+
+.faqBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faqBodyOpen {
+  grid-template-rows: 1fr;
+}
+
+.faqAnswerInner {
+  overflow: hidden;
+}
+
+.faqAnswer {
+  padding: 0 28px 24px;
+  font-size: $text-md;
+  line-height: 24px;
+  color: $color-text-secondary;
+
+  @include media-breakpoint-down(sm) {
+    padding: 0 20px 20px;
+  }
+}

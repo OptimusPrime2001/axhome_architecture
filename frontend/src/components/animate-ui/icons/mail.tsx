@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { motion, type Variants } from 'motion/react';
+import * as React from "react";
+import { motion, type Variants } from "motion/react";
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from '@animate-ui/react/icons';
+} from "@animate-ui/react/icons";
 
 type MailProps = IconProps<keyof typeof animations>;
 
 const CLOSED_BODY =
-  'M20 4c1.105 0 2 0.895 2 2v12a2 2 0 0 1 -2 2H4a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2l8 0a0 0 0 0 1 0 0l8 0Z';
+  "M20 4c1.105 0 2 0.895 2 2v12a2 2 0 0 1 -2 2H4a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2l8 0a0 0 0 0 1 0 0l8 0Z";
 const OPEN_BODY =
-  'M21.2 8.4c0.5 0.38 0.8 0.97 0.8 1.6v10a2 2 0 0 1 -2 2H4a2 2 0 0 1 -2 -2V10a2 2 0 0 1 0.8 -1.6l8 -6a2 2 0 0 1 2.4 0l8 6Z';
-const CLOSED_FLAP = 'm22 7 -8.991 5.727a2 2 0 0 1 -2.009 0L2 7';
-const OPEN_FLAP = 'm22 10 -8.97 5.7a1.94 1.94 0 0 1 -2.06 0L2 10';
+  "M21.2 8.4c0.5 0.38 0.8 0.97 0.8 1.6v10a2 2 0 0 1 -2 2H4a2 2 0 0 1 -2 -2V10a2 2 0 0 1 0.8 -1.6l8 -6a2 2 0 0 1 2.4 0l8 6Z";
+const CLOSED_FLAP = "m22 7 -8.991 5.727a2 2 0 0 1 -2.009 0L2 7";
+const OPEN_FLAP = "m22 10 -8.97 5.7a1.94 1.94 0 0 1 -2.06 0L2 10";
 
 const animations = {
   default: {
@@ -25,7 +25,7 @@ const animations = {
       initial: { y: 0 },
       animate: {
         y: [0, -1.5, 0],
-        transition: { duration: 0.6, ease: 'easeInOut' },
+        transition: { duration: 0.6, ease: "easeInOut" },
       },
     },
     path1: {
@@ -33,7 +33,7 @@ const animations = {
       animate: {
         pathLength: [0, 1],
         opacity: [0, 1],
-        transition: { duration: 0.6, ease: 'easeInOut' },
+        transition: { duration: 0.6, ease: "easeInOut" },
       },
     },
     path2: {},
@@ -43,21 +43,21 @@ const animations = {
     path1: {
       initial: {
         d: CLOSED_FLAP,
-        transition: { duration: 0.35, ease: 'easeInOut' },
+        transition: { duration: 0.35, ease: "easeInOut" },
       },
       animate: {
         d: OPEN_FLAP,
-        transition: { duration: 0.45, ease: 'easeInOut' },
+        transition: { duration: 0.45, ease: "easeInOut" },
       },
     },
     path2: {
       initial: {
         d: CLOSED_BODY,
-        transition: { duration: 0.35, ease: 'easeInOut' },
+        transition: { duration: 0.35, ease: "easeInOut" },
       },
       animate: {
         d: OPEN_BODY,
-        transition: { duration: 0.45, ease: 'easeInOut' },
+        transition: { duration: 0.45, ease: "easeInOut" },
       },
     },
   } satisfies Record<string, Variants>,
@@ -70,7 +70,7 @@ const animations = {
         transition: {
           duration: 1.4,
           times: [0, 0.3, 0.7, 1],
-          ease: 'easeInOut',
+          ease: "easeInOut",
         },
       },
     },
@@ -81,7 +81,7 @@ const animations = {
         transition: {
           duration: 1.4,
           times: [0, 0.3, 0.7, 1],
-          ease: 'easeInOut',
+          ease: "easeInOut",
         },
       },
     },

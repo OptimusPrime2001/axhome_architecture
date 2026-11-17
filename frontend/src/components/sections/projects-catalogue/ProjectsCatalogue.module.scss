@@ -1,0 +1,417 @@
+.section {
+  padding: 0 0 88px;
+  background-color: $color-surface-bg;
+
+  @include media-breakpoint-down(md) {
+    padding: 0 0 64px;
+  }
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 36px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+}
+
+.tabsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $color-surface-border;
+}
+
+.tabButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: $radius-sm;
+  background-color: $color-surface-muted;
+  color: $color-text-secondary;
+  font-size: $text-sm;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    color: $color-text-primary;
+    background-color: #ebe4d8;
+  }
+}
+
+.tabButtonActive {
+  background-color: $color-surface-dark;
+  color: $color-text-inverse;
+
+  &:hover {
+    background-color: $color-surface-dark;
+    color: $color-text-inverse;
+  }
+}
+
+.tabCount {
+  font-family: $font-mono;
+  font-size: 11px;
+  opacity: 0.78;
+}
+
+.secondaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.categoryChips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+  margin-right: 4px;
+}
+
+.chipBtn {
+  padding: 6px 12px;
+  border-radius: $radius-full;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-bg;
+  color: $color-text-secondary;
+  font-size: $text-sm;
+  font-weight: 500;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    border-color: $color-brand-light;
+    color: $color-text-primary;
+  }
+}
+
+.chipBtnActive {
+  background-color: #f4ece1;
+  border-color: $color-brand-primary;
+  color: $color-brand-dark;
+  font-weight: 600;
+}
+
+.controlsGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
+}
+
+.searchWrapper {
+  position: relative;
+  width: 240px;
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-text-muted;
+  pointer-events: none;
+}
+
+.searchInput {
+  padding-left: 34px;
+}
+
+.selectBox {
+  min-width: 175px;
+
+  @include media-breakpoint-down(sm) {
+    flex: 1;
+    min-width: 140px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $color-brand-light;
+    box-shadow: $shadow-lg;
+  }
+}
+
+.mediaWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: $color-surface-dark;
+}
+
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .card:hover & {
+    transform: scale(1.06);
+  }
+}
+
+.topBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 1;
+}
+
+.categoryTag {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  z-index: 1;
+  padding: 4px 10px;
+  border-radius: $radius-xs;
+  background-color: rgba(34, 30, 26, 0.78);
+  backdrop-filter: blur(4px);
+  font-size: 11px;
+  font-weight: 500;
+  color: $color-text-inverse;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  padding: 20px 22px 22px;
+}
+
+.cardTop {
+  display: flex;
+  flex-direction: column;
+}
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: $text-sm;
+  color: $color-text-secondary;
+  margin-bottom: 6px;
+}
+
+.cardTitle {
+  @include text-heading-3;
+  font-size: $text-xl;
+  line-height: 28px;
+  margin-bottom: 8px;
+}
+
+.cardExcerpt {
+  @include line-clamp(2);
+  font-size: $text-md;
+  line-height: 22px;
+  color: $color-text-secondary;
+}
+
+.cardBottom {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.specsBox {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: $radius-sm;
+  background-color: $color-surface-muted;
+  margin-bottom: 16px;
+}
+
+.specItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.specLabel {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-text-secondary;
+}
+
+.specValue {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.cardAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid $color-surface-border;
+  font-size: $text-base;
+  font-weight: 600;
+  color: $color-text-primary;
+  transition: color 0.2s ease;
+
+  .card:hover & {
+    color: $color-brand-primary;
+  }
+}
+
+.actionArrow {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .card:hover & {
+    transform: translateX(4px);
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  padding: 64px 24px;
+  background-color: $color-surface-card;
+  border: 1px dashed $color-surface-border;
+  border-radius: $radius-md;
+}
+
+.emptyTitle {
+  @include text-heading-3;
+  font-size: $text-xl;
+}
+
+.emptyDesc {
+  max-width: 440px;
+  font-size: $text-md;
+  color: $color-text-secondary;
+  margin-bottom: 8px;
+}
+
+.paginationBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid $color-surface-border;
+}
+
+.resultSummary {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+
+  strong {
+    color: $color-text-primary;
+  }
+}
+
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pageBtn {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    border-color: $color-brand-primary;
+    color: $color-brand-primary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.pageBtnActive {
+  background-color: $color-surface-dark;
+  border-color: $color-surface-dark;
+  color: $color-text-inverse;
+
+  &:hover:not(:disabled) {
+    background-color: $color-surface-dark;
+    color: $color-text-inverse;
+  }
+}

@@ -1,4 +1,10 @@
-import { AnimateHoverItem, Container, Mail, Phone } from "@components";
+import {
+  AnimateHoverItem,
+  Container,
+  Mail,
+  Phone,
+  ScrollReveal,
+} from "@components";
 import { COMPANY_INFO } from "@constants";
 import styles from "./ContactCta.module.scss";
 import { QuickConsultForm } from "./QuickConsultForm";
@@ -13,74 +19,76 @@ import { QuickConsultForm } from "./QuickConsultForm";
 export const ContactCta: React.FC = () => (
   <section className={styles.section} aria-labelledby="contact-cta-heading">
     <Container>
-      <div className={styles.panel}>
-        <span className={styles.glow} aria-hidden="true" />
+      <ScrollReveal>
+        <div className={styles.panel}>
+          <span className={styles.glow} aria-hidden="true" />
 
-        <div className={styles.grid}>
-          <div className={styles.info}>
-            {/* TODO: đối chiếu eyebrow với Figma (node 1:1949) */}
-            <p className={styles.eyebrow}>Khởi đầu không gian sống</p>
+          <div className={styles.grid}>
+            <div className={styles.info}>
+              {/* TODO: đối chiếu eyebrow với Figma (node 1:1949) */}
+              <p className={styles.eyebrow}>Khởi đầu không gian sống</p>
 
-            <h2 id="contact-cta-heading" className={styles.title}>
-              Cùng chúng tôi kiến tạo ngôi nhà mơ ước
-            </h2>
+              <h2 id="contact-cta-heading" className={styles.title}>
+                Cùng chúng tôi kiến tạo ngôi nhà mơ ước
+              </h2>
 
-            <p className={styles.lead}>
-              Để lại thông tin hoặc đặt lịch hẹn trực tiếp cùng Tổng Kiến trúc
-              sư trưởng để nhận phương án quy hoạch mặt bằng và tư vấn dự toán
-              độc bản hoàn toàn miễn phí.
-            </p>
+              <p className={styles.lead}>
+                Để lại thông tin hoặc đặt lịch hẹn trực tiếp cùng Tổng Kiến trúc
+                sư trưởng để nhận phương án quy hoạch mặt bằng và tư vấn dự toán
+                độc bản hoàn toàn miễn phí.
+              </p>
 
-            <ul className={styles.contactList}>
-              <li className={styles.contactRow}>
-                <AnimateHoverItem
-                  as="span"
-                  className={styles.contactIcon}
-                  aria-hidden="true"
-                >
-                  <Phone />
-                </AnimateHoverItem>
+              <ul className={styles.contactList}>
+                <li className={styles.contactRow}>
+                  <AnimateHoverItem
+                    as="span"
+                    className={styles.contactIcon}
+                    aria-hidden="true"
+                  >
+                    <Phone />
+                  </AnimateHoverItem>
 
-                <span className={styles.contactText}>
-                  {/* TODO: đối chiếu label với Figma (node 1:1957) */}
-                  <span className={styles.contactLabel}>
-                    Hotline tư vấn 24/7
+                  <span className={styles.contactText}>
+                    {/* TODO: đối chiếu label với Figma (node 1:1957) */}
+                    <span className={styles.contactLabel}>
+                      Hotline tư vấn 24/7
+                    </span>
+                    <a
+                      className={styles.contactHotline}
+                      href={`tel:${COMPANY_INFO.hotline}`}
+                    >
+                      {COMPANY_INFO.hotlineFormatted}
+                    </a>
                   </span>
-                  <a
-                    className={styles.contactHotline}
-                    href={`tel:${COMPANY_INFO.hotline}`}
-                  >
-                    {COMPANY_INFO.hotlineFormatted}
-                  </a>
-                </span>
-              </li>
+                </li>
 
-              <li className={styles.contactRow}>
-                <AnimateHoverItem
-                  as="span"
-                  className={styles.contactIcon}
-                  aria-hidden="true"
-                >
-                  <Mail />
-                </AnimateHoverItem>
-
-                <span className={styles.contactText}>
-                  {/* TODO: đối chiếu label với Figma (node 1:1965) */}
-                  <span className={styles.contactLabel}>Email tư vấn</span>
-                  <a
-                    className={styles.contactEmail}
-                    href={`mailto:${COMPANY_INFO.email}`}
+                <li className={styles.contactRow}>
+                  <AnimateHoverItem
+                    as="span"
+                    className={styles.contactIcon}
+                    aria-hidden="true"
                   >
-                    {COMPANY_INFO.email}
-                  </a>
-                </span>
-              </li>
-            </ul>
+                    <Mail />
+                  </AnimateHoverItem>
+
+                  <span className={styles.contactText}>
+                    {/* TODO: đối chiếu label với Figma (node 1:1965) */}
+                    <span className={styles.contactLabel}>Email tư vấn</span>
+                    <a
+                      className={styles.contactEmail}
+                      href={`mailto:${COMPANY_INFO.email}`}
+                    >
+                      {COMPANY_INFO.email}
+                    </a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <QuickConsultForm />
           </div>
-
-          <QuickConsultForm />
         </div>
-      </div>
+      </ScrollReveal>
     </Container>
   </section>
 );

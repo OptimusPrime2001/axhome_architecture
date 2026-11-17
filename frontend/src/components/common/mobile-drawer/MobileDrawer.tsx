@@ -1,11 +1,10 @@
 "use client";
 
 import { AnimateIcon } from "@animate-ui/react/icons";
-import { Button } from "@components";
+import { Button, X } from "@components";
 import { COMPANY_INFO, MAIN_NAV_ITEMS } from "@constants";
 import Link from "next/link";
 import type React from "react";
-import { X } from "@/components/animate-ui/icons/x";
 import styles from "./MobileDrawer.module.scss";
 
 export interface MobileDrawerProps {
@@ -44,7 +43,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         aria-hidden={!isOpen}
       >
         <div className={styles.drawerHeader}>
-          <span className={styles.brandTitle}>{COMPANY_INFO.brandName}</span>
+          <span className={styles.brandTitle}>Axhome Architecture</span>
           <button
             type="button"
             className={styles.closeButton}

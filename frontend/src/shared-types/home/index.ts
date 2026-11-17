@@ -6,7 +6,8 @@
 /** Section 2 — Giới thiệu công ty & 4 thẻ số liệu (node 1:1342) */
 export interface CompanyStatItem {
   id: string;
-  value: string;
+  value: number;
+  type: "percent" | "plus";
   label: string;
   description: string;
 }

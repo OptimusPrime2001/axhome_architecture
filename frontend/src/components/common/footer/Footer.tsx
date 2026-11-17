@@ -4,8 +4,10 @@ import {
   FOOTER_QUICK_LINKS,
   FOOTER_SERVICES_LINKS,
 } from "@constants";
+import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
+import Logo from "../logo/Logo";
 import styles from "./Footer.module.scss";
 
 export const Footer: React.FC = () => {
@@ -15,12 +17,7 @@ export const Footer: React.FC = () => {
         <div className={styles.footerGrid}>
           {/* Col 1: Brand Info */}
           <div className={styles.brandCol}>
-            <div className={styles.brandLogo}>
-              <span className={styles.logoIcon}>A</span>
-              <span className={styles.brandTitle}>
-                {COMPANY_INFO.brandName}
-              </span>
-            </div>
+            <Logo size="large" />
             <p className={styles.slogan}>{COMPANY_INFO.slogan}</p>
             <p className={styles.description}>{COMPANY_INFO.description}</p>
           </div>

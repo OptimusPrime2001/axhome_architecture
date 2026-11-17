@@ -75,7 +75,7 @@ export const QuickConsultForm: React.FC = () => {
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: DEFAULT_VALUES,
-    mode: "onTouched",
+    mode: "onSubmit",
   });
 
   const onSubmit = (_data: ContactFormValues) => {

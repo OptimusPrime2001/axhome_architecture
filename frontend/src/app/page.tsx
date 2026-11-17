@@ -1,12 +1,19 @@
 import { AnimateIcon } from "@animate-ui/react/icons";
+import { CountingNumber } from "@animate-ui/react/primitives/texts/counting-number";
+import { MorphingText } from "@animate-ui/react/primitives/texts/morphing";
+
 import {
+  ArrowRight,
   Badge,
   Button,
   CompanyIntro,
   ContactCta,
   Container,
+  ScrollReveal,
   SectionHeader,
   ServicesSection,
+  StaggerGroup,
+  StaggerItem,
   TestimonialsSection,
   WhyChooseUs,
   WorkingProcess,
@@ -14,7 +21,6 @@ import {
 import { COMPANY_INFO, MOCK_PROJECTS } from "@constants";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "@/components/animate-ui/icons/arrow-right";
 import styles from "./page.module.scss";
 
 export default async function HomePage() {
@@ -62,12 +68,22 @@ export default async function HomePage() {
               <span className={styles.badgeDot} aria-hidden="true" />
               <span>{COMPANY_INFO.slogan}</span>
             </div>
+            <MorphingText
+              className={styles.heroTitle}
+              text={[
+                "Kiến tạo không gian",
+                "Xây dựng công trình",
+                "Đặt tâm huyết vào",
+              ]}
+              loop
+            />
 
-            <h1 className={styles.heroTitle}>
-              Kiến tạo không gian sống <br />
-              chuẩn xác từng chi tiết
-            </h1>
-
+            {/* Dòng 2 */}
+            <MorphingText
+              className={styles.heroTitle}
+              text={["sống hiện đại", "chuyên nghiệp", "từng bản thiết kế"]}
+              loop
+            />
             <p className={styles.heroSubtitle}>
               Nơi nghệ thuật kiến trúc độc bản giao thoa cùng kỷ luật thi công
               chuẩn mực — kiến tạo những dinh thự và không gian sống di sản bền
@@ -76,11 +92,11 @@ export default async function HomePage() {
 
             <div className={styles.heroActions}>
               <Link href="/projects" className={styles.heroPrimaryBtn}>
+                <span>Khám phá dự án</span>
                 <AnimateIcon
                   animateOnHover
                   className={styles.heroPrimaryBtnInner}
                 >
-                  <span>Khám phá dự án</span>
                   <ArrowRight
                     size={16}
                     className={styles.heroBtnIcon}
@@ -92,12 +108,14 @@ export default async function HomePage() {
                 <span>Liên hệ tư vấn</span>
               </Link>
             </div>
-
             {/* Bottom Floating Metrics Ribbon (Figma node 1:1320) */}
             <div className={styles.metricsRibbon}>
               {COMPANY_INFO.metrics.map((item) => (
                 <div key={item.label} className={styles.metricItem}>
-                  <span className={styles.metricValue}>{item.value}</span>
+                  <span className={styles.metricValue}>
+                    <CountingNumber number={Number(item.value)} inView />
+                    <span>{item.suffix}</span>
+                  </span>
                   <span className={styles.metricLabel}>{item.label}</span>
                 </div>
               ))}
@@ -115,69 +133,74 @@ export default async function HomePage() {
       {/* 4 & 5. FEATURED PROJECTS SECTION (Unified Designs & Projects) */}
       <section className={styles.projectsSection}>
         <Container>
-          <SectionHeader
-            tag="DỰ ÁN TIÊU BIỂU"
-            title="Dấu Ấn Qua Từng Công Trình"
-            description="Tuyển tập các công trình thực tế đã bàn giao và phương án thiết kế độc bản do đội ngũ Kiến trúc sư & Kỹ sư trưởng Architectura trực tiếp kiến tạo."
-            align="center"
-          />
+          <ScrollReveal>
+            <SectionHeader
+              tag="DỰ ÁN TIÊU BIỂU"
+              title="Dấu Ấn Qua Từng Công Trình"
+              description="Tuyển tập các công trình thực tế đã bàn giao và phương án thiết kế độc bản do đội ngũ Kiến trúc sư & Kỹ sư trưởng Architectura trực tiếp kiến tạo."
+              align="center"
+            />
+          </ScrollReveal>
 
-          <div className={styles.projectsGrid}>
+          <StaggerGroup className={styles.projectsGrid}>
             {featuredProjects.map((project) => (
-              <Link
-                key={project.id}
-                href={`/projects/${project.slug}`}
-                className={styles.projectCard}
-              >
-                <div className={styles.imageWrapper}>
-                  <Image
-                    src={project.coverImage}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className={styles.cardImage}
-                    unoptimized
-                  />
-                  <div className={styles.badgeOverlay}>
-                    {getStatusBadge(project.projectType)}
-                  </div>
-                </div>
-
-                <div className={styles.cardContent}>
-                  <span className={styles.metaLocation}>{project.city}</span>
-                  <h3 className={styles.cardTitle}>{project.title}</h3>
-                  <p className={styles.cardExcerpt}>{project.excerpt}</p>
-
-                  <div className={styles.specRow}>
-                    <div className={styles.specItem}>
-                      <span className={styles.specLabel}>Diện tích</span>
-                      <span className={styles.specValue}>
-                        {project.landArea} m²
-                      </span>
-                    </div>
-                    <div className={styles.specItem}>
-                      <span className={styles.specLabel}>Quy mô</span>
-                      <span className={styles.specValue}>
-                        {project.floorsCount} Tầng
-                      </span>
-                    </div>
-                    <div className={styles.specItem}>
-                      <span className={styles.specLabel}>Mặt tiền</span>
-                      <span className={styles.specValue}>
-                        {project.facadeWidth} m
-                      </span>
+              <StaggerItem key={project.id}>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className={styles.projectCard}
+                >
+                  <div className={styles.imageWrapper}>
+                    <Image
+                      src={project.coverImage}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className={styles.cardImage}
+                      unoptimized
+                    />
+                    <div className={styles.badgeOverlay}>
+                      {getStatusBadge(project.projectType)}
                     </div>
                   </div>
-                </div>
-              </Link>
+
+                  <div className={styles.cardContent}>
+                    <span className={styles.metaLocation}>{project.city}</span>
+                    <h3 className={styles.cardTitle}>{project.title}</h3>
+                    <p className={styles.cardExcerpt}>{project.excerpt}</p>
+
+                    <div className={styles.specRow}>
+                      <div className={styles.specItem}>
+                        <span className={styles.specLabel}>Diện tích</span>
+                        <span className={styles.specValue}>
+                          {project.landArea} m²
+                        </span>
+                      </div>
+                      <div className={styles.specItem}>
+                        <span className={styles.specLabel}>Quy mô</span>
+                        <span className={styles.specValue}>
+                          {project.floorsCount} Tầng
+                        </span>
+                      </div>
+                      <div className={styles.specItem}>
+                        <span className={styles.specLabel}>Mặt tiền</span>
+                        <span className={styles.specValue}>
+                          {project.facadeWidth} m
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
 
-          <div className={styles.viewAllContainer}>
-            <Button href="/projects" size="md" variant="secondary">
-              Xem Toàn Bộ Dự Án
-            </Button>
-          </div>
+          <ScrollReveal delay={0.1}>
+            <div className={styles.viewAllContainer}>
+              <Button href="/projects" size="md" variant="secondary">
+                Xem Toàn Bộ Dự Án
+              </Button>
+            </div>
+          </ScrollReveal>
         </Container>
       </section>
 

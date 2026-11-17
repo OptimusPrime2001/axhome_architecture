@@ -1,13 +1,18 @@
 import { AnimateIcon } from "@animate-ui/react/icons";
-import { Container } from "@components";
+import {
+  ClipboardList,
+  Container,
+  Hammer,
+  Key,
+  MapPin,
+  MessageSquare,
+  ScrollReveal,
+  Sparkles,
+  StaggerGroup,
+  StaggerItem,
+} from "@components";
 import { WORKING_PROCESS_STEPS } from "@constants";
 import type React from "react";
-import { ClipboardList } from "@/components/animate-ui/icons/clipboard-list";
-import { Hammer } from "@/components/animate-ui/icons/hammer";
-import { Key } from "@/components/animate-ui/icons/key";
-import { MapPin } from "@/components/animate-ui/icons/map-pin";
-import { MessageSquare } from "@/components/animate-ui/icons/message-square";
-import { Sparkles } from "@/components/animate-ui/icons/sparkles";
 import styles from "./WorkingProcess.module.scss";
 
 const STEP_ICONS: React.ReactNode[] = [
@@ -19,28 +24,35 @@ const STEP_ICONS: React.ReactNode[] = [
   <Key key="step-6" size={20} />,
 ];
 
-export const WorkingProcess: React.FC = () => {
+export interface WorkingProcessProps {
+  id?: string;
+}
+
+export const WorkingProcess: React.FC<WorkingProcessProps> = ({ id }) => {
   return (
     <section
+      id={id}
       className={styles.section}
       aria-labelledby="working-process-heading"
     >
       <Container>
-        <div className={styles.header}>
-          <p className={styles.eyebrow}>Quy trình 6 bước</p>
-          <h2 id="working-process-heading" className={styles.title}>
-            Quy trình làm việc
-          </h2>
-          <p className={styles.lead}>
-            Từ buổi gặp đầu tiên đến khi bàn giao, mỗi công trình đi qua sáu
-            bước chặt chẽ với cam kết minh bạch về tiến độ, chi phí và chất
-            lượng.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className={styles.header}>
+            <p className={styles.eyebrow}>Quy trình 6 bước</p>
+            <h2 id="working-process-heading" className={styles.title}>
+              Quy trình làm việc
+            </h2>
+            <p className={styles.lead}>
+              Từ buổi gặp đầu tiên đến khi bàn giao, mỗi công trình đi qua sáu
+              bước chặt chẽ với cam kết minh bạch về tiến độ, chi phí và chất
+              lượng.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <ol className={styles.grid}>
+        <StaggerGroup className={styles.grid}>
           {WORKING_PROCESS_STEPS.map((step, index) => (
-            <li key={step.id} className={styles.card}>
+            <StaggerItem key={step.id} className={styles.card}>
               <div className={styles.cardHead}>
                 <span className={styles.number} aria-hidden="true">
                   {step.number}
@@ -55,9 +67,9 @@ export const WorkingProcess: React.FC = () => {
               </div>
               <h3 className={styles.cardTitle}>{step.title}</h3>
               <p className={styles.cardDescription}>{step.description}</p>
-            </li>
+            </StaggerItem>
           ))}
-        </ol>
+        </StaggerGroup>
       </Container>
     </section>
   );

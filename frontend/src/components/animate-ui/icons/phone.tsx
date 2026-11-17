@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { motion, type Variants } from 'motion/react';
+import * as React from "react";
+import { motion, type Variants } from "motion/react";
 
 import {
   getVariants,
   useAnimateIconContext,
   IconWrapper,
   type IconProps,
-} from '@animate-ui/react/icons';
+} from "@animate-ui/react/icons";
 
 type PhoneProps = IconProps<keyof typeof animations>;
 
@@ -19,7 +19,7 @@ const animations = {
       animate: {
         rotate: [0, -10, 10, -10, 10, 0],
         scale: [1, 0.88, 0.88, 0.88, 0.88, 1],
-        transition: { duration: 0.7, ease: 'easeInOut' },
+        transition: { duration: 0.7, ease: "easeInOut" },
       },
     },
   } satisfies Record<string, Variants>,

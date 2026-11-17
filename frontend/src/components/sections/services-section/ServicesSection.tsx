@@ -1,11 +1,16 @@
 import { AnimateIcon } from "@animate-ui/react/icons";
-import { Container } from "@components";
+import {
+  ArrowRight,
+  Check,
+  Container,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+} from "@components";
 import { HOME_SERVICES, HOME_SERVICES_HEADER } from "@constants";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
-import { ArrowRight } from "@/components/animate-ui/icons/arrow-right";
-import { Check } from "@/components/animate-ui/icons/check";
 import styles from "./ServicesSection.module.scss";
 
 export const ServicesSection: React.FC = () => {
@@ -16,20 +21,22 @@ export const ServicesSection: React.FC = () => {
     >
       <Container>
         {/* Header 2-col: Left title / Right description (Figma node 1:1418) */}
-        <div className={styles.header}>
-          <div className={styles.headerLeft}>
-            <p className={styles.eyebrow}>{HOME_SERVICES_HEADER.eyebrow}</p>
-            <h2 id="services-section-heading" className={styles.title}>
-              {HOME_SERVICES_HEADER.title}
-            </h2>
+        <ScrollReveal>
+          <div className={styles.header}>
+            <div className={styles.headerLeft}>
+              <p className={styles.eyebrow}>{HOME_SERVICES_HEADER.eyebrow}</p>
+              <h2 id="services-section-heading" className={styles.title}>
+                {HOME_SERVICES_HEADER.title}
+              </h2>
+            </div>
+            <p className={styles.lead}>{HOME_SERVICES_HEADER.description}</p>
           </div>
-          <p className={styles.lead}>{HOME_SERVICES_HEADER.description}</p>
-        </div>
+        </ScrollReveal>
 
         {/* 3 Service Cards Grid (Figma node 1:1424) */}
-        <ul className={styles.grid}>
+        <StaggerGroup className={styles.grid}>
           {HOME_SERVICES.map((service) => (
-            <li key={service.id} className={styles.card}>
+            <StaggerItem key={service.id} className={styles.card}>
               <div className={styles.imageWrapper}>
                 <Image
                   src={service.imageUrl}
@@ -72,9 +79,9 @@ export const ServicesSection: React.FC = () => {
                   </AnimateIcon>
                 </Link>
               </div>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </StaggerGroup>
       </Container>
     </section>
   );
