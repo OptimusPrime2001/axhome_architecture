@@ -1,0 +1,142 @@
+.section {
+  padding: 96px 0;
+  background-color: $color-surface-bg;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+.header {
+  max-width: 720px;
+  margin: 0 auto 56px;
+  text-align: center;
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 36px;
+  }
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.title {
+  @include text-heading-2;
+  margin-bottom: 10px;
+}
+
+.lead {
+  font-size: 15px;
+  line-height: 26px;
+  color: $color-text-secondary;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+
+  &:hover {
+    background-color: #f4ece1;
+    border-color: $color-brand-light;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.cardTop {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.number {
+  font-family: $font-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+  color: $color-brand-light;
+  transition: color 0.25s ease;
+
+  .card:hover & {
+    color: $color-brand-primary;
+  }
+}
+
+.iconBox {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  background-color: $color-surface-card;
+  color: $color-brand-primary;
+}
+
+.cardTitle {
+  @include text-heading-3;
+  font-size: $text-xl;
+  line-height: 26px;
+  margin-bottom: 10px;
+}
+
+.cardDesc {
+  font-size: $text-md;
+  line-height: 22px;
+  color: $color-text-secondary;
+}
+
+.cardFooter {
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid $color-surface-border;
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 500;
+  color: $color-brand-dark;
+}

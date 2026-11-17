@@ -3,7 +3,7 @@
 
 ## Project Context
 - Build a Vietnamese architecture and construction company website.
-- Follow docs/product/project-brief.md.
+- Follow architecture_construction_project_brief.md.
 - Public website language: Vietnamese.
 - Technical discussions and code documentation: English.
 

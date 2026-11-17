@@ -1,0 +1,53 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+
+  .brandLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    .logoWrapper {
+      position: relative;
+      .logoImage {
+        width: auto;
+        position: absolute;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .brandText {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .brandName {
+      font-family: $font-serif;
+      font-size: $text-3xl;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: inherit;
+      text-transform: uppercase;
+    }
+
+    .brandTagline {
+      font-family: $font-sans;
+      font-size: $text-lg;
+      letter-spacing: 0.04em;
+      color: $color-brand-primary;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    @include media-breakpoint-down(md) {
+      .brandName {
+        font-size: $text-2xl;
+      }
+
+      .brandTagline {
+        font-size: $text-md;
+      }
+    }
+  }
+}

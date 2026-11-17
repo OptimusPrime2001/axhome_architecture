@@ -1,0 +1,218 @@
+.section {
+  padding: 96px 0;
+  background-color: $color-surface-bg;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+.topRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 48px;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    margin-bottom: 36px;
+  }
+}
+
+.headerCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.title {
+  @include text-heading-2;
+  margin-bottom: 12px;
+}
+
+.lead {
+  font-size: 15px;
+  line-height: 26px;
+  color: $color-text-secondary;
+  max-width: 580px;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metricCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+
+  &:hover {
+    background-color: #f4ece1;
+    border-color: $color-brand-light;
+    transform: translateY(-2px);
+    box-shadow: $shadow-sm;
+  }
+}
+
+.metricValue {
+  font-family: $font-serif;
+  font-size: $text-3xl;
+  font-weight: 600;
+  line-height: 1.1;
+  color: $color-text-primary;
+}
+
+.metricLabel {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.groupPanel {
+  padding: 28px;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+
+  @include media-breakpoint-down(sm) {
+    padding: 20px;
+  }
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.groupIcon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  background-color: $color-surface-dark;
+  color: $color-text-inverse;
+}
+
+.groupTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.groupEyebrow {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+}
+
+.groupTitle {
+  @include text-heading-3;
+  font-size: $text-xl;
+  line-height: 26px;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.itemCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-sm;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+
+  &:hover {
+    background-color: #fcfaf7;
+    border-color: $color-brand-light;
+    transform: translateY(-2px);
+    box-shadow: $shadow-sm;
+  }
+}
+
+.itemIcon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-xs;
+  background-color: $color-surface-muted;
+  color: $color-brand-primary;
+  margin-top: 2px;
+}
+
+.itemBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemTitle {
+  font-size: $text-md;
+  font-weight: 700;
+  line-height: 20px;
+  color: $color-text-primary;
+}
+
+.itemDesc {
+  font-size: $text-base;
+  line-height: 20px;
+  color: $color-text-secondary;
+}

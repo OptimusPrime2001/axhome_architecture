@@ -1,9 +1,14 @@
 import { AnimateIcon } from "@animate-ui/react/icons";
-import { Container } from "@components";
+import {
+  Container,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+  Star,
+} from "@components";
 import { HOME_TESTIMONIALS, HOME_TESTIMONIALS_HEADER } from "@constants";
 import Image from "next/image";
 import type React from "react";
-import { Star } from "@/components/animate-ui/icons/star";
 import styles from "./TestimonialsSection.module.scss";
 
 const STAR_INDICES = [1, 2, 3, 4, 5] as const;
@@ -16,18 +21,22 @@ export const TestimonialsSection: React.FC = () => {
     >
       <Container>
         {/* Header canh giữa, 768px (Figma node 1:1865) */}
-        <div className={styles.header}>
-          <p className={styles.eyebrow}>{HOME_TESTIMONIALS_HEADER.eyebrow}</p>
-          <h2 id="testimonials-section-heading" className={styles.title}>
-            {HOME_TESTIMONIALS_HEADER.title}
-          </h2>
-          <p className={styles.lead}>{HOME_TESTIMONIALS_HEADER.description}</p>
-        </div>
+        <ScrollReveal>
+          <div className={styles.header}>
+            <p className={styles.eyebrow}>{HOME_TESTIMONIALS_HEADER.eyebrow}</p>
+            <h2 id="testimonials-section-heading" className={styles.title}>
+              {HOME_TESTIMONIALS_HEADER.title}
+            </h2>
+            <p className={styles.lead}>
+              {HOME_TESTIMONIALS_HEADER.description}
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 3 Luxury Testimonial Cards (Figma node 1:1871) */}
-        <ul className={styles.grid}>
+        <StaggerGroup className={styles.grid}>
           {HOME_TESTIMONIALS.map((item) => (
-            <li key={item.id} className={styles.card}>
+            <StaggerItem key={item.id} className={styles.card}>
               <div className={styles.cardTop}>
                 <AnimateIcon
                   animateOnHover
@@ -63,9 +72,9 @@ export const TestimonialsSection: React.FC = () => {
                   <p className={styles.authorRole}>{item.authorRole}</p>
                 </div>
               </div>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </StaggerGroup>
       </Container>
     </section>
   );

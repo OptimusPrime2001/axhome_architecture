@@ -1,0 +1,171 @@
+.section {
+  padding: 72px 0;
+  background-color: $color-surface-bg;
+
+  @include media-breakpoint-down(md) {
+    padding: 56px 0;
+  }
+}
+
+.headerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.title {
+  @include text-heading-2;
+}
+
+.viewAllLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-brand-primary;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-brand-dark;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: $color-brand-light;
+    box-shadow: $shadow-md;
+  }
+}
+
+.mediaWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: $color-surface-dark;
+}
+
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.badgeOverlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+}
+
+.styleTag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 6px;
+}
+
+.cardTitle {
+  @include text-heading-3;
+  font-size: $text-xl;
+  line-height: 26px;
+  margin-bottom: 8px;
+}
+
+.cardExcerpt {
+  @include line-clamp(2);
+  font-size: $text-base;
+  line-height: 20px;
+  color: $color-text-secondary;
+  margin-bottom: 16px;
+}
+
+.cardFooter {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid $color-surface-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cardSpecs {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $color-text-secondary;
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+  transition: color 0.2s ease;
+
+  .card:hover & {
+    color: $color-brand-primary;
+  }
+}
+
+.ctaArrow {
+  transition: transform 0.25s ease;
+
+  .card:hover & {
+    transform: translateX(3px);
+  }
+}

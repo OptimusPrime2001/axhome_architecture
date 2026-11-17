@@ -1,5 +1,7 @@
+export * from "./about";
 export * from "./company";
 export * from "./company-intro";
+export * from "./contact";
 export * from "./fonts";
 export * from "./navigation";
 export * from "./projects";

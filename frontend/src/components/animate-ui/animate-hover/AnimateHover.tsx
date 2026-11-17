@@ -16,10 +16,15 @@ type AnimateHoverSpanProps = {
   as: "span";
 } & React.ComponentPropsWithoutRef<"span">;
 
+type AnimateHoverArticleProps = {
+  as: "article";
+} & React.ComponentPropsWithoutRef<"article">;
+
 export type AnimateHoverItemProps =
   | AnimateHoverLiProps
   | AnimateHoverDivProps
-  | AnimateHoverSpanProps;
+  | AnimateHoverSpanProps
+  | AnimateHoverArticleProps;
 
 export const AnimateHoverItem: React.FC<AnimateHoverItemProps> = (props) => {
   if (props.as === "div") {
@@ -36,6 +41,15 @@ export const AnimateHoverItem: React.FC<AnimateHoverItemProps> = (props) => {
     return (
       <AnimateIcon animateOnHover asChild>
         <span {...spanProps}>{children}</span>
+      </AnimateIcon>
+    );
+  }
+
+  if (props.as === "article") {
+    const { as: _, children, ...articleProps } = props;
+    return (
+      <AnimateIcon animateOnHover asChild>
+        <article {...articleProps}>{children}</article>
       </AnimateIcon>
     );
   }
