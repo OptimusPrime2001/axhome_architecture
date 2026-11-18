@@ -1,0 +1,23 @@
+.shellWrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: $color-surface-bg;
+}
+
+.contentColumn {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 28px;
+  max-width: 1440px;
+  width: 100%;
+
+  @include media-breakpoint-down(md) {
+    padding: 20px 16px;
+  }
+}

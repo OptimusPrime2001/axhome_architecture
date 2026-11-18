@@ -1,0 +1,159 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $text-sm;
+  color: $color-text-secondary;
+  margin-bottom: 6px;
+}
+
+.breadcrumbLink {
+  color: $color-text-secondary;
+  text-decoration: none;
+  transition: color 0.16s ease;
+
+  &:hover {
+    color: $color-brand-primary;
+  }
+}
+
+.breadcrumbCurrent {
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.headerCopy {
+  max-width: 680px;
+}
+
+.pageTitle {
+  font-family: $font-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.2;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 24px;
+  }
+}
+
+.pageSubtitle {
+  margin-top: 8px;
+  font-size: $text-md;
+  color: $color-text-secondary;
+  line-height: 1.55;
+}
+
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.secondaryBtn {
+  height: 42px;
+  padding: 0 16px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+
+  &:hover {
+    background-color: #ebe5dc;
+    border-color: $color-brand-light;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.primaryBtn {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: $radius-md;
+  border: 1px solid $color-brand-dark;
+  background-color: $color-brand-dark;
+  color: $color-text-inverse;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  box-shadow: $shadow-sm;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+
+  &:hover {
+    background-color: $color-brand-primary;
+    border-color: $color-brand-primary;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.feedbackBanner {
+  background-color: $color-status-published-bg;
+  border: 1px solid $color-status-published-border;
+  color: $color-status-published-text;
+  border-radius: $radius-md;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: $text-base;
+  font-weight: 500;
+}
+
+.feedbackCloseBtn {
+  border: none;
+  background: transparent;
+  color: currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: $radius-xs;
+  cursor: pointer;
+  opacity: 0.75;
+
+  &:hover {
+    opacity: 1;
+  }
+}

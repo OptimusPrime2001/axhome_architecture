@@ -1,0 +1,475 @@
+.sectionCard {
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  padding: 24px;
+  box-shadow: $shadow-sm;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include media-breakpoint-down(sm) {
+    padding: 18px;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $color-surface-border;
+}
+
+.sectionTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: $radius-md;
+  background-color: #f6efe7;
+  color: $color-brand-dark;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sectionEyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-text-secondary;
+  margin-bottom: 2px;
+}
+
+.sectionTitle {
+  font-family: $font-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.25;
+}
+
+.sectionBadge {
+  padding: 4px 10px;
+  border-radius: $radius-sm;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-text-secondary;
+}
+
+.gridTwo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gridThree {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fieldLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $color-text-primary;
+}
+
+.requiredStar {
+  color: $color-error;
+  margin-left: 3px;
+}
+
+.charCounter {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $color-text-muted;
+}
+
+.textInput {
+  width: 100%;
+  height: 42px;
+  padding: 0 13px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-md;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.12);
+  }
+}
+
+.textArea {
+  width: 100%;
+  min-height: 92px;
+  padding: 11px 13px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-md;
+  line-height: 1.6;
+  resize: vertical;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.12);
+  }
+}
+
+.inputInvalid {
+  border-color: $color-error;
+  background-color: #fffbfa;
+}
+
+.slugGroup {
+  display: flex;
+  align-items: stretch;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  overflow: hidden;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+
+  &:focus-within {
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.12);
+  }
+}
+
+.slugPrefix {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  background-color: #ede8e0;
+  border-right: 1px solid $color-surface-border;
+  font-family: $font-mono;
+  font-size: 12px;
+  color: $color-text-secondary;
+  white-space: nowrap;
+
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+
+.slugInput {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border: none;
+  background: transparent;
+  font-family: $font-mono;
+  font-size: 13px;
+  font-weight: 600;
+  color: $color-text-primary;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.slugRefreshBtn {
+  appearance: none;
+  width: 40px;
+  border: none;
+  border-left: 1px solid $color-surface-border;
+  background: transparent;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(48, 44, 40, 0.06);
+    color: $color-text-primary;
+  }
+}
+
+.unitBox {
+  display: flex;
+  align-items: stretch;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  overflow: hidden;
+
+  &:focus-within {
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.12);
+  }
+}
+
+.unitInput {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border: none;
+  background: transparent;
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-text-primary;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.unitSuffix {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 11px;
+  background-color: #ede8e0;
+  border-left: 1px solid $color-surface-border;
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 600;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.selectControl {
+  appearance: none;
+  width: 100%;
+  height: 42px;
+  padding: 0 34px 0 13px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-md;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.12);
+  }
+}
+
+.selectIcon {
+  position: absolute;
+  right: 12px;
+  color: $color-text-secondary;
+  pointer-events: none;
+}
+
+.helperText {
+  font-size: $text-xs;
+  color: $color-text-secondary;
+  line-height: 1.45;
+}
+
+.errorText {
+  font-size: $text-xs;
+  font-weight: 600;
+  color: $color-error;
+}
+
+/* Sub-block inside Section 2 (Highlights & Testimonial) */
+.subDivider {
+  border-top: 1px solid $color-surface-border;
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.subHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.subTitle {
+  font-size: $text-md;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.subDesc {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.addOutlineBtn {
+  appearance: none;
+  height: 34px;
+  padding: 0 13px;
+  border-radius: $radius-md;
+  border: 1px dashed $color-brand-primary;
+  background-color: #faf7f2;
+  color: $color-brand-dark;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background-color 0.16s ease;
+
+  &:hover:not(:disabled) {
+    background-color: #f3ece1;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.highlightItemCard {
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 32px;
+  gap: 12px;
+  align-items: start;
+}
+
+.highlightIndex {
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-sm;
+  background-color: #efe8dd;
+  color: $color-brand-dark;
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlightFields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.removeIconBtn {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-status-cancelled-bg;
+    border-color: $color-status-cancelled-border;
+    color: $color-status-cancelled-text;
+  }
+}
+
+.toggleRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: $text-base;
+  font-weight: 600;
+  color: $color-text-primary;
+  cursor: pointer;
+
+  input {
+    width: 16px;
+    height: 16px;
+    accent-color: $color-brand-dark;
+  }
+}
+
+// Loading placeholder for dynamically imported RichTextEditor
+.editorLoadingPlaceholder {
+  min-height: 240px;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  background-color: $color-surface-card;
+}

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "@styles/index.scss";
-import { BackToTop, Footer, Header } from "@components";
-import { MotionProvider } from "@components/animate-ui";
+import { MotionProvider, TooltipProvider } from "@components";
 import {
   beVietnamPro,
   COMPANY_INFO,
+  googleSans,
   playfair,
   space_grotesk,
 } from "@constants";
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "kiến trúc nhà phố",
     "bản vẽ kiến trúc",
     "xây nhà trọn gói tp hcm",
-    "architectura",
+    "axhome",
   ],
   authors: [{ name: COMPANY_INFO.brandName }],
   creator: COMPANY_INFO.brandName,
@@ -44,14 +44,18 @@ export default async function RootLayout({
   "use cache";
 
   return (
-    <html lang="vi" className={cn(playfair.variable, space_grotesk.variable)}>
+    <html
+      lang="vi"
+      className={cn(
+        playfair.variable,
+        space_grotesk.variable,
+        googleSans.variable,
+      )}
+    >
       <head />
       <body className={beVietnamPro.className}>
         <MotionProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <BackToTop />
+          <TooltipProvider>{children}</TooltipProvider>
         </MotionProvider>
       </body>
     </html>

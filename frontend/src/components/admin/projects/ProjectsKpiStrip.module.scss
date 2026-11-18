@@ -1,0 +1,161 @@
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+
+  @include media-breakpoint-down(xl) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kpiCard {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: $shadow-sm;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    border-color: $color-brand-light;
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.cardTitle {
+  font-size: $text-md;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.35;
+}
+
+.iconBox {
+  width: 38px;
+  height: 38px;
+  border-radius: $radius-md;
+  background-color: #f6efe7;
+  color: $color-brand-dark;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.kpiCardActive {
+  border-color: $color-brand-primary;
+  background-color: #fdfcfb;
+  box-shadow:
+    0 0 0 1px rgba(138, 113, 89, 0.2),
+    $shadow-md;
+
+  .iconBox {
+    background-color: $color-brand-dark;
+    color: $color-text-inverse;
+  }
+}
+
+.metricRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.metricValue {
+  font-family: $font-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1;
+}
+
+.metricUnit {
+  font-size: $text-base;
+  font-weight: 500;
+  color: $color-text-secondary;
+}
+
+.cardBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid $color-surface-border;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 4px;
+  border-radius: $radius-full;
+  background-color: #ede8e0;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: $radius-full;
+  background-color: $color-brand-primary;
+  transition: width 0.3s ease;
+}
+
+.metaFooter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: $text-xs;
+  color: $color-text-secondary;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: 600;
+  }
+}
+
+.publishedAccent {
+  color: $color-status-published-text;
+  font-weight: 600;
+}
+
+.dot {
+  color: $color-text-muted;
+}

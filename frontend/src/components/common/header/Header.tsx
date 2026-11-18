@@ -12,7 +12,6 @@ import {
 import { Menu } from "@components/animate-ui";
 import { Button, Container } from "@components/ui";
 import { COMPANY_INFO, MAIN_NAV_ITEMS } from "@constants";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";

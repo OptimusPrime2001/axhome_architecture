@@ -1,0 +1,100 @@
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+
+  @include media-breakpoint-down(xl) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kpiCardInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  height: 100%;
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.cardTitle {
+  font-size: $text-lg;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.3;
+}
+
+.iconBox {
+  width: 38px;
+  height: 38px;
+  border-radius: $radius-md;
+  background-color: #f6efe7;
+  color: $color-brand-dark;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.metricRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.metricValue {
+  font-family: $font-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1;
+}
+
+.metricUnit {
+  font-size: $text-md;
+  color: $color-text-secondary;
+}
+
+.metaFooter {
+  padding-top: 12px;
+  border-top: 1px solid $color-surface-border;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: $text-xs;
+  color: $color-text-secondary;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: 600;
+  }
+}
+
+.dot {
+  color: $color-text-muted;
+}
+
+.urgentHighlight {
+  color: $color-error;
+  font-weight: 700;
+}

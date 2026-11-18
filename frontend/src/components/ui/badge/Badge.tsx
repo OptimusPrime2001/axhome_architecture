@@ -11,6 +11,7 @@ export const badgeVariants = cva(styles.badge, {
       pending: styles["status-pending"],
       progress: styles["status-progress"],
       completed: styles["status-completed"],
+      cancelled: styles["status-cancelled"],
       concept: styles["status-concept"],
       neutral: styles["status-neutral"],
     },

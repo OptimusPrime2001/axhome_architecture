@@ -44,6 +44,7 @@ Không tuyên bố test/build thành công nếu chưa chạy hoặc chưa có b
 - `.agent/rules/frontend-07-typescript-types.md` — Tổ chức types tập trung theo module.
 - `.agent/rules/frontend-08-forms-and-validation.md` — Form và validation.
 - `.agent/rules/frontend-09-quality-and-testing.md` — Chất lượng, accessibility, responsive và kiểm thử.
+- `.agent/rules/frontend-10-state-and-zustand.md` — Quản lý state và cấu trúc chuẩn Zustand Store (`store-base`).
 - `.agent/rules/frontend-animate-ui.md` — Quy tắc sử dụng Animate UI (Icons, Components, Backgrounds & Effects).
 
 Nếu task liên quan nhiều mảng, phải đọc tất cả rule tương ứng, không chỉ đọc một file.

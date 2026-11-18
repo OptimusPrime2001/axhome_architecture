@@ -1,0 +1,179 @@
+.section {
+  padding: 96px 0;
+  background-color: $color-surface-muted;
+
+  @include media-breakpoint-down(md) {
+    padding: 64px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 48px 0;
+  }
+}
+
+// Header: 768px, canh trái (Figma node 1:1721)
+.header {
+  max-width: 768px;
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: $text-xs; // 11px
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 7px;
+}
+
+.title {
+  @include text-heading-2;
+  margin-bottom: 7px;
+
+  @include media-breakpoint-down(sm) {
+    line-height: 1.3;
+  }
+}
+
+.lead {
+  font-size: 15px;
+  line-height: 30px;
+  color: $color-text-secondary;
+}
+
+// 4 trụ cột: 262px × 4, gap 24px = 1120px (Figma node 1:1727)
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 64px;
+  list-style: none;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 40px;
+  }
+}
+
+.pillar {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  min-height: 370px;
+  box-shadow: $shadow-sm;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      $color-brand-primary 0%,
+      $color-brand-light 100%
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+    background-color: #fcfaf7;
+    border-color: $color-brand-light;
+    box-shadow: $shadow-lg;
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.iconBox {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  background-color: $color-surface-muted;
+  color: $color-brand-primary;
+  margin-bottom: 12px;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  svg {
+    width: 22px;
+    height: 20px;
+  }
+
+  .pillar:hover & {
+    background-color: $color-brand-primary;
+    color: $color-text-inverse;
+    transform: scale(1.05);
+    box-shadow: $shadow-sm;
+  }
+}
+
+.pillarTitle {
+  @include text-heading-3;
+  margin-top: 4px;
+  transition: color 0.25s ease;
+
+  .pillar:hover & {
+    color: $color-brand-dark;
+  }
+}
+
+.pillarDescription {
+  font-size: 15px;
+  line-height: 24px;
+  color: $color-text-secondary;
+  margin-top: 8px;
+}
+
+// Dòng nhấn cuối pillar, đẩy xuống đáy card
+.stat {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid $color-surface-border;
+  font-family: $font-sans;
+  font-size: $text-xs; // 11px
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-dark;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+
+  .pillar:hover & {
+    color: $color-brand-primary;
+    border-color: rgba($color-brand-primary, 0.35);
+    transform: translateX(3px);
+  }
+}

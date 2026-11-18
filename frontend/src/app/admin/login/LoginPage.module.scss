@@ -1,0 +1,350 @@
+.pageWrapper {
+  min-height: 100vh;
+  background-color: $color-surface-bg;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px 24px 24px;
+
+  @include media-breakpoint-down(sm) {
+    padding: 20px 16px;
+  }
+}
+
+.topEyebrow {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.cardContainer {
+  width: 100%;
+  max-width: 960px;
+}
+
+.splitCard {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-lg;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.visualPanel {
+  position: relative;
+  min-height: 520px;
+  color: $color-text-inverse;
+  overflow: hidden;
+
+  @include media-breakpoint-down(lg) {
+    min-height: 280px;
+  }
+}
+
+.visualBg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.visualOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(34, 30, 26, 0.72) 0%,
+    rgba(48, 44, 40, 0.68) 45%,
+    rgba(34, 30, 26, 0.88) 100%
+  );
+}
+
+.visualInner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+
+  @include media-breakpoint-down(sm) {
+    padding: 22px 20px;
+  }
+}
+
+.portalHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.portalBrandRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+.portalLogo {
+  width: auto;
+  height: 28px;
+  object-fit: contain;
+}
+
+.portalDivider {
+  width: 1px;
+  height: 18px;
+  background-color: rgba(250, 249, 246, 0.35);
+}
+
+.portalLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: $color-text-inverse;
+  text-transform: uppercase;
+}
+
+.studioLocation {
+  font-size: $text-sm;
+  color: rgba(250, 249, 246, 0.78);
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-light;
+}
+
+.heroTitle {
+  font-family: $font-serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ffffff;
+
+  em {
+    font-style: italic;
+    color: #e7dcd0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: 24px;
+  }
+}
+
+.heroDescription {
+  font-size: $text-base;
+  line-height: 1.6;
+  color: rgba(250, 249, 246, 0.84);
+}
+
+.statusCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: $radius-md;
+  background-color: rgba(34, 30, 26, 0.56);
+  border: 1px solid rgba(250, 249, 246, 0.18);
+  backdrop-filter: blur(8px);
+
+  @include media-breakpoint-down(sm) {
+    flex-wrap: wrap;
+  }
+}
+
+.statusIconBox {
+  width: 34px;
+  height: 34px;
+  border-radius: $radius-sm;
+  background-color: rgba(187, 165, 140, 0.2);
+  color: $color-brand-light;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statusMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.statusTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.statusSubtitle {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(250, 249, 246, 0.72);
+  text-transform: uppercase;
+}
+
+.isoBadge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  border-radius: $radius-xs;
+  background-color: rgba(250, 249, 246, 0.12);
+  color: #e7dcd0;
+  white-space: nowrap;
+}
+
+.formPanel {
+  padding: 42px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include media-breakpoint-down(md) {
+    padding: 32px 24px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 28px 20px;
+  }
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: $color-brand-primary;
+  text-transform: uppercase;
+}
+
+.eyebrowSquare {
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  background-color: $color-brand-dark;
+}
+
+.formTitle {
+  font-family: $font-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: $color-text-primary;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 26px;
+  }
+}
+
+.formSubtitle {
+  font-size: $text-md;
+  color: $color-text-secondary;
+  line-height: 1.5;
+}
+
+.formDivider {
+  height: 1px;
+  background-color: $color-surface-border;
+  margin: 22px 0;
+}
+
+.systemStatusBar {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.serverStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.onlineDot {
+  width: 7px;
+  height: 7px;
+  border-radius: $radius-full;
+  background-color: #16a34a;
+  flex-shrink: 0;
+}
+
+.versionInfo {
+  color: $color-text-secondary;
+}
+
+.pageFooter {
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: $text-sm;
+  color: $color-text-secondary;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: 600;
+  }
+
+  a:hover {
+    color: $color-brand-primary;
+    text-decoration: underline;
+  }
+}
+
+.footerItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

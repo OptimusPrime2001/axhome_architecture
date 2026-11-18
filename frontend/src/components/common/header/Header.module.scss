@@ -32,14 +32,12 @@
 }
 
 .navHighlight {
-  border-radius: $radius-sm;
-  background-color: rgba($color-brand-primary, 0.12);
   border-bottom: 2px solid $color-brand-primary;
 }
 
 .navLink {
   font-family: $font-sans;
-  font-size: $text-base;
+  font-size: $text-md;
   font-weight: 500;
   color: $color-text-secondary;
   padding: 8px 16px;

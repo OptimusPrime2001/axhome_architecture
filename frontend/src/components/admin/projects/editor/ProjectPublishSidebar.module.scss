@@ -1,0 +1,470 @@
+.sidebarStack {
+  position: sticky;
+  top: 86px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include media-breakpoint-down(xl) {
+    position: static;
+  }
+}
+
+.card {
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  padding: 20px;
+  box-shadow: $shadow-sm;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $color-surface-border;
+}
+
+.cardTitleGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: $color-brand-dark;
+}
+
+.cardTitle {
+  font-family: $font-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: $radius-full;
+  background-color: $color-brand-primary;
+}
+
+.seoBadge {
+  padding: 3px 8px;
+  border-radius: $radius-xs;
+  background-color: #f3ece1;
+  color: $color-brand-dark;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.blockGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.miniLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.miniLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-text-secondary;
+}
+
+.miniCounter {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $color-text-muted;
+}
+
+/* Status Segmented Toggle */
+.statusSegment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background-color: $color-surface-muted;
+  padding: 4px;
+  border-radius: $radius-md;
+}
+
+.segmentBtn {
+  appearance: none;
+  height: 36px;
+  border-radius: $radius-sm;
+  border: 1px solid transparent;
+  background: transparent;
+  color: $color-text-secondary;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.segmentBtnActive {
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  border-color: $color-surface-border;
+  box-shadow: $shadow-sm;
+}
+
+/* Stage Radio Cards */
+.stageList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stageCard {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  padding: 11px 13px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-bg;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease;
+
+  &:hover {
+    border-color: $color-brand-light;
+  }
+}
+
+.radioCircle {
+  margin-top: 2px;
+  width: 15px;
+  height: 15px;
+  border-radius: $radius-full;
+  border: 2px solid $color-text-muted;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.radioDot {
+  width: 7px;
+  height: 7px;
+  border-radius: $radius-full;
+  background-color: transparent;
+}
+
+.stageCardActive {
+  background-color: #faf6f0;
+  border-color: $color-brand-primary;
+
+  .radioCircle {
+    border-color: $color-brand-dark;
+  }
+
+  .radioDot {
+    background-color: $color-brand-dark;
+  }
+}
+
+.stageMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stageName {
+  font-size: $text-base;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.stageSub {
+  font-size: 11.5px;
+  color: $color-text-secondary;
+  line-height: 1.4;
+}
+
+/* Overall Progress Box */
+.progressBox {
+  background-color: $color-surface-muted;
+  border-radius: $radius-md;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progressHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: $color-text-secondary;
+
+  strong {
+    font-family: $font-mono;
+    color: $color-brand-dark;
+  }
+}
+
+.progressTrack {
+  width: 100%;
+  height: 5px;
+  border-radius: $radius-full;
+  background-color: #dfd8cd;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: $radius-full;
+  background-color: $color-brand-dark;
+  transition: width 0.25s ease;
+}
+
+/* Featured Switch */
+.featuredBox {
+  padding-top: 12px;
+  border-top: 1px solid $color-surface-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.featuredCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.featuredTitle {
+  font-size: $text-base;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.featuredSub {
+  font-size: 11.5px;
+  color: $color-text-secondary;
+}
+
+.switchBtn {
+  appearance: none;
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: $radius-full;
+  border: none;
+  background-color: #d6cfc5;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.18s ease;
+}
+
+.switchThumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: $radius-full;
+  background-color: #ffffff;
+  box-shadow: $shadow-sm;
+  transition: transform 0.18s ease;
+}
+
+.switchBtnActive {
+  background-color: $color-brand-dark;
+
+  .switchThumb {
+    transform: translateX(20px);
+  }
+}
+
+/* Author Strip */
+.authorStrip {
+  background-color: $color-surface-muted;
+  border-radius: $radius-md;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.authorAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: $radius-full;
+  background-color: $color-surface-dark;
+  color: $color-text-inverse;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.authorName {
+  font-size: $text-base;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.authorRole {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $color-text-secondary;
+}
+
+/* SEO Inputs & Google SERP Preview */
+.seoInput {
+  width: 100%;
+  height: 38px;
+  padding: 0 11px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  font-family: $font-sans;
+  font-size: $text-base;
+  color: $color-text-primary;
+
+  &:focus {
+    outline: none;
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+  }
+}
+
+.seoTextarea {
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  font-family: $font-sans;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: $color-text-primary;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+  }
+}
+
+.charMeter {
+  width: 100%;
+  height: 3px;
+  border-radius: $radius-full;
+  background-color: #ebe6de;
+  overflow: hidden;
+}
+
+.charMeterFill {
+  height: 100%;
+  background-color: $color-brand-primary;
+  transition: width 0.2s ease;
+}
+
+.serpPreview {
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.serpSiteRow {
+  font-size: 11px;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.serpTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a0dab;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.serpDesc {
+  font-size: 12px;
+  color: #4d5156;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Quality Checklist */
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: $color-text-secondary;
+}
+
+.checkIconPending {
+  margin-top: 1px;
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.checkIconDone {
+  margin-top: 1px;
+  color: $color-status-completed-text;
+  flex-shrink: 0;
+}
+
+.checkItemDone {
+  color: $color-text-primary;
+  font-weight: 500;
+}

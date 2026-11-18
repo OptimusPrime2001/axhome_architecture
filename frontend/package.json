@@ -11,10 +11,20 @@
   },
   "dependencies": {
     "@animate-ui/react": "^2.4.3",
+    "@base-ui/react": "^1.9.0",
     "@hookform/resolvers": "^7.0.6",
     "@radix-ui/react-label": "^2.1.17",
     "@radix-ui/react-select": "^2.4.1",
+    "@radix-ui/react-slot": "^1.5.0",
+    "@radix-ui/react-tabs": "^1.2.1",
+    "@radix-ui/react-tooltip": "^1.4.1",
     "@tanstack/react-query": "^5.107.1",
+    "@tiptap/extension-link": "^3.34.0",
+    "@tiptap/extension-placeholder": "^3.34.0",
+    "@tiptap/extension-underline": "^3.34.0",
+    "@tiptap/pm": "^3.34.0",
+    "@tiptap/react": "^3.34.0",
+    "@tiptap/starter-kit": "^3.34.0",
     "axios": "^1.21.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -26,9 +36,9 @@
     "react-hook-form": "^7.92.0",
     "sass-embedded": "^1.93.3",
     "tailwind-merge": "^3.7.0",
+    "tailwindcss-animate": "^1.0.7",
     "zod": "^4.6.7",
-    "zustand": "^5.1.0",
-    "tailwindcss-animate": "^1.0.7"
+    "zustand": "^5.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.7",

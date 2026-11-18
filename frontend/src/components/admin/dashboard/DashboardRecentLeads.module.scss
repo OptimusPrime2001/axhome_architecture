@@ -1,0 +1,214 @@
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-family: $font-serif;
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.3;
+}
+
+.pendingPill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: $radius-full;
+  background-color: $color-status-pending-bg;
+  color: $color-status-pending-text;
+  border: 1px solid $color-status-pending-border;
+}
+
+.subtitle {
+  margin-top: 4px;
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.viewAllLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: $text-xs;
+  font-weight: 600;
+  color: $color-brand-dark;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $color-brand-primary;
+  }
+}
+
+.leadList {
+  display: flex;
+  flex-direction: column;
+}
+
+.leadItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid $color-surface-border;
+
+  &:first-child {
+    padding-top: 4px;
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 4px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  color: $color-brand-dark;
+  font-size: $text-md;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.leadInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.leadTop {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.leadName {
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.leadPhone {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $color-text-secondary;
+}
+
+.leadService {
+  margin-top: 2px;
+  font-size: $text-xs;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leadMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-left: 48px;
+    justify-content: space-between;
+  }
+}
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: $radius-xs;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.statusPending {
+  background-color: $color-status-pending-bg;
+  color: $color-status-pending-text;
+  border-color: $color-status-pending-border;
+}
+
+.statusProgress,
+.statusScheduled {
+  background-color: $color-status-progress-bg;
+  color: $color-status-progress-text;
+  border-color: $color-status-progress-border;
+}
+
+.statusWon {
+  background-color: $color-status-completed-bg;
+  color: $color-status-completed-text;
+  border-color: $color-status-completed-border;
+}
+
+.statusLost {
+  background-color: $color-status-cancelled-bg;
+  color: $color-status-cancelled-text;
+  border-color: $color-status-cancelled-border;
+}
+
+.leadTime {
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+.footerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 40px;
+  border-radius: $radius-md;
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    background-color: $color-surface-muted;
+    border-color: $color-brand-light;
+  }
+}

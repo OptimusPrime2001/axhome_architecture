@@ -19,11 +19,12 @@ Việc hợp nhất giúp tinh giản cấu trúc website, tối ưu trải nghi
 | **Public** | `/projects`                       | **Dự Án (Catalogue):** Danh sách toàn bộ dự án với các tab bộ lọc: _Tất cả_, _Bản vẽ thiết kế 3D_, _Đang thi công_, _Đã hoàn thành bàn giao_. Hỗ trợ lọc theo loại hình (Biệt thự, Nhà phố, Dinh thự) và địa điểm.   |
 | **Public** | `/projects/:slug`                 | **Chi Tiết Dự Án (Modular Template):** Dùng chung format cho mọi dự án. Nội dung bài viết chi tiết viết từ Editor, kèm các khối linh hoạt (Gallery, Bản vẽ mặt bằng, Nhật ký tiến độ thi công, Form đăng ký tư vấn). |
 | **Public** | `/contact`                        | **Liên Hệ:** Thông tin các chi nhánh/xưởng, Form yêu cầu tư vấn chuyên sâu, Bản đồ và kết nối mạng xã hội.                                                                                                           |
+| **Admin**  | `/admin/login`                    | **Đăng nhập Admin:** Giao diện đăng nhập hệ thống quản trị CMS.                                                                                                                                                     |
 | **Admin**  | `/admin/dashboard`                | **Bảng điều khiển:** 4 KPI Cards, biểu đồ tương tác, danh sách Leads mới cần gọi, danh sách dự án đang thi công.                                                                                                     |
 | **Admin**  | `/admin/projects`                 | **Quản Lý Dự Án (CRUD tập trung):** Danh sách, tìm kiếm, lọc theo phân loại (_Thiết kế / Thi công_), trạng thái (_Draft / Published_).                                                                               |
 | **Admin**  | `/admin/projects/create` & `/:id` | **Biên tập Dự Án:** Nhập thông số kỹ thuật, tích hợp Rich Text Editor viết bài, upload Gallery ảnh, tùy chọn thêm Mặt bằng công năng hoặc Mốc tiến độ thi công.                                                      |
 | **Admin**  | `/admin/contacts`                 | **CRM Quản lý Yêu Cầu Tư Vấn:** Tiếp nhận leads từ các form, quản lý pipeline xử lý (_Chờ xử lý → Đang tư vấn → Đã hẹn → Đã chốt HĐ → Đã huỷ_), lưu ghi chú nội bộ.                                                  |
-| **Admin**  | `/admin/services` & `/settings`   | **Cài đặt hệ thống:** Cập nhật nội dung dịch vụ, thông tin công ty, hotline, SEO mặc định.                                                                                                                           |
+| **Admin**  | `/admin/settings`                 | **Tài khoản & Bảo mật:** Quản lý hồ sơ quản trị viên, đổi mật khẩu đăng nhập Admin và giám sát trạng thái kết nối hạ tầng (Go API & Cloudflare R2). Thông tin thương hiệu & 3 dịch vụ cốt lõi giữ tĩnh ở Frontend (`0ms` độ trễ, không gọi API cấu hình). |
 
 ---
 
@@ -234,22 +235,23 @@ erDiagram
   - Khối tùy chọn: Nhật ký tiến độ thi công (Milestone Timeline).
   - Form CTA nhận tư vấn phương án này & 3 Dự án liên quan.
 
-### Giai đoạn 4: Xây Dựng Backend & Database (Sau khi duyệt FE)
+### Giai đoạn 4: Phát Triển UI Admin CMS (Mock Data / Frontend First)
 
-- [ ] **Task 4.1:** Thiết kế Database PostgreSQL với schema tinh giản (`projects`, `project_images`, `floor_plans`, `project_milestones`, `consultation_leads`).
-- [ ] **Task 4.2:** Xây dựng Go Backend REST API cho Public & Admin (JWT Auth, CRUD Projects, Quản lý Leads, File Upload WebP).
+- [x] **Task 4.1:** Trang Đăng nhập Admin (`/admin/login`) & Admin Layout (Sidebar, Topbar, User menu, Responsive Drawer).
+- [x] **Task 4.2:** Dashboard (`/admin/dashboard`): 4 KPI Cards, biểu đồ/thống kê tổng quan, danh sách Leads mới cần gọi, danh sách dự án đang thi công (dùng mock data).
+- [x] **Task 4.3:** Quản lý Dự án (`/admin/projects`): Bảng danh sách, tìm kiếm, phân trang, lọc theo phân loại (*Bản vẽ 3D / Đang thi công / Đã hoàn thành*) & trạng thái (*Draft / Published*).
+- [x] **Task 4.4:** Tạo/Sửa Dự án (`/admin/projects/create`, `/admin/projects/[id]`): Form thông số kỹ thuật, tích hợp Rich Text Editor, upload/preview Gallery ảnh, builder Mặt bằng công năng & Mốc tiến độ thi công.
+- [x] **Task 4.5:** Quản lý Yêu cầu Tư vấn (`/admin/contacts`): Pipeline CRM quản lý trạng thái khách hàng (*Chờ xử lý → Đang tư vấn → Đã hẹn → Đã chốt HĐ → Đã huỷ*) và ghi chú nội bộ.
+- [x] **Task 4.6:** Tài khoản & Bảo mật Admin (`/admin/settings`): Quản lý hồ sơ quản trị viên, đổi mật khẩu đăng nhập và theo dõi trạng thái hạ tầng (lược bỏ cấu hình web động & quản lý dịch vụ để giữ tốc độ tải trang Public tĩnh 0ms không chớp).
 
-### Giai đoạn 5: Phát Triển Admin CMS
+### Giai đoạn 5: Xây Dựng Backend, Database & Ghép API (Integration)
 
-- [ ] **Task 5.1:** Admin Layout (Sidebar, Topbar, User menu).
-- [ ] **Task 5.2:** Dashboard (`/admin/dashboard`): Thống kê KPIs, leads mới cần gọi.
-- [ ] **Task 5.3:** Quản lý Dự án (`/admin/projects`): Bảng danh sách, phân trang, lọc trạng thái.
-- [ ] **Task 5.4:** Tạo/Sửa Dự án (`/admin/projects/create`, `/:id`): Tích hợp Rich Editor, upload ảnh, builder Mặt bằng & Milestones tiến độ.
-- [ ] **Task 5.5:** Quản lý Yêu cầu Tư vấn (`/admin/contacts`): Pipeline CRM quản lý trạng thái khách hàng.
-- [ ] **Task 5.6:** Cài đặt thông tin website (`/admin/settings`).
+- [ ] **Task 5.1:** Thiết kế Database PostgreSQL với schema tinh giản (`projects`, `project_images`, `floor_plans`, `project_milestones`, `consultation_leads`, `users`).
+- [ ] **Task 5.2:** Xây dựng Go Backend REST API cho Public & Admin (JWT/Cookie Auth, Đổi mật khẩu Admin, CRUD Projects, Quản lý Leads, Upload ảnh tối ưu WebP lên **Cloudflare R2**).
+- [ ] **Task 5.3:** Tích hợp API vào Frontend (`src/apis/`, `src/hooks/` với Axios & TanStack Query): Thay thế toàn bộ mock data Dự án & Yêu cầu tư vấn bằng dữ liệu thật từ Backend, kết nối Auth guard và Upload ảnh Cloudflare R2.
 
 ### Giai đoạn 6: Tối Ưu, Kiểm Thử & Hoàn Thiện
 
-- [ ] **Task 6.1:** Kiểm thử Responsive toàn diện (Desktop 1280px, Tablet 768px, Mobile 390px).
-- [ ] **Task 6.2:** Cấu hình SEO On-page: Metadata, OpenGraph, JSON-LD Schema (ArchitecturalService, LocalBusiness).
-- [ ] **Task 6.3:** Kiểm tra linting Biome và TypeScript compile (`tsc --noEmit`).
+- [ ] **Task 6.1:** Kiểm thử Responsive toàn diện (Desktop 1280px/1440px, Tablet 768px/1024px, Mobile 375px/390px/430px) cho cả Public và Admin.
+- [ ] **Task 6.2:** Cấu hình SEO On-page: Metadata, OpenGraph, JSON-LD Schema (`ArchitecturalService`, `LocalBusiness`).
+- [ ] **Task 6.3:** Kiểm tra linting Biome, TypeScript compile (`tsc --noEmit`) và `next build`.

@@ -4,7 +4,6 @@ import {
   FOOTER_QUICK_LINKS,
   FOOTER_SERVICES_LINKS,
 } from "@constants";
-import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 import Logo from "../logo/Logo";

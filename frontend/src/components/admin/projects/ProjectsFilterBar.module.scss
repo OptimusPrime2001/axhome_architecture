@@ -1,0 +1,250 @@
+.filterCard {
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: $shadow-sm;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px solid $color-surface-border;
+}
+
+.typeTabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  background-color: $color-surface-muted;
+  padding: 4px;
+  border-radius: $radius-md;
+}
+
+.typeTab {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: $color-text-secondary;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 500;
+  padding: 7px 13px;
+  border-radius: $radius-sm;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 1px;
+  }
+}
+
+.tabCount {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: $radius-full;
+  background-color: rgba(48, 44, 40, 0.06);
+  color: $color-text-secondary;
+}
+
+.typeTabActive {
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  font-weight: 600;
+  border-color: $color-surface-border;
+  box-shadow: $shadow-sm;
+
+  .tabCount {
+    background-color: #f3ece2;
+    color: $color-brand-dark;
+  }
+}
+
+.resetButton {
+  appearance: none;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  color: $color-text-secondary;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 500;
+  padding: 7px 12px;
+  border-radius: $radius-md;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
+
+  &:hover:not(:disabled) {
+    background-color: #ebe5dc;
+    color: $color-text-primary;
+    border-color: $color-brand-light;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.controlsGrid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.6fr) repeat(3, minmax(160px, 1fr));
+  gap: 14px;
+  align-items: end;
+
+  @include media-breakpoint-down(xl) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: $color-text-secondary;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 40px;
+  padding: 0 34px 0 36px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-base;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.12);
+  }
+}
+
+.clearSearchBtn {
+  position: absolute;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(48, 44, 40, 0.08);
+    color: $color-text-primary;
+  }
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.selectControl {
+  appearance: none;
+  width: 100%;
+  height: 40px;
+  padding: 0 34px 0 12px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease;
+
+  &:hover {
+    border-color: $color-brand-light;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.12);
+  }
+}
+
+.selectChevron {
+  position: absolute;
+  right: 11px;
+  color: $color-text-secondary;
+  pointer-events: none;
+}

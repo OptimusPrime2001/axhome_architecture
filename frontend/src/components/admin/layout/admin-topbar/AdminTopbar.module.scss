@@ -1,0 +1,363 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: 75px;
+  padding: 0 28px;
+  background-color: $color-surface-card;
+  border-bottom: 1px solid $color-surface-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  @include media-breakpoint-down(md) {
+    padding: 0 16px;
+  }
+}
+
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.menuButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: $radius-md;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  color: $color-text-primary;
+  flex-shrink: 0;
+
+  @include media-breakpoint-down(lg) {
+    display: inline-flex;
+  }
+
+  &:hover {
+    border-color: $color-brand-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: $text-md;
+}
+
+.breadcrumbRoot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $color-brand-primary;
+  }
+
+  @include media-breakpoint-down(sm) {
+    span {
+      display: none;
+    }
+  }
+}
+
+.breadcrumbSep {
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.breadcrumbCurrent {
+  font-weight: 600;
+  color: $color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 280px;
+
+  @include media-breakpoint-down(lg) {
+    width: 220px;
+  }
+
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: $color-text-secondary;
+  pointer-events: none;
+}
+
+.searchInput {
+  height: 38px;
+  padding-left: 36px;
+  font-size: $text-sm;
+  background-color: $color-surface-muted;
+}
+
+.popoverAnchor {
+  position: relative;
+}
+
+.iconButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: $radius-md;
+  color: $color-text-secondary;
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    color: $color-text-primary;
+    border-color: $color-brand-light;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.unreadDot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: $radius-full;
+  background-color: #dc2626;
+  border: 1.5px solid #ffffff;
+}
+
+.userTrigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 4px 10px 4px 6px;
+  border-radius: $radius-md;
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: $color-brand-light;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.userAvatarBox {
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-full;
+  background-color: $color-brand-dark;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.userMeta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+
+.userTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+  line-height: 1.2;
+}
+
+.userPerm {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: $color-brand-primary;
+  text-transform: uppercase;
+}
+
+.chevronIcon {
+  color: $color-text-secondary;
+  flex-shrink: 0;
+}
+
+.notifPopover,
+.userDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  z-index: 60;
+}
+
+.notifPopover {
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  overflow: hidden;
+}
+
+.popoverHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid $color-surface-border;
+}
+
+.popoverTitle {
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.popoverBadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: $radius-full;
+  background-color: $color-status-pending-bg;
+  color: $color-status-pending-text;
+}
+
+.notifList {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notifItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 16px;
+  border-bottom: 1px solid $color-surface-border;
+  transition: background-color 0.15s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: $color-surface-bg;
+  }
+
+  &.notifUnread {
+    background-color: #fcfaf6;
+  }
+}
+
+.notifTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.notifDesc {
+  font-size: $text-xs;
+  color: $color-text-secondary;
+  line-height: 1.4;
+}
+
+.notifTime {
+  font-size: 10px;
+  color: $color-text-muted;
+}
+
+.userDropdown {
+  width: 230px;
+  padding: 6px 0;
+}
+
+.dropdownHeader {
+  padding: 10px 14px;
+}
+
+.dropdownName {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.dropdownEmail {
+  font-size: $text-xs;
+  color: $color-text-secondary;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background-color: $color-surface-border;
+  margin: 4px 0;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 14px;
+  font-size: $text-sm;
+  font-weight: 500;
+  color: $color-text-primary;
+  text-align: left;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: $color-surface-muted;
+  }
+}
+
+.dropdownDanger {
+  color: $color-error;
+}

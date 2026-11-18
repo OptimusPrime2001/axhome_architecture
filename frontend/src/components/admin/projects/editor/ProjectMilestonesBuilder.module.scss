@@ -1,0 +1,145 @@
+.headActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.presetBtn {
+  appearance: none;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ebe5dc;
+  }
+}
+
+.emptyNotice {
+  background-color: $color-surface-bg;
+  border: 1px dashed $color-surface-border;
+  border-radius: $radius-md;
+  padding: 22px 18px;
+  text-align: center;
+  font-size: $text-base;
+  color: $color-text-secondary;
+  line-height: 1.55;
+}
+
+.milestoneList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.milestoneCard {
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $color-surface-border;
+}
+
+.stepGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepNumber {
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-full;
+  background-color: $color-brand-dark;
+  color: $color-text-inverse;
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completedCheckLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  font-size: 12px;
+  font-weight: 600;
+  color: $color-text-secondary;
+  cursor: pointer;
+
+  input {
+    width: 15px;
+    height: 15px;
+    accent-color: $color-status-completed-text;
+  }
+}
+
+.completedCheckActive {
+  background-color: $color-status-completed-bg;
+  border-color: $color-status-completed-border;
+  color: $color-status-completed-text;
+}
+
+.rowActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.iconBtn {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background-color: $color-surface-muted;
+    color: $color-text-primary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.iconBtnDanger {
+  &:hover:not(:disabled) {
+    background-color: $color-status-cancelled-bg;
+    border-color: $color-status-cancelled-border;
+    color: $color-status-cancelled-text;
+  }
+}

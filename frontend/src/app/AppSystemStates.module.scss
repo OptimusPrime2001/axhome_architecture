@@ -1,0 +1,94 @@
+.stateWrapper {
+  min-height: 75vh;
+  padding: 64px 20px;
+  background-color: $color-surface-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stateCard {
+  width: 100%;
+  max-width: 560px;
+  padding: 40px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  @include media-breakpoint-down(sm) {
+    padding: 28px 20px;
+  }
+}
+
+.iconCircle {
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-full;
+  background-color: #f6efe7;
+  border: 1px solid $color-surface-border;
+  color: $color-brand-dark;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorIconCircle {
+  background-color: $color-status-cancelled-bg;
+  border-color: $color-status-cancelled-border;
+  color: $color-status-cancelled-text;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: $color-brand-primary;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: $font-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.25;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 24px;
+  }
+}
+
+.description {
+  font-size: $text-md;
+  color: $color-text-secondary;
+  line-height: 1.6;
+  max-width: 440px;
+}
+
+.actionsRow {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.loadingWrap {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: $color-text-secondary;
+  font-size: $text-sm;
+}
+
+.spinnerIcon {
+  width: 28px;
+  height: 28px;
+  color: $color-brand-primary;
+}

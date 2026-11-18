@@ -1,14 +1,12 @@
 "use client";
 
-import * as React from "react";
-import { motion, type Variants } from "motion/react";
-
 import {
   getVariants,
-  useAnimateIconContext,
-  IconWrapper,
   type IconProps,
+  IconWrapper,
+  useAnimateIconContext,
 } from "@animate-ui/react/icons";
+import { motion, type Variants } from "motion/react";
 
 type MailProps = IconProps<keyof typeof animations>;
 

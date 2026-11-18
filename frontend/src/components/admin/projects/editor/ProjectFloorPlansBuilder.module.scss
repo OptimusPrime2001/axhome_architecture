@@ -1,0 +1,236 @@
+.emptyNotice {
+  background-color: $color-surface-bg;
+  border: 1px dashed $color-surface-border;
+  border-radius: $radius-md;
+  padding: 22px 18px;
+  text-align: center;
+  font-size: $text-base;
+  color: $color-text-secondary;
+  line-height: 1.55;
+}
+
+.planList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.planCard {
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.planCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $color-surface-border;
+}
+
+.planBadge {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: $radius-sm;
+  background-color: #efe8dd;
+  color: $color-brand-dark;
+}
+
+.planHeadActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.iconBtn {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background-color: $color-surface-muted;
+    color: $color-text-primary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.iconBtnDanger {
+  &:hover:not(:disabled) {
+    background-color: $color-status-cancelled-bg;
+    border-color: $color-status-cancelled-border;
+    color: $color-status-cancelled-text;
+  }
+}
+
+.planBodyGrid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.blueprintCol {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.blueprintFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: $radius-md;
+  overflow: hidden;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blueprintImg {
+  object-fit: cover;
+}
+
+.blueprintPlaceholder {
+  padding: 12px;
+  text-align: center;
+  font-size: $text-xs;
+  color: $color-text-muted;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.uploadMiniBtn {
+  appearance: none;
+  width: 100%;
+  height: 34px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-surface-muted;
+    border-color: $color-brand-light;
+  }
+}
+
+.fieldsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.roomsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.roomInputRow {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.roomAddBtn {
+  appearance: none;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-surface-muted;
+  }
+}
+
+.roomChips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.roomChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: $radius-full;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  font-size: $text-sm;
+  color: $color-text-primary;
+}
+
+.roomChipRemove {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: $color-text-muted;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-status-cancelled-text;
+  }
+}
+
+.errorBanner {
+  padding: 10px 14px;
+  border-radius: $radius-md;
+  background-color: $color-status-cancelled-bg;
+  border: 1px solid $color-status-cancelled-border;
+  color: $color-status-cancelled-text;
+  font-size: $text-sm;
+  font-weight: 600;
+}

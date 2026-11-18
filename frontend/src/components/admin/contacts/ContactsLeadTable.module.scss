@@ -1,0 +1,168 @@
+.tableCard {
+  overflow: hidden;
+}
+
+.row {
+  cursor: pointer;
+
+  &.selectedRow {
+    background-color: #f8f2ea;
+  }
+}
+
+.rowSelectButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  color: $color-brand-dark;
+  font-size: $text-sm;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.customerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.customerName {
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-text-primary;
+  white-space: nowrap;
+}
+
+.customerSub {
+  font-size: $text-xs;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+.contactCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.phoneText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+  white-space: nowrap;
+}
+
+.emailText {
+  font-size: $text-xs;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+.needCell {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: 340px;
+}
+
+.serviceLabel {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+  line-height: 1.35;
+}
+
+.scaleMeta {
+  font-size: $text-xs;
+  color: $color-text-secondary;
+}
+
+.statusCell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.timeMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+.paginationBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  border-top: 1px solid $color-surface-border;
+  background-color: $color-surface-bg;
+}
+
+.paginationInfo {
+  font-size: $text-xs;
+  color: $color-text-secondary;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: 600;
+  }
+}
+
+.paginationControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pageBtn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+}
+
+.emptyState {
+  border-style: dashed;
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.emptyIcon {
+  color: $color-text-muted;
+}
+
+.emptyTitle {
+  font-size: $text-lg;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.emptyDesc {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+  max-width: 420px;
+}

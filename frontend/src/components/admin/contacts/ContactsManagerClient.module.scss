@@ -1,0 +1,123 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: $color-brand-primary;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.pageTitle {
+  font-family: $font-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.2;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 23px;
+  }
+}
+
+.pageSubtitle {
+  margin-top: 6px;
+  font-size: $text-md;
+  color: $color-text-secondary;
+  line-height: 1.5;
+  max-width: 680px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filterToolbar {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.searchWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 280px;
+  max-width: 100%;
+
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: $color-text-secondary;
+  pointer-events: none;
+}
+
+.searchInput {
+  height: 38px;
+  padding-left: 36px;
+  font-size: $text-sm;
+  background-color: $color-surface-bg;
+}
+
+.filtersRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: flex-end;
+
+  @include media-breakpoint-down(md) {
+    justify-content: flex-start;
+  }
+}
+
+.tabsRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filterTabBtn {
+  height: 32px;
+  padding: 0 11px;
+  font-size: $text-xs;
+}
+
+.serviceSelectWrap {
+  width: 190px;
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
+}
+
+.serviceTrigger {
+  height: 34px;
+  font-size: $text-xs;
+}

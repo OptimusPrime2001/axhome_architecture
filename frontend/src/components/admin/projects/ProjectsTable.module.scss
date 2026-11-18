@@ -1,0 +1,660 @@
+.tableSection {
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.bulkToolbar {
+  background-color: #f6efe7;
+  border-bottom: 1px solid #e4d7c7;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bulkCount {
+  font-size: $text-base;
+  color: $color-text-primary;
+
+  strong {
+    font-weight: 700;
+    color: $color-brand-dark;
+  }
+}
+
+.bulkActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bulkBtn {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease;
+
+  &:hover {
+    background-color: $color-surface-muted;
+    border-color: $color-brand-light;
+  }
+}
+
+.bulkBtnDanger {
+  color: $color-status-cancelled-text;
+  border-color: $color-status-cancelled-border;
+  background-color: $color-status-cancelled-bg;
+
+  &:hover {
+    background-color: #fbe5e5;
+    border-color: $color-status-cancelled-text;
+  }
+}
+
+.bulkBtnGhost {
+  border-color: transparent;
+  background: transparent;
+  color: $color-text-secondary;
+
+  &:hover {
+    background-color: rgba(48, 44, 40, 0.06);
+    color: $color-text-primary;
+  }
+}
+
+.tableScrollWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.dataTable {
+  width: 100%;
+  min-width: 1040px;
+  border-collapse: collapse;
+  text-align: left;
+
+  thead th {
+    background-color: #f5f2ec;
+    border-bottom: 1px solid $color-surface-border;
+    padding: 13px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $color-text-secondary;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid $color-surface-border;
+    transition: background-color 0.16s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: #fcfbf9;
+    }
+  }
+
+  td {
+    padding: 16px;
+    vertical-align: middle;
+  }
+
+  tbody tr.rowSelected {
+    background-color: #faf5ef;
+
+    &:hover {
+      background-color: #f6efe6;
+    }
+  }
+
+  th.checkboxCol,
+  td.checkboxCol {
+    width: 44px;
+    text-align: center;
+    padding-left: 18px;
+    padding-right: 8px;
+  }
+}
+
+.checkboxInput {
+  width: 16px;
+  height: 16px;
+  accent-color: $color-brand-dark;
+  cursor: pointer;
+}
+
+.thumbCol {
+  width: 108px;
+}
+
+.thumbFrame {
+  position: relative;
+  width: 88px;
+  height: 60px;
+  border-radius: $radius-md;
+  overflow: hidden;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  flex-shrink: 0;
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+.mediaTag {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  padding: 1px 5px;
+  border-radius: $radius-xs;
+  background-color: rgba(34, 30, 26, 0.78);
+  color: #ffffff;
+  font-family: $font-mono;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.featuredCorner {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: $radius-full;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #c78a26;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectInfoCell {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 320px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.projectTitleLink {
+  font-size: 15px;
+  font-weight: 700;
+  color: $color-text-primary;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: color 0.16s ease;
+
+  &:hover {
+    color: $color-brand-primary;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.stylePill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: $radius-sm;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  font-size: 11px;
+  font-weight: 500;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.projectCode {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $color-brand-dark;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.metaDot {
+  color: $color-text-muted;
+}
+
+.typeProgressCell {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 180px;
+}
+
+.typeHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.typeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: $radius-full;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.typeBadgeConcept {
+  background-color: #f4efe8;
+  color: $color-brand-dark;
+  border-color: #dfd4c5;
+}
+
+.typeBadgeConstruction {
+  background-color: $color-status-progress-bg;
+  color: $color-status-progress-text;
+  border-color: $color-status-progress-border;
+}
+
+.typeBadgeCompleted {
+  background-color: #f6eada;
+  color: #7c5127;
+  border-color: #ebd5b8;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: $radius-full;
+  background-color: currentColor;
+}
+
+.progressPercent {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.progressBarTrack {
+  width: 100%;
+  height: 5px;
+  border-radius: $radius-full;
+  background-color: #ebe6de;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: $radius-full;
+  background-color: $color-brand-dark;
+  transition: width 0.25s ease;
+}
+
+.subDetailText {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.specsCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.areaPrimary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.areaNumber {
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.categoryLabel {
+  font-size: $text-sm;
+  font-weight: 500;
+  color: $color-text-secondary;
+}
+
+.scaleSub {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.statusCell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.statusBadgeBtn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: $radius-full;
+  font-family: $font-sans;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-sm;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.statusPublished {
+  background-color: $color-status-published-bg;
+  color: $color-status-published-text;
+  border: 1px solid $color-status-published-border;
+}
+
+.statusDraft {
+  background-color: $color-status-draft-bg;
+  color: $color-status-draft-text;
+  border: 1px solid $color-status-draft-border;
+}
+
+.statusSubRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: $color-text-secondary;
+}
+
+.viewStat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: $font-mono;
+}
+
+.featuredToggleBtn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: $font-sans;
+  font-size: 11px;
+  font-weight: 600;
+  color: $color-text-muted;
+  cursor: pointer;
+
+  &:hover {
+    color: #b7791f;
+  }
+}
+
+.featuredActive {
+  color: #b7791f;
+}
+
+.actionsCol {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.actionGroup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.iconActionBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    border-color 0.16s ease;
+
+  &:hover {
+    background-color: $color-surface-muted;
+    color: $color-text-primary;
+    border-color: $color-brand-light;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 1px;
+  }
+}
+
+.iconActionDisabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.iconActionDanger {
+  &:hover {
+    background-color: $color-status-cancelled-bg;
+    color: $color-status-cancelled-text;
+    border-color: $color-status-cancelled-border;
+  }
+}
+
+/* Empty State */
+.emptyState {
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.emptyIconBox {
+  width: 52px;
+  height: 52px;
+  border-radius: $radius-full;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  color: $color-brand-primary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyTitle {
+  font-family: $font-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.emptyDesc {
+  max-width: 440px;
+  font-size: $text-md;
+  color: $color-text-secondary;
+  line-height: 1.55;
+}
+
+.emptyResetBtn {
+  margin-top: 6px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: $radius-md;
+  border: 1px solid $color-brand-dark;
+  background-color: $color-brand-dark;
+  color: $color-text-inverse;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-brand-primary;
+    border-color: $color-brand-primary;
+  }
+}
+
+/* Pagination Footer */
+.paginationFooter {
+  background-color: #f7f4ef;
+  border-top: 1px solid $color-surface-border;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.paginationMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: $text-base;
+  color: $color-text-secondary;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: 700;
+  }
+}
+
+.pageSizeLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pageSizeSelect {
+  height: 32px;
+  padding: 0 10px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pageControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pageBtn {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+
+  &:hover:not(:disabled) {
+    background-color: $color-surface-muted;
+    border-color: $color-brand-light;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.pageBtnActive {
+  background-color: $color-surface-dark;
+  border-color: $color-surface-dark;
+  color: $color-text-inverse;
+
+  &:hover:not(:disabled) {
+    background-color: $color-brand-dark;
+    border-color: $color-brand-dark;
+    color: $color-text-inverse;
+  }
+}

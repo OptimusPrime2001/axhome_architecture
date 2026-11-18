@@ -1,0 +1,224 @@
+.section {
+  padding: 72px 0;
+  background-color: $color-surface-muted;
+
+  @include media-breakpoint-down(md) {
+    padding: 56px 0;
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+}
+
+.storyCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 8px;
+}
+
+.title {
+  @include text-heading-2;
+  margin-bottom: 16px;
+}
+
+.lead {
+  font-size: $text-lg;
+  line-height: 1.65;
+  font-weight: 500;
+  color: $color-text-primary;
+  margin-bottom: 20px;
+}
+
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 15px;
+  line-height: 26px;
+  color: $color-text-secondary;
+
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    font-family: $font-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: $color-text-primary;
+    line-height: 1.35;
+    margin: 8px 0 0;
+  }
+
+  h3 {
+    font-family: $font-sans;
+    font-size: 17px;
+    font-weight: 700;
+    color: $color-text-primary;
+    line-height: 1.4;
+    margin: 6px 0 0;
+  }
+
+  ul,
+  ol {
+    margin: 0;
+    padding-left: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  blockquote {
+    margin: 4px 0;
+    padding: 14px 18px;
+    border-left: 3px solid $color-brand-primary;
+    background-color: $color-surface-card;
+    border-radius: 0 $radius-sm $radius-sm 0;
+    font-style: italic;
+    color: $color-text-primary;
+  }
+
+  strong {
+    color: $color-text-primary;
+    font-weight: 600;
+  }
+
+  a {
+    color: $color-brand-primary;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.techCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.techCard {
+  padding: 28px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+}
+
+.techEyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-brand-primary;
+  margin-bottom: 6px;
+}
+
+.techTitle {
+  @include text-heading-3;
+  font-size: $text-xl;
+  margin-bottom: 20px;
+}
+
+.techItems {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.techItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 1px solid $color-surface-border;
+
+  &:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+}
+
+.techNumber {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $color-brand-primary;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.techBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.techItemTitle {
+  font-size: $text-md;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.techItemDesc {
+  font-size: $text-base;
+  line-height: 20px;
+  color: $color-text-secondary;
+}
+
+.quoteCard {
+  padding: 24px;
+  background-color: #f8f3ec;
+  border: 1px solid $color-brand-light;
+  border-radius: $radius-md;
+}
+
+.quoteIcon {
+  color: $color-brand-primary;
+  margin-bottom: 10px;
+}
+
+.quoteText {
+  font-family: $font-serif;
+  font-size: $text-lg;
+  line-height: 1.6;
+  font-style: italic;
+  color: $color-text-primary;
+  margin-bottom: 12px;
+}
+
+.quoteFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: $text-sm;
+  color: $color-text-secondary;
+
+  strong {
+    color: $color-text-primary;
+  }
+}
