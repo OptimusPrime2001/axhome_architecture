@@ -1,0 +1,44 @@
+.content {
+  z-index: 100;
+  overflow: hidden;
+  padding: 6px 12px;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 500;
+  line-height: 1.4;
+  color: $color-text-inverse;
+  background-color: $color-surface-dark;
+  border: 1px solid rgba($color-brand-light, 0.2);
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+  user-select: none;
+  pointer-events: none;
+  transform-origin: var(--radix-tooltip-content-transform-origin, center);
+  animation: tooltipIn 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &[data-state="closed"] {
+    animation: tooltipOut 0.12s ease-in forwards;
+  }
+}
+
+@keyframes tooltipIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tooltipOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}

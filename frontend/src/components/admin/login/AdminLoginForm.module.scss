@@ -1,0 +1,154 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.required {
+  color: $color-error;
+}
+
+.formatHint {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+}
+
+.forgotLink {
+  font-size: $text-xs;
+  font-weight: 600;
+  color: $color-brand-primary;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $color-brand-dark;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+    border-radius: $radius-xs;
+  }
+}
+
+.inputFieldWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.leadingIcon {
+  position: absolute;
+  left: 14px;
+  color: $color-text-secondary;
+  pointer-events: none;
+}
+
+.inputWithLeading {
+  height: 46px;
+  padding-left: 40px;
+  background-color: $color-surface-muted;
+}
+
+.inputWithBoth {
+  height: 46px;
+  padding-left: 40px;
+  padding-right: 42px;
+  background-color: $color-surface-muted;
+}
+
+.toggleVisibility {
+  position: absolute;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-secondary;
+  padding: 5px;
+  border-radius: $radius-xs;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 1px;
+  }
+}
+
+.errorText {
+  font-size: $text-sm;
+  color: $color-error;
+  line-height: 1.4;
+}
+
+.infoHint {
+  font-size: $text-xs;
+  color: $color-brand-dark;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-sm;
+  padding: 8px 10px;
+  line-height: 1.45;
+}
+
+.optionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.checkboxLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: $text-sm;
+  color: $color-text-primary;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 15px;
+  height: 15px;
+  accent-color: $color-brand-dark;
+  cursor: pointer;
+}
+
+.twoFaTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+}

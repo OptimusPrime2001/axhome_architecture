@@ -69,6 +69,16 @@
     }
   }
 
+  &.status-cancelled {
+    background-color: $color-status-cancelled-bg;
+    color: $color-status-cancelled-text;
+    border-color: $color-status-cancelled-border;
+
+    .dot {
+      background-color: $color-status-cancelled-text;
+    }
+  }
+
   &.status-concept {
     background-color: #f6f0ea;
     color: $color-brand-primary;

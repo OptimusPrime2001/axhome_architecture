@@ -1,0 +1,90 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(34, 30, 26, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  width: calc(100% - 32px);
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  padding: 24px;
+  box-shadow: $shadow-lg;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  @include media-breakpoint-down(sm) {
+    width: calc(100% - 24px);
+    padding: 18px;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: $radius-sm;
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    color: $color-text-primary;
+    border-color: $color-brand-light;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 40px;
+}
+
+.title {
+  font-family: $font-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.25;
+}
+
+.description {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}

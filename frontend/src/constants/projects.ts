@@ -1178,12 +1178,209 @@ export const MOCK_PROJECTS: Project[] = [
     viewCount: 1940,
     createdAt: "2024-09-05",
   },
+  {
+    id: "proj-10",
+    title: "Brutalist Courtyard House",
+    slug: "brutalist-courtyard-house",
+    projectType: "concept",
+    category: "villa",
+    style: "minimalist",
+    location: "Khu đô thị Ciputra, Nam Thăng Long",
+    city: "Tây Hồ, Hà Nội",
+    completedYear: 2025,
+    clientName: "Gia đình Anh B.",
+    leadArchitect: "KTS. Phạm Gia Bách",
+    constructionDuration: "Dự kiến 12 Tháng",
+
+    landArea: 280,
+    floorArea: 380,
+    floorsCount: 3,
+    bedroomsCount: 4,
+    facadeWidth: 14,
+
+    excerpt:
+      "Biệt thự sân trong phong cách tối giản thô mộc với khối bê tông trần đúc toàn khối và khoảng thông tầng cây xanh tĩnh lặng.",
+    contentHtml: `
+      <p>Phương án thiết kế khai thác vẻ đẹp nguyên bản của bê tông trần kết hợp gỗ sồi tự nhiên, xoay quanh lõi sân trong đón nắng sớm và thông gió đối lưu xuyên suốt ba tầng lầu.</p>
+    `,
+    coverImage:
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
+    gallery: [
+      {
+        id: "img-10-1",
+        url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+        caption: "Phối cảnh mặt tiền bê tông trần và hệ lam che nắng hướng Tây",
+        type: "render_3d",
+        spaceCategory: "exterior_day",
+        isCover: true,
+      },
+    ],
+    floorPlans: [
+      {
+        id: "fp-10-1",
+        name: "Mặt bằng Tầng 1",
+        imageUrl:
+          "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=80",
+        description:
+          "Tổ chức sân trong trung tâm kết nối phòng khách và bếp ăn mở.",
+        areaSquareMeters: 140,
+        rooms: ["Sân trong cảnh quan", "Phòng khách mở", "Bếp đảo & Bàn ăn"],
+      },
+      {
+        id: "fp-10-2",
+        name: "Mặt bằng Tầng 2",
+        imageUrl:
+          "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=80",
+        description: "Không gian nghỉ ngơi riêng tư với 3 phòng ngủ khép kín.",
+        areaSquareMeters: 130,
+        rooms: ["Master Suite", "02 Phòng ngủ con", "Hành lang thông tầng"],
+      },
+    ],
+
+    isFeatured: false,
+    status: "draft",
+    viewCount: 0,
+    createdAt: "2024-11-10",
+  },
+  {
+    id: "proj-11",
+    title: "Zen Countryside Retreat",
+    slug: "zen-countryside-retreat",
+    projectType: "concept",
+    category: "villa",
+    style: "minimalist",
+    location: "Xã Minh Phú, Sóc Sơn",
+    city: "Sóc Sơn, Hà Nội",
+    completedYear: 2025,
+    clientName: "Chị Lan Anh",
+    leadArchitect: "KTS. Nguyễn An Nhiên",
+    constructionDuration: "Dự kiến 9 Tháng",
+
+    landArea: 520,
+    floorArea: 260,
+    floorsCount: 1,
+    bedroomsCount: 3,
+    facadeWidth: 24,
+
+    excerpt:
+      "Nhà vườn nghỉ dưỡng 1 tầng trải dài dưới tán thông với hiên gỗ rộng và hồ nước tĩnh điều hòa vi khí hậu.",
+    contentHtml: `
+      <p>Thiết kế biệt thự nghỉ dưỡng một tầng ưu tiên sự giao hòa tuyệt đối với địa hình đồi thông tự nhiên, sử dụng đá chẻ bản địa và hệ mái đua rộng chắn mưa hắt.</p>
+    `,
+    coverImage:
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1400&q=80",
+    gallery: [
+      {
+        id: "img-11-1",
+        url: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+        caption: "Phối cảnh hoàng hôn nhìn từ hồ cảnh quan trung tâm",
+        type: "render_3d",
+        spaceCategory: "exterior_night",
+        isCover: true,
+      },
+    ],
+    floorPlans: [
+      {
+        id: "fp-11-1",
+        name: "Mặt bằng Tổng thể Tầng 1",
+        imageUrl:
+          "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=80",
+        description:
+          "Mặt bằng trải ngang chữ L ôm trọn hồ cá Koi và hiên trà đạo.",
+        areaSquareMeters: 260,
+        rooms: ["Phòng khách & Trà thất", "03 Phòng ngủ view rừng thông"],
+      },
+    ],
+
+    isFeatured: false,
+    status: "draft",
+    viewCount: 0,
+    createdAt: "2024-11-14",
+  },
+  {
+    id: "proj-12",
+    title: "Dinh Thự Hoàng Gia Phú Mỹ Hưng",
+    slug: "dinh-thu-hoang-gia-phu-my-hung",
+    projectType: "under_construction",
+    category: "mansion",
+    style: "neoclassic",
+    location: "Khu Chateau, Phú Mỹ Hưng",
+    city: "Quận 7, TP. Hồ Chí Minh",
+    completedYear: 2025,
+    clientName: "Gia đình Ông H.",
+    leadArchitect: "KTS. Trần Hoàng Lâm",
+    constructionDuration: "18 Tháng",
+
+    landArea: 680,
+    floorArea: 1120,
+    floorsCount: 4,
+    bedroomsCount: 6,
+    facadeWidth: 26,
+
+    excerpt:
+      "Dinh thự tân cổ điển ven sông đang trong giai đoạn thi công kết cấu phần thô, chuẩn bị biên tập hồ sơ công bố trên hệ thống.",
+    contentHtml: `
+      <p>Công trình dinh thự 4 tầng kết hợp tầng hầm rượu vang đang được đội ngũ kỹ sư hiện trường giám sát thi công phần khung bê tông cốt thép dự ứng lực.</p>
+    `,
+    coverImage:
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80",
+    gallery: [
+      {
+        id: "img-12-1",
+        url: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+        caption: "Phối cảnh tổng thể dinh thự Chateau Phú Mỹ Hưng",
+        type: "render_3d",
+        spaceCategory: "exterior_day",
+        isCover: true,
+      },
+    ],
+    milestones: [
+      {
+        id: "ms-12-1",
+        title: "Thi công cọc nhồi & Tầng hầm",
+        period: "Tháng 08/2024",
+        description: "Hoàn thành tường vây chống thấm và sàn đáy tầng hầm.",
+        isCompleted: true,
+      },
+      {
+        id: "ms-12-2",
+        title: "Kết cấu khung BTCT Tầng 1 - 4",
+        period: "Tháng 11/2024",
+        description: "Đổ bê tông sàn tầng 3 và kiểm định cường độ bê tông.",
+        isCompleted: true,
+      },
+      {
+        id: "ms-12-3",
+        title: "Đắp phào chỉ mặt dựng & Mái Mansard",
+        period: "Tháng 03/2025 (Dự kiến)",
+        description: "Thi công chi tiết phào chỉ đá tự nhiên và lợp ngói đá.",
+        isCompleted: false,
+      },
+      {
+        id: "ms-12-4",
+        title: "Hoàn thiện nội thất & Bàn giao",
+        period: "Tháng 08/2025 (Dự kiến)",
+        description: "Lắp đặt nội thất gỗ óc chó và nghiệm thu tổng thể.",
+        isCompleted: false,
+      },
+    ],
+
+    isFeatured: false,
+    status: "draft",
+    viewCount: 0,
+    createdAt: "2024-11-16",
+  },
 ];
 
 export const PROJECT_TYPE_LABELS: Record<Project["projectType"], string> = {
   concept: "Bản Vẽ 3D",
   under_construction: "Đang Thi Công",
   completed: "Đã Hoàn Thành",
+};
+
+export const PROJECT_STATUS_LABELS: Record<Project["status"], string> = {
+  published: "Đã xuất bản",
+  draft: "Bản nháp",
 };
 
 export const PROJECT_CATEGORY_LABELS: Record<Project["category"], string> = {
@@ -1271,7 +1468,7 @@ export const PROJECTS_CTA_CONTENT = {
   eyebrow: "KHỞI ĐẦU KHÔNG GIAN SỐNG ĐÍCH THỰC",
   title: "Bạn đã tìm thấy ý tưởng cho ngôi nhà tương lai?",
   description:
-    "Liên hệ ngay với KTS Trưởng và Chỉ huy trưởng công trình của ARCHITECTURA để nhận bản phác thảo mặt bằng ý tưởng cùng báo giá dự toán sơ bộ hoàn toàn miễn phí.",
+    "Liên hệ ngay với KTS Trưởng và Chỉ huy trưởng công trình của Axhome để nhận bản phác thảo mặt bằng ý tưởng cùng báo giá dự toán sơ bộ hoàn toàn miễn phí.",
   primaryCta: {
     label: "Đăng ký tư vấn dự án",
     href: "/contact",

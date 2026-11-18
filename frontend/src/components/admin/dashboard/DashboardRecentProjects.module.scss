@@ -1,0 +1,159 @@
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  font-family: $font-serif;
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.3;
+}
+
+.subtitle {
+  margin-top: 4px;
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.viewAllLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: $text-xs;
+  font-weight: 600;
+  color: $color-brand-dark;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $color-brand-primary;
+  }
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectItem {
+  border-bottom: 1px solid $color-surface-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.projectLink {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 6px;
+  border-radius: $radius-md;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: $color-surface-bg;
+  }
+}
+
+.thumbWrap {
+  position: relative;
+  width: 56px;
+  height: 44px;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  flex-shrink: 0;
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+.projectInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.projectTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.projectTitle {
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: $radius-xs;
+  border: 1px solid transparent;
+  flex-shrink: 0;
+}
+
+.statusPublished {
+  background-color: $color-status-published-bg;
+  color: $color-status-published-text;
+  border-color: $color-status-published-border;
+}
+
+.statusDraft {
+  background-color: $color-status-draft-bg;
+  color: $color-status-draft-text;
+  border-color: $color-status-draft-border;
+}
+
+.projectMeta {
+  margin-top: 3px;
+  font-size: $text-xs;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 40px;
+  border-radius: $radius-md;
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $color-text-primary;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    background-color: $color-surface-muted;
+    border-color: $color-brand-light;
+  }
+}

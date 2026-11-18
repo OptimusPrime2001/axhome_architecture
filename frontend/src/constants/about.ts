@@ -30,7 +30,7 @@ export const ABOUT_HERO_CONTENT: AboutHeroContent = {
       title: "Sự giao thoa giữa ánh sáng tự nhiên và chất liệu bản địa",
       imageUrl:
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Dinh thự Thảo Điền hoàn thành năm 2025 bởi ARCHITECTURA",
+      imageAlt: "Dinh thự Thảo Điền hoàn thành năm 2025 bởi Axhome",
       badge: "Turnkey Scope",
     },
     secondaryTop: {
@@ -47,7 +47,7 @@ export const ABOUT_HERO_CONTENT: AboutHeroContent = {
       title: "Quy chuẩn thiết kế quốc tế",
       imageUrl:
         "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Không gian làm việc và nghiên cứu kiến trúc ARCHITECTURA",
+      imageAlt: "Không gian làm việc và nghiên cứu kiến trúc Axhome",
     },
   },
 };
@@ -56,7 +56,7 @@ export const ABOUT_STORY_CONTENT: AboutStoryContent = {
   eyebrow: "LỊCH SỬ HÌNH THÀNH",
   title: "Khởi nguồn từ niềm đam mê chất liệu và cấu trúc bền vững",
   paragraphs: [
-    "Được thành lập vào năm 2012 bởi các kiến trúc sư và kỹ sư kết cấu tốt nghiệp các học viện danh giá trong nước và tu nghiệp tại Pháp, ARCHITECTURA ra đời từ khát vọng kết nối khí hậu nhiệt đới gió mùa Việt Nam với ngôn ngữ tối giản đương đại.",
+    "Được thành lập vào năm 2012 bởi các kiến trúc sư và kỹ sư kết cấu tốt nghiệp các học viện danh giá trong nước và tu nghiệp tại Pháp, Axhome ra đời từ khát vọng kết nối khí hậu nhiệt đới gió mùa Việt Nam với ngôn ngữ tối giản đương đại.",
     "Chúng tôi không chỉ kiến tạo những hình khối bắt mắt; chúng tôi đi sâu vào vi khí hậu, hướng gió, độ khúc xạ ánh sáng và độ bền hóa lý của từng mác bê tông, khối đá vôi hay thớ gỗ tự nhiên. Mỗi công trình là một tác phẩm được “may đo” riêng cho từng phong cách sống độc tôn.",
     "Trải qua hơn một thập kỷ, mô hình tổng thầu thiết kế song hành thi công (Design & Build) của chúng tôi đảm bảo mỗi nét vẽ trong bản phối cảnh được tái hiện nguyên vẹn ngoài công trường với sai số kỹ thuật tiệm cận mức 0%.",
   ],
@@ -183,7 +183,7 @@ export const ABOUT_CAPABILITIES_HEADER = {
   eyebrow: "NĂNG LỰC TOÀN DIỆN",
   title: "Năng lực thiết kế & Tổng thầu thi công đồng bộ",
   description:
-    "Sức mạnh của ARCHITECTURA nằm ở khả năng tích hợp hoàn chỉnh hai mắt xích cốt lõi: Studio thiết kế tư duy sáng tạo cao cấp và Công ty xây lắp kỷ luật quân đội.",
+    "Sức mạnh của Axhome nằm ở khả năng tích hợp hoàn chỉnh hai mắt xích cốt lõi: Studio thiết kế tư duy sáng tạo cao cấp và Công ty xây lắp kỷ luật quân đội.",
 } as const;
 
 export const ABOUT_CAPABILITY_METRICS: AboutCapabilityMetric[] = [

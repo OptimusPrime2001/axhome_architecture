@@ -1,0 +1,160 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background-color: rgba(34, 30, 26, 0.52);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.backdropHitArea {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: default;
+}
+
+.dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-lg;
+  padding: 24px;
+  box-shadow: $shadow-lg;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.headerRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.warningIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  background-color: $color-status-cancelled-bg;
+  border: 1px solid $color-status-cancelled-border;
+  color: $color-status-cancelled-text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dialogTitle {
+  font-family: $font-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.25;
+}
+
+.closeBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-surface-muted;
+    color: $color-text-primary;
+  }
+}
+
+.description {
+  font-size: $text-md;
+  color: $color-text-secondary;
+  line-height: 1.6;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: 600;
+  }
+}
+
+.targetList {
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  padding: 10px 14px;
+  margin: 0;
+  list-style: disc inside;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 140px;
+  overflow-y: auto;
+  font-size: $text-base;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid $color-surface-border;
+}
+
+.cancelBtn {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-surface-muted;
+  }
+}
+
+.deleteBtn {
+  height: 38px;
+  padding: 0 18px;
+  border-radius: $radius-md;
+  border: 1px solid $color-status-cancelled-text;
+  background-color: $color-status-cancelled-text;
+  color: #ffffff;
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.18s ease;
+
+  &:hover {
+    opacity: 0.92;
+  }
+}

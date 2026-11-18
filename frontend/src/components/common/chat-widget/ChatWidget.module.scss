@@ -1,0 +1,40 @@
+.chat_widget {
+  position: fixed;
+  inset-block-end: 80px;
+  inset-inline-end: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 50;
+
+  .chat_button {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    background: #fefefe;
+    border-radius: 45px;
+    justify-content: center;
+    border: 1px solid #e4e7ec;
+    .phone_img {
+      height: 35px;
+      width: 35px;
+    }
+    img {
+      width: 45px;
+      height: 45px;
+      background: #fefefe;
+      padding: 4px;
+      border-radius: 45px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      object-fit: contain;
+      margin-bottom: 0;
+    }
+  }
+}
+@include media-breakpoint-down(sm) {
+  .chat_widget {
+    inset-block-end: 70px;
+    inset-inline-end: 16px;
+  }
+}

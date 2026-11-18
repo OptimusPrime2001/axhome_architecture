@@ -3,8 +3,8 @@
   right: 24px;
   bottom: 24px;
   z-index: 45;
-  width: 44px;
-  height: 44px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -25,7 +25,5 @@
   @include media-breakpoint-down(sm) {
     right: 16px;
     bottom: 16px;
-    width: 40px;
-    height: 40px;
   }
 }

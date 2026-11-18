@@ -1,0 +1,52 @@
+.tabsList {
+  display: inline-flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-md;
+  background-color: $color-surface-muted;
+  padding: 4px;
+  color: $color-text-secondary;
+}
+
+.tabsTrigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: $radius-sm;
+  padding: 6px 12px;
+  font-family: $font-sans;
+  font-size: $text-md;
+  font-weight: 500;
+  color: $color-text-secondary;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &[data-state="active"] {
+    background-color: $color-surface-card;
+    color: $color-text-primary;
+    box-shadow: $shadow-sm;
+  }
+}
+
+.tabsContent {
+  margin-top: 8px;
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-primary;
+    outline-offset: 2px;
+  }
+}

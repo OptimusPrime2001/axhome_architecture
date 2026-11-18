@@ -6,6 +6,10 @@ import type {
   ContactStartStep,
 } from "@shared-types";
 
+export const MESSENGER_ID = "61570966773480";
+export const ZALO_PHONE = "0947 712 626";
+export const MESSENGER_LINK = `https://m.me/${MESSENGER_ID}`;
+export const ZALO_LINK = `https://zalo.me/${ZALO_PHONE}`;
 export const CONTACT_HERO_CONTENT = {
   badge: "LIÊN HỆ & TƯ VẤN TRỰC TIẾP",
   title: "Kết nối cùng chúng tôi",
@@ -52,7 +56,7 @@ export const CONTACT_START_PROCESS = {
   eyebrow: "QUY TRÌNH BẮT ĐẦU",
   title: "Kiến tạo không gian mang bản sắc gia chủ",
   description:
-    "Mỗi công trình của ARCHITECTURA là sự giao thoa giữa ánh sáng nhiệt đới, kết cấu chuẩn mực và vật liệu tự nhiên tinh tuyển. Chúng tôi khởi đầu mọi dự án bằng cuộc trò chuyện sâu sắc về lối sống, thói quen sinh hoạt và tầm nhìn bền vững của gia đình.",
+    "Mỗi công trình của Axhome là sự giao thoa giữa ánh sáng nhiệt đới, kết cấu chuẩn mực và vật liệu tự nhiên tinh tuyển. Chúng tôi khởi đầu mọi dự án bằng cuộc trò chuyện sâu sắc về lối sống, thói quen sinh hoạt và tầm nhìn bền vững của gia đình.",
   steps: [
     {
       id: "start-step-1",
@@ -149,7 +153,7 @@ export const CONTACT_FAQ_ITEMS: ContactFaqItem[] = [
     id: "faq-1",
     question: "Chi phí tư vấn ban đầu có tính phí không?",
     answer:
-      "Hoàn toàn không. Buổi trao đổi định hướng ban đầu, phân tích sơ đồ khu đất, đánh giá phong thủy kiến trúc và đề xuất concept phác thảo đầu tiên là dịch vụ tư vấn hoàn toàn miễn phí của ARCHITECTURA nhằm giúp gia chủ thấu hiểu rõ tiềm năng của công trình.",
+      "Hoàn toàn không. Buổi trao đổi định hướng ban đầu, phân tích sơ đồ khu đất, đánh giá phong thủy kiến trúc và đề xuất concept phác thảo đầu tiên là dịch vụ tư vấn hoàn toàn miễn phí của Axhome nhằm giúp gia chủ thấu hiểu rõ tiềm năng của công trình.",
   },
   {
     id: "faq-2",
@@ -165,7 +169,7 @@ export const CONTACT_FAQ_ITEMS: ContactFaqItem[] = [
   },
   {
     id: "faq-4",
-    question: "ARCHITECTURA có nhận tổng thầu thi công ngoại tỉnh không?",
+    question: "Axhome có nhận tổng thầu thi công ngoại tỉnh không?",
     answer:
       "Có. Chúng tôi sở hữu năng lực tổng thầu xây dựng trọn gói chìa khóa trao tay tại khắp các tỉnh thành trọng điểm: Hà Nội, TP.HCM, Đà Nẵng, Nha Trang, Phú Quốc, Hải Phòng, Hưng Yên... Đội ngũ kỹ sư giám sát độc lập luôn bám sát công trường 24/7 với hệ thống camera trực tuyến báo cáo hằng ngày cho gia chủ.",
   },
@@ -173,7 +177,7 @@ export const CONTACT_FAQ_ITEMS: ContactFaqItem[] = [
 
 export const CONTACT_SOCIAL_HEADER = {
   eyebrow: "MẠNG LƯỚI SÁNG TẠO",
-  title: "Khám phá các ấn phẩm & dự án mới nhất của ARCHITECTURA",
+  title: "Khám phá các ấn phẩm & dự án mới nhất của Axhome",
 } as const;
 
 export const CONTACT_SOCIAL_LINKS: ContactSocialLink[] = [

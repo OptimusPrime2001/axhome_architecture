@@ -44,8 +44,9 @@ description: "Quy tắc về React components, Server/Client Components, hooks, 
 - Không render dữ liệu chưa được kiểm tra như thể luôn tồn tại.
 - Tránh tính toán nặng trong render; chỉ tối ưu memoization khi có lý do đo được hoặc rõ ràng.
 
-## 6. Sử dụng thư viện shadcn/ui
+## 6. Sử dụng thư viện shadcn/ui (Bắt buộc ưu tiên)
 
-- Tận dụng tối đa component của **shadcn/ui** (đặt trong `src/components/ui/<component-name>/`).
-- Sử dụng utility `cn()` (`src/lib/utils.ts`) để gộp và xử lý conditional class names.
-- Phần style mặc định nếu chưa giống với approved design trong Figma thì bổ sung hoặc override bằng class name (Tailwind hoặc CSS/Sass module) để đảm bảo chuẩn xác theo thiết kế.
+- **Luôn ưu tiên sử dụng component của shadcn/ui** trong `src/components/ui/` (`Button`, `Input`, `Label`, `Select`, `Textarea`, `Badge`, `Card`, `Table`, `Dialog`, `Combobox`, `Tabs`, `Skeleton`, `Spinner`...) thay vì tự viết thẻ HTML thuần (`<input>`, `<select>`, `<textarea>`, `<button>`, `<table>`, modal/drawer tự dựng).
+- Nếu tính năng mới cần một UI primitive chưa có trong `src/components/ui/` (như Accordion, AlertDialog, Popover, Tooltip...), kiểm tra `package.json` (`@base-ui/react`, `@radix-ui/*`) hoặc dùng **shadcn MCP** để bổ sung component vào `src/components/ui/<component-name>/` (style bằng Sass Modules theo rule `05-styling.md §6`) và re-export tại `src/components/ui/index.ts` trước khi viết feature UI.
+- Sử dụng utility `cn()` (`@lib/utils`) để gộp và xử lý conditional class names.
+- Phần style mặc định nếu chưa khớp với approved design trong Figma thì bổ sung hoặc override bằng Sass Module class để đảm bảo chuẩn xác theo thiết kế.

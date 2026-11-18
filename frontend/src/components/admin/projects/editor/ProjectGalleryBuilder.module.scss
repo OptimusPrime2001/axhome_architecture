@@ -1,0 +1,354 @@
+.subSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.subLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $color-text-primary;
+}
+
+.formatHint {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $color-text-muted;
+}
+
+.dropzone {
+  position: relative;
+  border: 1.5px dashed #d3c8b9;
+  border-radius: $radius-lg;
+  background-color: #faf8f4;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+
+  &:hover {
+    border-color: $color-brand-primary;
+    background-color: #f6f1e9;
+  }
+}
+
+.dropzoneDragging {
+  border-color: $color-brand-dark;
+  background-color: #f1e9dc;
+}
+
+.hiddenFileInput {
+  display: none;
+}
+
+.uploadIconCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-full;
+  background-color: $color-surface-card;
+  border: 1px solid $color-surface-border;
+  color: $color-brand-dark;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $shadow-sm;
+}
+
+.dropzoneTitle {
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-text-primary;
+
+  span {
+    color: $color-brand-primary;
+    text-decoration: underline;
+  }
+}
+
+.dropzoneSub {
+  max-width: 460px;
+  font-size: $text-xs;
+  color: $color-text-secondary;
+  line-height: 1.5;
+}
+
+.urlAddRow {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+  }
+}
+
+.urlInput {
+  flex: 1;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+  font-family: $font-sans;
+  font-size: $text-base;
+  color: $color-text-primary;
+
+  &:focus {
+    outline: none;
+    background-color: $color-surface-card;
+    border-color: $color-brand-primary;
+  }
+}
+
+.urlAddBtn {
+  appearance: none;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: $radius-md;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-surface-muted;
+    border-color: $color-brand-light;
+  }
+}
+
+/* Cover Preview */
+.coverPreviewBox {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 340px;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-muted;
+}
+
+.coverPreviewImg {
+  object-fit: cover;
+}
+
+.coverBadge {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 6px 12px;
+  border-radius: $radius-md;
+  background-color: rgba(34, 30, 26, 0.84);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.coverOverlayActions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coverActionBtn {
+  appearance: none;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: $radius-sm;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background-color: rgba(34, 30, 26, 0.78);
+  color: #ffffff;
+  font-family: $font-sans;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(34, 30, 26, 0.94);
+  }
+}
+
+/* Upload Error Banner */
+.uploadError {
+  padding: 10px 14px;
+  border-radius: $radius-md;
+  background-color: $color-status-cancelled-bg;
+  border: 1px solid $color-status-cancelled-border;
+  color: $color-status-cancelled-text;
+  font-size: $text-sm;
+  font-weight: 600;
+}
+
+/* Gallery Grid */
+.divider {
+  border-top: 1px solid $color-surface-border;
+  padding-top: 18px;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.galleryCard {
+  background-color: $color-surface-bg;
+  border: 1px solid $color-surface-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.galleryThumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: $color-surface-muted;
+  border-bottom: 1px solid $color-surface-border;
+}
+
+.galleryThumbImg {
+  object-fit: cover;
+}
+
+.galleryTopBar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.coverPill {
+  padding: 3px 8px;
+  border-radius: $radius-xs;
+  background-color: rgba(34, 30, 26, 0.85);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.thumbIconGroup {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.thumbIconBtn {
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-xs;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: $color-text-primary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background-color: #ffffff;
+    color: $color-brand-dark;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.thumbIconDanger {
+  &:hover:not(:disabled) {
+    color: $color-status-cancelled-text;
+  }
+}
+
+.galleryMetaBody {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gallerySelectRow {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 8px;
+}
+
+.miniSelect {
+  width: 100%;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  font-family: $font-sans;
+  font-size: 12px;
+  font-weight: 500;
+  color: $color-text-primary;
+}
+
+.captionInput {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-surface-border;
+  background-color: $color-surface-card;
+  font-family: $font-sans;
+  font-size: 12.5px;
+  color: $color-text-primary;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+}

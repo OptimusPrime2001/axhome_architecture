@@ -60,7 +60,7 @@ $font-sans:
   Roboto,
   sans-serif;
 // Heading / display font — Figma dùng Playfair Display (SemiBold) cho wordmark & tiêu đề
-$font-serif: var(--font-playfair), Georgia, serif;
+$font-serif: var(--font_google-sans), Georgia, serif;
 $font-mono: var(--font-space_grotesk), ui-monospace, monospace;
 
 // Font sizes
