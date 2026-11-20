@@ -26,7 +26,7 @@ export const BentoVisualCard: React.FC<BentoVisualCardProps> = ({
     <figure className={isPrimary ? styles.bentoPrimary : styles.bentoSecondary}>
       <Shine
         enableOnHover
-        color="#faf9f6"
+        color="var(--color-surface-bg)"
         opacity={0.18}
         duration={900}
         className={styles.bentoShine}

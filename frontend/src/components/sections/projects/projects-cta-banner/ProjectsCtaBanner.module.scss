@@ -38,8 +38,8 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(187, 165, 140, 0.22) 0%,
-    rgba(34, 30, 26, 0) 70%
+    rgba($color-brand-light, 0.22) 0%,
+    rgba($color-surface-dark, 0) 70%
   );
   pointer-events: none;
 }
@@ -76,7 +76,7 @@
 .description {
   font-size: 15px;
   line-height: 24px;
-  color: rgba(250, 249, 246, 0.78);
+  color: rgba($color-text-inverse, 0.78);
 }
 
 .actions {
@@ -94,7 +94,7 @@
   justify-content: center;
   padding: 13px 24px;
   border-radius: $radius-sm;
-  background-color: #f4ece1;
+  background-color: $color-surface-muted-hover;
   color: $color-text-primary;
   font-size: $text-md;
   font-weight: 600;
@@ -119,7 +119,7 @@
   gap: 8px;
   padding: 13px 20px;
   border-radius: $radius-sm;
-  border: 1px solid rgba(250, 249, 246, 0.26);
+  border: 1px solid rgba($color-text-inverse, 0.26);
   color: $color-text-inverse;
   font-size: $text-md;
   font-weight: 500;
@@ -129,8 +129,8 @@
     transform 0.2s ease;
 
   &:hover {
-    background-color: rgba(250, 249, 246, 0.08);
-    border-color: rgba(250, 249, 246, 0.48);
+    background-color: rgba($color-text-inverse, 0.08);
+    border-color: rgba($color-text-inverse, 0.48);
     transform: translateY(-1px);
   }
 }

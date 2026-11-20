@@ -6,7 +6,7 @@
   cursor: pointer;
 
   &.selectedRow {
-    background-color: #f8f2ea;
+    background-color: $color-surface-hover;
   }
 }
 

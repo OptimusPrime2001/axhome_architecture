@@ -189,11 +189,11 @@
 .timelineItem:hover {
   .dot {
     background-color: $color-brand-primary;
-    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.2);
+    box-shadow: 0 0 0 3px rgba($color-brand-primary, 0.2);
   }
 
   .card {
-    background-color: #f8f3ec;
+    background-color: $color-surface-hover;
     border-color: $color-brand-light;
     transform: translateY(-2px);
     box-shadow: $shadow-md;

@@ -225,9 +225,9 @@
   pointer-events: none;
   background: linear-gradient(
     to top,
-    rgba(24, 20, 16, 0.82) 0%,
-    rgba(24, 20, 16, 0.25) 55%,
-    rgba(24, 20, 16, 0.05) 100%
+    rgba($color-surface-dark, 0.82) 0%,
+    rgba($color-surface-dark, 0.25) 55%,
+    rgba($color-surface-dark, 0.05) 100%
   );
   transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -292,7 +292,7 @@
 
   .bentoPrimary:hover &,
   .bentoSecondary:hover & {
-    color: #e4d4be;
+    color: $color-text-inverse;
   }
 }
 
@@ -316,8 +316,8 @@
   flex-shrink: 0;
   padding: 5px 12px;
   border-radius: $radius-full;
-  background-color: rgba(250, 249, 246, 0.14);
-  border: 1px solid rgba(250, 249, 246, 0.28);
+  background-color: rgba($color-text-inverse, 0.14);
+  border: 1px solid rgba($color-text-inverse, 0.28);
   backdrop-filter: blur(6px);
   font-size: 11px;
   font-weight: 500;
@@ -327,7 +327,7 @@
     border-color 0.3s ease;
 
   .bentoPrimary:hover & {
-    background-color: rgba(250, 249, 246, 0.24);
-    border-color: rgba(250, 249, 246, 0.5);
+    background-color: rgba($color-text-inverse, 0.24);
+    border-color: rgba($color-text-inverse, 0.5);
   }
 }

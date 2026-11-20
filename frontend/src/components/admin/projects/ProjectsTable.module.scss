@@ -9,8 +9,8 @@
 }
 
 .bulkToolbar {
-  background-color: #f6efe7;
-  border-bottom: 1px solid #e4d7c7;
+  background-color: $color-surface-hover;
+  border-bottom: 1px solid $color-surface-border;
   padding: 12px 20px;
   display: flex;
   align-items: center;
@@ -66,7 +66,7 @@
   background-color: $color-status-cancelled-bg;
 
   &:hover {
-    background-color: #fbe5e5;
+    background-color: $color-status-cancelled-bg;
     border-color: $color-status-cancelled-text;
   }
 }
@@ -77,7 +77,7 @@
   color: $color-text-secondary;
 
   &:hover {
-    background-color: rgba(48, 44, 40, 0.06);
+    background-color: rgba($color-text-primary, 0.06);
     color: $color-text-primary;
   }
 }
@@ -94,7 +94,7 @@
   text-align: left;
 
   thead th {
-    background-color: #f5f2ec;
+    background-color: $color-surface-hover;
     border-bottom: 1px solid $color-surface-border;
     padding: 13px 16px;
     font-size: 11px;
@@ -114,7 +114,7 @@
     }
 
     &:hover {
-      background-color: #fcfbf9;
+      background-color: $color-surface-card;
     }
   }
 
@@ -124,10 +124,10 @@
   }
 
   tbody tr.rowSelected {
-    background-color: #faf5ef;
+    background-color: $color-surface-hover;
 
     &:hover {
-      background-color: #f6efe6;
+      background-color: $color-surface-hover;
     }
   }
 
@@ -172,8 +172,8 @@
   bottom: 4px;
   padding: 1px 5px;
   border-radius: $radius-xs;
-  background-color: rgba(34, 30, 26, 0.78);
-  color: #ffffff;
+  background-color: rgba($color-surface-dark, 0.78);
+  color: $color-text-inverse;
   font-family: $font-mono;
   font-size: 9px;
   font-weight: 700;
@@ -187,8 +187,8 @@
   width: 18px;
   height: 18px;
   border-radius: $radius-full;
-  background-color: rgba(255, 255, 255, 0.92);
-  color: #c78a26;
+  background-color: rgba($color-surface-card, 0.92);
+  color: $color-status-pending-text;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -289,9 +289,9 @@
 }
 
 .typeBadgeConcept {
-  background-color: #f4efe8;
+  background-color: $color-text-inverse;
   color: $color-brand-dark;
-  border-color: #dfd4c5;
+  border-color: $color-surface-border;
 }
 
 .typeBadgeConstruction {
@@ -301,9 +301,9 @@
 }
 
 .typeBadgeCompleted {
-  background-color: #f6eada;
-  color: #7c5127;
-  border-color: #ebd5b8;
+  background-color: $color-status-pending-bg;
+  color: $color-status-pending-text;
+  border-color: $color-status-pending-border;
 }
 
 .badgeDot {
@@ -324,7 +324,7 @@
   width: 100%;
   height: 5px;
   border-radius: $radius-full;
-  background-color: #ebe6de;
+  background-color: $color-surface-muted-hover;
   overflow: hidden;
 }
 
@@ -447,12 +447,12 @@
   cursor: pointer;
 
   &:hover {
-    color: #b7791f;
+    color: $color-status-pending-text;
   }
 }
 
 .featuredActive {
-  color: #b7791f;
+  color: $color-status-pending-text;
 }
 
 .actionsCol {
@@ -566,7 +566,7 @@
 
 /* Pagination Footer */
 .paginationFooter {
-  background-color: #f7f4ef;
+  background-color: $color-surface-hover;
   border-top: 1px solid $color-surface-border;
   padding: 14px 20px;
   display: flex;

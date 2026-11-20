@@ -37,8 +37,8 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(187, 165, 140, 0.2) 0%,
-    rgba(34, 30, 26, 0) 70%
+    rgba($color-brand-light, 0.2) 0%,
+    rgba($color-surface-dark, 0) 70%
   );
   pointer-events: none;
 }
@@ -56,8 +56,8 @@
   padding: 6px 14px;
   margin-bottom: 24px;
   border-radius: $radius-full;
-  background-color: rgba(250, 249, 246, 0.08);
-  border: 1px solid rgba(250, 249, 246, 0.16);
+  background-color: rgba($color-text-inverse, 0.08);
+  border: 1px solid rgba($color-text-inverse, 0.16);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -86,7 +86,7 @@
 .description {
   font-size: 15px;
   line-height: 26px;
-  color: rgba(250, 249, 246, 0.78);
+  color: rgba($color-text-inverse, 0.78);
   margin-bottom: 32px;
 }
 
@@ -103,7 +103,7 @@
   gap: 8px;
   padding: 12px 24px;
   border-radius: $radius-sm;
-  background-color: #f4ece1;
+  background-color: $color-surface-muted-hover;
   color: $color-text-primary;
   font-size: $text-md;
   font-weight: 600;
@@ -121,7 +121,7 @@
   padding: 12px 24px;
   border-radius: $radius-sm;
   background-color: transparent;
-  border: 1px solid rgba(250, 249, 246, 0.28);
+  border: 1px solid rgba($color-text-inverse, 0.28);
   color: $color-text-inverse;
   font-size: $text-md;
   font-weight: 500;
@@ -130,8 +130,8 @@
     border-color 0.2s ease;
 
   &:hover {
-    background-color: rgba(250, 249, 246, 0.08);
-    border-color: rgba(250, 249, 246, 0.45);
+    background-color: rgba($color-text-inverse, 0.08);
+    border-color: rgba($color-text-inverse, 0.45);
   }
 }
 
@@ -142,7 +142,7 @@
   gap: 24px;
   margin-top: 40px;
   padding-top: 24px;
-  border-top: 1px solid rgba(250, 249, 246, 0.14);
+  border-top: 1px solid rgba($color-text-inverse, 0.14);
   list-style: none;
   padding-left: 0;
 }
@@ -152,7 +152,7 @@
   align-items: center;
   gap: 8px;
   font-size: $text-sm;
-  color: rgba(250, 249, 246, 0.72);
+  color: rgba($color-text-inverse, 0.72);
 }
 
 .highlightIcon {

@@ -16,9 +16,9 @@ interface CategoryStat {
 
 const CATEGORY_META: Record<ProjectCategory, { label: string; color: string }> =
   {
-    villa: { label: "Biệt thự cao cấp", color: "#594638" },
-    mansion: { label: "Dinh thự", color: "#8a7159" },
-    townhouse: { label: "Nhà phố hiện đại", color: "#bba58c" },
+    villa: { label: "Biệt thự cao cấp", color: "var(--color-brand-dark)" },
+    mansion: { label: "Dinh thự", color: "var(--color-brand-primary)" },
+    townhouse: { label: "Nhà phố hiện đại", color: "var(--color-brand-light)" },
   };
 
 export const DashboardCategoryChart: React.FC = () => {
@@ -71,7 +71,7 @@ export const DashboardCategoryChart: React.FC = () => {
               cy="80"
               r={radius}
               fill="none"
-              stroke="#f2efea"
+              stroke="var(--color-surface-muted)"
               strokeWidth="18"
             />
             {stats.map((item) => {

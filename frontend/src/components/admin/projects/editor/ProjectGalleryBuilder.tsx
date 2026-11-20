@@ -434,7 +434,7 @@ export const ProjectGalleryBuilder: React.FC<ProjectGalleryBuilderProps> = ({
                         >
                           <Star
                             size={13}
-                            fill={isCurrentCover ? "#c78a26" : "none"}
+                            fill={isCurrentCover ? "currentColor" : "none"}
                           />
                         </button>
 

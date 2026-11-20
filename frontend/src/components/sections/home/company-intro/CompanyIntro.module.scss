@@ -243,7 +243,7 @@
 
   &:hover {
     transform: translateY(-4px);
-    background-color: #fcfaf7;
+    background-color: $color-surface-hover;
     border-color: $color-brand-light;
     box-shadow: $shadow-md;
   }

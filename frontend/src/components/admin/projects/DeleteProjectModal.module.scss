@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 90;
-  background-color: rgba(34, 30, 26, 0.52);
+  background-color: rgba($color-surface-dark, 0.52);
   backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
@@ -147,7 +147,7 @@
   border-radius: $radius-md;
   border: 1px solid $color-status-cancelled-text;
   background-color: $color-status-cancelled-text;
-  color: #ffffff;
+  color: $color-text-inverse;
   font-family: $font-sans;
   font-size: $text-base;
   font-weight: 600;
