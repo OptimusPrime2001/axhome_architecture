@@ -61,24 +61,26 @@ Tránh:
 - Trang trí gây nhiễu, animation ảnh hưởng hiệu năng.
 - Ảnh stock không liên quan hoặc lặp ảnh thiếu chủ đích.
 
-## 4. Design tokens tham chiếu
+## 4. Design tokens tham chiếu (Option 1: Blueprint Navy & Concrete Slate)
 
-Chỉ dùng các giá trị này làm token nền; nếu đã có design system/Stitch được duyệt mới hơn thì ưu tiên nguồn đã được xác nhận.
+Hệ thống màu chủ đạo đã được phê duyệt theo định hướng **Công ty Thiết kế & Thi công Công trình (Design & Build)** tại `src/styles/utils/_variables.scss`:
 
-| Token | Giá trị |
-|---|---|
-| Primary 900 | `#594638` |
-| Primary 800 | `#705A46` |
-| Primary 700 | `#8A7159` |
-| Primary 600 | `#A58B70` |
-| Primary 500 | `#BBA58C` |
-| Neutral 950 | `#302C28` |
-| Neutral 800 | `#514A43` |
-| Neutral 600 | `#81776D` |
-| Neutral 400 | `#B9B0A5` |
-| Neutral 200 | `#E7E1D9` |
-| Neutral 100 | `#F2EFEA` |
-| Neutral 50 | `#FAF9F6` |
+| Token | Giá trị | Vai trò |
+|---|---|---|
+| `$color-brand-primary` | `#1b365d` | Xanh Thép Kỹ Thuật (Blueprint Navy — Buttons, highlights, active nav) |
+| `$color-brand-light` | `#3b5b8c` | Xanh Lam Thép Sáng (Steel Blue — Hover states, badges, viền nhấn) |
+| `$color-brand-dark` | `#0f213a` | Xanh Đen Kết Cấu (Structural Midnight — Khối đậm, active state) |
+| `$color-surface-bg` | `#f8fafc` | Nền chính toàn trang (Technical Alabaster) |
+| `$color-surface-card` | `#ffffff` | Nền card, form, modal |
+| `$color-surface-hover` | `#f4f7fb` | Nền card sáng khi hover |
+| `$color-surface-muted` | `#f1f5f9` | Nền section xen kẽ / Xám Bê Tông Sáng (Concrete Mist) |
+| `$color-surface-muted-hover` | `#e6edf5` | Nền card muted khi hover |
+| `$color-surface-border` | `#e2e8f0` | Viền ngăn cách 1px (Steel Hairline) |
+| `$color-surface-dark` | `#0f172a` | Bề mặt tối (Slate Obsidian — Footer, CTA banner) |
+| `$color-text-primary` | `#0f172a` | Chữ chính sắc nét |
+| `$color-text-secondary` | `#475569` | Chữ mô tả xám đá kỹ thuật |
+| `$color-text-muted` | `#94a3b8` | Placeholder, ghi chú nhỏ |
+| `$color-text-inverse` | `#f8fafc` | Chữ trên nền tối |
 
 Semantic colors tham chiếu:
 - Success: `#66836B`

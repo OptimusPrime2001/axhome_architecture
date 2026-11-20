@@ -162,8 +162,8 @@
   width: 7px;
   height: 7px;
   border-radius: $radius-full;
-  background-color: #dc2626;
-  border: 1.5px solid #ffffff;
+  background-color: $color-status-cancelled-text;
+  border: 1.5px solid $color-surface-card;
 }
 
 .userTrigger {
@@ -192,7 +192,7 @@
   height: 28px;
   border-radius: $radius-full;
   background-color: $color-brand-dark;
-  color: #ffffff;
+  color: $color-text-inverse;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -294,7 +294,7 @@
   }
 
   &.notifUnread {
-    background-color: #fcfaf6;
+    background-color: $color-surface-hover;
   }
 }
 

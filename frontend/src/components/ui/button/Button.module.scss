@@ -42,7 +42,7 @@
   // Variants
   &.variant-primary {
     background-color: $color-brand-primary;
-    color: #ffffff;
+    color: $color-text-inverse;
     border: 1px solid transparent;
 
     &:hover:not(:disabled) {
@@ -68,7 +68,7 @@
 
   &.variant-dark {
     background-color: $color-brand-dark;
-    color: #ffffff;
+    color: $color-text-inverse;
     border: 1px solid transparent;
 
     &:hover:not(:disabled) {

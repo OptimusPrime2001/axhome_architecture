@@ -35,7 +35,7 @@
   transition: background-color 0.15s ease;
 
   &:hover {
-    background-color: #fcfaf6;
+    background-color: $color-surface-hover;
   }
 }
 

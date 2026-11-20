@@ -3,23 +3,26 @@
 // Extracted from Figma: Axhome_Architecture (Key: DSzrCfaZrm5NL29HQawzhN)
 // ==============================================================================
 
-// 1. Brand Colors (Màu thương hiệu - Gỗ và đất nung)
-$color-brand-primary: #8a7159; // Nâu chính (Buttons, highlights, active nav)
-$color-brand-light: #bba58c; // Nâu sáng (Hover states, badges, viền trang trí)
-$color-brand-dark: #594638; // Nâu đậm (Text nhấn mạnh, icons đặc biệt)
+// 1. Brand Colors (Màu thương hiệu - Xanh Thép Kỹ Thuật & Kết Cấu Công Trình)
+$color-brand-primary: #1b365d; // Xanh thép kỹ thuật (Buttons, highlights, active nav)
+$color-brand-light: #3b5b8c; // Xanh lam thép sáng (Hover states, badges, viền trang trí)
+$color-brand-dark: #0f213a; // Xanh đen kết cấu (Text nhấn mạnh, icons đặc biệt)
 
-// 2. Surfaces & Structure (Nền & Bề mặt)
-$color-surface-bg: #faf9f6; // Nền chính toàn trang (Off-white ấm)
+// 2. Surfaces & Structure (Nền & Bề mặt - Bê tông & Bản vẽ kỹ thuật)
+$color-surface-bg: #f8fafc; // Nền chính toàn trang (Technical Alabaster)
 $color-surface-card: #ffffff; // Nền card, form, modal (Trắng tinh khiết)
-$color-surface-muted: #f4f1ea; // Nền phụ (Thanh công cụ, ô nhập liệu)
-$color-surface-border: #e7e1d9; // Viền ngăn cách (Border mỏng thanh lịch 1px)
-$color-surface-dark: #221e1a; // Bề mặt tối (Footer, banner đặc biệt)
+$color-surface-hover: #f4f7fb; // Nền card sáng khi hover
+$color-surface-muted: #f1f5f9; // Nền phụ (Concrete Mist)
+$color-surface-muted-hover: #e6edf5; // Nền card muted khi hover
+$color-surface-border: #e2e8f0; // Viền ngăn cách (Border mỏng thanh lịch 1px)
+$color-surface-dark: #0f172a; // Bề mặt tối (Footer, banner đặc biệt)
 
 // 3. Typography Colors (Văn bản)
-$color-text-primary: #302c28; // Tiêu đề, chữ chính (Đen nâu than củi)
-$color-text-secondary: #81776d; // Đoạn văn, nhãn phụ, thông số
-$color-text-muted: #b9b0a5; // Placeholder, disabled, ghi chú nhỏ
-$color-text-inverse: #faf9f6; // Chữ trên nền tối
+$color-text-primary: #0f172a; // Tiêu đề, chữ chính (Đen thép sắc nét)
+$color-text-secondary: #475569; // Đoạn văn, nhãn phụ, thông số
+$color-text-muted: #94a3b8; // Placeholder, disabled, ghi chú nhỏ
+$color-text-inverse: #f8fafc; // Chữ sáng trên nền tối / nút màu đậm
+$color-text-inverse-muted: #94a3b8; // Chữ phụ trên nền tối (Footer, dark banner)
 
 // 3b. Semantic colors — theo .agents/rules/01-project-context.md §3
 // Dùng cho trạng thái Invalid của form (rule 08 §3).
@@ -88,9 +91,9 @@ $radius-lg: 8px;
 $radius-full: 9999px;
 
 // 8. Box Shadows (Tối giản kiến trúc)
-$shadow-sm: 0 1px 2px rgba(48, 44, 40, 0.04);
-$shadow-md: 0 4px 12px rgba(48, 44, 40, 0.06);
-$shadow-lg: 0 12px 24px -4px rgba(48, 44, 40, 0.08);
+$shadow-sm: 0 1px 2px rgba($color-text-primary, 0.04);
+$shadow-md: 0 4px 12px rgba($color-text-primary, 0.06);
+$shadow-lg: 0 12px 24px -4px rgba($color-text-primary, 0.08);
 
 // 9. Breakpoints — NGUỒN SỰ THẬT DUY NHẤT
 //    Dùng với media-breakpoint-up / media-breakpoint-down / media-breakpoint-between

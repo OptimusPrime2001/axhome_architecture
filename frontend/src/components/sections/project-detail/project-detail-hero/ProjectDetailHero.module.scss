@@ -175,8 +175,8 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(24, 20, 16, 0.55) 0%,
-    rgba(24, 20, 16, 0) 45%
+    rgba($color-surface-dark, 0.55) 0%,
+    rgba($color-surface-dark, 0) 45%
   );
   pointer-events: none;
 }
@@ -188,7 +188,7 @@
   z-index: 1;
   padding: 5px 12px;
   border-radius: $radius-xs;
-  background-color: rgba(34, 30, 26, 0.82);
+  background-color: rgba($color-surface-dark, 0.82);
   backdrop-filter: blur(6px);
   font-family: $font-mono;
   font-size: 10px;

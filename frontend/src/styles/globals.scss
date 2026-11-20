@@ -11,12 +11,17 @@
 
   --color-surface-bg: #{$color-surface-bg};
   --color-surface-card: #{$color-surface-card};
+  --color-surface-hover: #{$color-surface-hover};
   --color-surface-muted: #{$color-surface-muted};
+  --color-surface-muted-hover: #{$color-surface-muted-hover};
   --color-surface-border: #{$color-surface-border};
+  --color-surface-dark: #{$color-surface-dark};
 
   --color-text-primary: #{$color-text-primary};
   --color-text-secondary: #{$color-text-secondary};
   --color-text-muted: #{$color-text-muted};
+  --color-text-inverse: #{$color-text-inverse};
+  --color-text-inverse-muted: #{$color-text-inverse-muted};
 
   /* shadcn/ui semantic theme variables mapped to Axhome design tokens */
   --background: #{$color-surface-bg};

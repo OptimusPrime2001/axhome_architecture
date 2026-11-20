@@ -135,7 +135,7 @@
   width: 38px;
   height: 38px;
   border-radius: $radius-md;
-  background-color: #f6efe7;
+  background-color: $color-surface-hover;
   color: $color-brand-dark;
   display: inline-flex;
   align-items: center;
@@ -162,7 +162,7 @@
 .permBadge {
   padding: 4px 10px;
   border-radius: $radius-full;
-  background-color: #f3ece1;
+  background-color: $color-surface-muted-hover;
   color: $color-brand-dark;
   font-size: 10px;
   font-weight: 700;
@@ -257,13 +257,13 @@
     outline: none;
     background-color: $color-surface-card;
     border-color: $color-brand-primary;
-    box-shadow: 0 0 0 3px rgba(138, 113, 89, 0.12);
+    box-shadow: 0 0 0 3px rgba($color-brand-primary, 0.12);
   }
 }
 
 .inputInvalid {
   border-color: $color-error;
-  background-color: #fffbfa;
+  background-color: $color-surface-card;
 }
 
 .eyeToggleBtn {
@@ -386,8 +386,8 @@
 .pillStandby {
   padding: 3px 9px;
   border-radius: $radius-full;
-  background-color: #f4efe8;
-  border: 1px solid #dfd4c5;
+  background-color: $color-text-inverse;
+  border: 1px solid $color-surface-border;
   color: $color-brand-dark;
   font-size: 10.5px;
   font-weight: 700;
@@ -446,7 +446,7 @@
   gap: 7px;
 
   &:hover {
-    background-color: #ebe5dc;
+    background-color: $color-surface-muted-hover;
     border-color: $color-brand-light;
   }
 }

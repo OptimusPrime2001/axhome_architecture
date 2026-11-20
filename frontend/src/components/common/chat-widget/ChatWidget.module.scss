@@ -12,10 +12,10 @@
     height: 45px;
     display: flex;
     align-items: center;
-    background: #fefefe;
+    background: $color-surface-card;
     border-radius: 45px;
     justify-content: center;
-    border: 1px solid #e4e7ec;
+    border: 1px solid $color-surface-border;
     .phone_img {
       height: 35px;
       width: 35px;
@@ -23,10 +23,10 @@
     img {
       width: 45px;
       height: 45px;
-      background: #fefefe;
+      background: $color-surface-card;
       padding: 4px;
       border-radius: 45px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px rgba($color-surface-dark, 0.1);
       object-fit: contain;
       margin-bottom: 0;
     }

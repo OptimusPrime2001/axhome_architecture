@@ -77,7 +77,7 @@
     box-shadow 0.22s ease;
 
   &:hover {
-    background-color: #f4ece1;
+    background-color: $color-surface-muted-hover;
     border-color: $color-brand-light;
     transform: translateY(-2px);
     box-shadow: $shadow-sm;

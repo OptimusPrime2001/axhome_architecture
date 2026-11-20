@@ -68,9 +68,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(34, 30, 26, 0.72) 0%,
-    rgba(48, 44, 40, 0.68) 45%,
-    rgba(34, 30, 26, 0.88) 100%
+    rgba($color-surface-dark, 0.72) 0%,
+    rgba($color-text-primary, 0.68) 45%,
+    rgba($color-surface-dark, 0.88) 100%
   );
 }
 
@@ -111,7 +111,7 @@
 .portalDivider {
   width: 1px;
   height: 18px;
-  background-color: rgba(250, 249, 246, 0.35);
+  background-color: rgba($color-text-inverse, 0.35);
 }
 
 .portalLabel {
@@ -124,7 +124,7 @@
 
 .studioLocation {
   font-size: $text-sm;
-  color: rgba(250, 249, 246, 0.78);
+  color: rgba($color-text-inverse, 0.78);
 }
 
 .heroCopy {
@@ -149,11 +149,11 @@
   font-size: 30px;
   font-weight: 600;
   line-height: 1.2;
-  color: #ffffff;
+  color: $color-text-inverse;
 
   em {
     font-style: italic;
-    color: #e7dcd0;
+    color: $color-text-inverse;
   }
 
   @include media-breakpoint-down(sm) {
@@ -164,7 +164,7 @@
 .heroDescription {
   font-size: $text-base;
   line-height: 1.6;
-  color: rgba(250, 249, 246, 0.84);
+  color: rgba($color-text-inverse, 0.84);
 }
 
 .statusCard {
@@ -173,8 +173,8 @@
   gap: 12px;
   padding: 12px 14px;
   border-radius: $radius-md;
-  background-color: rgba(34, 30, 26, 0.56);
-  border: 1px solid rgba(250, 249, 246, 0.18);
+  background-color: rgba($color-surface-dark, 0.56);
+  border: 1px solid rgba($color-text-inverse, 0.18);
   backdrop-filter: blur(8px);
 
   @include media-breakpoint-down(sm) {
@@ -186,7 +186,7 @@
   width: 34px;
   height: 34px;
   border-radius: $radius-sm;
-  background-color: rgba(187, 165, 140, 0.2);
+  background-color: rgba($color-brand-light, 0.2);
   color: $color-brand-light;
   display: inline-flex;
   align-items: center;
@@ -202,13 +202,13 @@
 .statusTitle {
   font-size: $text-sm;
   font-weight: 600;
-  color: #ffffff;
+  color: $color-text-inverse;
 }
 
 .statusSubtitle {
   font-size: 10px;
   letter-spacing: 0.08em;
-  color: rgba(250, 249, 246, 0.72);
+  color: rgba($color-text-inverse, 0.72);
   text-transform: uppercase;
 }
 
@@ -218,8 +218,8 @@
   letter-spacing: 0.06em;
   padding: 4px 8px;
   border-radius: $radius-xs;
-  background-color: rgba(250, 249, 246, 0.12);
-  color: #e7dcd0;
+  background-color: rgba($color-text-inverse, 0.12);
+  color: $color-text-inverse;
   white-space: nowrap;
 }
 
@@ -314,7 +314,7 @@
   width: 7px;
   height: 7px;
   border-radius: $radius-full;
-  background-color: #16a34a;
+  background-color: $color-status-completed-text;
   flex-shrink: 0;
 }
 

@@ -11,7 +11,7 @@
   justify-content: center;
   background-color: $color-surface-dark;
   color: $color-text-inverse;
-  border: 1px solid rgba(250, 249, 246, 0.16);
+  border: 1px solid rgba($color-text-inverse, 0.16);
   box-shadow: $shadow-lg;
   transition:
     background-color 0.2s ease,

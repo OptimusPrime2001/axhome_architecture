@@ -88,10 +88,10 @@
 .primaryAction {
   background-color: $color-brand-dark;
   border: 1px solid $color-brand-dark;
-  color: #ffffff;
+  color: $color-text-inverse;
 
   &:hover {
-    background-color: #46372c;
+    background-color: $color-brand-dark;
   }
 }
 

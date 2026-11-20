@@ -83,11 +83,11 @@
 
 .callBtn {
   background-color: $color-brand-dark;
-  color: #ffffff;
+  color: $color-text-inverse;
   transition: background-color 0.15s ease;
 
   &:hover {
-    background-color: #46372c;
+    background-color: $color-brand-dark;
   }
 }
 

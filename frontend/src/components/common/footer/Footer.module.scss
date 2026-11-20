@@ -3,7 +3,7 @@
   color: $color-text-inverse;
   padding-top: 72px;
   padding-bottom: 32px;
-  border-top: 1px solid rgba(231, 225, 217, 0.1);
+  border-top: 1px solid rgba($color-text-inverse, 0.1);
 }
 
 .footerGrid {
@@ -50,7 +50,7 @@
       font-size: $text-lg;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: #ffffff;
+      color: $color-text-inverse;
     }
   }
 
@@ -63,7 +63,7 @@
 
   .description {
     font-size: $text-sm;
-    color: #a49b92;
+    color: $color-text-inverse-muted;
     line-height: 1.6;
     max-width: 360px;
   }
@@ -78,7 +78,7 @@
     font-size: $text-base;
     font-weight: 600;
     letter-spacing: 0.04em;
-    color: #ffffff;
+    color: $color-text-inverse;
     text-transform: uppercase;
     position: relative;
     padding-bottom: 12px;
@@ -101,7 +101,7 @@
 
     .linkItem {
       font-size: $text-sm;
-      color: #a49b92;
+      color: $color-text-inverse-muted;
       transition: color 0.15s ease;
 
       &:hover {
@@ -120,7 +120,7 @@
     font-size: $text-base;
     font-weight: 600;
     letter-spacing: 0.04em;
-    color: #ffffff;
+    color: $color-text-inverse;
     text-transform: uppercase;
     position: relative;
     padding-bottom: 12px;
@@ -149,20 +149,20 @@
       .officeName {
         font-size: $text-sm;
         font-weight: 600;
-        color: #e5ded5;
+        color: $color-text-inverse;
       }
 
       .officeAddress {
         font-size: $text-xs;
-        color: #a49b92;
+        color: $color-text-inverse-muted;
         line-height: 1.5;
       }
     }
   }
 
   .hotlineBox {
-    background-color: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: rgba($color-surface-card, 0.04);
+    border: 1px solid rgba($color-surface-card, 0.08);
     border-radius: $radius-sm;
     padding: 14px;
     display: flex;
@@ -180,19 +180,19 @@
       font-family: $font-mono;
       font-size: $text-lg;
       font-weight: 700;
-      color: #ffffff;
+      color: $color-text-inverse;
     }
   }
 }
 
 .bottomBar {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba($color-surface-card, 0.08);
   padding-top: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: $text-xs;
-  color: #7b736b;
+  color: $color-text-inverse-muted;
 
   @include media-breakpoint-down(sm) {
     flex-direction: column;

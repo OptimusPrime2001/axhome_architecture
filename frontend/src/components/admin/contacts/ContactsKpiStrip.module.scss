@@ -20,7 +20,7 @@
 
 .urgentCard {
   border-color: $color-status-pending-border;
-  background-color: #fffdf9;
+  background-color: $color-surface-card;
 }
 
 .cardTop {
@@ -42,7 +42,7 @@
   width: 34px;
   height: 34px;
   border-radius: $radius-md;
-  background-color: #f6efe7;
+  background-color: $color-surface-hover;
   color: $color-brand-dark;
   display: inline-flex;
   align-items: center;

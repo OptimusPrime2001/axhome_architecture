@@ -125,7 +125,7 @@
 }
 
 .barPrimary {
-  fill: #cfc6bc;
+  fill: $color-surface-border;
   transition: fill 0.15s ease;
 }
 
@@ -134,7 +134,7 @@
 }
 
 .barSecondary {
-  fill: #e3dcd3;
+  fill: $color-surface-border;
   transition: fill 0.15s ease;
 }
 
