@@ -15,13 +15,13 @@ const (
 // Auth validates JWT tokens from HttpOnly cookie ("access_token") or Authorization Bearer header.
 func Auth(jwtSecret string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		tokenStr := extractAccessToken(c)
-		if tokenStr == "" {
+		accessToken := extractAccessToken(c)
+		if accessToken == "" {
 			utils.ResponseError(c, utils.NewError(utils.MsgInvalidToken, utils.ErrCodeUnauthorized))
 			return
 		}
 
-		claims, err := utils.ParseAccessToken(jwtSecret, tokenStr)
+		claims, err := utils.ParseAccessToken(jwtSecret, accessToken)
 		if err != nil {
 			utils.ResponseError(c, err)
 			return
@@ -66,17 +66,10 @@ func RequireRoles(allowedRoles ...string) gin.HandlerFunc {
 }
 
 func extractAccessToken(c *gin.Context) string {
-	// 1. Prefer HttpOnly cookie for browser / Next.js SSR calls.
-	if cookieToken, err := c.Cookie(AccessTokenCookieName); err == nil {
-		if trimmed := strings.TrimSpace(cookieToken); trimmed != "" {
-			return trimmed
-		}
-	}
-
-	// 2. Fallback to Authorization: Bearer <token> header for API clients / curl.
-	authHeader := strings.TrimSpace(c.GetHeader("Authorization"))
-	if len(authHeader) > 7 && strings.EqualFold(authHeader[:7], "Bearer ") {
-		return strings.TrimSpace(authHeader[7:])
+	// 2. Get AccessToken to Authorization: Bearer <token> header for API clients / curl.
+	accessToken := strings.TrimSpace(c.GetHeader("Authorization"))
+	if len(accessToken) > 7 && strings.EqualFold(accessToken[:7], "Bearer ") {
+		return strings.TrimSpace(accessToken[7:])
 	}
 
 	return ""

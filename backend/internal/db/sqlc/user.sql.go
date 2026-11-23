@@ -82,6 +82,36 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 	return i, err
 }
 
+const deleteAllUserRefreshTokens = `-- name: DeleteAllUserRefreshTokens :exec
+DELETE FROM refresh_tokens
+WHERE user_id = $1
+`
+
+func (q *Queries) DeleteAllUserRefreshTokens(ctx context.Context, userID uuid.UUID) error {
+	_, err := q.db.Exec(ctx, deleteAllUserRefreshTokens, userID)
+	return err
+}
+
+const deleteExpiredOrRevokedRefreshTokens = `-- name: DeleteExpiredOrRevokedRefreshTokens :exec
+DELETE FROM refresh_tokens
+WHERE user_id = $1 AND (revoked_at IS NOT NULL OR expires_at <= NOW())
+`
+
+func (q *Queries) DeleteExpiredOrRevokedRefreshTokens(ctx context.Context, userID uuid.UUID) error {
+	_, err := q.db.Exec(ctx, deleteExpiredOrRevokedRefreshTokens, userID)
+	return err
+}
+
+const deleteRefreshTokenByHash = `-- name: DeleteRefreshTokenByHash :exec
+DELETE FROM refresh_tokens
+WHERE token_hash = $1
+`
+
+func (q *Queries) DeleteRefreshTokenByHash(ctx context.Context, tokenHash string) error {
+	_, err := q.db.Exec(ctx, deleteRefreshTokenByHash, tokenHash)
+	return err
+}
+
 const deleteUser = `-- name: DeleteUser :exec
 DELETE FROM users
 WHERE id = $1
@@ -89,6 +119,21 @@ WHERE id = $1
 
 func (q *Queries) DeleteUser(ctx context.Context, id uuid.UUID) error {
 	_, err := q.db.Exec(ctx, deleteUser, id)
+	return err
+}
+
+const deleteUserRefreshTokensByDevice = `-- name: DeleteUserRefreshTokensByDevice :exec
+DELETE FROM refresh_tokens
+WHERE user_id = $1 AND COALESCE(user_agent, '') = COALESCE($2, '')
+`
+
+type DeleteUserRefreshTokensByDeviceParams struct {
+	UserID    uuid.UUID `json:"user_id"`
+	UserAgent *string   `json:"user_agent"`
+}
+
+func (q *Queries) DeleteUserRefreshTokensByDevice(ctx context.Context, arg DeleteUserRefreshTokensByDeviceParams) error {
+	_, err := q.db.Exec(ctx, deleteUserRefreshTokensByDevice, arg.UserID, arg.UserAgent)
 	return err
 }
 

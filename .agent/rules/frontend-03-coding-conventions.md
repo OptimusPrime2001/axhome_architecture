@@ -30,7 +30,7 @@ description: "Coding conventions cho TypeScript, giới hạn kích thước fil
 - React component: `PascalCase`.
 - Function, variable, custom hook: `camelCase`; hook bắt đầu bằng `use`.
 - Type/interface: `PascalCase`.
-- Constant thực sự bất biến và mang ý nghĩa cấu hình: `UPPER_SNAKE_CASE`.
+- Constant thực sự bất biến và mang ý nghĩa cấu hình (toàn bộ export trong `src/constants/`, API endpoints, TanStack Query keys...): **bắt buộc viết hoa `UPPER_SNAKE_CASE`** (ví dụ: `API_ENDPOINTS`, `AUTH_CURRENT_ACCOUNT_KEY`, `FONT_BE_VIETNAM_PRO`).
 - Component file: `PascalCase.tsx`.
 - Hook file: `use-<purpose>.ts`.
 - API file: `<module>.api.ts`.

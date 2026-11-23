@@ -66,3 +66,19 @@ WHERE token_hash = $1 AND revoked_at IS NULL;
 UPDATE refresh_tokens
 SET revoked_at = NOW()
 WHERE user_id = $1 AND revoked_at IS NULL;
+
+-- name: DeleteExpiredOrRevokedRefreshTokens :exec
+DELETE FROM refresh_tokens
+WHERE user_id = $1 AND (revoked_at IS NOT NULL OR expires_at <= NOW());
+
+-- name: DeleteUserRefreshTokensByDevice :exec
+DELETE FROM refresh_tokens
+WHERE user_id = $1 AND COALESCE(user_agent, '') = COALESCE($2, '');
+
+-- name: DeleteRefreshTokenByHash :exec
+DELETE FROM refresh_tokens
+WHERE token_hash = $1;
+
+-- name: DeleteAllUserRefreshTokens :exec
+DELETE FROM refresh_tokens
+WHERE user_id = $1;

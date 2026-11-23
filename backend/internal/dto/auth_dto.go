@@ -35,10 +35,8 @@ type UserResponse struct {
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
-
 type LoginResponse struct {
-	AccessToken  string       `json:"access_token"`
-	ExpiresIn    int64        `json:"expires_in"`
-	RefreshToken string       `json:"refresh_token"`
-	User         UserResponse `json:"user"`
+	AccessToken string       `json:"access_token"`
+	ExpiresIn   int64        `json:"expires_in"`
+	User        UserResponse `json:"user"`
 }

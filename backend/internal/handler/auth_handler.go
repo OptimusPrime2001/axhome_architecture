@@ -70,7 +70,11 @@ func (h *AuthHandler) Login(ctx *gin.Context) {
 		true,
 	)
 
-	utils.ResponseSuccess(ctx, http.StatusOK, res)
+	utils.ResponseSuccess(ctx, http.StatusOK, &dto.LoginResponse{
+		AccessToken: res.AccessToken,
+		ExpiresIn:   res.ExpiresIn,
+		User:        res.User,
+	})
 }
 
 func (h *AuthHandler) Logout(ctx *gin.Context) {
@@ -118,15 +122,16 @@ func (h *AuthHandler) GetMe(ctx *gin.Context) {
 		utils.ResponseError(ctx, utils.NewError(utils.MsgInvalidToken, utils.ErrCodeUnauthorized))
 		return
 	}
-
 	user, err := h.service.GetMe(ctx.Request.Context(), claims.UserID)
 	if err != nil {
 		if strings.Contains(err.Error(), "stateless") {
 			utils.ResponseSuccess(ctx, http.StatusOK, dto.UserResponse{
-				ID:       claims.UserID,
-				Email:    claims.Email,
-				FullName: "Quản trị viên Axhome",
-				Role:     claims.Role,
+				ID:        user.ID,
+				Email:     user.Email,
+				FullName:  user.FullName,
+				Role:      user.Role,
+				CreatedAt: user.CreatedAt,
+				UpdatedAt: user.UpdatedAt,
 			})
 			return
 		}

@@ -82,7 +82,8 @@ func (s *authService) Login(ctx context.Context, req dto.LoginRequest, userAgent
 	}
 	ua := strings.TrimSpace(userAgent)
 
-	err = s.repo.CreateRefreshToken(ctx, sqlc.CreateRefreshTokenParams{
+	// Multi-device clean strategy: purge expired/revoked rows and replace any existing row for this device atomically.
+	err = s.repo.SaveDeviceRefreshToken(ctx, sqlc.CreateRefreshTokenParams{
 		UserID:    user.ID,
 		TokenHash: tokenHash,
 		UserAgent: &ua,
@@ -90,7 +91,7 @@ func (s *authService) Login(ctx context.Context, req dto.LoginRequest, userAgent
 		ExpiresAt: time.Now().Add(s.jwtCfg.RefreshTokenTTL),
 	})
 	if err != nil {
-		return nil, err
+		return nil, utils.WrapAppError(err, utils.MsgInternalServer, utils.ErrCodeInternal)
 	}
 	return &AuthResult{
 		AccessToken:  accessToken,
@@ -107,7 +108,7 @@ func (s *authService) Logout(ctx context.Context, refreshToken string) error {
 	}
 	sum := sha256.Sum256([]byte(trimmed))
 	tokenHash := hex.EncodeToString(sum[:])
-	return s.repo.RevokeRefreshToken(ctx, tokenHash)
+	return s.repo.DeleteRefreshTokenByHash(ctx, tokenHash)
 }
 
 func (s *authService) GetMe(ctx context.Context, userID uuid.UUID) (*dto.UserResponse, error) {
@@ -159,7 +160,7 @@ func (s *authService) ChangePassword(ctx context.Context, userID uuid.UUID, req 
 		return err
 	}
 
-	_ = s.repo.RevokeAllUserRefreshTokens(ctx, userID)
+	_ = s.repo.DeleteAllUserRefreshTokens(ctx, userID)
 	return nil
 }
 

@@ -21,12 +21,16 @@ type Querier interface {
 	CreateProjectMilestone(ctx context.Context, arg CreateProjectMilestoneParams) (ProjectMilestone, error)
 	CreateRefreshToken(ctx context.Context, arg CreateRefreshTokenParams) error
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
+	DeleteAllUserRefreshTokens(ctx context.Context, userID uuid.UUID) error
 	DeleteConsultationLead(ctx context.Context, id uuid.UUID) error
+	DeleteExpiredOrRevokedRefreshTokens(ctx context.Context, userID uuid.UUID) error
 	DeleteFloorPlansByProjectID(ctx context.Context, projectID uuid.UUID) error
 	DeleteProject(ctx context.Context, id uuid.UUID) error
 	DeleteProjectImagesByProjectID(ctx context.Context, projectID uuid.UUID) error
 	DeleteProjectMilestonesByProjectID(ctx context.Context, projectID uuid.UUID) error
+	DeleteRefreshTokenByHash(ctx context.Context, tokenHash string) error
 	DeleteUser(ctx context.Context, id uuid.UUID) error
+	DeleteUserRefreshTokensByDevice(ctx context.Context, arg DeleteUserRefreshTokensByDeviceParams) error
 	GetConsultationLeadByID(ctx context.Context, id uuid.UUID) (ConsultationLead, error)
 	GetConsultationLeadStats(ctx context.Context) ([]GetConsultationLeadStatsRow, error)
 	GetProjectByID(ctx context.Context, id uuid.UUID) (Project, error)
