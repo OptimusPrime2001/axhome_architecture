@@ -1,8 +1,10 @@
 "use client";
 
-import { ADMIN_MOCK_USER, ADMIN_NAV_ITEMS } from "@constants";
+import { toast } from "@components";
+import { ADMIN_NAV_ITEMS } from "@constants";
+import { useAdminLeads, useAuthLogout } from "@hooks";
 import type { AdminNavIconKey } from "@shared-types";
-import { adminContactsSelector, useAdminContactsStore } from "@store";
+import { adminContactsSelector, useAdminAuthStore } from "@store";
 import {
   ExternalLink,
   FolderKanban,
@@ -37,8 +39,11 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
 }) => {
   const pathname = usePathname();
   const router = useRouter();
-  const pendingLeadsCount = useAdminContactsStore(
-    adminContactsSelector.getPendingCount,
+  const profile = useAdminAuthStore((state) => state.profile);
+  const { logoutMutation } = useAuthLogout();
+  const { data: leadsData } = useAdminLeads({ params: { limit: 100 } });
+  const pendingLeadsCount = adminContactsSelector.getPendingCount(
+    leadsData?.items ?? [],
   );
 
   useEffect(() => {
@@ -61,10 +66,13 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
     return pathname.startsWith(href);
   };
 
-  const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      window.sessionStorage.removeItem("axhome_admin_user");
+  const handleLogout = async () => {
+    try {
+      await logoutMutation.mutateAsync();
+    } catch {
+      // Proceed with local redirect even if network fails
     }
+    toast.info("Đã đăng xuất khỏi hệ thống quản trị.");
     onClose();
     router.push("/admin/login");
   };
@@ -165,11 +173,15 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
 
         <div className={styles.userCard}>
           <div className={styles.avatar} aria-hidden="true">
-            {ADMIN_MOCK_USER.initials}
+            {profile?.initials ?? "AD"}
           </div>
           <div className={styles.userInfo}>
-            <p className={styles.userName}>{ADMIN_MOCK_USER.name}</p>
-            <p className={styles.userRole}>{ADMIN_MOCK_USER.role}</p>
+            <p className={styles.userName}>
+              {profile?.name ?? "Quản trị viên"}
+            </p>
+            <p className={styles.userRole}>
+              {profile?.role ?? "Hệ thống quản trị"}
+            </p>
           </div>
           <button
             type="button"

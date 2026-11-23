@@ -22,7 +22,6 @@ import {
   PROJECT_TYPE_LABELS,
 } from "@constants";
 import type { ArchitecturalStyle, Project, ProjectType } from "@shared-types";
-import { useProjectsCatalogueStore } from "@store";
 import {
   ArrowRight,
   ChevronLeft,
@@ -32,11 +31,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
 import styles from "./ProjectsCatalogue.module.scss";
-
-const PAGE_SIZE = 6;
+import { useProjectsCatalogue } from "./useProjectsCatalogue";
 
 type StyleFilter = "all" | ArchitecturalStyle;
 type SortOption = "newest" | "area_desc" | "views_desc";
@@ -59,114 +55,26 @@ function getBadgeVariant(type: ProjectType) {
 export const ProjectsCatalogueClient: React.FC<
   ProjectsCatalogueClientProps
 > = ({ projects }) => {
-  const searchParams = useSearchParams();
-  const typeParam = searchParams.get("type");
-
-  const activeType = useProjectsCatalogueStore((state) => state.activeType);
-  const activeCategory = useProjectsCatalogueStore(
-    (state) => state.activeCategory,
-  );
-  const activeStyle = useProjectsCatalogueStore((state) => state.activeStyle);
-  const searchQuery = useProjectsCatalogueStore((state) => state.searchQuery);
-  const sortBy = useProjectsCatalogueStore((state) => state.sortBy);
-  const currentPage = useProjectsCatalogueStore((state) => state.currentPage);
-
-  const setActiveType = useProjectsCatalogueStore(
-    (state) => state.setActiveType,
-  );
-  const setActiveCategory = useProjectsCatalogueStore(
-    (state) => state.setActiveCategory,
-  );
-  const setActiveStyle = useProjectsCatalogueStore(
-    (state) => state.setActiveStyle,
-  );
-  const setSearchQuery = useProjectsCatalogueStore(
-    (state) => state.setSearchQuery,
-  );
-  const setSortBy = useProjectsCatalogueStore((state) => state.setSortBy);
-  const setCurrentPage = useProjectsCatalogueStore(
-    (state) => state.setCurrentPage,
-  );
-
-  useEffect(() => {
-    if (
-      typeParam === "concept" ||
-      typeParam === "under_construction" ||
-      typeParam === "completed"
-    ) {
-      setActiveType(typeParam);
-    }
-  }, [typeParam, setActiveType]);
-
-  const typeCounts = useMemo(() => {
-    return {
-      all: projects.length,
-      concept: projects.filter((p) => p.projectType === "concept").length,
-      under_construction: projects.filter(
-        (p) => p.projectType === "under_construction",
-      ).length,
-      completed: projects.filter((p) => p.projectType === "completed").length,
-    };
-  }, [projects]);
-
-  const filteredProjects = useMemo(() => {
-    const normalizedQuery = searchQuery.trim().toLowerCase();
-
-    const matched = projects.filter((project) => {
-      if (activeType !== "all" && project.projectType !== activeType) {
-        return false;
-      }
-      if (activeCategory !== "all" && project.category !== activeCategory) {
-        return false;
-      }
-      if (activeStyle !== "all" && project.style !== activeStyle) {
-        return false;
-      }
-      if (normalizedQuery) {
-        const haystack =
-          `${project.title} ${project.city} ${project.location} ${project.excerpt}`.toLowerCase();
-        if (!haystack.includes(normalizedQuery)) {
-          return false;
-        }
-      }
-      return true;
-    });
-
-    return [...matched].sort((a, b) => {
-      if (sortBy === "area_desc") {
-        return b.landArea - a.landArea;
-      }
-      if (sortBy === "views_desc") {
-        return b.viewCount - a.viewCount;
-      }
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
-  }, [projects, activeType, activeCategory, activeStyle, searchQuery, sortBy]);
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredProjects.length / PAGE_SIZE),
-  );
-  const safePage = Math.min(currentPage, totalPages);
-  const paginatedProjects = filteredProjects.slice(
-    (safePage - 1) * PAGE_SIZE,
-    safePage * PAGE_SIZE,
-  );
-
-  const handleResetFilters = () => {
-    setActiveType("all");
-    setActiveCategory("all");
-    setActiveStyle("all");
-    setSearchQuery("");
-    setSortBy("newest");
-    setCurrentPage(1);
-  };
-
-  const hasActiveFilters =
-    activeType !== "all" ||
-    activeCategory !== "all" ||
-    activeStyle !== "all" ||
-    searchQuery.trim().length > 0;
+  const {
+    activeType,
+    activeCategory,
+    activeStyle,
+    searchQuery,
+    sortBy,
+    setActiveType,
+    setActiveCategory,
+    setActiveStyle,
+    setSearchQuery,
+    setSortBy,
+    setCurrentPage,
+    typeCounts,
+    filteredProjects,
+    totalPages,
+    safePage,
+    paginatedProjects,
+    handleResetFilters,
+    hasActiveFilters,
+  } = useProjectsCatalogue(projects);
 
   return (
     <section className={styles.section} aria-label="Danh sách dự án">
@@ -332,7 +240,7 @@ export const ProjectsCatalogueClient: React.FC<
           </div>
         ) : (
           <StaggerGroup
-            key={`${activeType}-${activeCategory}-${activeStyle}-${currentPage}-${searchQuery}`}
+            key={`${activeType}-${activeCategory}-${activeStyle}-${safePage}-${searchQuery}`}
             className={styles.grid}
           >
             {paginatedProjects.map((project) => (

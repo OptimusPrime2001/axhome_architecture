@@ -1,6 +1,8 @@
 // ==============================================================================
-// Axhome Architecture - Media Upload Service (Go Backend + Cloudflare R2 Ready)
+// Axhome Architecture - Media Upload Service (Axios + Cloudflare R2 Ready)
 // ==============================================================================
+
+import { apiClient, isApiConfigured, unwrapResponse } from "./api-client";
 
 export type MediaUploadCategory = "cover" | "gallery" | "floor-plan";
 
@@ -10,6 +12,11 @@ export interface MediaUploadResult {
   sizeBytes: number;
   mimeType: string;
   storageProvider: "cloudflare-r2" | "local-preview";
+}
+
+interface UploadMediaEndpointDTO {
+  url: string;
+  key?: string;
 }
 
 const ALLOWED_IMAGE_MIME_TYPES = new Set([
@@ -34,10 +41,8 @@ export function validateImageFile(file: File): string | null {
 }
 
 /**
- * Uploads an image via the Go Backend API to Cloudflare R2 when
- * `NEXT_PUBLIC_API_URL` is configured (Phase 5).
- * Automatically falls back to an instant browser Object URL preview during
- * Phase 4 Frontend-First development so all UI dropzones work seamlessly.
+ * Uploads an image via the Go Backend API to Cloudflare R2 using the shared
+ * Axios `apiClient` (`withCredentials: true` for HttpOnly `access_token` cookie).
  */
 export async function uploadProjectImage(
   file: File,
@@ -48,40 +53,25 @@ export async function uploadProjectImage(
     throw new Error(validationError);
   }
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
-
-  if (apiBaseUrl) {
+  if (isApiConfigured()) {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("category", category);
 
-    const response = await fetch(
-      `${apiBaseUrl.replace(/\/$/, "")}/api/v1/admin/media/upload`,
-      {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      },
+    const data = await unwrapResponse<UploadMediaEndpointDTO>(
+      apiClient.post("/admin/media/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }),
     );
 
-    if (!response.ok) {
-      throw new Error(
-        `Không thể tải ảnh "${file.name}" lên Cloudflare R2 (Mã lỗi: ${response.status}).`,
-      );
-    }
-
-    const payload = (await response.json()) as {
-      data?: { url?: string };
-      url?: string;
-    };
-    const uploadedUrl = payload.data?.url ?? payload.url;
-
-    if (!uploadedUrl) {
+    if (!data?.url) {
       throw new Error("Phản hồi từ máy chủ lưu trữ không chứa đường dẫn ảnh.");
     }
 
     return {
-      url: uploadedUrl,
+      url: data.url,
       fileName: file.name,
       sizeBytes: file.size,
       mimeType: file.type,
@@ -89,7 +79,7 @@ export async function uploadProjectImage(
     };
   }
 
-  // Phase 4 UI-first local preview simulation
+  // Fallback local preview simulation when NEXT_PUBLIC_API_URL is not configured
   await new Promise((resolve) => setTimeout(resolve, 220));
   const previewUrl = URL.createObjectURL(file);
 

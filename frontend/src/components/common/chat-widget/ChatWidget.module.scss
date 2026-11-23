@@ -32,9 +32,9 @@
     }
   }
 }
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(md) {
   .chat_widget {
-    inset-block-end: 70px;
+    inset-block-end: calc(144px + env(safe-area-inset-bottom));
     inset-inline-end: 16px;
   }
 }

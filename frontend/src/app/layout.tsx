@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import "@styles/index.scss";
-import { MotionProvider, TooltipProvider } from "@components";
 import {
-  beVietnamPro,
+  MotionProvider,
+  QueryProvider,
+  Toaster,
+  TooltipProvider,
+} from "@components";
+import {
   COMPANY_INFO,
-  googleSans,
-  playfair,
-  space_grotesk,
+  FONT_BE_VIETNAM_PRO,
+  FONT_GOOGLE_SANS,
+  FONT_PLAYFAIR,
+  FONT_SPACE_GROTESK,
 } from "@constants";
 import { cn } from "@lib/utils";
 
@@ -47,16 +52,21 @@ export default async function RootLayout({
     <html
       lang="vi"
       className={cn(
-        playfair.variable,
-        space_grotesk.variable,
-        googleSans.variable,
+        FONT_PLAYFAIR.variable,
+        FONT_SPACE_GROTESK.variable,
+        FONT_GOOGLE_SANS.variable,
       )}
     >
       <head />
-      <body className={beVietnamPro.className}>
-        <MotionProvider>
-          <TooltipProvider>{children}</TooltipProvider>
-        </MotionProvider>
+      <body className={FONT_BE_VIETNAM_PRO.className}>
+        <QueryProvider>
+          <MotionProvider>
+            <TooltipProvider>
+              {children}
+              <Toaster />
+            </TooltipProvider>
+          </MotionProvider>
+        </QueryProvider>
       </body>
     </html>
   );

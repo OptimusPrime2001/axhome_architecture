@@ -22,8 +22,8 @@
     transform: translateY(-2px);
   }
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     right: 16px;
-    bottom: 16px;
+    bottom: calc(88px + env(safe-area-inset-bottom));
   }
 }

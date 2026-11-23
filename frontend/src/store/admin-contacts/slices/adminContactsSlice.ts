@@ -1,4 +1,3 @@
-import { ADMIN_MOCK_LEADS } from "@constants";
 import type { StateCreator } from "zustand";
 import type { AdminContactsSlice, AdminContactsState } from "../types";
 
@@ -8,7 +7,6 @@ export const createAdminContactsSlice: StateCreator<
   [],
   AdminContactsSlice
 > = (set) => ({
-  leads: [...ADMIN_MOCK_LEADS],
   searchQuery: "",
   statusFilter: "all",
   serviceFilter: "all",
@@ -46,33 +44,14 @@ export const createAdminContactsSlice: StateCreator<
   setIsAddModalOpen: (open) =>
     set({ isAddModalOpen: open }, false, "adminContacts/setIsAddModalOpen"),
 
-  addLead: (lead) =>
+  resetAfterLeadCreated: (leadId) =>
     set(
-      (state) => ({
-        leads: [lead, ...state.leads],
+      {
         statusFilter: "all",
         currentPage: 1,
-        selectedLeadId: lead.id,
-      }),
+        selectedLeadId: leadId,
+      },
       false,
-      "adminContacts/addLead",
-    ),
-
-  updateLead: (leadId, updates) =>
-    set(
-      (state) => ({
-        leads: state.leads.map((item) =>
-          item.id === leadId
-            ? {
-                ...item,
-                leadStatus: updates.leadStatus,
-                assignedArchitect: updates.assignedArchitect || undefined,
-                internalNotes: updates.internalNotes || undefined,
-              }
-            : item,
-        ),
-      }),
-      false,
-      "adminContacts/updateLead",
+      "adminContacts/resetAfterLeadCreated",
     ),
 });

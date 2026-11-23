@@ -1,4 +1,3 @@
-import { ADMIN_MOCK_USER } from "@constants";
 import type {
   FloorPlan,
   GallerySpaceCategory,
@@ -193,7 +192,7 @@ export function getDefaultEditorValues(): ProjectEditorFormValues {
     city: "",
     completedYear: new Date().getFullYear(),
     clientName: "",
-    leadArchitect: ADMIN_MOCK_USER.name,
+    leadArchitect: "Default user",
     constructionDuration: "12 Tháng",
     landArea: 300,
     floorArea: 450,

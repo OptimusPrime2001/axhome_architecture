@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@components";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useAdminProjectsStore } from "@store";
+import { Button, Skeleton, Spinner } from "@components";
 import {
   AlertCircle,
   ArrowLeft,
@@ -12,10 +10,7 @@ import {
   Clock,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import type React from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import { ProjectBasicSection } from "./ProjectBasicSection";
 import styles from "./ProjectEditorClient.module.scss";
 import { ProjectFloorPlansBuilder } from "./ProjectFloorPlansBuilder";
@@ -23,13 +18,7 @@ import { ProjectGalleryBuilder } from "./ProjectGalleryBuilder";
 import { ProjectMilestonesBuilder } from "./ProjectMilestonesBuilder";
 import { ProjectPublishSidebar } from "./ProjectPublishSidebar";
 import { ProjectSpecsSection } from "./ProjectSpecsSection";
-import {
-  formValuesToProject,
-  getDefaultEditorValues,
-  type ProjectEditorFormValues,
-  projectEditorSchema,
-  projectToFormValues,
-} from "./project-editor.schema";
+import { useProjectEditor } from "./useProjectEditor";
 
 export interface ProjectEditorClientProps {
   mode: "create" | "edit";
@@ -40,53 +29,47 @@ export const ProjectEditorClient: React.FC<ProjectEditorClientProps> = ({
   mode,
   projectId,
 }) => {
-  const router = useRouter();
-  const topRef = useRef<HTMLFormElement>(null);
-
-  const projects = useAdminProjectsStore((state) => state.projects);
-  const addProject = useAdminProjectsStore((state) => state.addProject);
-  const updateProject = useAdminProjectsStore((state) => state.updateProject);
-  const setLastActionNotice = useAdminProjectsStore(
-    (state) => state.setLastActionNotice,
-  );
-
-  const existingProject = useMemo(
-    () =>
-      mode === "edit" && projectId
-        ? projects.find((p) => p.id === projectId)
-        : undefined,
-    [mode, projectId, projects],
-  );
-
-  const [slugManuallyEdited, setSlugManuallyEdited] = useState(mode === "edit");
-  const [formBannerError, setFormBannerError] = useState<string | null>(null);
-
-  const initialValues = useMemo(
-    () =>
-      existingProject
-        ? projectToFormValues(existingProject)
-        : getDefaultEditorValues(),
-    [existingProject],
-  );
-
-  const form = useForm<ProjectEditorFormValues>({
-    resolver: zodResolver(projectEditorSchema),
-    defaultValues: initialValues,
-  });
-
   const {
-    handleSubmit,
-    reset,
-    setValue,
-    setError,
-    formState: { isDirty, isSubmitting, errors },
-  } = form;
+    topRef,
+    form,
+    existingProject,
+    isLoadingDetail,
+    busy,
+    isDirty,
+    errors,
+    slugManuallyEdited,
+    setSlugManuallyEdited,
+    formBannerError,
+    submitWithTargetStatus,
+  } = useProjectEditor({ mode, projectId });
 
-  useEffect(() => {
-    if (existingProject) {
-      reset(projectToFormValues(existingProject));
-    }
-  }, [existingProject, reset]);
+  if (isLoadingDetail) {
+    return (
+      <output
+        className={styles.editorWrapper}
+        aria-label="Đang tải dữ liệu hồ sơ dự án"
+      >
+        <Skeleton
+          style={{ height: "72px", borderRadius: "10px", marginBottom: "20px" }}
+        />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "2fr 1fr",
+            gap: "24px",
+          }}
+        >
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+          >
+            <Skeleton style={{ height: "260px", borderRadius: "12px" }} />
+            <Skeleton style={{ height: "220px", borderRadius: "12px" }} />
+          </div>
+          <Skeleton style={{ height: "380px", borderRadius: "12px" }} />
+        </div>
+      </output>
+    );
+  }
 
   if (mode === "edit" && !existingProject) {
     return (
@@ -107,65 +90,6 @@ export const ProjectEditorClient: React.FC<ProjectEditorClientProps> = ({
       </div>
     );
   }
-
-  const submitWithTargetStatus = (targetStatus: "draft" | "published") => {
-    setFormBannerError(null);
-    setValue("status", targetStatus, { shouldDirty: true });
-
-    void handleSubmit(
-      (values) => {
-        const normalizedSlug = values.slug.trim();
-        const duplicateSlug = projects.some(
-          (p) => p.slug === normalizedSlug && p.id !== existingProject?.id,
-        );
-
-        if (duplicateSlug) {
-          setError("slug", {
-            type: "manual",
-            message:
-              "Đường dẫn slug này đã được sử dụng bởi một dự án khác. Vui lòng chọn slug khác.",
-          });
-          setFormBannerError(
-            "Đường dẫn tĩnh (Slug) bị trùng lặp với dự án đã tồn tại.",
-          );
-          topRef.current?.scrollIntoView({ behavior: "smooth" });
-          return;
-        }
-
-        const nextNumericIndex = projects.length + 1;
-        const nextId = `proj-${String(nextNumericIndex).padStart(2, "0")}`;
-        const finalPayload = formValuesToProject(
-          { ...values, status: targetStatus },
-          existingProject,
-          nextId,
-        );
-
-        if (mode === "edit" && existingProject) {
-          updateProject(existingProject.id, finalPayload);
-          setLastActionNotice(
-            targetStatus === "published"
-              ? `Đã cập nhật và xuất bản hồ sơ "${finalPayload.title}".`
-              : `Đã lưu bản nháp hồ sơ "${finalPayload.title}".`,
-          );
-        } else {
-          addProject(finalPayload);
-          setLastActionNotice(
-            targetStatus === "published"
-              ? `Đã khởi tạo và xuất bản dự án mới "${finalPayload.title}".`
-              : `Đã lưu dự án mới "${finalPayload.title}" vào Bản nháp.`,
-          );
-        }
-
-        router.push("/admin/projects");
-      },
-      () => {
-        setFormBannerError(
-          "Vui lòng kiểm tra lại các trường bắt buộc được đánh dấu đỏ bên dưới trước khi lưu.",
-        );
-        topRef.current?.scrollIntoView({ behavior: "smooth" });
-      },
-    )();
-  };
 
   const hasValidationErrors = Object.keys(errors).length > 0;
 
@@ -226,22 +150,38 @@ export const ProjectEditorClient: React.FC<ProjectEditorClientProps> = ({
             type="button"
             variant="secondary"
             size="sm"
-            disabled={isSubmitting}
+            disabled={busy}
             onClick={() => submitWithTargetStatus("draft")}
-            leftIcon={<Bookmark size={15} aria-hidden="true" />}
+            leftIcon={
+              busy ? (
+                <Spinner width={15} height={15} />
+              ) : (
+                <Bookmark size={15} aria-hidden="true" />
+              )
+            }
           >
-            Lưu bản nháp
+            {busy ? "Đang lưu..." : "Lưu bản nháp"}
           </Button>
 
           <Button
             type="button"
             variant="dark"
             size="sm"
-            disabled={isSubmitting}
+            disabled={busy}
             onClick={() => submitWithTargetStatus("published")}
-            leftIcon={<CheckCircle2 size={15} aria-hidden="true" />}
+            leftIcon={
+              busy ? (
+                <Spinner width={15} height={15} />
+              ) : (
+                <CheckCircle2 size={15} aria-hidden="true" />
+              )
+            }
           >
-            {mode === "create" ? "Xuất bản dự án" : "Cập nhật & Xuất bản"}
+            {busy
+              ? "Đang xử lý..."
+              : mode === "create"
+                ? "Xuất bản dự án"
+                : "Cập nhật & Xuất bản"}
           </Button>
         </div>
       </header>
@@ -302,22 +242,38 @@ export const ProjectEditorClient: React.FC<ProjectEditorClientProps> = ({
             type="button"
             variant="secondary"
             size="sm"
-            disabled={isSubmitting}
+            disabled={busy}
             onClick={() => submitWithTargetStatus("draft")}
-            leftIcon={<Bookmark size={15} aria-hidden="true" />}
+            leftIcon={
+              busy ? (
+                <Spinner width={15} height={15} />
+              ) : (
+                <Bookmark size={15} aria-hidden="true" />
+              )
+            }
           >
-            Lưu bản nháp
+            {busy ? "Đang lưu..." : "Lưu bản nháp"}
           </Button>
 
           <Button
             type="button"
             variant="dark"
             size="sm"
-            disabled={isSubmitting}
+            disabled={busy}
             onClick={() => submitWithTargetStatus("published")}
-            leftIcon={<CheckCircle2 size={15} aria-hidden="true" />}
+            leftIcon={
+              busy ? (
+                <Spinner width={15} height={15} />
+              ) : (
+                <CheckCircle2 size={15} aria-hidden="true" />
+              )
+            }
           >
-            {mode === "create" ? "Xuất bản dự án" : "Lưu cập nhật"}
+            {busy
+              ? "Đang xử lý..."
+              : mode === "create"
+                ? "Xuất bản dự án"
+                : "Lưu cập nhật"}
           </Button>
         </div>
       </div>

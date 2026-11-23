@@ -1,33 +1,49 @@
-import type { AdminContactStatusFilter, AdminContactsState } from "../types";
+import type { ConsultationLead } from "@shared-types";
+import type {
+  AdminContactServiceFilter,
+  AdminContactStatusFilter,
+} from "../types";
 
 export const adminContactsSelector = {
-  getPendingCount: (state: AdminContactsState) =>
-    state.leads.filter((lead) => lead.leadStatus === "pending").length,
+  getPendingCount: (leads: ConsultationLead[]) =>
+    leads.filter((lead) => lead.leadStatus === "pending").length,
 
-  getStatusCounts: (state: AdminContactsState) => {
+  getStatusCounts: (leads: ConsultationLead[]) => {
     const counts: Record<AdminContactStatusFilter, number> = {
-      all: state.leads.length,
+      all: leads.length,
       pending: 0,
       in_progress: 0,
       scheduled: 0,
       won: 0,
       lost: 0,
     };
-    for (const item of state.leads) {
+    for (const item of leads) {
       counts[item.leadStatus] += 1;
     }
     return counts;
   },
 
-  getFilteredLeads: (state: AdminContactsState) => {
-    const { leads, searchQuery, statusFilter, serviceFilter } = state;
-    const normalizedQuery = searchQuery.trim().toLowerCase();
+  filterLeads: (
+    leads: ConsultationLead[],
+    filters: {
+      searchQuery: string;
+      statusFilter: AdminContactStatusFilter;
+      serviceFilter: AdminContactServiceFilter;
+    },
+  ) => {
+    const normalizedQuery = filters.searchQuery.trim().toLowerCase();
 
     return leads.filter((lead) => {
-      if (statusFilter !== "all" && lead.leadStatus !== statusFilter) {
+      if (
+        filters.statusFilter !== "all" &&
+        lead.leadStatus !== filters.statusFilter
+      ) {
         return false;
       }
-      if (serviceFilter !== "all" && lead.serviceType !== serviceFilter) {
+      if (
+        filters.serviceFilter !== "all" &&
+        lead.serviceType !== filters.serviceFilter
+      ) {
         return false;
       }
       if (!normalizedQuery) {

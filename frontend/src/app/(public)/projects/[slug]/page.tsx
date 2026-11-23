@@ -1,3 +1,4 @@
+import { fetchPublicProjectBySlug, fetchRelatedProjects } from "@apis";
 import {
   ProjectConsultCta,
   ProjectDetailGallery,
@@ -7,7 +8,8 @@ import {
   ProjectMilestones,
   RelatedProjects,
 } from "@components";
-import { COMPANY_INFO, MOCK_PROJECTS } from "@constants";
+import { COMPANY_INFO } from "@constants";
+import type { Project } from "@shared-types";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -15,19 +17,28 @@ export interface ProjectDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return MOCK_PROJECTS.filter((p) => p.status === "published").map(
-    (project) => ({
-      slug: project.slug,
-    }),
-  );
+async function resolvePublicProject(slug: string): Promise<Project | null> {
+  try {
+    return await fetchPublicProjectBySlug(slug);
+  } catch {
+    return null;
+  }
+}
+
+async function resolveRelatedProjects(project: Project): Promise<Project[]> {
+  try {
+    const items = await fetchRelatedProjects(project.slug, 3);
+    return items ?? [];
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({
   params,
 }: ProjectDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = MOCK_PROJECTS.find((p) => p.slug === slug);
+  const project = await resolvePublicProject(slug);
 
   if (!project) {
     return {
@@ -36,11 +47,11 @@ export async function generateMetadata({
   }
 
   return {
-    title: project.title,
-    description: project.excerpt,
+    title: project.seoTitle || project.title,
+    description: project.seoDescription || project.excerpt,
     openGraph: {
-      title: `${project.title} | ${COMPANY_INFO.brandName}`,
-      description: project.excerpt,
+      title: `${project.seoTitle || project.title} | ${COMPANY_INFO.brandName}`,
+      description: project.seoDescription || project.excerpt,
       images: [project.coverImage],
     },
   };
@@ -50,35 +61,21 @@ export default async function ProjectDetailPage({
   params,
 }: ProjectDetailPageProps) {
   const { slug } = await params;
-  const project = MOCK_PROJECTS.find(
-    (p) => p.slug === slug && p.status === "published",
-  );
+  const project = await resolvePublicProject(slug);
 
   if (!project) {
     notFound();
   }
 
-  const relatedProjects = MOCK_PROJECTS.filter(
-    (p) => p.id !== project.id && p.status === "published",
-  )
-    .sort((a, b) => {
-      const aMatch =
-        Number(a.category === project.category) +
-        Number(a.style === project.style);
-      const bMatch =
-        Number(b.category === project.category) +
-        Number(b.style === project.style);
-      return bMatch - aMatch;
-    })
-    .slice(0, 3);
+  const relatedProjects = await resolveRelatedProjects(project);
 
   return (
     <>
       <ProjectDetailHero project={project} />
       <ProjectDetailStory project={project} />
       <ProjectDetailGallery
-        images={project?.gallery}
-        projectTitle={project?.title}
+        images={project.gallery}
+        projectTitle={project.title}
       />
 
       {project.floorPlans && project.floorPlans.length > 0 && (

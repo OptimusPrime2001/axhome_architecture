@@ -1,68 +1,56 @@
 "use client";
 
-import { ArrowRight, Button, Input, Label } from "@components";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRight, Button, Input, Label, Spinner } from "@components";
+import { APP_ROUTE } from "@constants";
+import { useAdminAuthStore } from "@store";
+import { cookieStorage } from "@utils";
 import { AtSign, Eye, EyeOff, Lock, Smartphone } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useEffect } from "react";
 import styles from "./AdminLoginForm.module.scss";
-
-const adminLoginSchema = z.object({
-  identifier: z
-    .string()
-    .trim()
-    .min(3, "Vui lòng nhập tên đăng nhập hoặc email công vụ."),
-  password: z.string().min(6, "Mật khẩu ủy quyền phải có ít nhất 6 ký tự."),
-  rememberDevice: z.boolean(),
-});
-
-type AdminLoginFormValues = z.infer<typeof adminLoginSchema>;
+import { useAdminLoginForm } from "./useAdminLoginForm";
 
 export const AdminLoginForm: React.FC = () => {
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-  const [forgotHint, setForgotHint] = useState<string | null>(null);
-
   const {
     register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<AdminLoginFormValues>({
-    resolver: zodResolver(adminLoginSchema),
-    defaultValues: {
-      identifier: "",
-      password: "",
-      rememberDevice: true,
-    },
-  });
-
-  const onSubmit = async (values: AdminLoginFormValues) => {
-    // UI-first mock authentication: simulate brief latency before entering CMS.
-    await new Promise((resolve) => setTimeout(resolve, 350));
-    if (typeof window !== "undefined") {
-      window.sessionStorage.setItem("axhome_admin_user", values.identifier);
+    errors,
+    isSubmitting,
+    showPassword,
+    forgotHint,
+    authError,
+    handleFormSubmit,
+    toggleShowPassword,
+    showForgotPasswordHint,
+  } = useAdminLoginForm();
+  const hasCheckedAuth = useAdminAuthStore((state) => state.hasCheckedAuth);
+  useEffect(() => {
+    if (hasCheckedAuth && cookieStorage.get("access_token")) {
+      router.replace(APP_ROUTE.LOGIN_ADMIN);
     }
-    router.push("/admin/dashboard");
-  };
-
+  }, [hasCheckedAuth, router.replace]);
   return (
     <form
       className={styles.form}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleFormSubmit}
       noValidate
       aria-label="Biểu mẫu đăng nhập quản trị"
     >
+      {authError && (
+        <p className={styles.errorText} role="alert">
+          {authError}
+        </p>
+      )}
+
       <div className={styles.fieldGroup}>
         <div className={styles.labelRow}>
           <Label htmlFor="admin-identifier" className={styles.label}>
-            Tên đăng nhập hoặc Email công vụ{" "}
+            Email công vụ{" "}
             <span className={styles.required} aria-hidden="true">
               *
             </span>
           </Label>
-          <span className={styles.formatHint}>ĐỊNH DẠNG: @AXHOME.VN</span>
+          <span className={styles.formatHint}>Định dạng: @gmail.com</span>
         </div>
 
         <div className={styles.inputFieldWrap}>
@@ -71,7 +59,7 @@ export const AdminLoginForm: React.FC = () => {
             id="admin-identifier"
             type="text"
             autoComplete="username"
-            placeholder="admin@axhome.vn"
+            placeholder="admin@gmail.com"
             invalid={Boolean(errors.identifier)}
             aria-describedby={
               errors.identifier ? "admin-identifier-error" : undefined
@@ -103,11 +91,7 @@ export const AdminLoginForm: React.FC = () => {
           <button
             type="button"
             className={styles.forgotLink}
-            onClick={() =>
-              setForgotHint(
-                "Vui lòng liên hệ Quản trị viên hệ thống để cấp lại mật khẩu ủy quyền.",
-              )
-            }
+            onClick={showForgotPasswordHint}
           >
             Quên mật khẩu?
           </button>
@@ -130,7 +114,7 @@ export const AdminLoginForm: React.FC = () => {
           <button
             type="button"
             className={styles.toggleVisibility}
-            onClick={() => setShowPassword((prev) => !prev)}
+            onClick={toggleShowPassword}
             aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
           >
             {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -176,7 +160,10 @@ export const AdminLoginForm: React.FC = () => {
         size="lg"
         fullWidth
         disabled={isSubmitting}
-        rightIcon={<ArrowRight size={16} aria-hidden="true" />}
+        leftIcon={isSubmitting ? <Spinner width={16} height={16} /> : undefined}
+        rightIcon={
+          isSubmitting ? undefined : <ArrowRight size={16} aria-hidden="true" />
+        }
       >
         {isSubmitting ? "Đang xác thực..." : "Đăng Nhập Quản Trị"}
       </Button>

@@ -8,11 +8,24 @@ export interface NavItem {
   description?: string;
 }
 
+export type MobileBottomNavIconKey = "home" | "projects" | "about" | "contact";
+
+export interface MobileBottomNavItem extends NavItem {
+  iconKey: MobileBottomNavIconKey;
+}
+
 export const MAIN_NAV_ITEMS: NavItem[] = [
   { label: "Trang Chủ", href: "/" },
   { label: "Dự Án", href: "/projects" },
   { label: "Giới Thiệu", href: "/about" },
   { label: "Liên Hệ", href: "/contact" },
+];
+
+export const MOBILE_BOTTOM_NAV_ITEMS: MobileBottomNavItem[] = [
+  { label: "Trang chủ", href: "/", iconKey: "home" },
+  { label: "Dự án", href: "/projects", iconKey: "projects" },
+  { label: "Giới thiệu", href: "/about", iconKey: "about" },
+  { label: "Liên hệ", href: "/contact", iconKey: "contact" },
 ];
 
 export const FOOTER_SERVICES_LINKS: NavItem[] = [

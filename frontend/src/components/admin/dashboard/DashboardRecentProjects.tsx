@@ -1,8 +1,8 @@
 "use client";
 
 import { Badge, Button, Card, CardContent } from "@components";
+import { useAdminProjects } from "@hooks";
 import type { ProjectCategory, ProjectType } from "@shared-types";
-import { useAdminProjectsStore } from "@store";
 import { ChevronRight, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +22,8 @@ const TYPE_LABELS: Record<ProjectType, string> = {
 };
 
 export const DashboardRecentProjects: React.FC = () => {
-  const projects = useAdminProjectsStore((state) => state.projects);
+  const { data: projectsData } = useAdminProjects({ params: { limit: 100 } });
+  const projects = projectsData?.items ?? [];
   const recentProjects = [...projects]
     .sort(
       (a, b) =>

@@ -9,195 +9,43 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Skeleton,
 } from "@components";
-import {
-  type AdminContactServiceFilter,
-  type AdminContactStatusFilter,
-  adminContactsSelector,
-  useAdminContactsStore,
-} from "@store";
+import type { AdminContactServiceFilter } from "@store";
 import { Download, Plus, Search } from "lucide-react";
 import type React from "react";
-import { useMemo } from "react";
 import { AddLeadModal } from "./AddLeadModal";
 import { ContactDetailPanel } from "./ContactDetailPanel";
 import { ContactsKpiStrip } from "./ContactsKpiStrip";
 import { ContactsLeadTable } from "./ContactsLeadTable";
 import styles from "./ContactsManagerClient.module.scss";
-
-const ITEMS_PER_PAGE = 5;
-
-const escapeCsvField = (value: string | undefined): string => {
-  const str = (value ?? "").replace(/"/g, '""');
-  return `"${str}"`;
-};
+import { useContactsManager } from "./useContactsManager";
 
 export const ContactsManagerClient: React.FC = () => {
-  const leads = useAdminContactsStore((state) => state.leads);
-  const searchQuery = useAdminContactsStore((state) => state.searchQuery);
-  const statusFilter = useAdminContactsStore((state) => state.statusFilter);
-  const serviceFilter = useAdminContactsStore((state) => state.serviceFilter);
-  const currentPage = useAdminContactsStore((state) => state.currentPage);
-  const selectedLeadId = useAdminContactsStore((state) => state.selectedLeadId);
-  const isAddModalOpen = useAdminContactsStore((state) => state.isAddModalOpen);
-
-  const setSearchQuery = useAdminContactsStore((state) => state.setSearchQuery);
-  const setStatusFilter = useAdminContactsStore(
-    (state) => state.setStatusFilter,
-  );
-  const setServiceFilter = useAdminContactsStore(
-    (state) => state.setServiceFilter,
-  );
-  const setCurrentPage = useAdminContactsStore((state) => state.setCurrentPage);
-  const setSelectedLeadId = useAdminContactsStore(
-    (state) => state.setSelectedLeadId,
-  );
-  const setIsAddModalOpen = useAdminContactsStore(
-    (state) => state.setIsAddModalOpen,
-  );
-  const addLead = useAdminContactsStore((state) => state.addLead);
-  const updateLead = useAdminContactsStore((state) => state.updateLead);
-
-  const statusCounts = useMemo(
-    () =>
-      adminContactsSelector.getStatusCounts({
-        leads,
-        searchQuery,
-        statusFilter,
-        serviceFilter,
-        currentPage,
-        selectedLeadId,
-        isAddModalOpen,
-        setSearchQuery,
-        setStatusFilter,
-        setServiceFilter,
-        setCurrentPage,
-        setSelectedLeadId,
-        setIsAddModalOpen,
-        addLead,
-        updateLead,
-      }),
-    [
-      leads,
-      searchQuery,
-      statusFilter,
-      serviceFilter,
-      currentPage,
-      selectedLeadId,
-      isAddModalOpen,
-      setSearchQuery,
-      setStatusFilter,
-      setServiceFilter,
-      setCurrentPage,
-      setSelectedLeadId,
-      setIsAddModalOpen,
-      addLead,
-      updateLead,
-    ],
-  );
-
-  const filteredLeads = useMemo(
-    () =>
-      adminContactsSelector.getFilteredLeads({
-        leads,
-        searchQuery,
-        statusFilter,
-        serviceFilter,
-        currentPage,
-        selectedLeadId,
-        isAddModalOpen,
-        setSearchQuery,
-        setStatusFilter,
-        setServiceFilter,
-        setCurrentPage,
-        setSelectedLeadId,
-        setIsAddModalOpen,
-        addLead,
-        updateLead,
-      }),
-    [
-      leads,
-      searchQuery,
-      statusFilter,
-      serviceFilter,
-      currentPage,
-      selectedLeadId,
-      isAddModalOpen,
-      setSearchQuery,
-      setStatusFilter,
-      setServiceFilter,
-      setCurrentPage,
-      setSelectedLeadId,
-      setIsAddModalOpen,
-      addLead,
-      updateLead,
-    ],
-  );
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredLeads.length / ITEMS_PER_PAGE),
-  );
-  const safePage = Math.min(currentPage, totalPages);
-  const paginatedLeads = useMemo(() => {
-    const start = (safePage - 1) * ITEMS_PER_PAGE;
-    return filteredLeads.slice(start, start + ITEMS_PER_PAGE);
-  }, [filteredLeads, safePage]);
-
-  const selectedLead = useMemo(
-    () => leads.find((item) => item.id === selectedLeadId) ?? null,
-    [leads, selectedLeadId],
-  );
-
-  const handleExportCsv = () => {
-    const headers = [
-      "Mã hồ sơ",
-      "Họ và tên",
-      "Số điện thoại",
-      "Email",
-      "Nhu cầu tư vấn",
-      "Quy mô",
-      "Ngân sách dự kiến",
-      "Địa điểm",
-      "Trạng thái",
-      "KTS phụ trách",
-      "Nguồn",
-    ];
-
-    const rows = filteredLeads.map((lead) =>
-      [
-        escapeCsvField(lead.code),
-        escapeCsvField(lead.fullName),
-        escapeCsvField(lead.phone),
-        escapeCsvField(lead.email),
-        escapeCsvField(lead.serviceLabel),
-        escapeCsvField(lead.landSize),
-        escapeCsvField(lead.estimatedBudget),
-        escapeCsvField(lead.location),
-        escapeCsvField(lead.leadStatus),
-        escapeCsvField(lead.assignedArchitect),
-        escapeCsvField(lead.sourcePage),
-      ].join(","),
-    );
-
-    const csvContent = `\uFEFF${[headers.join(","), ...rows].join("\n")}`;
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "axhome-yeu-cau-tu-van.csv";
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const STATUS_TABS: { key: AdminContactStatusFilter; label: string }[] = [
-    { key: "all", label: `Tất cả (${statusCounts.all})` },
-    { key: "pending", label: `Chờ xử lý (${statusCounts.pending})` },
-    { key: "in_progress", label: `Đang tư vấn (${statusCounts.in_progress})` },
-    { key: "scheduled", label: `Đã hẹn (${statusCounts.scheduled})` },
-    { key: "won", label: `Đã chốt HĐ (${statusCounts.won})` },
-    { key: "lost", label: `Đã huỷ (${statusCounts.lost})` },
-  ];
+  const {
+    leads,
+    isLoading,
+    searchQuery,
+    statusFilter,
+    serviceFilter,
+    selectedLeadId,
+    selectedLead,
+    isAddModalOpen,
+    filteredLeads,
+    paginatedLeads,
+    totalPages,
+    safePage,
+    statusTabs: STATUS_TABS,
+    setSearchQuery,
+    setStatusFilter,
+    setServiceFilter,
+    setCurrentPage,
+    setSelectedLeadId,
+    setIsAddModalOpen,
+    addLead,
+    updateLead,
+    handleExportCsv,
+  } = useContactsManager();
 
   return (
     <div className={styles.pageContainer}>
@@ -223,6 +71,7 @@ export const ContactsManagerClient: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={handleExportCsv}
+            disabled={isLoading}
             leftIcon={<Download size={15} aria-hidden="true" />}
           >
             Xuất Dữ Liệu (CSV)
@@ -240,79 +89,126 @@ export const ContactsManagerClient: React.FC = () => {
         </div>
       </header>
 
-      {/* KPI Strip */}
-      <ContactsKpiStrip leads={leads} />
-
-      {/* Filter & Search Bar */}
-      <Card className={styles.filterToolbar}>
-        <div className={styles.searchWrap}>
-          <Search className={styles.searchIcon} size={15} aria-hidden="true" />
-          <Input
-            type="search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Tìm theo tên khách hàng, SĐT, địa điểm..."
-            aria-label="Tìm kiếm yêu cầu tư vấn"
-            className={styles.searchInput}
-          />
-        </div>
-
-        <div className={styles.filtersRight}>
+      {isLoading ? (
+        <output aria-label="Đang tải danh sách yêu cầu tư vấn">
           <div
-            className={styles.tabsRow}
-            role="tablist"
-            aria-label="Lọc theo trạng thái"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+              gap: "16px",
+              marginBottom: "20px",
+            }}
           >
-            {STATUS_TABS.map((tab) => (
-              <Button
-                key={tab.key}
-                type="button"
-                role="tab"
-                size="sm"
-                variant={statusFilter === tab.key ? "dark" : "secondary"}
-                aria-selected={statusFilter === tab.key}
-                className={styles.filterTabBtn}
-                onClick={() => setStatusFilter(tab.key)}
-              >
-                {tab.label}
-              </Button>
+            {[1, 2, 3, 4].map((key) => (
+              <Skeleton
+                key={key}
+                style={{ height: "96px", borderRadius: "10px" }}
+              />
             ))}
           </div>
-
-          <div className={styles.serviceSelectWrap}>
-            <Select
-              value={serviceFilter}
-              onValueChange={(value) =>
-                setServiceFilter(value as AdminContactServiceFilter)
-              }
-            >
-              <SelectTrigger
-                aria-label="Lọc theo loại dịch vụ"
-                className={styles.serviceTrigger}
-              >
-                <SelectValue placeholder="Tất cả loại dịch vụ" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Tất cả loại dịch vụ</SelectItem>
-                <SelectItem value="design">Thiết kế kiến trúc</SelectItem>
-                <SelectItem value="construction">Thi công xây dựng</SelectItem>
-                <SelectItem value="full_package">Thi công trọn gói</SelectItem>
-              </SelectContent>
-            </Select>
+          <Skeleton
+            style={{
+              height: "60px",
+              borderRadius: "10px",
+              marginBottom: "16px",
+            }}
+          />
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
+            {[1, 2, 3, 4, 5].map((key) => (
+              <Skeleton
+                key={key}
+                style={{ height: "64px", borderRadius: "8px" }}
+              />
+            ))}
           </div>
-        </div>
-      </Card>
+        </output>
+      ) : (
+        <>
+          {/* KPI Strip */}
+          <ContactsKpiStrip leads={leads} />
 
-      {/* Lead Table */}
-      <ContactsLeadTable
-        leads={paginatedLeads}
-        totalFilteredCount={filteredLeads.length}
-        selectedLeadId={selectedLeadId}
-        onSelectLead={setSelectedLeadId}
-        currentPage={safePage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+          {/* Filter & Search Bar */}
+          <Card className={styles.filterToolbar}>
+            <div className={styles.searchWrap}>
+              <Search
+                className={styles.searchIcon}
+                size={15}
+                aria-hidden="true"
+              />
+              <Input
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Tìm theo tên khách hàng, SĐT, địa điểm..."
+                aria-label="Tìm kiếm yêu cầu tư vấn"
+                className={styles.searchInput}
+              />
+            </div>
+
+            <div className={styles.filtersRight}>
+              <div
+                className={styles.tabsRow}
+                role="tablist"
+                aria-label="Lọc theo trạng thái"
+              >
+                {STATUS_TABS.map((tab) => (
+                  <Button
+                    key={tab.key}
+                    type="button"
+                    role="tab"
+                    size="sm"
+                    variant={statusFilter === tab.key ? "dark" : "secondary"}
+                    aria-selected={statusFilter === tab.key}
+                    className={styles.filterTabBtn}
+                    onClick={() => setStatusFilter(tab.key)}
+                  >
+                    {tab.label}
+                  </Button>
+                ))}
+              </div>
+
+              <div className={styles.serviceSelectWrap}>
+                <Select
+                  value={serviceFilter}
+                  onValueChange={(value) =>
+                    setServiceFilter(value as AdminContactServiceFilter)
+                  }
+                >
+                  <SelectTrigger
+                    aria-label="Lọc theo loại dịch vụ"
+                    className={styles.serviceTrigger}
+                  >
+                    <SelectValue placeholder="Tất cả loại dịch vụ" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Tất cả loại dịch vụ</SelectItem>
+                    <SelectItem value="design">Thiết kế kiến trúc</SelectItem>
+                    <SelectItem value="construction">
+                      Thi công xây dựng
+                    </SelectItem>
+                    <SelectItem value="full_package">
+                      Thi công trọn gói
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </Card>
+
+          {/* Lead Table */}
+          <ContactsLeadTable
+            leads={paginatedLeads}
+            totalFilteredCount={filteredLeads.length}
+            selectedLeadId={selectedLeadId}
+            onSelectLead={setSelectedLeadId}
+            currentPage={safePage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </>
+      )}
 
       {/* Detail Modal */}
       {selectedLead && (
