@@ -1,6 +1,9 @@
 package utils
 
 import (
+	"crypto/rand"
+	"crypto/sha256"
+	"encoding/hex"
 	"errors"
 	"time"
 
@@ -60,4 +63,15 @@ func ParseAccessToken(secret, tokenStr string) (*AuthClaims, error) {
 	}
 
 	return claims, nil
+}
+
+func GenerateRefreshTokenPair() (rawToken string, tokenHash string, err error) {
+	b := make([]byte, 32)
+	if _, err := rand.Read(b); err != nil {
+		return "", "", err
+	}
+	rawToken = hex.EncodeToString(b)
+	sum := sha256.Sum256([]byte(rawToken))
+	tokenHash = hex.EncodeToString(sum[:])
+	return rawToken, tokenHash, nil
 }

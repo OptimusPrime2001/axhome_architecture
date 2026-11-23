@@ -59,16 +59,6 @@ func (h *AuthHandler) Login(ctx *gin.Context) {
 	}
 
 	ctx.SetSameSite(http.SameSiteLaxMode)
-	// Store access_token in HttpOnly cookie (httpOnly = true)
-	ctx.SetCookie(
-		middleware.AccessTokenCookieName,
-		res.AccessToken,
-		int(h.accessTokenTTL.Seconds()),
-		"/",
-		"",
-		h.isProduction,
-		true,
-	)
 	// Store refresh_token in HttpOnly cookie (httpOnly = true)
 	ctx.SetCookie(
 		RefreshTokenCookieName,

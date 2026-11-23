@@ -7,7 +7,6 @@ import (
 	"axhome_server/internal/repository"
 	"axhome_server/internal/utils"
 	"context"
-	"crypto/rand"
 	"crypto/sha256"
 	"encoding/hex"
 	"net/netip"
@@ -19,7 +18,7 @@ import (
 )
 
 type AuthService interface {
-	Login(ctx context.Context, req dto.LoginRequest, userAgent, clientIP string) (*dto.LoginResponse, error)
+	Login(ctx context.Context, req dto.LoginRequest, userAgent, clientIP string) (*AuthResult, error)
 	Logout(ctx context.Context, refreshToken string) error
 	GetMe(ctx context.Context, userID uuid.UUID) (*dto.UserResponse, error)
 	UpdateProfile(ctx context.Context, userID uuid.UUID, req dto.UpdateProfileRequest) (*dto.UserResponse, error)
@@ -29,6 +28,12 @@ type AuthService interface {
 type authService struct {
 	repo   repository.AuthRepository
 	jwtCfg config.JWTConfig
+}
+type AuthResult struct {
+	AccessToken  string
+	RefreshToken string
+	ExpiresIn    int64
+	User         dto.UserResponse
 }
 
 func NewAuthService(repo repository.AuthRepository, jwtCfg config.JWTConfig) AuthService {
@@ -44,7 +49,7 @@ func NewAuthService(repo repository.AuthRepository, jwtCfg config.JWTConfig) Aut
 	}
 }
 
-func (s *authService) Login(ctx context.Context, req dto.LoginRequest, userAgent, clientIP string) (*dto.LoginResponse, error) {
+func (s *authService) Login(ctx context.Context, req dto.LoginRequest, userAgent, clientIP string) (*AuthResult, error) {
 	email := strings.TrimSpace(strings.ToLower(req.Email))
 	user, err := s.repo.GetUserByEmail(ctx, email)
 	if err != nil {
@@ -66,7 +71,7 @@ func (s *authService) Login(ctx context.Context, req dto.LoginRequest, userAgent
 		return nil, utils.WrapAppError(err, utils.MsgInternalServer, utils.ErrCodeInternal)
 	}
 
-	rawRefresh, tokenHash, err := generateRefreshTokenPair()
+	rawRefresh, tokenHash, err := utils.GenerateRefreshTokenPair()
 	if err != nil {
 		return nil, utils.WrapAppError(err, utils.MsgInternalServer, utils.ErrCodeInternal)
 	}
@@ -77,16 +82,19 @@ func (s *authService) Login(ctx context.Context, req dto.LoginRequest, userAgent
 	}
 	ua := strings.TrimSpace(userAgent)
 
-	_ = s.repo.CreateRefreshToken(ctx, sqlc.CreateRefreshTokenParams{
+	err = s.repo.CreateRefreshToken(ctx, sqlc.CreateRefreshTokenParams{
 		UserID:    user.ID,
 		TokenHash: tokenHash,
 		UserAgent: &ua,
 		Ip:        parsedIP,
 		ExpiresAt: time.Now().Add(s.jwtCfg.RefreshTokenTTL),
 	})
-
-	return &dto.LoginResponse{
+	if err != nil {
+		return nil, err
+	}
+	return &AuthResult{
 		AccessToken:  accessToken,
+		ExpiresIn:    int64(s.jwtCfg.AccessTokenTTL.Seconds()),
 		RefreshToken: rawRefresh,
 		User:         mapUserToDTO(user),
 	}, nil
@@ -164,15 +172,4 @@ func mapUserToDTO(u *sqlc.User) dto.UserResponse {
 		CreatedAt: u.CreatedAt,
 		UpdatedAt: u.UpdatedAt,
 	}
-}
-
-func generateRefreshTokenPair() (rawToken string, tokenHash string, err error) {
-	b := make([]byte, 32)
-	if _, err := rand.Read(b); err != nil {
-		return "", "", err
-	}
-	rawToken = hex.EncodeToString(b)
-	sum := sha256.Sum256([]byte(rawToken))
-	tokenHash = hex.EncodeToString(sum[:])
-	return rawToken, tokenHash, nil
 }

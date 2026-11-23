@@ -125,9 +125,9 @@ func NewConfig() *Config {
 			PublicBaseURL:   utils.Getenv("R2_PUBLIC_BASE_URL", ""),
 		},
 		AdminSeed: AdminSeedConfig{
-			Email:    utils.Getenv("ADMIN_EMAIL", "admin@axhome.vn"),
-			Password: utils.Getenv("ADMIN_PASSWORD", "Admin@123456"),
-			FullName: utils.Getenv("ADMIN_FULL_NAME", "KTS. Nguyễn Hoàng Anh"),
+			Email:    utils.Getenv("ADMIN_EMAIL", "axhome@gmail.com"),
+			Password: utils.Getenv("ADMIN_PASSWORD", "axhome632001@"),
+			FullName: utils.Getenv("ADMIN_FULL_NAME", "Huy Hùng Admin"),
 		},
 	}
 }
