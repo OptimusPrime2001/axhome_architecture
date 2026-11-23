@@ -9,6 +9,7 @@ import (
 )
 
 type DatabaseConfig struct {
+	URL      string
 	Host     string
 	Port     string
 	Username string
@@ -84,17 +85,38 @@ func NewConfig() *Config {
 	jwtHours := parseIntEnv("JWT_EXPIRES_IN", 24)
 	refreshDays := parseIntEnv("JWT_REFRESH_DAYS", 7)
 
-	return &Config{
-		AppEnv:        utils.Getenv("APP_ENV", "development"),
-		ServerAddress: utils.Getenv("SERVER_ADDRESS", ":8080"),
-		Database: DatabaseConfig{
+	serverAddr := utils.Getenv("SERVER_ADDRESS", "")
+	if serverAddr == "" {
+		if port := utils.Getenv("PORT", ""); port != "" {
+			serverAddr = ":" + strings.TrimPrefix(port, ":")
+		} else {
+			serverAddr = ":8080"
+		}
+	}
+
+	dbURL := utils.Getenv("DATABASE_URL", "")
+	var dbCfg DatabaseConfig
+	if dbURL != "" {
+		dbCfg = DatabaseConfig{
+			URL:     dbURL,
+			DBName:  utils.Getenv("DB_NAME", "production"),
+			SSLMode: utils.Getenv("DB_SSLMODE", "require"),
+		}
+	} else {
+		dbCfg = DatabaseConfig{
 			Host:     utils.MustGetEnv("DB_HOST"),
 			Port:     utils.MustGetEnv("DB_PORT"),
 			Username: utils.MustGetEnv("DB_USER"),
 			Password: utils.MustGetEnv("DB_PASSWORD"),
 			DBName:   utils.MustGetEnv("DB_NAME"),
 			SSLMode:  utils.MustGetEnv("DB_SSLMODE"),
-		},
+		}
+	}
+
+	return &Config{
+		AppEnv:        utils.Getenv("APP_ENV", "development"),
+		ServerAddress: serverAddr,
+		Database:      dbCfg,
 		JWT: JWTConfig{
 			Secret:          utils.MustGetEnv("JWT_SECRET"),
 			AccessTokenTTL:  time.Duration(jwtHours) * time.Hour,
@@ -133,6 +155,9 @@ func NewConfig() *Config {
 }
 
 func (c *Config) GetConnectDb() string {
+	if c.Database.URL != "" {
+		return c.Database.URL
+	}
 	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		c.Database.Host,
 		c.Database.Port,

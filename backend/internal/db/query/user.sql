@@ -21,11 +21,28 @@ SELECT * FROM users
 ORDER BY created_at DESC
 LIMIT $1 OFFSET $2;
 
+-- name: CountUsers :one
+SELECT COUNT(*) FROM users;
+
+-- name: CountUsersByRole :one
+SELECT COUNT(*) FROM users
+WHERE role = $1;
+
 -- name: UpdateUserProfile :one
 UPDATE users
 SET
     full_name = $2,
     email = $3,
+    updated_at = NOW()
+WHERE id = $1
+RETURNING *;
+
+-- name: UpdateUserByAdmin :one
+UPDATE users
+SET
+    full_name = $2,
+    email = $3,
+    role = $4,
     updated_at = NOW()
 WHERE id = $1
 RETURNING *;

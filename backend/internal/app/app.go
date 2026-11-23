@@ -55,6 +55,7 @@ func NewApplication(cfg *config.Config) (*Application, error) {
 	)
 
 	authModule := module.NewAuthModule(store, module.WithAuthConfig(cfg))
+	userModule := module.NewUserModule(store)
 	projectModule := module.NewProjectModule(store)
 	leadModule := module.NewLeadModule(store)
 	mediaModule := module.NewMediaModule(cfg.R2)
@@ -62,6 +63,7 @@ func NewApplication(cfg *config.Config) (*Application, error) {
 	engine := router.New(
 		&router.Modules{
 			Auth:    authModule,
+			User:    userModule,
 			Project: projectModule,
 			Lead:    leadModule,
 			Media:   mediaModule,
