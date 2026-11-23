@@ -1,33 +1,22 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"axhome_server/config"
+	"axhome_server/internal/app"
+	"axhome_server/internal/utils"
+	"log"
 )
 
 func main() {
-	router := gin.New()
+	utils.LoadEnv()
+	cfg := config.NewConfig()
 
-	api := router.Group("/api")
-	{
-		v1 := api.Group("/api/v1")
-		{
-			public := v1.Group("/public")
-			public.GET("/projects", func(ctx *gin.Context) {
-				ctx.JSON(http.StatusOK, gin.H{
-					"Endpoint": "Lấy danh sách dự án published",
-				})
-			})
-
-			admin := v1.Group("/admin/auth")
-			admin.POST("/lgoin", func(ctx *gin.Context) {
-
-			})
-		}
+	application, err := app.NewApplication(cfg)
+	if err != nil {
+		log.Fatalf("Failed to initialize application: %v", err)
 	}
 
-	// authRouter := v1.Group("/admin/auth")
-
-	router.Run(":8080")
+	if err := application.Run(); err != nil {
+		log.Fatalf("Application stopped with error: %v", err)
+	}
 }
