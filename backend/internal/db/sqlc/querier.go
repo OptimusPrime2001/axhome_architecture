@@ -14,6 +14,8 @@ type Querier interface {
 	CheckProjectSlugExists(ctx context.Context, arg CheckProjectSlugExistsParams) (bool, error)
 	CountConsultationLeads(ctx context.Context, arg CountConsultationLeadsParams) (int32, error)
 	CountProjects(ctx context.Context, arg CountProjectsParams) (int32, error)
+	CountUsers(ctx context.Context) (int64, error)
+	CountUsersByRole(ctx context.Context, role UserRole) (int64, error)
 	CreateConsultationLead(ctx context.Context, arg CreateConsultationLeadParams) (ConsultationLead, error)
 	CreateFloorPlan(ctx context.Context, arg CreateFloorPlanParams) (FloorPlan, error)
 	CreateProject(ctx context.Context, arg CreateProjectParams) (Project, error)
@@ -51,6 +53,7 @@ type Querier interface {
 	UpdateConsultationLead(ctx context.Context, arg UpdateConsultationLeadParams) (ConsultationLead, error)
 	UpdateProject(ctx context.Context, arg UpdateProjectParams) (Project, error)
 	UpdateProjectStatus(ctx context.Context, arg UpdateProjectStatusParams) (Project, error)
+	UpdateUserByAdmin(ctx context.Context, arg UpdateUserByAdminParams) (User, error)
 	UpdateUserPassword(ctx context.Context, arg UpdateUserPasswordParams) error
 	UpdateUserProfile(ctx context.Context, arg UpdateUserProfileParams) (User, error)
 }

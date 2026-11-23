@@ -250,8 +250,16 @@ erDiagram
 - [x] **Task 5.2:** Xây dựng Go Backend REST API cho Public & Admin (JWT/Cookie Auth, Đổi mật khẩu Admin, CRUD Projects, Quản lý Leads, Upload ảnh tối ưu WebP lên **Cloudflare R2**).
 - [x] **Task 5.3:** Tích hợp API vào Frontend (`src/apis/`, `src/hooks/` với Axios & TanStack Query): Thay thế toàn bộ mock data Dự án & Yêu cầu tư vấn bằng dữ liệu thật từ Backend, kết nối Auth guard và Upload ảnh Cloudflare R2.
 
-### Giai đoạn 6: Tối Ưu, Kiểm Thử & Hoàn Thiện
+### Giai đoạn 6: Tối Ưu Core Web Vitals, SEO, GA4 & Kiểm Thử
 
-- [ ] **Task 6.1:** Kiểm thử Responsive toàn diện (Desktop 1280px/1440px, Tablet 768px/1024px, Mobile 375px/390px/430px) cho cả Public và Admin.
-- [ ] **Task 6.2:** Cấu hình SEO On-page: Metadata, OpenGraph, JSON-LD Schema (`ArchitecturalService`, `LocalBusiness`).
-- [ ] **Task 6.3:** Kiểm tra linting Biome, TypeScript compile (`tsc --noEmit`) và `next build`.
+- [x] **Task 6.1:** Kiểm thử Responsive toàn diện (Desktop 1280px/1440px, Tablet 768px/1024px, Mobile 375px/390px/430px) cho cả Public và Admin.
+- [x] **Task 6.2:** Cấu hình SEO On-page: Metadata, OpenGraph, `sitemap.ts`, `robots.ts`, JSON-LD Schema (`ArchitecturalService`, `LocalBusiness`).
+- [x] **Task 6.3:** Tối ưu điểm **Core Web Vitals** (đo bằng Lighthouse & Google PageSpeed Insights mục tiêu ≥ 90+): tối ưu **LCP** (Hero image `priority`, WebP/AVIF, `sizes`), **CLS** (cố định `aspect-ratio`, font `swap`), **INP** (`next/dynamic` lazy-load các module nặng) và Cache-Control headers.
+- [x] **Task 6.4:** Tích hợp **Google Analytics 4 (`@next/third-parties/google`)**: gắn `<GoogleAnalytics />` có điều kiện theo `NEXT_PUBLIC_GA_ID`, theo dõi các sự kiện chuyển đổi (`generate_lead`, `view_project`, `click_contact`).
+- [x] **Task 6.5:** Kiểm tra linting Biome, TypeScript compile (`tsc --noEmit`), `next build` và chạy Lighthouse Audit kiểm chứng điểm số.
+
+### Giai đoạn 7: Cấu Hình Deploy Miễn Phí (0đ/tháng) & Tách Biệt Dev / Production
+
+- [x] **Task 7.1:** Nâng cấp `backend/config/config.go` hỗ trợ `DATABASE_URL` (Production Neon/Supabase) song song `DB_HOST/...` (Local Dev), tự động nhận biến `PORT` của Render/Koyeb, và tạo `backend/.env.example`, `frontend/.env.example`.
+- [x] **Task 7.2:** Tạo `backend/Dockerfile` (multi-stage build gọn nhẹ ~15MB) và `backend/render.yaml` để deploy Go Backend lên Render / Koyeb Free Tier.
+- [ ] **Task 7.3:** Cấu hình `frontend/next.config.ts` (`images.remotePatterns` cho Cloudflare R2) và hoàn thiện deploy thực tế theo hướng dẫn `docs/DEPLOY_GUIDE.md` (Vercel + Render/Koyeb + Neon/Supabase + Cloudflare R2 + UptimeRobot).

@@ -26,6 +26,7 @@ type RouteRegistrar interface {
 
 type Modules struct {
 	Auth    PrivateRouteRegistrar
+	User    PrivateRouteRegistrar
 	Project RouteRegistrar
 	Lead    RouteRegistrar
 	Media   PrivateRouteRegistrar
@@ -121,6 +122,9 @@ func registerV1(api *gin.RouterGroup, modules *Modules, healthHandler gin.Handle
 	if modules != nil {
 		if modules.Auth != nil {
 			modules.Auth.RegisterPrivateRoutes(private)
+		}
+		if modules.User != nil {
+			modules.User.RegisterPrivateRoutes(private)
 		}
 		if modules.Project != nil {
 			modules.Project.RegisterPrivateRoutes(private)

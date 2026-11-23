@@ -13,6 +13,29 @@ import (
 	uuid "github.com/google/uuid"
 )
 
+const countUsers = `-- name: CountUsers :one
+SELECT COUNT(*) FROM users
+`
+
+func (q *Queries) CountUsers(ctx context.Context) (int64, error) {
+	row := q.db.QueryRow(ctx, countUsers)
+	var count int64
+	err := row.Scan(&count)
+	return count, err
+}
+
+const countUsersByRole = `-- name: CountUsersByRole :one
+SELECT COUNT(*) FROM users
+WHERE role = $1
+`
+
+func (q *Queries) CountUsersByRole(ctx context.Context, role UserRole) (int64, error) {
+	row := q.db.QueryRow(ctx, countUsersByRole, role)
+	var count int64
+	err := row.Scan(&count)
+	return count, err
+}
+
 const createRefreshToken = `-- name: CreateRefreshToken :exec
 INSERT INTO refresh_tokens (
     user_id,
@@ -258,6 +281,44 @@ WHERE token_hash = $1 AND revoked_at IS NULL
 func (q *Queries) RevokeRefreshToken(ctx context.Context, tokenHash string) error {
 	_, err := q.db.Exec(ctx, revokeRefreshToken, tokenHash)
 	return err
+}
+
+const updateUserByAdmin = `-- name: UpdateUserByAdmin :one
+UPDATE users
+SET
+    full_name = $2,
+    email = $3,
+    role = $4,
+    updated_at = NOW()
+WHERE id = $1
+RETURNING id, email, password_hash, full_name, role, created_at, updated_at
+`
+
+type UpdateUserByAdminParams struct {
+	ID       uuid.UUID `json:"id"`
+	FullName string    `json:"full_name"`
+	Email    string    `json:"email"`
+	Role     UserRole  `json:"role"`
+}
+
+func (q *Queries) UpdateUserByAdmin(ctx context.Context, arg UpdateUserByAdminParams) (User, error) {
+	row := q.db.QueryRow(ctx, updateUserByAdmin,
+		arg.ID,
+		arg.FullName,
+		arg.Email,
+		arg.Role,
+	)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Email,
+		&i.PasswordHash,
+		&i.FullName,
+		&i.Role,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
 }
 
 const updateUserPassword = `-- name: UpdateUserPassword :exec
