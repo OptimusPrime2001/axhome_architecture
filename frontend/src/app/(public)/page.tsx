@@ -2,6 +2,7 @@ import { AnimateIcon } from "@animate-ui/react/icons";
 import { CountingNumber } from "@animate-ui/react/primitives/texts/counting-number";
 import { MorphingText } from "@animate-ui/react/primitives/texts/morphing";
 
+import { fetchPublicProjects } from "@apis";
 import {
   ArrowRight,
   Badge,
@@ -18,18 +19,23 @@ import {
   WhyChooseUs,
   WorkingProcess,
 } from "@components";
-import { COMPANY_INFO, MOCK_PROJECTS } from "@constants";
+import { COMPANY_INFO } from "@constants";
+import type { Project } from "@shared-types";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.scss";
 
 export default async function HomePage() {
-  "use cache";
+  let featuredProjects: Project[] = [];
 
-  const featuredProjects = MOCK_PROJECTS.filter((p) => p.isFeatured).slice(
-    0,
-    3,
-  );
+  try {
+    const res = await fetchPublicProjects({ featured: true, limit: 3 });
+    if (res?.items) {
+      featuredProjects = res.items;
+    }
+  } catch {
+    featuredProjects = [];
+  }
 
   const getStatusBadge = (type: string) => {
     switch (type) {

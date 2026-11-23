@@ -1,8 +1,8 @@
 "use client";
 
 import { Card, CardContent } from "@components";
+import { useAdminProjects } from "@hooks";
 import type { ProjectCategory } from "@shared-types";
-import { useAdminProjectsStore } from "@store";
 import type React from "react";
 import styles from "./DashboardCategoryChart.module.scss";
 
@@ -22,7 +22,8 @@ const CATEGORY_META: Record<ProjectCategory, { label: string; color: string }> =
   };
 
 export const DashboardCategoryChart: React.FC = () => {
-  const projects = useAdminProjectsStore((state) => state.projects);
+  const { data: projectsData } = useAdminProjects({ params: { limit: 100 } });
+  const projects = projectsData?.items ?? [];
   const totalProjects = projects.length;
 
   const stats: CategoryStat[] = (

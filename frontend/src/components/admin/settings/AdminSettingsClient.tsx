@@ -1,7 +1,7 @@
 "use client";
 
-import { ADMIN_MOCK_USER, COMPANY_INFO } from "@constants";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Skeleton, Spinner } from "@components";
+import { COMPANY_INFO } from "@constants";
 import {
   Building2,
   CheckCircle2,
@@ -16,109 +16,28 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import styles from "./AdminSettingsClient.module.scss";
-
-const profileSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(3, "Họ tên hiển thị cần tối thiểu 3 ký tự.")
-    .max(80, "Họ tên tối đa 80 ký tự."),
-  role: z
-    .string()
-    .trim()
-    .min(2, "Vui lòng nhập chức danh quản trị.")
-    .max(80, "Chức danh tối đa 80 ký tự."),
-  email: z.string().trim().email("Địa chỉ email công vụ không hợp lệ."),
-});
-
-type ProfileFormValues = z.infer<typeof profileSchema>;
-
-const changePasswordSchema = z
-  .object({
-    currentPassword: z
-      .string()
-      .min(6, "Vui lòng nhập mật khẩu hiện tại (tối thiểu 6 ký tự)."),
-    newPassword: z
-      .string()
-      .min(8, "Mật khẩu mới cần tối thiểu 8 ký tự.")
-      .regex(
-        /^(?=.*[A-Za-z])(?=.*\d).+$/,
-        "Mật khẩu mới phải bao gồm cả chữ cái và chữ số.",
-      ),
-    confirmPassword: z.string().min(1, "Vui lòng xác nhận lại mật khẩu mới."),
-  })
-  .refine((data) => data.newPassword !== data.currentPassword, {
-    message: "Mật khẩu mới không được trùng với mật khẩu hiện tại.",
-    path: ["newPassword"],
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Mật khẩu xác nhận chưa trùng khớp.",
-    path: ["confirmPassword"],
-  });
-
-type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>;
+import { useAdminSettings } from "./useAdminSettings";
 
 export const AdminSettingsClient: React.FC = () => {
-  const [profileDisplay, setProfileDisplay] = useState({
-    name: ADMIN_MOCK_USER.name,
-    role: ADMIN_MOCK_USER.role,
-    email: ADMIN_MOCK_USER.email,
-    initials: ADMIN_MOCK_USER.initials,
-  });
-
-  const [notice, setNotice] = useState<string | null>(null);
-  const [showCurrentPw, setShowCurrentPw] = useState(false);
-  const [showNewPw, setShowNewPw] = useState(false);
-  const [showConfirmPw, setShowConfirmPw] = useState(false);
-
-  const apiConfigured = Boolean(process.env.NEXT_PUBLIC_API_URL?.trim());
-
-  const profileForm = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileSchema),
-    defaultValues: {
-      name: ADMIN_MOCK_USER.name,
-      role: ADMIN_MOCK_USER.role,
-      email: ADMIN_MOCK_USER.email,
-    },
-  });
-
-  const passwordForm = useForm<ChangePasswordFormValues>({
-    resolver: zodResolver(changePasswordSchema),
-    defaultValues: {
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    },
-  });
-
-  const handleSaveProfile = async (values: ProfileFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 200));
-    const words = values.name.trim().split(/\s+/);
-    const initials =
-      words.length >= 2
-        ? `${words[words.length - 2][0]}${words[words.length - 1][0]}`.toUpperCase()
-        : values.name.slice(0, 2).toUpperCase();
-
-    setProfileDisplay({
-      name: values.name.trim(),
-      role: values.role.trim(),
-      email: values.email.trim(),
-      initials,
-    });
-    setNotice("Đã lưu cập nhật thông tin hồ sơ quản trị viên.");
-  };
-
-  const handleChangePassword = async (_values: ChangePasswordFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 250));
-    passwordForm.reset();
-    setNotice(
-      "Đã cập nhật mật khẩu ủy quyền thành công cho tài khoản quản trị.",
-    );
-  };
+  const {
+    isLoadingProfile,
+    profileDisplay,
+    notice,
+    setNotice,
+    showCurrentPw,
+    setShowCurrentPw,
+    showNewPw,
+    setShowNewPw,
+    showConfirmPw,
+    setShowConfirmPw,
+    profileForm,
+    passwordForm,
+    isSavingProfile,
+    isChangingPassword,
+    handleSaveProfile,
+    handleChangePassword,
+  } = useAdminSettings();
 
   return (
     <div className={styles.pageWrapper}>
@@ -160,11 +79,7 @@ export const AdminSettingsClient: React.FC = () => {
         {/* Left Column: Admin Profile & Password Forms */}
         <div className={styles.columnStack}>
           {/* Card 1: Admin Profile */}
-          <form
-            className={styles.card}
-            onSubmit={profileForm.handleSubmit(handleSaveProfile)}
-            noValidate
-          >
+          <form className={styles.card} onSubmit={handleSaveProfile} noValidate>
             <div className={styles.cardHead}>
               <div className={styles.cardTitleGroup}>
                 <span className={styles.iconBox} aria-hidden="true">
@@ -176,100 +91,132 @@ export const AdminSettingsClient: React.FC = () => {
                 </div>
               </div>
               <span className={styles.permBadge}>
-                {ADMIN_MOCK_USER.permissionLabel}
+                {profileDisplay.permissionLabel}
               </span>
             </div>
 
-            <div className={styles.profileBanner}>
-              <span className={styles.avatarCircle} aria-hidden="true">
-                {profileDisplay.initials}
-              </span>
-              <div>
-                <p className={styles.profileName}>{profileDisplay.name}</p>
-                <p className={styles.profileMeta}>
-                  {profileDisplay.role} • {profileDisplay.email}
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.formGridTwo}>
-              <div className={styles.fieldGroup}>
-                <label
-                  htmlFor="admin-profile-name"
-                  className={styles.fieldLabel}
-                >
-                  HỌ TÊN HIỂN THỊ
-                </label>
-                <input
-                  id="admin-profile-name"
-                  type="text"
-                  className={`${styles.textInput} ${profileForm.formState.errors.name ? styles.inputInvalid : ""}`}
-                  {...profileForm.register("name")}
-                />
-                {profileForm.formState.errors.name && (
-                  <p className={styles.errorText}>
-                    {profileForm.formState.errors.name.message}
-                  </p>
-                )}
-              </div>
-
-              <div className={styles.fieldGroup}>
-                <label
-                  htmlFor="admin-profile-role"
-                  className={styles.fieldLabel}
-                >
-                  CHỨC DANH CHUYÊN MÔN
-                </label>
-                <input
-                  id="admin-profile-role"
-                  type="text"
-                  className={`${styles.textInput} ${profileForm.formState.errors.role ? styles.inputInvalid : ""}`}
-                  {...profileForm.register("role")}
-                />
-                {profileForm.formState.errors.role && (
-                  <p className={styles.errorText}>
-                    {profileForm.formState.errors.role.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className={styles.fieldGroup}>
-              <label
-                htmlFor="admin-profile-email"
-                className={styles.fieldLabel}
+            {isLoadingProfile ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "14px",
+                  padding: "8px 0",
+                }}
               >
-                ĐỊA CHỈ EMAIL ĐĂNG NHẬP CÔNG VỤ
-              </label>
-              <input
-                id="admin-profile-email"
-                type="email"
-                className={`${styles.textInput} ${profileForm.formState.errors.email ? styles.inputInvalid : ""}`}
-                {...profileForm.register("email")}
-              />
-              {profileForm.formState.errors.email && (
-                <p className={styles.errorText}>
-                  {profileForm.formState.errors.email.message}
-                </p>
-              )}
-            </div>
+                <Skeleton style={{ height: "68px", borderRadius: "10px" }} />
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "12px",
+                  }}
+                >
+                  <Skeleton style={{ height: "42px", borderRadius: "8px" }} />
+                  <Skeleton style={{ height: "42px", borderRadius: "8px" }} />
+                </div>
+                <Skeleton style={{ height: "42px", borderRadius: "8px" }} />
+              </div>
+            ) : (
+              <>
+                <div className={styles.profileBanner}>
+                  <span className={styles.avatarCircle} aria-hidden="true">
+                    {profileDisplay.initials}
+                  </span>
+                  <div>
+                    <p className={styles.profileName}>{profileDisplay.name}</p>
+                    <p className={styles.profileMeta}>
+                      {profileDisplay.role} • {profileDisplay.email}
+                    </p>
+                  </div>
+                </div>
 
-            <div className={styles.cardFooter}>
-              <button
-                type="submit"
-                disabled={profileForm.formState.isSubmitting}
-                className={styles.primaryBtn}
-              >
-                <CheckCircle2 size={15} aria-hidden="true" />
-                <span>Lưu thông tin hồ sơ</span>
-              </button>
-            </div>
+                <div className={styles.formGridTwo}>
+                  <div className={styles.fieldGroup}>
+                    <label
+                      htmlFor="admin-profile-name"
+                      className={styles.fieldLabel}
+                    >
+                      HỌ TÊN HIỂN THỊ
+                    </label>
+                    <input
+                      id="admin-profile-name"
+                      type="text"
+                      className={`${styles.textInput} ${profileForm.formState.errors.name ? styles.inputInvalid : ""}`}
+                      {...profileForm.register("name")}
+                    />
+                    {profileForm.formState.errors.name && (
+                      <p className={styles.errorText}>
+                        {profileForm.formState.errors.name.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className={styles.fieldGroup}>
+                    <label
+                      htmlFor="admin-profile-role"
+                      className={styles.fieldLabel}
+                    >
+                      CHỨC DANH CHUYÊN MÔN
+                    </label>
+                    <input
+                      id="admin-profile-role"
+                      type="text"
+                      className={`${styles.textInput} ${profileForm.formState.errors.role ? styles.inputInvalid : ""}`}
+                      {...profileForm.register("role")}
+                    />
+                    {profileForm.formState.errors.role && (
+                      <p className={styles.errorText}>
+                        {profileForm.formState.errors.role.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className={styles.fieldGroup}>
+                  <label
+                    htmlFor="admin-profile-email"
+                    className={styles.fieldLabel}
+                  >
+                    ĐỊA CHỈ EMAIL ĐĂNG NHẬP CÔNG VỤ
+                  </label>
+                  <input
+                    id="admin-profile-email"
+                    type="email"
+                    className={`${styles.textInput} ${profileForm.formState.errors.email ? styles.inputInvalid : ""}`}
+                    {...profileForm.register("email")}
+                  />
+                  {profileForm.formState.errors.email && (
+                    <p className={styles.errorText}>
+                      {profileForm.formState.errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className={styles.cardFooter}>
+                  <button
+                    type="submit"
+                    disabled={isSavingProfile}
+                    className={styles.primaryBtn}
+                  >
+                    {isSavingProfile ? (
+                      <Spinner width={15} height={15} />
+                    ) : (
+                      <CheckCircle2 size={15} aria-hidden="true" />
+                    )}
+                    <span>
+                      {isSavingProfile ? "Đang lưu..." : "Lưu thông tin hồ sơ"}
+                    </span>
+                  </button>
+                </div>
+              </>
+            )}
           </form>
 
           {/* Card 2: Change Password */}
           <form
             className={styles.card}
-            onSubmit={passwordForm.handleSubmit(handleChangePassword)}
+            onSubmit={handleChangePassword}
             noValidate
           >
             <div className={styles.cardHead}>
@@ -383,11 +330,19 @@ export const AdminSettingsClient: React.FC = () => {
             <div className={styles.cardFooter}>
               <button
                 type="submit"
-                disabled={passwordForm.formState.isSubmitting}
+                disabled={isChangingPassword}
                 className={styles.primaryBtn}
               >
-                <KeyRound size={15} aria-hidden="true" />
-                <span>Cập nhật mật khẩu</span>
+                {isChangingPassword ? (
+                  <Spinner width={15} height={15} />
+                ) : (
+                  <KeyRound size={15} aria-hidden="true" />
+                )}
+                <span>
+                  {isChangingPassword
+                    ? "Đang cập nhật..."
+                    : "Cập nhật mật khẩu"}
+                </span>
               </button>
             </div>
           </form>
@@ -428,18 +383,11 @@ export const AdminSettingsClient: React.FC = () => {
                     Go Backend REST API
                   </span>
                   <span className={styles.statusSub}>
-                    {apiConfigured
-                      ? `Đã kết nối: ${process.env.NEXT_PUBLIC_API_URL}`
-                      : "Đang chạy chế độ Mock Store (Chờ ghép Giai đoạn 5)"}
+                    Đã kết nối:{" "}
+                    {process.env.NEXT_PUBLIC_API_URL || "Backend API"}
                   </span>
                 </div>
-                <span
-                  className={
-                    apiConfigured ? styles.pillOnline : styles.pillStandby
-                  }
-                >
-                  {apiConfigured ? "ONLINE" : "MOCK MODE"}
-                </span>
+                <span className={styles.pillOnline}>ONLINE</span>
               </div>
 
               <div className={styles.statusRow}>
@@ -451,13 +399,7 @@ export const AdminSettingsClient: React.FC = () => {
                     Lưu trữ ảnh dự án & bản vẽ mặt bằng qua CDN (0đ băng thông)
                   </span>
                 </div>
-                <span
-                  className={
-                    apiConfigured ? styles.pillOnline : styles.pillStandby
-                  }
-                >
-                  {apiConfigured ? "ĐÃ KẾT NỐI" : "ADAPTER SẴN SÀNG"}
-                </span>
+                <span className={styles.pillOnline}>ĐÃ KẾT NỐI</span>
               </div>
             </div>
           </section>

@@ -1,8 +1,7 @@
-import type { AdminProjectsState } from "../types";
+import type { AdminProjectFilterState, Project } from "@shared-types";
 
 export const adminProjectsSelector = {
-  getFilteredProjects: (state: AdminProjectsState) => {
-    const { projects, filters } = state;
+  filterProjects: (projects: Project[], filters: AdminProjectFilterState) => {
     const query = filters.search.trim().toLowerCase();
 
     return projects.filter((project) => {

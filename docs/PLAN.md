@@ -246,9 +246,9 @@ erDiagram
 
 ### Giai đoạn 5: Xây Dựng Backend, Database & Ghép API (Integration)
 
-- [ ] **Task 5.1:** Thiết kế Database PostgreSQL với schema tinh giản (`projects`, `project_images`, `floor_plans`, `project_milestones`, `consultation_leads`, `users`).
-- [ ] **Task 5.2:** Xây dựng Go Backend REST API cho Public & Admin (JWT/Cookie Auth, Đổi mật khẩu Admin, CRUD Projects, Quản lý Leads, Upload ảnh tối ưu WebP lên **Cloudflare R2**).
-- [ ] **Task 5.3:** Tích hợp API vào Frontend (`src/apis/`, `src/hooks/` với Axios & TanStack Query): Thay thế toàn bộ mock data Dự án & Yêu cầu tư vấn bằng dữ liệu thật từ Backend, kết nối Auth guard và Upload ảnh Cloudflare R2.
+- [x] **Task 5.1:** Thiết kế Database PostgreSQL với schema tinh giản (`projects`, `project_images`, `floor_plans`, `project_milestones`, `consultation_leads`, `users`).
+- [x] **Task 5.2:** Xây dựng Go Backend REST API cho Public & Admin (JWT/Cookie Auth, Đổi mật khẩu Admin, CRUD Projects, Quản lý Leads, Upload ảnh tối ưu WebP lên **Cloudflare R2**).
+- [x] **Task 5.3:** Tích hợp API vào Frontend (`src/apis/`, `src/hooks/` với Axios & TanStack Query): Thay thế toàn bộ mock data Dự án & Yêu cầu tư vấn bằng dữ liệu thật từ Backend, kết nối Auth guard và Upload ảnh Cloudflare R2.
 
 ### Giai đoạn 6: Tối Ưu, Kiểm Thử & Hoàn Thiện
 

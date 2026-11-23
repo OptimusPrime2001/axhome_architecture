@@ -1,4 +1,10 @@
-import { BackToTop, ChatWidget, Footer, Header } from "@components";
+import {
+  BackToTop,
+  ChatWidget,
+  Footer,
+  Header,
+  MobileBottomNav,
+} from "@components";
 
 export default function PublicLayout({
   children,
@@ -12,6 +18,7 @@ export default function PublicLayout({
       <Footer />
       <ChatWidget />
       <BackToTop />
+      <MobileBottomNav />
     </>
   );
 }

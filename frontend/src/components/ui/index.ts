@@ -10,6 +10,7 @@ export * from "./label";
 export * from "./section-header";
 export * from "./select";
 export * from "./skeleton";
+export * from "./sooner";
 export * from "./spinner";
 export * from "./table";
 export * from "./tabs";

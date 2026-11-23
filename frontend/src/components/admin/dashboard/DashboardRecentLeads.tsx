@@ -1,8 +1,8 @@
 "use client";
 
 import { Badge, type BadgeProps, Button, Card, CardContent } from "@components";
+import { useAdminLeads } from "@hooks";
 import type { ConsultationLeadStatus } from "@shared-types";
-import { useAdminContactsStore } from "@store";
 import { ChevronRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
@@ -26,7 +26,8 @@ const getInitial = (fullName: string) => {
 };
 
 export const DashboardRecentLeads: React.FC = () => {
-  const leads = useAdminContactsStore((state) => state.leads);
+  const { data: leadsData } = useAdminLeads({ params: { limit: 100 } });
+  const leads = leadsData?.items ?? [];
   const pendingCount = leads.filter(
     (lead) => lead.leadStatus === "pending",
   ).length;

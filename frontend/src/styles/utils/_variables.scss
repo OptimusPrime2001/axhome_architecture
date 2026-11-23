@@ -116,3 +116,10 @@ $grid-breakpoints: (
   "2xl": 1440px,
   "3xl": 1536px,
 ) !default;
+
+// 10. Z-Index Layers (Thứ tự phân lớp UI)
+// Đảm bảo dropdown/popover/tooltip mở từ bên trong modal luôn nổi phía trên Dialog.
+$z-modal-backdrop: 100;
+$z-modal: 101;
+$z-popover: 200;
+$z-tooltip: 210;

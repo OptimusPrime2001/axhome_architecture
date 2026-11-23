@@ -1,11 +1,9 @@
 "use client";
 
-import { Badge, Input, Menu } from "@components";
-import {
-  ADMIN_MOCK_NOTIFICATIONS,
-  ADMIN_MOCK_USER,
-  ADMIN_ROUTE_TITLES,
-} from "@constants";
+import { Badge, Input, Menu, toast } from "@components";
+import { ADMIN_ROUTE_TITLES } from "@constants";
+import { useAdminLeads, useAuthLogout } from "@hooks";
+import { useAdminAuthStore } from "@store";
 import {
   Bell,
   ChevronDown,
@@ -29,6 +27,10 @@ export interface AdminTopbarProps {
 export const AdminTopbar: React.FC<AdminTopbarProps> = ({ onOpenDrawer }) => {
   const pathname = usePathname();
   const router = useRouter();
+  const profile = useAdminAuthStore((state) => state.profile);
+  const { logoutMutation } = useAuthLogout();
+  const { data: leadsData } = useAdminLeads({ params: { limit: 100 } });
+  const leads = leadsData?.items ?? [];
   const [searchQuery, setSearchQuery] = useState("");
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -43,9 +45,16 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({ onOpenDrawer }) => {
     )?.[1] ??
     "Quản trị";
 
-  const unreadCount = ADMIN_MOCK_NOTIFICATIONS.filter(
-    (item) => item.isUnread,
-  ).length;
+  const notifications = leads.slice(0, 5).map((lead) => ({
+    id: lead.id,
+    title: `Yêu cầu tư vấn mới: ${lead.fullName}`,
+    description: `${lead.serviceLabel} — ${lead.location}`,
+    timeLabel: lead.relativeTime,
+    isUnread: lead.leadStatus === "pending",
+    href: "/admin/contacts",
+  }));
+
+  const unreadCount = notifications.filter((item) => item.isUnread).length;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -73,10 +82,13 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({ onOpenDrawer }) => {
     };
   }, []);
 
-  const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      window.sessionStorage.removeItem("axhome_admin_user");
+  const handleLogout = async () => {
+    try {
+      await logoutMutation.mutateAsync();
+    } catch {
+      // Proceed with local redirect even if network fails
     }
+    toast.info("Đã đăng xuất khỏi hệ thống quản trị.");
     setIsUserMenuOpen(false);
     router.push("/admin/login");
   };
@@ -151,21 +163,31 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({ onOpenDrawer }) => {
                 </Badge>
               </div>
               <ul className={styles.notifList}>
-                {ADMIN_MOCK_NOTIFICATIONS.map((item) => (
-                  <li key={item.id}>
-                    <Link
-                      href={item.href}
-                      className={`${styles.notifItem} ${
-                        item.isUnread ? styles.notifUnread : ""
-                      }`}
-                      onClick={() => setIsNotifOpen(false)}
-                    >
-                      <p className={styles.notifTitle}>{item.title}</p>
-                      <p className={styles.notifDesc}>{item.description}</p>
-                      <span className={styles.notifTime}>{item.timeLabel}</span>
-                    </Link>
+                {notifications.length === 0 ? (
+                  <li className={styles.notifItem}>
+                    <p className={styles.notifDesc}>
+                      Hiện chưa có yêu cầu tư vấn mới nào.
+                    </p>
                   </li>
-                ))}
+                ) : (
+                  notifications.map((item) => (
+                    <li key={item.id}>
+                      <Link
+                        href={item.href}
+                        className={`${styles.notifItem} ${
+                          item.isUnread ? styles.notifUnread : ""
+                        }`}
+                        onClick={() => setIsNotifOpen(false)}
+                      >
+                        <p className={styles.notifTitle}>{item.title}</p>
+                        <p className={styles.notifDesc}>{item.description}</p>
+                        <span className={styles.notifTime}>
+                          {item.timeLabel}
+                        </span>
+                      </Link>
+                    </li>
+                  ))
+                )}
               </ul>
             </section>
           )}
@@ -188,10 +210,10 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({ onOpenDrawer }) => {
             </span>
             <span className={styles.userMeta}>
               <span className={styles.userTitle}>
-                {ADMIN_MOCK_USER.accountTitle}
+                {profile?.accountTitle ?? "Quản trị viên"}
               </span>
               <span className={styles.userPerm}>
-                {ADMIN_MOCK_USER.permissionLabel}
+                {profile?.permissionLabel ?? "ADMIN"}
               </span>
             </span>
             <ChevronDown
@@ -204,8 +226,10 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({ onOpenDrawer }) => {
           {isUserMenuOpen && (
             <div className={styles.userDropdown} role="menu">
               <div className={styles.dropdownHeader}>
-                <p className={styles.dropdownName}>{ADMIN_MOCK_USER.name}</p>
-                <p className={styles.dropdownEmail}>{ADMIN_MOCK_USER.email}</p>
+                <p className={styles.dropdownName}>
+                  {profile?.name ?? "Quản trị viên"}
+                </p>
+                <p className={styles.dropdownEmail}>{profile?.email ?? ""}</p>
               </div>
 
               <div className={styles.dropdownDivider} />

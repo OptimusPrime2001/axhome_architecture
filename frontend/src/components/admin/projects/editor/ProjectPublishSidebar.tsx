@@ -1,8 +1,9 @@
 "use client";
 
 import { Input, Label, Textarea } from "@components";
-import { ADMIN_MOCK_USER, COMPANY_INFO } from "@constants";
+import { COMPANY_INFO } from "@constants";
 import type { ProjectType } from "@shared-types";
+import { useAdminAuthStore } from "@store";
 import {
   CheckCircle2,
   Circle,
@@ -46,6 +47,7 @@ const STAGE_OPTIONS: ReadonlyArray<{
 export const ProjectPublishSidebar: React.FC<ProjectPublishSidebarProps> = ({
   form,
 }) => {
+  const profile = useAdminAuthStore((state) => state.profile);
   const { register, watch, setValue } = form;
 
   const status = watch("status");
@@ -222,11 +224,11 @@ export const ProjectPublishSidebar: React.FC<ProjectPublishSidebarProps> = ({
           <span className={styles.miniLabel}>BIÊN TẬP VIÊN HỒ SƠ</span>
           <div className={styles.authorStrip}>
             <span className={styles.authorAvatar} aria-hidden="true">
-              {ADMIN_MOCK_USER.initials}
+              {profile?.initials}
             </span>
             <div>
-              <p className={styles.authorName}>{ADMIN_MOCK_USER.name}</p>
-              <p className={styles.authorRole}>{ADMIN_MOCK_USER.role}</p>
+              <p className={styles.authorName}>{profile?.name}</p>
+              <p className={styles.authorRole}>{profile?.role}</p>
             </div>
           </div>
         </div>

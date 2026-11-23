@@ -1,57 +1,26 @@
 "use client";
 
 import { AnimateIcon } from "@animate-ui/react/icons";
-import { ArrowRight, Button, Input, Label, Textarea } from "@components";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import {
+  ArrowRight,
+  Button,
+  Input,
+  Label,
+  Spinner,
+  Textarea,
+} from "@components";
 import styles from "./ProjectConsultCta.module.scss";
-
-const projectConsultSchema = z.object({
-  fullName: z.string().trim().min(1, "Vui lòng nhập họ và tên."),
-  phone: z
-    .string()
-    .trim()
-    .min(1, "Vui lòng nhập số điện thoại.")
-    .regex(/^(\+?84|0)[0-9]{8,10}$/, "Số điện thoại chưa đúng định dạng."),
-  landSize: z.string().trim().min(1, "Vui lòng nhập kích thước khu đất."),
-  expectedStart: z.string().trim().optional(),
-  notes: z.string().trim().max(500, "Ghi chú tối đa 500 ký tự.").optional(),
-});
-
-type ProjectConsultFormValues = z.infer<typeof projectConsultSchema>;
+import { useProjectConsultForm } from "./useProjectConsultForm";
 
 export interface ProjectConsultFormProps {
   projectTitle: string;
 }
 
-type SubmitState = "idle" | "awaiting-contract";
-
 export const ProjectConsultForm: React.FC<ProjectConsultFormProps> = ({
   projectTitle,
 }) => {
-  const [submitState, setSubmitState] = useState<SubmitState>("idle");
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<ProjectConsultFormValues>({
-    resolver: zodResolver(projectConsultSchema),
-    defaultValues: {
-      fullName: "",
-      phone: "",
-      landSize: "",
-      expectedStart: "",
-      notes: "",
-    },
-    mode: "onSubmit",
-  });
-
-  const onSubmit = (_data: ProjectConsultFormValues) => {
-    setSubmitState("awaiting-contract");
-  };
+  const { register, errors, isSubmitting, submitState, handleFormSubmit } =
+    useProjectConsultForm(projectTitle);
 
   return (
     <div className={styles.formCard}>
@@ -59,11 +28,7 @@ export const ProjectConsultForm: React.FC<ProjectConsultFormProps> = ({
         Phương án tham chiếu: <strong>{projectTitle}</strong>
       </p>
 
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
+      <form className={styles.form} onSubmit={handleFormSubmit} noValidate>
         <div className={styles.field}>
           <Label htmlFor="proj-consult-name">HỌ VÀ TÊN QUÝ KHÁCH *</Label>
           <Input
@@ -178,11 +143,19 @@ export const ProjectConsultForm: React.FC<ProjectConsultFormProps> = ({
           )}
         </div>
 
+        {submitState === "submitted" && (
+          <p className={styles.notice} role="status">
+            Đã tiếp nhận yêu cầu tư vấn phương án{" "}
+            <strong>{projectTitle}</strong>. Đội ngũ KTS Axhome sẽ liên hệ lại
+            Quý khách trong thời gian sớm nhất.
+          </p>
+        )}
+
         {submitState === "awaiting-contract" && (
           <p className={styles.notice} role="status">
             Thông tin đã hợp lệ. Yêu cầu tư vấn phương án{" "}
-            <strong>{projectTitle}</strong> sẽ được gửi đi ngay khi kết nối API
-            từ máy chủ.
+            <strong>{projectTitle}</strong> sẽ được gửi đi ngay khi cấu hình
+            `NEXT_PUBLIC_API_URL`.
           </p>
         )}
 
@@ -193,9 +166,18 @@ export const ProjectConsultForm: React.FC<ProjectConsultFormProps> = ({
             size="md"
             fullWidth
             disabled={isSubmitting}
-            rightIcon={<ArrowRight size={16} aria-hidden="true" />}
+            leftIcon={
+              isSubmitting ? <Spinner width={16} height={16} /> : undefined
+            }
+            rightIcon={
+              isSubmitting ? undefined : (
+                <ArrowRight size={16} aria-hidden="true" />
+              )
+            }
           >
-            Gửi yêu cầu tư vấn phương án
+            {isSubmitting
+              ? "Đang gửi yêu cầu..."
+              : "Gửi yêu cầu tư vấn phương án"}
           </Button>
         </AnimateIcon>
 

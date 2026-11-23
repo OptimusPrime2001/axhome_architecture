@@ -1,0 +1,106 @@
+.toaster {
+  font-family: inherit;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background-color: $color-surface-card;
+  color: $color-text-primary;
+  border: 1px solid $color-surface-border;
+  box-shadow: 0 12px 32px rgba(48, 44, 40, 0.12);
+}
+
+.title {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: $color-text-primary;
+}
+
+.description {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: $color-text-secondary;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.success {
+  border-left: 3.5px solid $color-status-published-text;
+
+  .icon {
+    color: $color-status-published-text;
+  }
+}
+
+.error {
+  border-left: 3.5px solid $color-status-cancelled-text;
+
+  .icon {
+    color: $color-status-cancelled-text;
+  }
+}
+
+.warning {
+  border-left: 3.5px solid $color-status-pending-text;
+
+  .icon {
+    color: $color-status-pending-text;
+  }
+}
+
+.info {
+  border-left: 3.5px solid $color-brand-primary;
+
+  .icon {
+    color: $color-brand-primary;
+  }
+}
+
+.actionButton {
+  background-color: $color-brand-primary;
+  color: $color-text-inverse;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 10px;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: $color-brand-dark;
+  }
+}
+
+.cancelButton {
+  background-color: $color-surface-bg;
+  color: $color-text-secondary;
+  border: 1px solid $color-surface-border;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 10px;
+}
+
+.closeButton {
+  background-color: $color-surface-card;
+  color: $color-text-muted;
+  border: 1px solid $color-surface-border;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background-color: $color-surface-bg;
+    color: $color-text-primary;
+  }
+}

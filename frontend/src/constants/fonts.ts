@@ -6,31 +6,35 @@ import {
   Space_Grotesk,
 } from "next/font/google";
 
-export const beVietnamPro = Be_Vietnam_Pro({
+export const FONT_BE_VIETNAM_PRO = Be_Vietnam_Pro({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin", "vietnamese"],
   display: "swap",
   variable: "--font-be_vietnam",
 });
-export const playfair = Playfair_Display({
+
+export const FONT_PLAYFAIR = Playfair_Display({
   subsets: ["latin", "vietnamese"],
   display: "swap",
-  variable: "--font-playfair", // xuất ra CSS variable để dùng trong SCSS
+  variable: "--font-playfair",
 });
-export const poppins = Poppins({
+
+export const FONT_POPPINS = Poppins({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
   variable: "--font-poppins",
 });
-export const space_grotesk = Space_Grotesk({
+
+export const FONT_SPACE_GROTESK = Space_Grotesk({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
   variable: "--font-space_grotesk",
 });
-export const googleSans = Google_Sans({
+
+export const FONT_GOOGLE_SANS = Google_Sans({
   subsets: ["latin", "vietnamese"],
-  variable: "--font-google-sans", // Tạo biến CSS để dùng trong SCSS
+  variable: "--font-google-sans",
   display: "swap",
 });

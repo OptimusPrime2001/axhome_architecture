@@ -1,8 +1,8 @@
 "use client";
 
 import { Badge, Card, CardContent } from "@components";
+import { useAdminProjects } from "@hooks";
 import type { Project } from "@shared-types";
-import { useAdminProjectsStore } from "@store";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
@@ -31,7 +31,8 @@ const getCurrentPhaseLabel = (project: Project): string => {
 };
 
 export const DashboardConstructionGrid: React.FC = () => {
-  const projects = useAdminProjectsStore((state) => state.projects);
+  const { data: projectsData } = useAdminProjects({ params: { limit: 100 } });
+  const projects = projectsData?.items ?? [];
 
   // Prioritize under_construction first, then completed with milestones
   const constructionProjects = projects

@@ -1,11 +1,9 @@
 import type {
   AdminProjectFilterState,
   AdminProjectTypeFilter,
-  Project,
 } from "@shared-types";
 
 export interface AdminProjectsSlice {
-  projects: Project[];
   filters: AdminProjectFilterState;
   currentPage: number;
   pageSize: number;
@@ -26,13 +24,7 @@ export interface AdminProjectsSlice {
   toggleSelectAllPage: (pageIds: string[]) => void;
   clearSelection: () => void;
   setPendingDeleteIds: (ids: string[]) => void;
-
-  addProject: (project: Project) => void;
-  updateProject: (id: string, updated: Project) => void;
-  deleteProjects: (ids: string[]) => void;
-  toggleStatus: (id: string) => Project["status"] | null;
-  toggleFeatured: (id: string) => boolean | null;
-  bulkUpdateStatus: (ids: string[], status: Project["status"]) => void;
+  removeSelectedIds: (ids: string[]) => void;
 }
 
 export interface AdminProjectsState extends AdminProjectsSlice {}

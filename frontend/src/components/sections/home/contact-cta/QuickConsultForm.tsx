@@ -11,51 +11,16 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Spinner,
   Textarea,
 } from "@components";
 import { COMPANY_INFO } from "@constants";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
+import { Controller } from "react-hook-form";
 import styles from "./QuickConsultForm.module.scss";
+import { useQuickConsultForm } from "./useQuickConsultForm";
 
-// ==============================================================================
-// Form yêu cầu tư vấn nhanh — Figma node 1:1973 (Quick Consultation Request Form)
-//
-// - Field bắt buộc (`*`) lấy đúng theo design (rule 08 §1: không tự đặt field).
-// - Chưa có backend contract nên KHÔNG gọi API và KHÔNG báo thành công giả
-//   (rule 06 §2, rule 08 §4, quyết định đã chốt).
-// ==============================================================================
-
-const contactFormSchema = z.object({
-  fullName: z.string().trim().min(1, "Vui lòng nhập họ và tên."),
-  phone: z
-    .string()
-    .trim()
-    .min(1, "Vui lòng nhập số điện thoại.")
-    // Nới lỏng để chấp nhận cả số di động lẫn bàn (0..., +84...)
-    .regex(/^(\+?84|0)[0-9]{8,10}$/, "Số điện thoại chưa đúng định dạng."),
-  location: z.string().trim().min(1, "Vui lòng nhập địa điểm dự án."),
-  projectNeed: z.string().min(1, "Vui lòng chọn nhu cầu dự án."),
-  notes: z.string().trim().max(500, "Ghi chú tối đa 500 ký tự.").optional(),
-});
-
-type ContactFormValues = z.infer<typeof contactFormSchema>;
-
-const DEFAULT_VALUES: ContactFormValues = {
-  fullName: "",
-  phone: "",
-  location: "",
-  projectNeed: "",
-  notes: "",
-};
-
-// TODO: đối chiếu placeholder địa điểm với Figma (node 1:2002).
 const LOCATION_PLACEHOLDER = "VD: Khu vực Quận 7, TP. Hồ Chí Minh";
 
-// TODO: đối chiếu danh sách options với Figma (node 1:2009).
-// Hiện lấy theo 3 dịch vụ chính trong architecture_construction_project_brief.md.
 const PROJECT_NEED_OPTIONS = [
   "Thiết kế kiến trúc",
   "Tối ưu chi phí",
@@ -63,41 +28,19 @@ const PROJECT_NEED_OPTIONS = [
   "Khác",
 ] as const;
 
-type SubmitState = "idle" | "awaiting-contract";
-
 export const QuickConsultForm: React.FC = () => {
-  const [submitState, setSubmitState] = useState<SubmitState>("idle");
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isSubmitting, isValid },
-  } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: DEFAULT_VALUES,
-    mode: "onSubmit",
-  });
-
-  const onSubmit = (_data: ContactFormValues) => {
-    // TODO: gửi lên API tạo yêu cầu tư vấn ngay khi backend có contract.
-    // Hiện tại dữ liệu đã hợp lệ nhưng KHÔNG gửi đi và KHÔNG báo thành công giả.
-    setSubmitState("awaiting-contract");
-  };
+  const { control, errors, isSubmitting, submitState, handleFormSubmit } =
+    useQuickConsultForm();
 
   return (
     <div className={styles.card}>
-      {/* TODO: đối chiếu heading + mô tả với Figma (node 1:1976, 1:1978) */}
       <h3 className={styles.title}>Đăng ký nhận phương án tư vấn</h3>
       <p className={styles.subtitle}>
         Thông tin của bạn được bảo mật tuyệt đối theo tiêu chuẩn tư vấn kiến
         trúc quốc tế.
       </p>
 
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
+      <form className={styles.form} onSubmit={handleFormSubmit} noValidate>
         <div className={styles.row}>
           <div className={styles.field}>
             <Label htmlFor="contact-full-name">Họ và tên *</Label>
@@ -241,16 +184,29 @@ export const QuickConsultForm: React.FC = () => {
             size="lg"
             fullWidth
             disabled={isSubmitting}
-            rightIcon={<ArrowRight size={16} aria-hidden="true" />}
+            leftIcon={
+              isSubmitting ? <Spinner width={16} height={16} /> : undefined
+            }
+            rightIcon={
+              isSubmitting ? undefined : (
+                <ArrowRight size={16} aria-hidden="true" />
+              )
+            }
           >
-            Đăng ký nhận tư vấn ngay
+            {isSubmitting ? "Đang gửi yêu cầu..." : "Đăng ký nhận tư vấn ngay"}
           </Button>
         </AnimateIcon>
 
-        {submitState === "awaiting-contract" && isValid && (
+        {submitState === "submitted" && (
           <p role="status" className={styles.notice}>
-            Biểu mẫu đã hợp lệ nhưng chưa được gửi vì hệ thống chưa có API. Vui
-            lòng gọi{" "}
+            Đã tiếp nhận yêu cầu tư vấn của Quý khách. Đội ngũ Kiến trúc sư
+            Axhome sẽ liên hệ lại trong vòng 2 giờ làm việc.
+          </p>
+        )}
+
+        {submitState === "awaiting-contract" && (
+          <p role="status" className={styles.notice}>
+            Hệ thống chưa cấu hình địa chỉ máy chủ API. Vui lòng gọi trực tiếp{" "}
             <a
               className={styles.noticeLink}
               href={`tel:${COMPANY_INFO.hotline}`}

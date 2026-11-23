@@ -12,66 +12,17 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Spinner,
   Textarea,
 } from "@components";
 import { CONTACT_FORM_COPY } from "@constants";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
+import { Controller } from "react-hook-form";
 import styles from "./ContactFormSection.module.scss";
-
-const deepConsultSchema = z.object({
-  fullName: z.string().trim().min(1, "Vui lòng nhập họ và tên."),
-  phone: z
-    .string()
-    .trim()
-    .min(1, "Vui lòng nhập số điện thoại.")
-    .regex(/^(\+?84|0)[0-9]{8,10}$/, "Số điện thoại chưa đúng định dạng."),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Vui lòng nhập địa chỉ email.")
-    .email("Địa chỉ email chưa đúng định dạng."),
-  serviceType: z.string().min(1, "Vui lòng chọn nhu cầu tư vấn."),
-  landArea: z.string().trim().min(1, "Vui lòng nhập diện tích dự kiến."),
-  location: z.string().trim().min(1, "Vui lòng nhập địa điểm khu đất / dự án."),
-  budget: z.string().optional(),
-  notes: z.string().trim().max(1000, "Nội dung tối đa 1.000 ký tự.").optional(),
-});
-
-type DeepConsultFormValues = z.infer<typeof deepConsultSchema>;
-
-const DEFAULT_VALUES: DeepConsultFormValues = {
-  fullName: "",
-  phone: "",
-  email: "",
-  serviceType: "",
-  landArea: "",
-  location: "",
-  budget: "",
-  notes: "",
-};
-
-type SubmitState = "idle" | "awaiting-contract";
+import { useDeepConsultForm } from "./useDeepConsultForm";
 
 export const DeepConsultForm: React.FC = () => {
-  const [submitState, setSubmitState] = useState<SubmitState>("idle");
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<DeepConsultFormValues>({
-    resolver: zodResolver(deepConsultSchema),
-    defaultValues: DEFAULT_VALUES,
-    mode: "onSubmit",
-  });
-
-  const onSubmit = (_data: DeepConsultFormValues) => {
-    // Chưa có endpoint backend nên giữ thông báo trung thực, không báo thành công giả.
-    setSubmitState("awaiting-contract");
-  };
+  const { control, errors, isSubmitting, submitState, handleFormSubmit } =
+    useDeepConsultForm();
 
   return (
     <div className={styles.formCard}>
@@ -79,11 +30,7 @@ export const DeepConsultForm: React.FC = () => {
       <h3 className={styles.formTitle}>{CONTACT_FORM_COPY.title}</h3>
       <p className={styles.formSubtitle}>{CONTACT_FORM_COPY.subtitle}</p>
 
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
+      <form className={styles.form} onSubmit={handleFormSubmit} noValidate>
         <div className={styles.row}>
           <div className={styles.field}>
             <Label htmlFor="deep-full-name">HỌ VÀ TÊN *</Label>
@@ -273,10 +220,17 @@ export const DeepConsultForm: React.FC = () => {
           )}
         </div>
 
+        {submitState === "submitted" && (
+          <p className={styles.notice} role="status">
+            Cảm ơn Quý khách! Hồ sơ tư vấn đã được gửi tới đội ngũ Kiến trúc sư
+            chủ trì Axhome. Chúng tôi sẽ liên hệ lại sớm nhất.
+          </p>
+        )}
+
         {submitState === "awaiting-contract" && (
           <p className={styles.notice} role="status">
-            Thông tin đã hợp lệ. Chức năng gửi yêu cầu sẽ được kích hoạt ngay
-            khi kết nối hệ thống tiếp nhận hồ sơ từ máy chủ.
+            Thông tin đã hợp lệ. Chức năng gửi yêu cầu sẽ hoạt động ngay khi cấu
+            hình `NEXT_PUBLIC_API_URL`.
           </p>
         )}
 
@@ -294,9 +248,18 @@ export const DeepConsultForm: React.FC = () => {
               variant="dark"
               size="md"
               disabled={isSubmitting}
-              rightIcon={<ArrowRight size={16} aria-hidden="true" />}
+              leftIcon={
+                isSubmitting ? <Spinner width={16} height={16} /> : undefined
+              }
+              rightIcon={
+                isSubmitting ? undefined : (
+                  <ArrowRight size={16} aria-hidden="true" />
+                )
+              }
             >
-              {CONTACT_FORM_COPY.submitLabel}
+              {isSubmitting
+                ? "Đang gửi hồ sơ..."
+                : CONTACT_FORM_COPY.submitLabel}
             </Button>
           </AnimateIcon>
         </div>

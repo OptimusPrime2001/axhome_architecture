@@ -1,5 +1,4 @@
-import { MOCK_PROJECTS } from "@constants";
-import type { AdminProjectFilterState, Project } from "@shared-types";
+import type { AdminProjectFilterState } from "@shared-types";
 import type { StateCreator } from "zustand";
 import type { AdminProjectsSlice, AdminProjectsState } from "../types";
 
@@ -16,8 +15,7 @@ export const createAdminProjectsSlice: StateCreator<
   [["zustand/devtools", never]],
   [],
   AdminProjectsSlice
-> = (set, get) => ({
-  projects: [...MOCK_PROJECTS],
+> = (set) => ({
   filters: INITIAL_ADMIN_PROJECT_FILTERS,
   currentPage: 1,
   pageSize: 6,
@@ -109,83 +107,13 @@ export const createAdminProjectsSlice: StateCreator<
   setPendingDeleteIds: (ids) =>
     set({ pendingDeleteIds: ids }, false, "adminProjects/setPendingDeleteIds"),
 
-  addProject: (project) =>
+  removeSelectedIds: (ids) =>
     set(
       (state) => ({
-        projects: [project, ...state.projects],
-      }),
-      false,
-      "adminProjects/addProject",
-    ),
-
-  updateProject: (id, updated) =>
-    set(
-      (state) => ({
-        projects: state.projects.map((item) =>
-          item.id === id ? updated : item,
-        ),
-      }),
-      false,
-      "adminProjects/updateProject",
-    ),
-
-  deleteProjects: (ids) =>
-    set(
-      (state) => ({
-        projects: state.projects.filter((item) => !ids.includes(item.id)),
         selectedIds: state.selectedIds.filter((id) => !ids.includes(id)),
         pendingDeleteIds: [],
       }),
       false,
-      "adminProjects/deleteProjects",
-    ),
-
-  toggleStatus: (id) => {
-    const target = get().projects.find((p) => p.id === id);
-    if (!target) return null;
-    const nextStatus: Project["status"] =
-      target.status === "published" ? "draft" : "published";
-
-    set(
-      (state) => ({
-        projects: state.projects.map((p) =>
-          p.id === id ? { ...p, status: nextStatus } : p,
-        ),
-      }),
-      false,
-      "adminProjects/toggleStatus",
-    );
-
-    return nextStatus;
-  },
-
-  toggleFeatured: (id) => {
-    const target = get().projects.find((p) => p.id === id);
-    if (!target) return null;
-    const nextFeatured = !target.isFeatured;
-
-    set(
-      (state) => ({
-        projects: state.projects.map((p) =>
-          p.id === id ? { ...p, isFeatured: nextFeatured } : p,
-        ),
-      }),
-      false,
-      "adminProjects/toggleFeatured",
-    );
-
-    return nextFeatured;
-  },
-
-  bulkUpdateStatus: (ids, status) =>
-    set(
-      (state) => ({
-        projects: state.projects.map((p) =>
-          ids.includes(p.id) ? { ...p, status } : p,
-        ),
-        selectedIds: [],
-      }),
-      false,
-      "adminProjects/bulkUpdateStatus",
+      "adminProjects/removeSelectedIds",
     ),
 });

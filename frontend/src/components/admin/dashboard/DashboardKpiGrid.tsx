@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@components";
-import { useAdminContactsStore, useAdminProjectsStore } from "@store";
+import { useAdminLeads, useAdminProjects } from "@hooks";
 import {
   Building2,
   Compass,
@@ -12,8 +12,10 @@ import type React from "react";
 import styles from "./DashboardKpiGrid.module.scss";
 
 export const DashboardKpiGrid: React.FC = () => {
-  const projects = useAdminProjectsStore((state) => state.projects);
-  const leads = useAdminContactsStore((state) => state.leads);
+  const { data: projectsData } = useAdminProjects({ params: { limit: 100 } });
+  const { data: leadsData } = useAdminLeads({ params: { limit: 100 } });
+  const projects = projectsData?.items ?? [];
+  const leads = leadsData?.items ?? [];
 
   const totalProjects = projects.length;
   const publishedCount = projects.filter(
