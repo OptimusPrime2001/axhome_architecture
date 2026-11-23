@@ -1,10 +1,13 @@
 import type { AuthUserDTO } from "@apis";
+import { USER_ROLES, type UserRole } from "@constants";
 
 export interface AdminProfileView {
   id: string;
   name: string;
   email: string;
   role: string;
+  roleCode: UserRole;
+  isAdmin: boolean;
   accountTitle: string;
   permissionLabel: string;
   initials: string;
@@ -18,16 +21,31 @@ export function buildInitials(fullName: string): string {
   return fullName.slice(0, 2).toUpperCase() || "AD";
 }
 
+function normalizeUserRole(raw: string | undefined): UserRole {
+  if (raw === USER_ROLES.ADMIN) return USER_ROLES.ADMIN;
+  if (raw === USER_ROLES.EDITOR) return USER_ROLES.EDITOR;
+  return USER_ROLES.VIEWER;
+}
+
+const ROLE_LABELS: Record<UserRole, string> = {
+  [USER_ROLES.ADMIN]: "Quản trị viên hệ thống",
+  [USER_ROLES.EDITOR]: "Biên tập viên CMS",
+  [USER_ROLES.VIEWER]: "Người xem (Chỉ đọc)",
+};
+
 export function mapDtoToProfile(dto: AuthUserDTO): AdminProfileView {
   const name = dto.full_name?.trim() || dto.email;
-  const roleUpper = (dto.role || "admin").toUpperCase();
+  const roleCode = normalizeUserRole(dto.role);
+  const isAdmin = roleCode === USER_ROLES.ADMIN;
   return {
     id: dto.id,
     name,
     email: dto.email,
-    role: dto.role === "admin" ? "Quản trị viên hệ thống" : "Biên tập viên CMS",
+    role: ROLE_LABELS[roleCode],
+    roleCode,
+    isAdmin,
     accountTitle: name,
-    permissionLabel: roleUpper === "ADMIN" ? "TOÀN QUYỀN" : roleUpper,
+    permissionLabel: isAdmin ? "TOÀN QUYỀN" : roleCode.toUpperCase(),
     initials: buildInitials(name),
   };
 }

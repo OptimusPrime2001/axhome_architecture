@@ -1,13 +1,16 @@
 "use client";
 
 import { toast } from "@components";
+import { USER_ROLES } from "@constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   useChangeAdminPassword,
   useCurrentAdmin,
   useUpdateAdminProfile,
+  useUpdateAdminUser,
 } from "@hooks";
-import { buildInitials, mapDtoToProfile } from "@utils";
+import { useAdminAuthStore } from "@store";
+import { mapDtoToProfile } from "@utils";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,11 +21,7 @@ const profileSchema = z.object({
     .trim()
     .min(3, "Họ tên hiển thị cần tối thiểu 3 ký tự.")
     .max(80, "Họ tên tối đa 80 ký tự."),
-  role: z
-    .string()
-    .trim()
-    .min(2, "Vui lòng nhập chức danh quản trị.")
-    .max(80, "Chức danh tối đa 80 ký tự."),
+  role: z.enum([USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.VIEWER]),
   email: z.string().trim().email("Địa chỉ email công vụ không hợp lệ."),
 });
 
@@ -54,6 +53,10 @@ const changePasswordSchema = z
 export type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>;
 
 export function useAdminSettings() {
+  const setProfileFromDto = useAdminAuthStore(
+    (state) => state.setProfileFromDto,
+  );
+
   const [profileDisplay, setProfileDisplay] = useState({
     name: "",
     role: "Quản trị viên hệ thống",
@@ -71,7 +74,7 @@ export function useAdminSettings() {
     resolver: zodResolver(profileSchema),
     defaultValues: {
       name: "",
-      role: "Quản trị viên hệ thống",
+      role: USER_ROLES.VIEWER,
       email: "",
     },
   });
@@ -86,12 +89,13 @@ export function useAdminSettings() {
   });
 
   const currentAdminQuery = useCurrentAdmin();
+  const currentUser = currentAdminQuery.data;
   const isLoadingProfile = currentAdminQuery.isLoading;
+  const isAdmin = currentUser?.role === USER_ROLES.ADMIN;
 
   useEffect(() => {
-    const user = currentAdminQuery.data;
-    if (!user) return;
-    const mapped = mapDtoToProfile(user);
+    if (!currentUser) return;
+    const mapped = mapDtoToProfile(currentUser);
     setProfileDisplay({
       name: mapped.name,
       role: mapped.role,
@@ -101,14 +105,22 @@ export function useAdminSettings() {
     });
     profileForm.reset({
       name: mapped.name,
-      role: mapped.role,
+      role: mapped.roleCode,
       email: mapped.email,
     });
-  }, [currentAdminQuery.data, profileForm]);
+  }, [currentUser, profileForm]);
 
-  const { updateProfileMutation, isPending: isSavingProfile } =
+  const { updateProfileMutation, isPending: isSavingSelfProfile } =
     useUpdateAdminProfile({
-      successCb: () => {
+      successCb: (updated) => {
+        const mapped = mapDtoToProfile(updated);
+        setProfileDisplay({
+          name: mapped.name,
+          role: mapped.role,
+          email: mapped.email,
+          initials: mapped.initials,
+          permissionLabel: mapped.permissionLabel,
+        });
         const msg = "Đã lưu cập nhật thông tin hồ sơ quản trị viên.";
         setNotice(msg);
         toast.success("Cập nhật hồ sơ thành công", { description: msg });
@@ -116,6 +128,30 @@ export function useAdminSettings() {
       errorCb: (err) => {
         const msg =
           err.message || "Không thể cập nhật thông tin hồ sơ quản trị viên.";
+        setNotice(msg);
+        toast.error("Cập nhật thất bại", { description: msg });
+      },
+    });
+
+  const { updateUserMutation, isPending: isSavingRoleProfile } =
+    useUpdateAdminUser({
+      successCb: (updated) => {
+        setProfileFromDto(updated);
+        const mapped = mapDtoToProfile(updated);
+        setProfileDisplay({
+          name: mapped.name,
+          role: mapped.role,
+          email: mapped.email,
+          initials: mapped.initials,
+          permissionLabel: mapped.permissionLabel,
+        });
+        const msg = "Đã lưu cập nhật hồ sơ & vai trò phân quyền.";
+        setNotice(msg);
+        toast.success("Cập nhật hồ sơ thành công", { description: msg });
+      },
+      errorCb: (err) => {
+        const msg =
+          err.message || "Không thể cập nhật thông tin hồ sơ & vai trò.";
         setNotice(msg);
         toast.error("Cập nhật thất bại", { description: msg });
       },
@@ -140,24 +176,23 @@ export function useAdminSettings() {
     });
 
   const handleSaveProfile = (values: ProfileFormValues) => {
-    const initials = buildInitials(values.name);
-    updateProfileMutation.mutate(
-      {
-        full_name: values.name.trim(),
-        email: values.email.trim(),
-      },
-      {
-        onSuccess: () => {
-          setProfileDisplay((prev) => ({
-            ...prev,
-            name: values.name.trim(),
-            role: values.role.trim(),
-            email: values.email.trim(),
-            initials,
-          }));
-        },
-      },
-    );
+    const trimmedName = values.name.trim();
+    const trimmedEmail = values.email.trim();
+
+    if (isAdmin && currentUser && values.role !== currentUser.role) {
+      updateUserMutation.mutate({
+        id: currentUser.id,
+        full_name: trimmedName,
+        email: trimmedEmail,
+        role: values.role,
+      });
+      return;
+    }
+
+    updateProfileMutation.mutate({
+      full_name: trimmedName,
+      email: trimmedEmail,
+    });
   };
 
   const handleChangePassword = (values: ChangePasswordFormValues) => {
@@ -169,6 +204,7 @@ export function useAdminSettings() {
 
   return {
     isLoadingProfile,
+    isAdmin,
     profileDisplay,
     notice,
     setNotice,
@@ -180,7 +216,10 @@ export function useAdminSettings() {
     setShowConfirmPw,
     profileForm,
     passwordForm,
-    isSavingProfile: profileForm.formState.isSubmitting || isSavingProfile,
+    isSavingProfile:
+      profileForm.formState.isSubmitting ||
+      isSavingSelfProfile ||
+      isSavingRoleProfile,
     isChangingPassword:
       passwordForm.formState.isSubmitting || isChangingPassword,
     handleSaveProfile: profileForm.handleSubmit(handleSaveProfile),

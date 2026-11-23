@@ -11,3 +11,5 @@ export const PROJECTS_ADMIN_DETAIL_KEY = "projects_admin_detail" as const;
 export const CONTACTS_QUERY_KEY = "contacts" as const;
 export const CONTACTS_ADMIN_LIST_KEY = "contacts_admin_list" as const;
 export const CONTACTS_ADMIN_STATS_KEY = "contacts_admin_stats" as const;
+
+export const USERS_ADMIN_LIST_KEY = "users_admin_list" as const;

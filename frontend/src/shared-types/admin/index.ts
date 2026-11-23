@@ -1,13 +1,22 @@
 import type {
+  ConsultationLeadStatus,
+  ConsultationServiceType,
+  UserRole,
+} from "../../constants/enums";
+import type {
   ArchitecturalStyle,
   ProjectCategory,
+  ProjectStatus,
   ProjectType,
 } from "../project";
+
+export type { ConsultationLeadStatus, ConsultationServiceType, UserRole };
 
 export type AdminNavIconKey =
   | "dashboard"
   | "projects"
   | "contacts"
+  | "accounts"
   | "settings";
 
 export interface AdminNavItem {
@@ -18,12 +27,25 @@ export interface AdminNavItem {
 }
 
 export interface AdminUserProfile {
+  id?: string;
   name: string;
   role: string;
+  roleCode?: UserRole;
+  isAdmin?: boolean;
   accountTitle: string;
   permissionLabel: string;
   initials: string;
   email: string;
+}
+
+export interface AdminAccount {
+  id: string;
+  fullName: string;
+  email: string;
+  role: UserRole;
+  initials: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface AdminNotificationItem {
@@ -34,18 +56,6 @@ export interface AdminNotificationItem {
   isUnread: boolean;
   href: string;
 }
-
-export type ConsultationLeadStatus =
-  | "pending"
-  | "in_progress"
-  | "scheduled"
-  | "won"
-  | "lost";
-
-export type ConsultationServiceType =
-  | "design"
-  | "construction"
-  | "full_package";
 
 export interface ConsultationLead {
   id: string;
@@ -75,7 +85,7 @@ export interface DashboardMonthlyStat {
   consultationLeads: number;
 }
 
-export type AdminProjectStatusFilter = "all" | "published" | "draft";
+export type AdminProjectStatusFilter = "all" | ProjectStatus;
 export type AdminProjectTypeFilter = "all" | ProjectType;
 export type AdminProjectCategoryFilter = "all" | ProjectCategory;
 export type AdminProjectStyleFilter = "all" | ArchitecturalStyle;

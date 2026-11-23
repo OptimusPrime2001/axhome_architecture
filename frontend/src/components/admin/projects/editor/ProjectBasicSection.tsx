@@ -118,7 +118,7 @@ export const ProjectBasicSection: React.FC<ProjectBasicSectionProps> = ({
           className={`${styles.slugGroup} ${errors.slug ? styles.inputInvalid : ""}`}
         >
           <span className={styles.slugPrefix}>https://axhome.vn/projects/</span>
-          <input
+          <Input
             id="project-slug"
             type="text"
             placeholder="villa-thao-dien-riverside"

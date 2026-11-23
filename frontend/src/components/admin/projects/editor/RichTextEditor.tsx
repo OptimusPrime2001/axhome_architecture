@@ -1,5 +1,6 @@
 "use client";
 
+import { Input, Textarea } from "@components";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -271,7 +272,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
       {/* Inline URL Bar when inserting/editing links */}
       {isLinkBarOpen && !isHtmlMode && (
         <div className={styles.linkPromptBar}>
-          <input
+          <Input
             type="url"
             value={linkUrl}
             onChange={(e) => setLinkUrl(e.target.value)}
@@ -298,7 +299,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
       {/* Visual Canvas or Raw HTML Source */}
       {isHtmlMode ? (
-        <textarea
+        <Textarea
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className={styles.htmlTextarea}

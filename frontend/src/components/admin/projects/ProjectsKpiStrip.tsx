@@ -85,9 +85,7 @@ export const ProjectsKpiStrip: React.FC<ProjectsKpiStripProps> = ({
         </div>
 
         <div className={styles.metricRow}>
-          <span className={styles.metricValue}>
-            {String(totalCount).padStart(2, "0")}
-          </span>
+          <span className={styles.metricValue}>{totalCount}</span>
           <span className={styles.metricUnit}>dự án hệ thống</span>
         </div>
 
@@ -130,9 +128,7 @@ export const ProjectsKpiStrip: React.FC<ProjectsKpiStripProps> = ({
         </div>
 
         <div className={styles.metricRow}>
-          <span className={styles.metricValue}>
-            {String(conceptProjects.length).padStart(2, "0")}
-          </span>
+          <span className={styles.metricValue}>{conceptProjects.length}</span>
           <span className={styles.metricUnit}>hồ sơ phối cảnh</span>
         </div>
 
@@ -164,7 +160,7 @@ export const ProjectsKpiStrip: React.FC<ProjectsKpiStripProps> = ({
 
         <div className={styles.metricRow}>
           <span className={styles.metricValue}>
-            {String(underConstructionProjects.length).padStart(2, "0")}
+            {underConstructionProjects.length}
           </span>
           <span className={styles.metricUnit}>công trường mở</span>
         </div>
@@ -203,9 +199,7 @@ export const ProjectsKpiStrip: React.FC<ProjectsKpiStripProps> = ({
         </div>
 
         <div className={styles.metricRow}>
-          <span className={styles.metricValue}>
-            {String(completedProjects.length).padStart(2, "0")}
-          </span>
+          <span className={styles.metricValue}>{completedProjects.length}</span>
           <span className={styles.metricUnit}>công trình bàn giao</span>
         </div>
 

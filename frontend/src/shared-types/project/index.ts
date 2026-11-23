@@ -2,28 +2,29 @@
 // Architectura - Project Domain Types
 // ==============================================================================
 
-export type ProjectType = "concept" | "under_construction" | "completed";
+import type {
+  ArchitecturalStyle,
+  GallerySpaceCategory,
+  ProjectCategory,
+  ProjectImageType,
+  ProjectStatus,
+  ProjectType,
+} from "../../constants/enums";
 
-export type ArchitecturalStyle =
-  | "modern"
-  | "neoclassic"
-  | "minimalist"
-  | "indochine";
-
-export type ProjectCategory = "villa" | "townhouse" | "mansion";
-
-export type GallerySpaceCategory =
-  | "exterior_day"
-  | "exterior_night"
-  | "living_room"
-  | "pool_garden"
-  | "interior_other";
+export type {
+  ArchitecturalStyle,
+  GallerySpaceCategory,
+  ProjectCategory,
+  ProjectImageType,
+  ProjectStatus,
+  ProjectType,
+};
 
 export interface ProjectImage {
   id: string;
   url: string;
   caption: string;
-  type: "render_3d" | "real_photo";
+  type: ProjectImageType;
   spaceCategory?: GallerySpaceCategory;
   isCover?: boolean;
 }
@@ -98,7 +99,7 @@ export interface Project {
 
   // Status flags
   isFeatured: boolean;
-  status: "draft" | "published";
+  status: ProjectStatus;
   viewCount: number;
   createdAt: string;
 }

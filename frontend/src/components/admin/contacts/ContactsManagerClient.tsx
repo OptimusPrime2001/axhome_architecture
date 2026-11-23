@@ -11,6 +11,7 @@ import {
   SelectValue,
   Skeleton,
 } from "@components";
+import { CONSULTATION_SERVICE_TYPES } from "@constants";
 import type { AdminContactServiceFilter } from "@store";
 import { Download, Plus, Search } from "lucide-react";
 import type React from "react";
@@ -184,11 +185,13 @@ export const ContactsManagerClient: React.FC = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">Tất cả loại dịch vụ</SelectItem>
-                    <SelectItem value="design">Thiết kế kiến trúc</SelectItem>
-                    <SelectItem value="construction">
+                    <SelectItem value={CONSULTATION_SERVICE_TYPES.DESIGN}>
+                      Thiết kế kiến trúc
+                    </SelectItem>
+                    <SelectItem value={CONSULTATION_SERVICE_TYPES.CONSTRUCTION}>
                       Thi công xây dựng
                     </SelectItem>
-                    <SelectItem value="full_package">
+                    <SelectItem value={CONSULTATION_SERVICE_TYPES.FULL_PACKAGE}>
                       Thi công trọn gói
                     </SelectItem>
                   </SelectContent>

@@ -263,7 +263,7 @@ export const ProjectFloorPlansBuilder: React.FC<
                           DIỆN TÍCH SÀN TẦNG *
                         </Label>
                         <div className={sharedStyles.unitBox}>
-                          <input
+                          <Input
                             id={`fp-area-${field.id}`}
                             type="number"
                             min={1}
@@ -333,15 +333,15 @@ export const ProjectFloorPlansBuilder: React.FC<
 
                     {/* Functional Rooms Tag List */}
                     <div className={styles.roomsSection}>
-                      <label
+                      <Label
                         htmlFor={`fp-room-input-${field.id}`}
                         className={sharedStyles.fieldLabel}
                       >
                         DANH SÁCH PHÒNG CHỨC NĂNG ({currentRooms.length})
-                      </label>
+                      </Label>
 
                       <div className={styles.roomInputRow}>
-                        <input
+                        <Input
                           id={`fp-room-input-${field.id}`}
                           type="text"
                           value={roomDrafts[field.id] ?? ""}

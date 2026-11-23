@@ -1,7 +1,19 @@
 "use client";
 
-import { Skeleton, Spinner } from "@components";
-import { COMPANY_INFO } from "@constants";
+import {
+  Button,
+  Input,
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Skeleton,
+  Spinner,
+} from "@components";
+import { COMPANY_INFO, USER_ROLES } from "@constants";
+import type { UserRole } from "@shared-types";
 import {
   Building2,
   CheckCircle2,
@@ -16,12 +28,20 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
+import { Controller } from "react-hook-form";
 import styles from "./AdminSettingsClient.module.scss";
 import { useAdminSettings } from "./useAdminSettings";
+
+const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
+  { value: USER_ROLES.ADMIN, label: "Quản trị viên" },
+  { value: USER_ROLES.EDITOR, label: "Biên tập viên" },
+  { value: USER_ROLES.VIEWER, label: "Người xem" },
+];
 
 export const AdminSettingsClient: React.FC = () => {
   const {
     isLoadingProfile,
+    isAdmin,
     profileDisplay,
     notice,
     setNotice,
@@ -48,12 +68,10 @@ export const AdminSettingsClient: React.FC = () => {
               Bảng điều khiển
             </Link>
             <ChevronRight size={13} aria-hidden="true" />
-            <span className={styles.breadcrumbCurrent}>
-              Tài khoản & Bảo mật
-            </span>
+            <span className={styles.breadcrumbCurrent}>Tài khoản của tôi</span>
           </nav>
 
-          <h1 className={styles.pageTitle}>Tài Khoản & Bảo Mật Hệ Thống</h1>
+          <h1 className={styles.pageTitle}>Tài Khoản Của Tôi</h1>
           <p className={styles.pageSubtitle}>
             Quản lý hồ sơ định danh quản trị viên, mật khẩu ủy quyền truy cập
             CMS và theo dõi trạng thái hạ tầng lưu trữ Cloudflare R2.
@@ -133,16 +151,16 @@ export const AdminSettingsClient: React.FC = () => {
 
                 <div className={styles.formGridTwo}>
                   <div className={styles.fieldGroup}>
-                    <label
+                    <Label
                       htmlFor="admin-profile-name"
                       className={styles.fieldLabel}
                     >
                       HỌ TÊN HIỂN THỊ
-                    </label>
-                    <input
+                    </Label>
+                    <Input
                       id="admin-profile-name"
                       type="text"
-                      className={`${styles.textInput} ${profileForm.formState.errors.name ? styles.inputInvalid : ""}`}
+                      invalid={Boolean(profileForm.formState.errors.name)}
                       {...profileForm.register("name")}
                     />
                     {profileForm.formState.errors.name && (
@@ -153,18 +171,42 @@ export const AdminSettingsClient: React.FC = () => {
                   </div>
 
                   <div className={styles.fieldGroup}>
-                    <label
+                    <Label
                       htmlFor="admin-profile-role"
                       className={styles.fieldLabel}
                     >
-                      CHỨC DANH CHUYÊN MÔN
-                    </label>
-                    <input
-                      id="admin-profile-role"
-                      type="text"
-                      className={`${styles.textInput} ${profileForm.formState.errors.role ? styles.inputInvalid : ""}`}
-                      {...profileForm.register("role")}
+                      VAI TRÒ PHÂN QUYỀN
+                    </Label>
+                    <Controller
+                      control={profileForm.control}
+                      name="role"
+                      render={({ field }) => (
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          disabled={!isAdmin || isSavingProfile}
+                        >
+                          <SelectTrigger
+                            id="admin-profile-role"
+                            invalid={Boolean(profileForm.formState.errors.role)}
+                          >
+                            <SelectValue placeholder="Chọn vai trò" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {ROLE_OPTIONS.map((opt) => (
+                              <SelectItem key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
                     />
+                    {!isAdmin && (
+                      <p className={styles.helperText}>
+                        Chỉ Quản trị viên (Admin) mới có quyền thay đổi vai trò.
+                      </p>
+                    )}
                     {profileForm.formState.errors.role && (
                       <p className={styles.errorText}>
                         {profileForm.formState.errors.role.message}
@@ -174,16 +216,16 @@ export const AdminSettingsClient: React.FC = () => {
                 </div>
 
                 <div className={styles.fieldGroup}>
-                  <label
+                  <Label
                     htmlFor="admin-profile-email"
                     className={styles.fieldLabel}
                   >
                     ĐỊA CHỈ EMAIL ĐĂNG NHẬP CÔNG VỤ
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     id="admin-profile-email"
                     type="email"
-                    className={`${styles.textInput} ${profileForm.formState.errors.email ? styles.inputInvalid : ""}`}
+                    invalid={Boolean(profileForm.formState.errors.email)}
                     {...profileForm.register("email")}
                   />
                   {profileForm.formState.errors.email && (
@@ -194,20 +236,21 @@ export const AdminSettingsClient: React.FC = () => {
                 </div>
 
                 <div className={styles.cardFooter}>
-                  <button
+                  <Button
                     type="submit"
+                    variant="dark"
+                    size="sm"
                     disabled={isSavingProfile}
-                    className={styles.primaryBtn}
+                    leftIcon={
+                      isSavingProfile ? (
+                        <Spinner width={15} height={15} />
+                      ) : (
+                        <CheckCircle2 size={15} aria-hidden="true" />
+                      )
+                    }
                   >
-                    {isSavingProfile ? (
-                      <Spinner width={15} height={15} />
-                    ) : (
-                      <CheckCircle2 size={15} aria-hidden="true" />
-                    )}
-                    <span>
-                      {isSavingProfile ? "Đang lưu..." : "Lưu thông tin hồ sơ"}
-                    </span>
-                  </button>
+                    {isSavingProfile ? "Đang lưu..." : "Lưu thông tin hồ sơ"}
+                  </Button>
                 </div>
               </>
             )}
@@ -234,16 +277,19 @@ export const AdminSettingsClient: React.FC = () => {
             </div>
 
             <div className={styles.fieldGroup}>
-              <label htmlFor="admin-current-pw" className={styles.fieldLabel}>
+              <Label htmlFor="admin-current-pw" className={styles.fieldLabel}>
                 MẬT KHẨU HIỆN TẠI
-              </label>
+              </Label>
               <div className={styles.inputWrapper}>
-                <input
+                <Input
                   id="admin-current-pw"
                   type={showCurrentPw ? "text" : "password"}
                   autoComplete="current-password"
                   placeholder="Nhập mật khẩu đang sử dụng..."
-                  className={`${styles.textInput} ${passwordForm.formState.errors.currentPassword ? styles.inputInvalid : ""}`}
+                  className={styles.passwordInput}
+                  invalid={Boolean(
+                    passwordForm.formState.errors.currentPassword,
+                  )}
                   {...passwordForm.register("currentPassword")}
                 />
                 <button
@@ -264,16 +310,17 @@ export const AdminSettingsClient: React.FC = () => {
 
             <div className={styles.formGridTwo}>
               <div className={styles.fieldGroup}>
-                <label htmlFor="admin-new-pw" className={styles.fieldLabel}>
+                <Label htmlFor="admin-new-pw" className={styles.fieldLabel}>
                   MẬT KHẨU MỚI
-                </label>
+                </Label>
                 <div className={styles.inputWrapper}>
-                  <input
+                  <Input
                     id="admin-new-pw"
                     type={showNewPw ? "text" : "password"}
                     autoComplete="new-password"
                     placeholder="Tối thiểu 8 ký tự (gồm chữ & số)"
-                    className={`${styles.textInput} ${passwordForm.formState.errors.newPassword ? styles.inputInvalid : ""}`}
+                    className={styles.passwordInput}
+                    invalid={Boolean(passwordForm.formState.errors.newPassword)}
                     {...passwordForm.register("newPassword")}
                   />
                   <button
@@ -293,16 +340,19 @@ export const AdminSettingsClient: React.FC = () => {
               </div>
 
               <div className={styles.fieldGroup}>
-                <label htmlFor="admin-confirm-pw" className={styles.fieldLabel}>
+                <Label htmlFor="admin-confirm-pw" className={styles.fieldLabel}>
                   XÁC NHẬN MẬT KHẨU MỚI
-                </label>
+                </Label>
                 <div className={styles.inputWrapper}>
-                  <input
+                  <Input
                     id="admin-confirm-pw"
                     type={showConfirmPw ? "text" : "password"}
                     autoComplete="new-password"
                     placeholder="Nhập lại mật khẩu mới..."
-                    className={`${styles.textInput} ${passwordForm.formState.errors.confirmPassword ? styles.inputInvalid : ""}`}
+                    className={styles.passwordInput}
+                    invalid={Boolean(
+                      passwordForm.formState.errors.confirmPassword,
+                    )}
                     {...passwordForm.register("confirmPassword")}
                   />
                   <button
@@ -328,22 +378,21 @@ export const AdminSettingsClient: React.FC = () => {
             </p>
 
             <div className={styles.cardFooter}>
-              <button
+              <Button
                 type="submit"
+                variant="dark"
+                size="sm"
                 disabled={isChangingPassword}
-                className={styles.primaryBtn}
+                leftIcon={
+                  isChangingPassword ? (
+                    <Spinner width={15} height={15} />
+                  ) : (
+                    <KeyRound size={15} aria-hidden="true" />
+                  )
+                }
               >
-                {isChangingPassword ? (
-                  <Spinner width={15} height={15} />
-                ) : (
-                  <KeyRound size={15} aria-hidden="true" />
-                )}
-                <span>
-                  {isChangingPassword
-                    ? "Đang cập nhật..."
-                    : "Cập nhật mật khẩu"}
-                </span>
-              </button>
+                {isChangingPassword ? "Đang cập nhật..." : "Cập nhật mật khẩu"}
+              </Button>
             </div>
           </form>
         </div>

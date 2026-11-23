@@ -1,0 +1,144 @@
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $color-text-secondary;
+    background-color: $color-surface-bg;
+    border-bottom: 1px solid $color-surface-border;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid $color-surface-border;
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: $color-surface-hover;
+  }
+}
+
+.userCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  background-color: $color-brand-dark;
+  color: $color-text-inverse;
+  font-size: $text-sm;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.userMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fullName {
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.selfTag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: $radius-full;
+  background-color: rgba($color-brand-primary, 0.12);
+  color: $color-brand-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.idSub {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $color-text-muted;
+}
+
+.emailCell,
+.dateCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.actionsCol {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.emptyState {
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.emptyIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-full;
+  background-color: $color-surface-muted;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.emptyTitle {
+  font-size: $text-md;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.emptyDesc {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}

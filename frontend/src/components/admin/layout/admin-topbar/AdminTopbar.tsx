@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge, Input, Menu, toast } from "@components";
-import { ADMIN_ROUTE_TITLES } from "@constants";
+import { ADMIN_ROUTE_TITLES, CONSULTATION_LEAD_STATUSES } from "@constants";
 import { useAdminLeads, useAuthLogout } from "@hooks";
 import { useAdminAuthStore } from "@store";
 import {
@@ -50,7 +50,7 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({ onOpenDrawer }) => {
     title: `Yêu cầu tư vấn mới: ${lead.fullName}`,
     description: `${lead.serviceLabel} — ${lead.location}`,
     timeLabel: lead.relativeTime,
-    isUnread: lead.leadStatus === "pending",
+    isUnread: lead.leadStatus === CONSULTATION_LEAD_STATUSES.PENDING,
     href: "/admin/contacts",
   }));
 
@@ -241,7 +241,7 @@ export const AdminTopbar: React.FC<AdminTopbarProps> = ({ onOpenDrawer }) => {
                 onClick={() => setIsUserMenuOpen(false)}
               >
                 <Settings size={15} aria-hidden="true" />
-                <span>Tài khoản & Bảo mật</span>
+                <span>Tài khoản của tôi</span>
               </Link>
 
               <Link

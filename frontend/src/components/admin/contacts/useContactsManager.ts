@@ -1,6 +1,7 @@
 "use client";
 
 import { toast } from "@components";
+import { CONSULTATION_LEAD_STATUSES } from "@constants";
 import {
   useAdminLeads,
   useSubmitConsultationLead,
@@ -173,11 +174,26 @@ export function useContactsManager() {
 
   const statusTabs: { key: AdminContactStatusFilter; label: string }[] = [
     { key: "all", label: `Tất cả (${statusCounts.all})` },
-    { key: "pending", label: `Chờ xử lý (${statusCounts.pending})` },
-    { key: "in_progress", label: `Đang tư vấn (${statusCounts.in_progress})` },
-    { key: "scheduled", label: `Đã hẹn (${statusCounts.scheduled})` },
-    { key: "won", label: `Đã chốt HĐ (${statusCounts.won})` },
-    { key: "lost", label: `Đã huỷ (${statusCounts.lost})` },
+    {
+      key: CONSULTATION_LEAD_STATUSES.PENDING,
+      label: `Chờ xử lý (${statusCounts.pending})`,
+    },
+    {
+      key: CONSULTATION_LEAD_STATUSES.IN_PROGRESS,
+      label: `Đang tư vấn (${statusCounts.in_progress})`,
+    },
+    {
+      key: CONSULTATION_LEAD_STATUSES.SCHEDULED,
+      label: `Đã hẹn (${statusCounts.scheduled})`,
+    },
+    {
+      key: CONSULTATION_LEAD_STATUSES.WON,
+      label: `Đã chốt HĐ (${statusCounts.won})`,
+    },
+    {
+      key: CONSULTATION_LEAD_STATUSES.LOST,
+      label: `Đã huỷ (${statusCounts.lost})`,
+    },
   ];
 
   return {

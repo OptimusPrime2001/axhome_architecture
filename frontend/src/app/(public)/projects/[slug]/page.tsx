@@ -3,6 +3,7 @@ import {
   ProjectConsultCta,
   ProjectDetailGallery,
   ProjectDetailHero,
+  ProjectDetailJsonLd,
   ProjectDetailStory,
   ProjectFloorPlans,
   ProjectMilestones,
@@ -71,6 +72,7 @@ export default async function ProjectDetailPage({
 
   return (
     <>
+      <ProjectDetailJsonLd project={project} />
       <ProjectDetailHero project={project} />
       <ProjectDetailStory project={project} />
       <ProjectDetailGallery

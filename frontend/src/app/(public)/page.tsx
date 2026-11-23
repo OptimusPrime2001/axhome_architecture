@@ -19,7 +19,7 @@ import {
   WhyChooseUs,
   WorkingProcess,
 } from "@components";
-import { COMPANY_INFO } from "@constants";
+import { COMPANY_INFO, PROJECT_TYPES } from "@constants";
 import type { Project } from "@shared-types";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,11 +39,11 @@ export default async function HomePage() {
 
   const getStatusBadge = (type: string) => {
     switch (type) {
-      case "completed":
+      case PROJECT_TYPES.COMPLETED:
         return <Badge variant="completed">Đã Hoàn Thành</Badge>;
-      case "under_construction":
+      case PROJECT_TYPES.UNDER_CONSTRUCTION:
         return <Badge variant="progress">Đang Thi Công</Badge>;
-      case "concept":
+      case PROJECT_TYPES.CONCEPT:
         return <Badge variant="concept">Bản Vẽ 3D</Badge>;
       default:
         return <Badge variant="neutral">Dự Án</Badge>;
@@ -60,9 +60,10 @@ export default async function HomePage() {
             alt=""
             fill
             priority
+            fetchPriority="high"
+            quality={85}
             sizes="100vw"
             className={styles.heroBackgroundImage}
-            unoptimized
           />
           <div className={styles.heroScrimOverlay} />
           <div className={styles.heroBottomGradient} />

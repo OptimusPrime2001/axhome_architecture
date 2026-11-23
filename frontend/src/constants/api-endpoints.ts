@@ -26,5 +26,9 @@ export const API_ENDPOINTS = {
       STATS: "/admin/contacts/stats",
       BY_ID: (id: string) => `/admin/contacts/${encodeURIComponent(id)}`,
     },
+    USERS: {
+      LIST: "/admin/users",
+      BY_ID: (id: string) => `/admin/users/${encodeURIComponent(id)}`,
+    },
   },
 } as const;

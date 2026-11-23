@@ -1,12 +1,14 @@
 "use client";
 
 import { toast } from "@components";
+import { CONSULTATION_SERVICE_TYPES } from "@constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSubmitConsultationLead } from "@hooks";
 import type { ConsultationServiceType } from "@shared-types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { trackGenerateLead } from "../../../../lib/analytics";
 
 const deepConsultSchema = z.object({
   fullName: z.string().trim().min(1, "Vui lòng nhập họ và tên."),
@@ -44,10 +46,12 @@ type SubmitState = "idle" | "submitted" | "awaiting-contract";
 
 function mapOptionToServiceType(option: string): ConsultationServiceType {
   const normalized = option.toLowerCase();
-  if (normalized.includes("trọn gói")) return "full_package";
-  if (normalized.includes("thiết kế")) return "design";
-  if (normalized.includes("thi công")) return "construction";
-  return "full_package";
+  if (normalized.includes("trọn gói"))
+    return CONSULTATION_SERVICE_TYPES.FULL_PACKAGE;
+  if (normalized.includes("thiết kế")) return CONSULTATION_SERVICE_TYPES.DESIGN;
+  if (normalized.includes("thi công"))
+    return CONSULTATION_SERVICE_TYPES.CONSTRUCTION;
+  return CONSULTATION_SERVICE_TYPES.FULL_PACKAGE;
 }
 
 export function useDeepConsultForm() {
@@ -60,7 +64,11 @@ export function useDeepConsultForm() {
   });
 
   const { submitLeadMutation, isPending } = useSubmitConsultationLead({
-    successCb: () => {
+    successCb: (saved) => {
+      trackGenerateLead({
+        sourcePage: "/contact",
+        serviceType: saved.serviceType,
+      });
       form.reset();
       setSubmitState("submitted");
       toast.success("Gửi yêu cầu thành công", {
