@@ -54,9 +54,7 @@ export const ContactsKpiStrip: React.FC<ContactsKpiStripProps> = ({
               <BellRing size={17} />
             </span>
           </div>
-          <p className={styles.metricValue}>
-            {String(pendingCount).padStart(2, "0")}
-          </p>
+          <p className={styles.metricValue}>{pendingCount}</p>
           <div className={styles.urgentFooter}>
             <span>Cần liên hệ trong 24h</span>
             {pendingCount > 0 && (
@@ -77,9 +75,7 @@ export const ContactsKpiStrip: React.FC<ContactsKpiStripProps> = ({
               <Compass size={17} />
             </span>
           </div>
-          <p className={styles.metricValue}>
-            {String(activeCount).padStart(2, "0")}
-          </p>
+          <p className={styles.metricValue}>{activeCount}</p>
           <p className={styles.metaText}>
             <strong>{scheduledCount}</strong> lịch hẹn khảo sát thực địa
           </p>
@@ -95,9 +91,7 @@ export const ContactsKpiStrip: React.FC<ContactsKpiStripProps> = ({
               <Award size={17} />
             </span>
           </div>
-          <p className={styles.metricValue}>
-            {String(wonCount).padStart(2, "0")}
-          </p>
+          <p className={styles.metricValue}>{wonCount}</p>
           <p className={styles.metaText}>
             Tỷ lệ chuyển đổi: <strong>{winRate}%</strong>
           </p>

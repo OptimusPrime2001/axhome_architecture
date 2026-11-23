@@ -223,14 +223,18 @@
   height: 40px;
   padding: 0 12px;
   border: none;
+  border-radius: 0;
   background: transparent;
   font-family: $font-mono;
   font-size: 13px;
   font-weight: 600;
   color: $color-text-primary;
 
-  &:focus {
+  &:focus,
+  &:focus-visible {
     outline: none;
+    border-color: transparent;
+    box-shadow: none;
   }
 }
 
@@ -273,14 +277,18 @@
   height: 40px;
   padding: 0 12px;
   border: none;
+  border-radius: 0;
   background: transparent;
   font-family: $font-mono;
   font-size: $text-md;
   font-weight: 600;
   color: $color-text-primary;
 
-  &:focus {
+  &:focus,
+  &:focus-visible {
     outline: none;
+    border-color: transparent;
+    box-shadow: none;
   }
 }
 

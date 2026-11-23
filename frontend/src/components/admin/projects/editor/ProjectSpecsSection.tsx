@@ -121,14 +121,14 @@ export const ProjectSpecsSection: React.FC<ProjectSpecsSectionProps> = ({
       {/* Area & Facade */}
       <div className={styles.gridThree}>
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-land-area" className={styles.fieldLabel}>
+          <Label htmlFor="project-land-area" className={styles.fieldLabel}>
             DIỆN TÍCH KHU ĐẤT
             <span className={styles.requiredStar}>*</span>
-          </label>
+          </Label>
           <div
             className={`${styles.unitBox} ${errors.landArea ? styles.inputInvalid : ""}`}
           >
-            <input
+            <Input
               id="project-land-area"
               type="number"
               min={1}
@@ -144,14 +144,14 @@ export const ProjectSpecsSection: React.FC<ProjectSpecsSectionProps> = ({
         </div>
 
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-floor-area" className={styles.fieldLabel}>
+          <Label htmlFor="project-floor-area" className={styles.fieldLabel}>
             TỔNG DIỆN TÍCH SÀN (GFA)
             <span className={styles.requiredStar}>*</span>
-          </label>
+          </Label>
           <div
             className={`${styles.unitBox} ${errors.floorArea ? styles.inputInvalid : ""}`}
           >
-            <input
+            <Input
               id="project-floor-area"
               type="number"
               min={1}
@@ -167,14 +167,14 @@ export const ProjectSpecsSection: React.FC<ProjectSpecsSectionProps> = ({
         </div>
 
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-facade" className={styles.fieldLabel}>
+          <Label htmlFor="project-facade" className={styles.fieldLabel}>
             KHẨU ĐỘ MẶT TIỀN
             <span className={styles.requiredStar}>*</span>
-          </label>
+          </Label>
           <div
             className={`${styles.unitBox} ${errors.facadeWidth ? styles.inputInvalid : ""}`}
           >
-            <input
+            <Input
               id="project-facade"
               type="number"
               min={1}
@@ -193,12 +193,12 @@ export const ProjectSpecsSection: React.FC<ProjectSpecsSectionProps> = ({
       {/* Scale: Floors, Bedrooms, Year */}
       <div className={styles.gridThree}>
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-floors" className={styles.fieldLabel}>
+          <Label htmlFor="project-floors" className={styles.fieldLabel}>
             QUY MÔ TẦNG CAO
             <span className={styles.requiredStar}>*</span>
-          </label>
+          </Label>
           <div className={styles.unitBox}>
-            <input
+            <Input
               id="project-floors"
               type="number"
               min={1}
@@ -214,12 +214,12 @@ export const ProjectSpecsSection: React.FC<ProjectSpecsSectionProps> = ({
         </div>
 
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-bedrooms" className={styles.fieldLabel}>
+          <Label htmlFor="project-bedrooms" className={styles.fieldLabel}>
             SỐ PHÒNG NGỦ
             <span className={styles.requiredStar}>*</span>
-          </label>
+          </Label>
           <div className={styles.unitBox}>
-            <input
+            <Input
               id="project-bedrooms"
               type="number"
               min={0}
@@ -235,16 +235,16 @@ export const ProjectSpecsSection: React.FC<ProjectSpecsSectionProps> = ({
         </div>
 
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-year" className={styles.fieldLabel}>
+          <Label htmlFor="project-year" className={styles.fieldLabel}>
             NĂM HOÀN THÀNH / THIẾT KẾ
             <span className={styles.requiredStar}>*</span>
-          </label>
-          <input
+          </Label>
+          <Input
             id="project-year"
             type="number"
             min={2000}
             max={2035}
-            className={`${styles.textInput} ${errors.completedYear ? styles.inputInvalid : ""}`}
+            invalid={Boolean(errors.completedYear)}
             {...register("completedYear", { valueAsNumber: true })}
           />
           {errors.completedYear && (
@@ -256,15 +256,15 @@ export const ProjectSpecsSection: React.FC<ProjectSpecsSectionProps> = ({
       {/* Lead Architect, Duration, Client Name */}
       <div className={styles.gridThree}>
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-architect" className={styles.fieldLabel}>
+          <Label htmlFor="project-architect" className={styles.fieldLabel}>
             CHỦ TRÌ THIẾT KẾ / CHỈ HUY TRƯỞNG
             <span className={styles.requiredStar}>*</span>
-          </label>
-          <input
+          </Label>
+          <Input
             id="project-architect"
             type="text"
             placeholder="VD: KTS. Trần Hoàng Lâm"
-            className={`${styles.textInput} ${errors.leadArchitect ? styles.inputInvalid : ""}`}
+            invalid={Boolean(errors.leadArchitect)}
             {...register("leadArchitect")}
           />
           {errors.leadArchitect && (
@@ -273,27 +273,25 @@ export const ProjectSpecsSection: React.FC<ProjectSpecsSectionProps> = ({
         </div>
 
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-duration" className={styles.fieldLabel}>
+          <Label htmlFor="project-duration" className={styles.fieldLabel}>
             THỜI LƯỢNG / TIẾN ĐỘ THỰC HIỆN
-          </label>
-          <input
+          </Label>
+          <Input
             id="project-duration"
             type="text"
             placeholder="VD: 14 Tháng (hoặc Dự kiến 12 Tháng)"
-            className={styles.textInput}
             {...register("constructionDuration")}
           />
         </div>
 
         <div className={styles.fieldGroup}>
-          <label htmlFor="project-client" className={styles.fieldLabel}>
+          <Label htmlFor="project-client" className={styles.fieldLabel}>
             CHỦ ĐẦU TƯ (TÙY CHỌN)
-          </label>
-          <input
+          </Label>
+          <Input
             id="project-client"
             type="text"
             placeholder="VD: Gia đình Anh T."
-            className={styles.textInput}
             {...register("clientName")}
           />
         </div>

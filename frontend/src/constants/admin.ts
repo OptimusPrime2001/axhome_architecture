@@ -33,9 +33,9 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     iconKey: "contacts",
   },
   {
-    label: "Tài khoản & Bảo mật",
-    href: "/admin/settings",
-    iconKey: "settings",
+    label: "Quản lý tài khoản",
+    href: "/admin/accounts",
+    iconKey: "accounts",
   },
 ];
 
@@ -44,7 +44,8 @@ export const ADMIN_ROUTE_TITLES: Record<string, string> = {
   "/admin/projects": "Quản lý dự án",
   "/admin/projects/create": "Tạo dự án mới",
   "/admin/contacts": "Yêu cầu tư vấn",
-  "/admin/settings": "Tài khoản & Bảo mật",
+  "/admin/accounts": "Quản lý tài khoản",
+  "/admin/settings": "Tài khoản của tôi",
 };
 
 export const ADMIN_LOGIN_COPY = {

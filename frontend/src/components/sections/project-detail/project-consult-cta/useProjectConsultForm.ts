@@ -1,12 +1,14 @@
 "use client";
 
 import { toast } from "@components";
+import { CONSULTATION_SERVICE_TYPES } from "@constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSubmitConsultationLead } from "@hooks";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { trackGenerateLead } from "../../../../lib/analytics";
 
 const projectConsultSchema = z.object({
   fullName: z.string().trim().min(1, "Vui lòng nhập họ và tên."),
@@ -41,7 +43,12 @@ export function useProjectConsultForm(projectTitle: string) {
   });
 
   const { submitLeadMutation, isPending } = useSubmitConsultationLead({
-    successCb: () => {
+    successCb: (saved) => {
+      trackGenerateLead({
+        sourcePage: pathname || "/projects",
+        serviceType: saved.serviceType,
+        projectTitle,
+      });
       form.reset();
       setSubmitState("submitted");
       toast.success("Gửi yêu cầu thành công", {
@@ -69,7 +76,7 @@ export function useProjectConsultForm(projectTitle: string) {
       fullName: data.fullName,
       phone: data.phone,
       landSize: data.landSize,
-      serviceType: "full_package",
+      serviceType: CONSULTATION_SERVICE_TYPES.FULL_PACKAGE,
       message:
         details || `Quan tâm tư vấn phương án tham chiếu: ${projectTitle}`,
       sourcePage: pathname || "/projects",

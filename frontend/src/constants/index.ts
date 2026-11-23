@@ -3,6 +3,7 @@ export * from "./admin";
 export * from "./api-endpoints";
 export * from "./company";
 export * from "./contact";
+export * from "./enums";
 export * from "./fonts";
 export * from "./home";
 export * from "./navigation";

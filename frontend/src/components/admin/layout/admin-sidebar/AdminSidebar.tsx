@@ -13,6 +13,7 @@ import {
   LogOut,
   MessageSquareText,
   Settings,
+  Users,
   X,
 } from "lucide-react";
 import Image from "next/image";
@@ -30,6 +31,7 @@ const NAV_ICONS: Record<AdminNavIconKey, React.ReactNode> = {
   dashboard: <LayoutGrid size={17} aria-hidden="true" />,
   projects: <FolderKanban size={17} aria-hidden="true" />,
   contacts: <MessageSquareText size={17} aria-hidden="true" />,
+  accounts: <Users size={17} aria-hidden="true" />,
   settings: <Settings size={17} aria-hidden="true" />,
 };
 
@@ -172,17 +174,24 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         </Link>
 
         <div className={styles.userCard}>
-          <div className={styles.avatar} aria-hidden="true">
-            {profile?.initials ?? "AD"}
-          </div>
-          <div className={styles.userInfo}>
-            <p className={styles.userName}>
-              {profile?.name ?? "Quản trị viên"}
-            </p>
-            <p className={styles.userRole}>
-              {profile?.role ?? "Hệ thống quản trị"}
-            </p>
-          </div>
+          <Link
+            href="/admin/settings"
+            className={styles.userProfileLink}
+            onClick={onClose}
+            title="Tài khoản của tôi"
+          >
+            <div className={styles.avatar} aria-hidden="true">
+              {profile?.initials ?? "AD"}
+            </div>
+            <div className={styles.userInfo}>
+              <p className={styles.userName}>
+                {profile?.name ?? "Quản trị viên"}
+              </p>
+              <p className={styles.userRole}>
+                {profile?.role ?? "Hệ thống quản trị"}
+              </p>
+            </div>
+          </Link>
           <button
             type="button"
             className={styles.logoutBtn}

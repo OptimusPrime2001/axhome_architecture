@@ -1,4 +1,5 @@
 import {
+  Input,
   Label,
   Select,
   SelectContent,
@@ -113,16 +114,16 @@ export const ProjectsFilterBar: React.FC<ProjectsFilterBarProps> = ({
       <div className={styles.controlsGrid}>
         {/* Search Input */}
         <div className={styles.fieldGroup}>
-          <label htmlFor="admin-project-search" className={styles.fieldLabel}>
+          <Label htmlFor="admin-project-search" className={styles.fieldLabel}>
             TÌM KIẾM HỒ SƠ & CÔNG TRÌNH
-          </label>
+          </Label>
           <div className={styles.searchBox}>
             <Search
               size={15}
               className={styles.searchIcon}
               aria-hidden="true"
             />
-            <input
+            <Input
               id="admin-project-search"
               type="search"
               value={filters.search}

@@ -14,8 +14,15 @@ import {
   FONT_SPACE_GROTESK,
 } from "@constants";
 import { cn } from "@lib/utils";
+import { GoogleAnalytics } from "@next/third-parties/google";
+
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID?.trim() || "";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(COMPANY_INFO.website),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
     template: `%s | ${COMPANY_INFO.brandName}`,
@@ -38,6 +45,20 @@ export const metadata: Metadata = {
     title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
     description: COMPANY_INFO.description,
     siteName: COMPANY_INFO.brandName,
+    images: [
+      {
+        url: "/images/hero_background.png",
+        width: 1200,
+        height: 630,
+        alt: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
+    description: COMPANY_INFO.description,
+    images: ["/images/hero_background.png"],
   },
 };
 
@@ -67,6 +88,9 @@ export default async function RootLayout({
             </TooltipProvider>
           </MotionProvider>
         </QueryProvider>
+        {GA_MEASUREMENT_ID ? (
+          <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
+        ) : null}
       </body>
     </html>
   );

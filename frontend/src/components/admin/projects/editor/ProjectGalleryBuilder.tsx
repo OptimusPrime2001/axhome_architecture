@@ -190,7 +190,7 @@ export const ProjectGalleryBuilder: React.FC<ProjectGalleryBuilderProps> = ({
         )}
 
         <div className={styles.urlAddRow}>
-          <input
+          <Input
             type="url"
             value={coverUrlDraft}
             onChange={(e) => setCoverUrlDraft(e.target.value)}
@@ -272,7 +272,7 @@ export const ProjectGalleryBuilder: React.FC<ProjectGalleryBuilderProps> = ({
         </div>
 
         <div className={styles.urlAddRow}>
-          <input
+          <Input
             type="url"
             value={galleryUrlDraft}
             onChange={(e) => setGalleryUrlDraft(e.target.value)}

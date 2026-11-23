@@ -1,0 +1,110 @@
+.dialogContent {
+  max-width: 600px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-family: $font-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: $color-text-primary;
+}
+
+.description {
+  font-size: $text-sm;
+  color: $color-text-secondary;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 12px;
+  border-top: 1px solid $color-surface-border;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fieldGroup,
+.fieldFull {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.fieldLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+}
+
+.required {
+  color: $color-error;
+}
+
+.passwordWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordInput {
+  padding-right: 38px;
+}
+
+.eyeBtn {
+  appearance: none;
+  position: absolute;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: $radius-xs;
+  background: transparent;
+  color: $color-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+.errorText {
+  font-size: $text-xs;
+  font-weight: 600;
+  color: $color-error;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid $color-surface-border;
+}

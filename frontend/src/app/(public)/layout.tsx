@@ -3,6 +3,7 @@ import {
   ChatWidget,
   Footer,
   Header,
+  LocalBusinessJsonLd,
   MobileBottomNav,
 } from "@components";
 
@@ -13,6 +14,7 @@ export default function PublicLayout({
 }) {
   return (
     <>
+      <LocalBusinessJsonLd />
       <Header />
       <main>{children}</main>
       <Footer />

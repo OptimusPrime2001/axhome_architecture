@@ -1,0 +1,170 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.pageTitle {
+  font-family: $font-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: $color-text-primary;
+  line-height: 1.2;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 22px;
+  }
+}
+
+.pageSubtitle {
+  margin-top: 6px;
+  font-size: $text-md;
+  color: $color-text-secondary;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.readOnlyPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: $radius-md;
+  background-color: $color-surface-muted;
+  border: 1px solid $color-surface-border;
+  font-size: $text-xs;
+  font-weight: 600;
+  color: $color-text-secondary;
+}
+
+.tableCard {
+  overflow: hidden;
+}
+
+.toolbar {
+  padding: 16px 20px;
+  border-bottom: 1px solid $color-surface-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.roleTabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.roleTab {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: $radius-md;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: $font-sans;
+  font-size: $text-sm;
+  font-weight: 500;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background-color: $color-surface-muted;
+    color: $color-text-primary;
+  }
+}
+
+.tabCount {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: $radius-full;
+  background-color: $color-surface-muted;
+  color: $color-text-secondary;
+}
+
+.roleTabActive {
+  background-color: $color-brand-dark;
+  color: $color-text-inverse;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $color-brand-dark;
+    color: $color-text-inverse;
+  }
+
+  .tabCount {
+    background-color: rgba($color-surface-card, 0.2);
+    color: $color-text-inverse;
+  }
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 260px;
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: $color-text-secondary;
+  pointer-events: none;
+}
+
+.searchInput {
+  padding-left: 36px;
+}
+
+.loadingStack {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.errorBox {
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: $color-text-secondary;
+  font-size: $text-sm;
+}
