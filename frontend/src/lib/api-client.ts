@@ -31,7 +31,15 @@ export function isApiConfigured(): boolean {
   return Boolean(process.env.NEXT_PUBLIC_API_URL?.trim());
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+function resolveApiBaseUrl(): string {
+  const rawBase = (
+    process.env.NEXT_PUBLIC_API_URL?.trim() || "http://localhost:8080"
+  ).replace(/\/+$/, "");
+
+  return rawBase.endsWith("/api/v1") ? rawBase : `${rawBase}/api/v1`;
+}
+
+const BASE_URL = resolveApiBaseUrl();
 /**
  * Shared Axios Instance configured with `withCredentials: true` so the browser
  * automatically attaches & receives HttpOnly cookies (`access_token` & `refresh_token`).
