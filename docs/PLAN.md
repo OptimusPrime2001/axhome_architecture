@@ -262,4 +262,4 @@ erDiagram
 
 - [x] **Task 7.1:** Nâng cấp `backend/config/config.go` hỗ trợ `DATABASE_URL` (Production Neon/Supabase) song song `DB_HOST/...` (Local Dev), tự động nhận biến `PORT` của Render/Koyeb, và tạo `backend/.env.example`, `frontend/.env.example`.
 - [x] **Task 7.2:** Tạo `backend/Dockerfile` (multi-stage build gọn nhẹ ~15MB) và `backend/render.yaml` để deploy Go Backend lên Render / Koyeb Free Tier.
-- [ ] **Task 7.3:** Cấu hình `frontend/next.config.ts` (`images.remotePatterns` cho Cloudflare R2) và hoàn thiện deploy thực tế theo hướng dẫn `docs/DEPLOY_GUIDE.md` (Vercel + Render/Koyeb + Neon/Supabase + Cloudflare R2 + UptimeRobot).
+- [x] **Task 7.3:** Cấu hình `frontend/next.config.ts` (`images.remotePatterns` cho Cloudflare R2) và hoàn thiện deploy thực tế theo hướng dẫn `docs/DEPLOY_GUIDE.md` (Vercel + Render/Koyeb + Neon/Supabase + Cloudflare R2 + UptimeRobot).
