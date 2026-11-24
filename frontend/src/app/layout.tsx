@@ -70,9 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
     description: COMPANY_INFO.description,
-    images: [
-      `${R2_IMG_URL}/banner/hero_background.jpg`,
-    ],
+    images: [`${R2_IMG_URL}/banner/hero_background.jpg`],
   },
 };
 

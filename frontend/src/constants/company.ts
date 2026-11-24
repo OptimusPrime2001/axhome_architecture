@@ -31,7 +31,9 @@ export const COMPANY_INFO = {
   hotline: "0947712626",
   hotlineFormatted: "0947 712 626",
   email: "Kientrucaxhome@gmail.com",
-  website: (process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://axhome.vn").replace(/\/+$/, ""),
+  website: (
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://axhome.vn"
+  ).replace(/\/+$/, ""),
   workingHours: "Thứ Hai – Thứ Bảy: 08:00 – 18:00 (Hỗ trợ Hotline 24/7)",
 
   offices: [
