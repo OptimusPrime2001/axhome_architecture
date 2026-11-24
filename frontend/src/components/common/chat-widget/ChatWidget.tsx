@@ -1,6 +1,7 @@
 "use client";
 import { TooltipHost } from "@components";
 import { MESSENGER_LINK, ZALO_LINK, ZALO_PHONE } from "@constants";
+import { trackContactClick } from "@lib/analytics";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./ChatWidget.module.scss";
@@ -13,8 +14,7 @@ export const ChatWidget: React.FC = () => {
         <a
           className={styles.chat_button}
           href={`tel:${ZALO_PHONE}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={() => trackContactClick("hotline")}
         >
           <Image
             unoptimized
@@ -22,7 +22,7 @@ export const ChatWidget: React.FC = () => {
             src={phoneGift}
             width={60}
             height={60}
-            alt="Messenger"
+            alt="Gọi Hotline Axhome"
           />
         </a>
       </TooltipHost>
@@ -32,6 +32,7 @@ export const ChatWidget: React.FC = () => {
           href={MESSENGER_LINK}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackContactClick("messenger")}
         >
           <Image
             src="https://cdn.shopify.com/s/files/1/0709/6211/8897/files/SyMC7xrWfi4u2iWOB3uAqjPxeuIlC8qooKrBbLIyPkpbmSMi116495.png?v=1729043757"
@@ -47,6 +48,7 @@ export const ChatWidget: React.FC = () => {
           href={ZALO_LINK}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackContactClick("zalo")}
         >
           <Image
             src="https://cdn.shopify.com/s/files/1/0709/6211/8897/files/zalo_3814521.png?v=1729013894"

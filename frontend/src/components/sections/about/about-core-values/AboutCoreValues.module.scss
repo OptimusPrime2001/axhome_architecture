@@ -106,6 +106,14 @@
   background-color: $color-surface-muted;
   color: $color-brand-primary;
   margin-bottom: 20px;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.card:hover .iconBox {
+  background-color: $color-brand-primary;
+  color: $color-text-inverse;
 }
 
 .tag {

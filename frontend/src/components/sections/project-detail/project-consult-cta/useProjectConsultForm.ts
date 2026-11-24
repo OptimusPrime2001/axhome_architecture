@@ -8,7 +8,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { trackGenerateLead } from "../../../../lib/analytics";
+import { trackGenerateLead } from "@lib/analytics";
+import { buildAttributedSourcePage } from "@lib/utm";
 
 const projectConsultSchema = z.object({
   fullName: z.string().trim().min(1, "Vui lòng nhập họ và tên."),
@@ -45,7 +46,9 @@ export function useProjectConsultForm(projectTitle: string) {
   const { submitLeadMutation, isPending } = useSubmitConsultationLead({
     successCb: (saved) => {
       trackGenerateLead({
-        sourcePage: pathname || "/projects",
+        sourcePage:
+          saved.sourcePage ||
+          buildAttributedSourcePage(pathname || "/projects"),
         serviceType: saved.serviceType,
         projectTitle,
       });
@@ -79,7 +82,7 @@ export function useProjectConsultForm(projectTitle: string) {
       serviceType: CONSULTATION_SERVICE_TYPES.FULL_PACKAGE,
       message:
         details || `Quan tâm tư vấn phương án tham chiếu: ${projectTitle}`,
-      sourcePage: pathname || "/projects",
+      sourcePage: buildAttributedSourcePage(pathname || "/projects"),
       referencedProjectTitle: projectTitle,
     });
   };

@@ -1,5 +1,10 @@
-import { COMPANY_INFO } from "@constants";
-import type { Project } from "@shared-types";
+import {
+  COMPANY_INFO,
+  MESSENGER_LINK,
+  R2_IMG_URL,
+  ZALO_LINK,
+} from "@constants";
+import type { ContactFaqItem, Project } from "@shared-types";
 
 function serializeJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
@@ -17,22 +22,59 @@ export function LocalBusinessJsonLd() {
     description: COMPANY_INFO.description,
     url: baseUrl,
     logo: `${baseUrl}/images/axhome_logo.png`,
-    image: "https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg",
+    image: `${R2_IMG_URL}/banner/hero_background.jpg`,
     telephone: COMPANY_INFO.hotline,
     email: COMPANY_INFO.email,
     slogan: COMPANY_INFO.slogan,
+    priceRange: "$$$",
     address: mainOffice
       ? {
           "@type": "PostalAddress",
           streetAddress: mainOffice.address,
+          addressLocality: "Hà Đông",
+          addressRegion: "Hà Nội",
           addressCountry: "VN",
         }
       : undefined,
-    openingHours: COMPANY_INFO.workingHours,
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "08:00",
+        closes: "18:00",
+      },
+    ],
+    sameAs: [MESSENGER_LINK, ZALO_LINK],
     areaServed: {
       "@type": "Country",
       name: "Vietnam",
     },
+  };
+
+  return <script type="application/ld+json">{serializeJsonLd(jsonLd)}</script>;
+}
+
+export function FaqJsonLd({ items }: { items: ContactFaqItem[] }) {
+  if (items.length === 0) return null;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   return <script type="application/ld+json">{serializeJsonLd(jsonLd)}</script>;

@@ -93,10 +93,13 @@
   background-color: $color-surface-muted;
   color: $color-brand-primary;
   margin-bottom: 24px;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
-.iconBoxDark {
-  background-color: $color-surface-dark;
+.card:hover .iconBox {
+  background-color: $color-brand-primary;
   color: $color-text-inverse;
 }
 

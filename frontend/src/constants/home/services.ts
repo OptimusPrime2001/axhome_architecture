@@ -3,6 +3,7 @@
 // Nguồn: Figma node 1:1416 (Section - 3. SERVICES SECTION)
 // ==============================================================================
 
+import { R2_IMG_URL } from "@constants";
 import type { HomeServiceItem } from "@shared-types";
 
 export const HOME_SERVICES_HEADER = {
@@ -26,8 +27,7 @@ export const HOME_SERVICES: HomeServiceItem[] = [
     ],
     ctaLabel: "Khám phá dịch vụ",
     href: "/projects",
-    imageUrl:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80",
+    imageUrl: `${R2_IMG_URL}/banner/noi_that.webp`,
     imageAlt: "Thiết kế kiến trúc biệt thự cao cấp",
   },
   {
@@ -60,8 +60,7 @@ export const HOME_SERVICES: HomeServiceItem[] = [
     ],
     ctaLabel: "Xem công trình thực tế",
     href: "/projects",
-    imageUrl:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80",
+    imageUrl: `${R2_IMG_URL}/banner/thi_cong_tron_goi.jpg`,
     imageAlt: "Thi công trọn gói biệt thự và dinh thự",
   },
 ];

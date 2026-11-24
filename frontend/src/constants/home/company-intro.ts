@@ -3,7 +3,7 @@
 // Nguồn: Figma node 1:1342 (Section - 2. COMPANY INTRODUCTION)
 // ==============================================================================
 
-import { PROJECT_DONE_COUNT } from "@constants";
+import { PROJECT_DONE_COUNT, R2_IMG_URL } from "@constants";
 import type { CompanyIntroContent, CompanyStatItem } from "@shared-types";
 
 export const COMPANY_INTRO_CONTENT: CompanyIntroContent = {
@@ -18,7 +18,7 @@ export const COMPANY_INTRO_CONTENT: CompanyIntroContent = {
     author: "— KTS. TRẦN HOÀNG LÂM, GIÁM ĐỐC SÁNG TẠO",
   },
   image: {
-    url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    url: `${R2_IMG_URL}/banner/triet_ly_kien_tao.jpg`,
     alt: "Axhome Design Atelier — Không gian kiến trúc đương đại",
   },
   floatingBadge: {

@@ -3,6 +3,7 @@
 import { AnimateIcon } from "@animate-ui/react/icons";
 import { Button, X } from "@components";
 import { COMPANY_INFO, MAIN_NAV_ITEMS } from "@constants";
+import { trackContactClick } from "@lib/analytics";
 import Link from "next/link";
 import type React from "react";
 import styles from "./MobileDrawer.module.scss";
@@ -75,6 +76,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             <a
               href={`tel:${COMPANY_INFO.hotline}`}
               className={styles.contactValue}
+              onClick={() => trackContactClick("hotline")}
             >
               {COMPANY_INFO.hotlineFormatted}
             </a>

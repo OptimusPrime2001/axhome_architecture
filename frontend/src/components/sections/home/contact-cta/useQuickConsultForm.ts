@@ -8,7 +8,8 @@ import type { ConsultationServiceType } from "@shared-types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { trackGenerateLead } from "../../../../lib/analytics";
+import { trackGenerateLead } from "@lib/analytics";
+import { buildAttributedSourcePage } from "@lib/utm";
 
 const contactFormSchema = z.object({
   fullName: z.string().trim().min(1, "Vui lòng nhập họ và tên."),
@@ -56,7 +57,7 @@ export function useQuickConsultForm() {
   const { submitLeadMutation, isPending } = useSubmitConsultationLead({
     successCb: (saved) => {
       trackGenerateLead({
-        sourcePage: "/",
+        sourcePage: saved.sourcePage || buildAttributedSourcePage("/"),
         serviceType: saved.serviceType,
       });
       form.reset();
@@ -82,7 +83,7 @@ export function useQuickConsultForm() {
       message: [data.projectNeed, data.notes?.trim()]
         .filter(Boolean)
         .join(" — "),
-      sourcePage: "/",
+      sourcePage: buildAttributedSourcePage("/"),
     });
   };
 

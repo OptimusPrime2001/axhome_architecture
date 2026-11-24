@@ -9,6 +9,7 @@ import {
   ProjectMilestones,
   RelatedProjects,
 } from "@components";
+import { ProjectDetailTracker } from "@components/sections/project-detail/ProjectDetailTracker";
 import { COMPANY_INFO } from "@constants";
 import type { Project } from "@shared-types";
 import type { Metadata } from "next";
@@ -47,12 +48,27 @@ export async function generateMetadata({
     };
   }
 
+  const seoTitle = project.seoTitle || project.title;
+  const seoDescription = project.seoDescription || project.excerpt;
+  const canonicalPath = `/projects/${project.slug}`;
+
   return {
-    title: project.seoTitle || project.title,
-    description: project.seoDescription || project.excerpt,
+    title: seoTitle,
+    description: seoDescription,
+    alternates: {
+      canonical: canonicalPath,
+    },
     openGraph: {
-      title: `${project.seoTitle || project.title} | ${COMPANY_INFO.brandName}`,
-      description: project.seoDescription || project.excerpt,
+      type: "article",
+      url: canonicalPath,
+      title: `${seoTitle} | ${COMPANY_INFO.brandName}`,
+      description: seoDescription,
+      images: [project.coverImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${seoTitle} | ${COMPANY_INFO.brandName}`,
+      description: seoDescription,
       images: [project.coverImage],
     },
   };
@@ -73,6 +89,11 @@ export default async function ProjectDetailPage({
   return (
     <>
       <ProjectDetailJsonLd project={project} />
+      <ProjectDetailTracker
+        slug={project.slug}
+        title={project.title}
+        category={project.category}
+      />
       <ProjectDetailHero project={project} />
       <ProjectDetailStory project={project} />
       <ProjectDetailGallery

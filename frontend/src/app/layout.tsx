@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@styles/index.scss";
 import {
+  MetaPixel,
   MotionProvider,
   QueryProvider,
   Toaster,
@@ -10,13 +11,16 @@ import {
   COMPANY_INFO,
   FONT_BE_VIETNAM_PRO,
   FONT_GOOGLE_SANS,
-  FONT_PLAYFAIR,
   FONT_SPACE_GROTESK,
+  R2_IMG_URL,
 } from "@constants";
 import { cn } from "@lib/utils";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID?.trim() || "";
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim() || "";
+const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() || "";
 
 export const metadata: Metadata = {
   metadataBase: new URL(COMPANY_INFO.website),
@@ -26,9 +30,6 @@ export const metadata: Metadata = {
       { url: "/icon.png", type: "image/png", sizes: "192x192" },
     ],
     shortcut: "/favicon.svg",
-  },
-  alternates: {
-    canonical: "/",
   },
   title: {
     default: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
@@ -40,9 +41,13 @@ export const metadata: Metadata = {
     "thi công trọn gói",
     "kiến trúc nhà phố",
     "bản vẽ kiến trúc",
-    "xây nhà trọn gói tp hcm",
+    "xây nhà trọn gói hà nội",
+    "thiết kế kiến trúc hà nội",
     "axhome",
   ],
+  ...(GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
+    : {}),
   authors: [{ name: COMPANY_INFO.brandName }],
   creator: COMPANY_INFO.brandName,
   openGraph: {
@@ -54,7 +59,7 @@ export const metadata: Metadata = {
     siteName: COMPANY_INFO.brandName,
     images: [
       {
-        url: "https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg",
+        url: `${R2_IMG_URL}/banner/hero_background.jpg`,
         width: 1200,
         height: 630,
         alt: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
@@ -65,7 +70,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
     description: COMPANY_INFO.description,
-    images: ["https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg"],
+    images: [
+      `${R2_IMG_URL}/banner/hero_background.jpg`,
+    ],
   },
 };
 
@@ -79,11 +86,7 @@ export default async function RootLayout({
   return (
     <html
       lang="vi"
-      className={cn(
-        FONT_PLAYFAIR.variable,
-        FONT_SPACE_GROTESK.variable,
-        FONT_GOOGLE_SANS.variable,
-      )}
+      className={cn(FONT_SPACE_GROTESK.variable, FONT_GOOGLE_SANS.variable)}
       data-scroll-behavior="smooth"
     >
       <head />
@@ -96,9 +99,11 @@ export default async function RootLayout({
             </TooltipProvider>
           </MotionProvider>
         </QueryProvider>
+        {GTM_ID ? <GoogleTagManager gtmId={GTM_ID} /> : null}
         {GA_MEASUREMENT_ID ? (
           <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
         ) : null}
+        <MetaPixel />
       </body>
     </html>
   );

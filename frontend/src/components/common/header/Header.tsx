@@ -12,6 +12,7 @@ import {
 import { Menu } from "@components/animate-ui";
 import { Button, Container } from "@components/ui";
 import { COMPANY_INFO, MAIN_NAV_ITEMS } from "@constants";
+import { trackContactClick } from "@lib/analytics";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -69,6 +70,7 @@ export const Header: React.FC = () => {
                 href={`tel:${COMPANY_INFO.hotline}`}
                 className={styles.hotlineLink}
                 aria-label={`Hotline: ${COMPANY_INFO.hotlineFormatted}`}
+                onClick={() => trackContactClick("hotline")}
               >
                 <span className={styles.hotlineLabel}>Hotline 24/7</span>
                 <span className={styles.hotlineNumber}>

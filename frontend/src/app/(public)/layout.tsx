@@ -5,7 +5,9 @@ import {
   Header,
   LocalBusinessJsonLd,
   MobileBottomNav,
+  UtmTracker,
 } from "@components";
+import { Suspense } from "react";
 
 export default function PublicLayout({
   children,
@@ -15,6 +17,9 @@ export default function PublicLayout({
   return (
     <>
       <LocalBusinessJsonLd />
+      <Suspense fallback={null}>
+        <UtmTracker />
+      </Suspense>
       <Header />
       <main>{children}</main>
       <Footer />
