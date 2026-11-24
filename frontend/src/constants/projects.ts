@@ -1,4 +1,5 @@
 import type { Project } from "@shared-types";
+import { PROJECT_DONE_COUNT } from "./company";
 
 export const PROJECT_TYPE_LABELS: Record<Project["projectType"], string> = {
   concept: "Bản Vẽ 3D",
@@ -32,7 +33,7 @@ export const PROJECTS_HERO_CONTENT = {
   highlights: [
     {
       id: "hl-projects",
-      value: 280,
+      value: PROJECT_DONE_COUNT,
       suffix: "+",
       label: "Công trình hoàn thiện",
       iconKey: "projects" as const,
@@ -71,7 +72,7 @@ export const PROJECTS_STANDARDS_HEADER = {
 export const PROJECTS_STANDARDS = [
   {
     id: "std-1",
-    title: "100% Hồ sơ bóc tách chuẩn xác",
+    title: "Hồ sơ bóc tách chuẩn xác",
     description:
       "Hồ sơ tích hợp trọn vẹn 4 bộ môn: Kiến trúc, Kết cấu an toàn vi mô, Điện nước MEP âm tường và Bố trí cảnh quan chi tiết từng milimet trước khi khởi công.",
     iconKey: "blueprint" as const,
@@ -85,7 +86,7 @@ export const PROJECTS_STANDARDS = [
   },
   {
     id: "std-3",
-    title: "Không phát sinh chi phí hợp đồng",
+    title: "Không phát sinh chi phí thêm",
     description:
       "Bảng dự toán bóc tách chi tiết từng hạng mục từ thiết kế tới thi công hoàn chỉnh, cam kết bảo lưu đơn giá và đền bù hợp đồng nếu chậm tiến độ.",
     iconKey: "transparent" as const,

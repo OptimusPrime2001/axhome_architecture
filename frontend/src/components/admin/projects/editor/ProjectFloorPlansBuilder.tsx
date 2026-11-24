@@ -1,7 +1,8 @@
 "use client";
 
 import { Button, Input, Label, Textarea } from "@components";
-import { uploadProjectImage } from "@lib/media-upload";
+import { useDeleteMedia, useUploadMedia } from "@hooks";
+import { validateImageFile } from "@lib";
 import {
   ArrowDown,
   ArrowUp,
@@ -13,7 +14,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import type React from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { type UseFormReturn, useFieldArray } from "react-hook-form";
 import sharedStyles from "./EditorShared.module.scss";
 import styles from "./ProjectFloorPlansBuilder.module.scss";
@@ -45,8 +46,12 @@ export const ProjectFloorPlansBuilder: React.FC<
   });
 
   const floorPlansValues = watch("floorPlans");
+  const sessionUploadedUrlsRef = useRef<Set<string>>(new Set());
   const [roomDrafts, setRoomDrafts] = useState<Record<string, string>>({});
   const [uploadError, setUploadError] = useState<string | null>(null);
+
+  const { uploadMediaMutation } = useUploadMedia();
+  const { deleteMediaMutation } = useDeleteMedia();
 
   const handleAddFloorPlan = () => {
     const nextFloorNum = planFields.length + 1;
@@ -65,17 +70,49 @@ export const ProjectFloorPlansBuilder: React.FC<
     files: FileList | null,
   ) => {
     if (!files || files.length === 0) return;
+    const file = files[0];
+    const validationError = validateImageFile(file);
+    if (validationError) {
+      setUploadError(validationError);
+      return;
+    }
+
     setUploadError(null);
     try {
-      const uploaded = await uploadProjectImage(files[0], "floor-plan");
+      const previousUrl = floorPlansValues[index]?.imageUrl;
+      const uploaded = await uploadMediaMutation.mutateAsync({
+        file,
+        category: "floor-plan",
+      });
+      if (!uploaded?.url) {
+        throw new Error(
+          "Phản hồi từ máy chủ lưu trữ không chứa đường dẫn ảnh.",
+        );
+      }
+
+      sessionUploadedUrlsRef.current.add(uploaded.url);
       setValue(`floorPlans.${index}.imageUrl`, uploaded.url, {
         shouldDirty: true,
         shouldValidate: true,
       });
+
+      if (previousUrl && sessionUploadedUrlsRef.current.has(previousUrl)) {
+        sessionUploadedUrlsRef.current.delete(previousUrl);
+        deleteMediaMutation.mutate({ url: previousUrl });
+      }
     } catch (err) {
       setUploadError(
         err instanceof Error ? err.message : "Không thể tải ảnh bản vẽ.",
       );
+    }
+  };
+
+  const handleRemoveFloorPlan = (index: number) => {
+    const removedUrl = floorPlansValues[index]?.imageUrl;
+    removePlan(index);
+    if (removedUrl && sessionUploadedUrlsRef.current.has(removedUrl)) {
+      sessionUploadedUrlsRef.current.delete(removedUrl);
+      deleteMediaMutation.mutate({ url: removedUrl });
     }
   };
 
@@ -182,7 +219,7 @@ export const ProjectFloorPlansBuilder: React.FC<
 
                     <button
                       type="button"
-                      onClick={() => removePlan(index)}
+                      onClick={() => handleRemoveFloorPlan(index)}
                       className={`${styles.iconBtn} ${styles.iconBtnDanger}`}
                       title="Xóa mặt bằng này"
                       aria-label="Xóa mặt bằng"

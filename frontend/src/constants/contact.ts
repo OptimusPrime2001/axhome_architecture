@@ -7,7 +7,7 @@ import type {
 } from "@shared-types";
 
 export const MESSENGER_ID = "61570966773480";
-export const ZALO_PHONE = "0947 712 626";
+export const ZALO_PHONE = "0767247666";
 export const MESSENGER_LINK = `https://m.me/${MESSENGER_ID}`;
 export const ZALO_LINK = `https://zalo.me/${ZALO_PHONE}`;
 export const CONTACT_HERO_CONTENT = {

@@ -26,6 +26,10 @@ export const API_ENDPOINTS = {
       STATS: "/admin/contacts/stats",
       BY_ID: (id: string) => `/admin/contacts/${encodeURIComponent(id)}`,
     },
+    MEDIA: {
+      UPLOAD: "/admin/media/upload",
+      DELETE: "/admin/media",
+    },
     USERS: {
       LIST: "/admin/users",
       BY_ID: (id: string) => `/admin/users/${encodeURIComponent(id)}`,

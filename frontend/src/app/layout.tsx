@@ -20,6 +20,13 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID?.trim() || "";
 
 export const metadata: Metadata = {
   metadataBase: new URL(COMPANY_INFO.website),
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png", sizes: "192x192" },
+    ],
+    shortcut: "/favicon.svg",
+  },
   alternates: {
     canonical: "/",
   },
@@ -47,7 +54,7 @@ export const metadata: Metadata = {
     siteName: COMPANY_INFO.brandName,
     images: [
       {
-        url: "/images/hero_background.png",
+        url: "https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg",
         width: 1200,
         height: 630,
         alt: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
@@ -58,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
     description: COMPANY_INFO.description,
-    images: ["/images/hero_background.png"],
+    images: ["https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg"],
   },
 };
 
@@ -77,6 +84,7 @@ export default async function RootLayout({
         FONT_SPACE_GROTESK.variable,
         FONT_GOOGLE_SANS.variable,
       )}
+      data-scroll-behavior="smooth"
     >
       <head />
       <body className={FONT_BE_VIETNAM_PRO.className}>

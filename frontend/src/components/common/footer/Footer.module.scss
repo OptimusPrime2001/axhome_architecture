@@ -60,7 +60,7 @@
 
   .slogan {
     font-size: $text-base;
-    color: $color-brand-light;
+    color: $color-text-muted;
     font-weight: 500;
     line-height: 1.4;
   }
@@ -107,6 +107,7 @@
       font-size: $text-sm;
       color: $color-text-inverse-muted;
       transition: color 0.15s ease;
+      font-weight: 600;
 
       &:hover {
         color: $color-brand-light;

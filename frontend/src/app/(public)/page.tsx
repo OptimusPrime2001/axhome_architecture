@@ -13,6 +13,7 @@ import {
   ScrollReveal,
   SectionHeader,
   ServicesSection,
+  Skeleton,
   StaggerGroup,
   StaggerItem,
   TestimonialsSection,
@@ -23,9 +24,33 @@ import { COMPANY_INFO, PROJECT_TYPES } from "@constants";
 import type { Project } from "@shared-types";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import styles from "./page.module.scss";
 
-export default async function HomePage() {
+function getStatusBadge(type: string) {
+  switch (type) {
+    case PROJECT_TYPES.COMPLETED:
+      return <Badge variant="completed">Đã Hoàn Thành</Badge>;
+    case PROJECT_TYPES.UNDER_CONSTRUCTION:
+      return <Badge variant="progress">Đang Thi Công</Badge>;
+    case PROJECT_TYPES.CONCEPT:
+      return <Badge variant="concept">Bản Vẽ 3D</Badge>;
+    default:
+      return <Badge variant="neutral">Dự Án</Badge>;
+  }
+}
+
+function FeaturedProjectsSkeleton() {
+  return (
+    <div className={styles.projectsGrid}>
+      {[1, 2, 3].map((key) => (
+        <Skeleton key={key} style={{ height: "420px", borderRadius: "12px" }} />
+      ))}
+    </div>
+  );
+}
+
+async function FeaturedProjectsGrid() {
   let featuredProjects: Project[] = [];
 
   try {
@@ -34,29 +59,71 @@ export default async function HomePage() {
       featuredProjects = res.items;
     }
   } catch {
-    featuredProjects = [];
+    // Render empty state if Go backend is temporarily unavailable
   }
 
-  const getStatusBadge = (type: string) => {
-    switch (type) {
-      case PROJECT_TYPES.COMPLETED:
-        return <Badge variant="completed">Đã Hoàn Thành</Badge>;
-      case PROJECT_TYPES.UNDER_CONSTRUCTION:
-        return <Badge variant="progress">Đang Thi Công</Badge>;
-      case PROJECT_TYPES.CONCEPT:
-        return <Badge variant="concept">Bản Vẽ 3D</Badge>;
-      default:
-        return <Badge variant="neutral">Dự Án</Badge>;
-    }
-  };
+  return (
+    <StaggerGroup className={styles.projectsGrid}>
+      {featuredProjects.map((project) => (
+        <StaggerItem key={project.id}>
+          <Link
+            href={`/projects/${project.slug}`}
+            className={styles.projectCard}
+          >
+            <div className={styles.imageWrapper}>
+              <Image
+                src={project.coverImage}
+                alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className={styles.cardImage}
+              />
+              <div className={styles.badgeOverlay}>
+                {getStatusBadge(project.projectType)}
+              </div>
+            </div>
 
+            <div className={styles.cardContent}>
+              <span className={styles.metaLocation}>{project.city}</span>
+              <h3 className={styles.cardTitle}>{project.title}</h3>
+              <p className={styles.cardExcerpt}>{project.excerpt}</p>
+
+              <div className={styles.specRow}>
+                <div className={styles.specItem}>
+                  <span className={styles.specLabel}>Diện tích</span>
+                  <span className={styles.specValue}>
+                    {project.landArea} m²
+                  </span>
+                </div>
+                <div className={styles.specItem}>
+                  <span className={styles.specLabel}>Quy mô</span>
+                  <span className={styles.specValue}>
+                    {project.floorsCount} Tầng
+                  </span>
+                </div>
+                <div className={styles.specItem}>
+                  <span className={styles.specLabel}>Mặt tiền</span>
+                  <span className={styles.specValue}>
+                    {project.facadeWidth} m
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </StaggerItem>
+      ))}
+    </StaggerGroup>
+  );
+}
+
+export default function HomePage() {
   return (
     <>
       {/* 1. HERO SECTION (Figma node 1:1294) */}
       <section className={styles.heroSection}>
         <div className={styles.heroVisualBackdrop} aria-hidden="true">
           <Image
-            src="/images/hero_background.png"
+            src="https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg"
             alt=""
             fill
             priority
@@ -149,57 +216,9 @@ export default async function HomePage() {
             />
           </ScrollReveal>
 
-          <StaggerGroup className={styles.projectsGrid}>
-            {featuredProjects.map((project) => (
-              <StaggerItem key={project.id}>
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className={styles.projectCard}
-                >
-                  <div className={styles.imageWrapper}>
-                    <Image
-                      src={project.coverImage}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className={styles.cardImage}
-                      unoptimized
-                    />
-                    <div className={styles.badgeOverlay}>
-                      {getStatusBadge(project.projectType)}
-                    </div>
-                  </div>
-
-                  <div className={styles.cardContent}>
-                    <span className={styles.metaLocation}>{project.city}</span>
-                    <h3 className={styles.cardTitle}>{project.title}</h3>
-                    <p className={styles.cardExcerpt}>{project.excerpt}</p>
-
-                    <div className={styles.specRow}>
-                      <div className={styles.specItem}>
-                        <span className={styles.specLabel}>Diện tích</span>
-                        <span className={styles.specValue}>
-                          {project.landArea} m²
-                        </span>
-                      </div>
-                      <div className={styles.specItem}>
-                        <span className={styles.specLabel}>Quy mô</span>
-                        <span className={styles.specValue}>
-                          {project.floorsCount} Tầng
-                        </span>
-                      </div>
-                      <div className={styles.specItem}>
-                        <span className={styles.specLabel}>Mặt tiền</span>
-                        <span className={styles.specValue}>
-                          {project.facadeWidth} m
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
+          <Suspense fallback={<FeaturedProjectsSkeleton />}>
+            <FeaturedProjectsGrid />
+          </Suspense>
 
           <ScrollReveal delay={0.1}>
             <div className={styles.viewAllContainer}>

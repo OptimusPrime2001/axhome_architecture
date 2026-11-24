@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <defs>
+    
+    <linearGradient id="roofGrad" x1="128" y1="54" x2="128" y2="160" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="60%" stop-color="#1D63DC" />
+      <stop offset="100%" stop-color="#1E3A8A" />
+    </linearGradient>
+
+    
+    <linearGradient id="xGrad" x1="180" y1="100" x2="180" y2="205" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="45%" stop-color="#1D63DC" />
+      <stop offset="100%" stop-color="#172554" />
+    </linearGradient>
+
+    
+    <linearGradient id="goldGrad" x1="80" y1="130" x2="80" y2="205" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+
+  
+  <path d="M22 162 L131 54 L182 81 L182 118 L131 74 L30 158 Z" fill="url(#roofGrad)" />
+  
+  
+  <path d="M132 76 L180 116" stroke="#E0F2FE" stroke-width="2" stroke-linecap="round" />
+
+  
+  <g fill="url(#goldGrad)">
+    <rect x="97" y="128" width="11" height="11" rx="1.5" />
+    <rect x="111" y="128" width="11" height="11" rx="1.5" />
+    <rect x="97" y="142" width="11" height="11" rx="1.5" />
+    <rect x="111" y="142" width="11" height="11" rx="1.5" />
+  </g>
+
+  
+  <path d="M32 204 C44 201 51 193 58 180 L76 146 C79 141 82 141 82 146 L77 167 L121 167 C124 167 125 170 124 173 C123 176 121 178 117 178 L73 178 L68 193 C67 198 69 201 76 204 Z" fill="url(#goldGrad)" />
+
+  
+  <path d="M123 102 L159 102 C156 105 156 109 159 114 L179 142 L203 113 C206 109 205 105 201 102 L232 102 C226 105 221 109 216 115 L186 151 L223 196 C227 200 231 202 236 204 L196 204 C200 201 200 198 197 194 L172 162 L145 194 C142 198 143 201 147 204 L117 204 C122 202 127 199 132 193 L165 153 L133 112 C129 107 126 104 123 102 Z" fill="url(#xGrad)" />
+</svg>
