@@ -34,9 +34,10 @@ const Logo: React.FC<LogoProps> = ({ size = "medium" }) => {
           <Image
             src="/images/axhome_logo.png"
             alt={`${COMPANY_INFO.brandName} logo`}
+            title={`${COMPANY_INFO.brandName} — ${COMPANY_INFO.tagline}`}
             className={styles.logoImage}
             sizes={size === "large" ? "120px" : "90px"}
-            priority
+            priority={size !== "large"}
             fill
           />
         </div>

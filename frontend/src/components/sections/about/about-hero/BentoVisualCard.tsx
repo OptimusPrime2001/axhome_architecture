@@ -41,11 +41,11 @@ export const BentoVisualCard: React.FC<BentoVisualCardProps> = ({
             <Image
               src={item.imageUrl}
               alt={item.imageAlt}
+              title={item.title}
               fill
               priority={priority}
               sizes={sizes}
               className={styles.bentoImage}
-              unoptimized
             />
           </div>
         </ImageZoom>

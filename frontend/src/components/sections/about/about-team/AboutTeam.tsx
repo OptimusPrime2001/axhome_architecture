@@ -32,10 +32,10 @@ export const AboutTeam: React.FC = () => {
                 <Image
                   src={member.avatarUrl}
                   alt={member.name}
+                  title={`${member.name} — ${member.role}`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className={styles.avatar}
-                  unoptimized
                 />
               </div>
 

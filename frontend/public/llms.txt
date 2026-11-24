@@ -1,0 +1,21 @@
+# AXHOME Architecture
+
+> Văn phòng kiến trúc và tổng thầu xây dựng trọn gói các công trình biệt thự, nhà phố, tư gia và không gian nghỉ dưỡng cao cấp tại Việt Nam. Bản vẽ chuẩn — Tối ưu chi phí — Thi công trọn gói.
+
+## Thông Tin Liên Hệ
+- **Thương hiệu**: AXHOME Architecture
+- **Trụ sở chính**: D20 TT14 Khu Đô Thị Văn Quán - Hà Đông, Hà Nội, Việt Nam
+- **Hotline 24/7**: 0947 712 626
+- **Email**: Kientrucaxhome@gmail.com
+- **Giờ làm việc**: Thứ Hai – Thứ Bảy: 08:00 – 18:00
+
+## Dịch Vụ Cốt Lõi
+- **Thiết kế kiến trúc & nội thất độc bản**: Khảo sát địa chất, tối ưu vi khí hậu nhiệt đới, bản vẽ kỹ thuật đồng bộ Kiến trúc - Kết cấu - MEP và phối cảnh 3D sát thực tế.
+- **Thi công xây dựng phần thô & hoàn thiện**: Quản trị kỹ thuật nghiêm ngặt, vật liệu chính hãng, đúng tiến độ hợp đồng.
+- **Tổng thầu thi công trọn gói (Design & Build)**: Chìa khóa trao tay, dự toán bóc tách minh bạch không phát sinh chi phí, bảo hành kết cấu 10 năm.
+
+## Danh Mục Trang Chính
+- [Trang chủ](https://axhome-architecture.vercel.app/): Tổng quan năng lực, quy trình làm việc, dịch vụ và các công trình tiêu biểu.
+- [Dự án tiêu biểu](https://axhome-architecture.vercel.app/projects): Bộ sưu tập thiết kế 3D và công trình thực tế (Biệt thự, Nhà phố, Dinh thự).
+- [Giới thiệu](https://axhome-architecture.vercel.app/about): Câu chuyện thương hiệu, tầm nhìn, sứ mệnh, 4 giá trị cốt lõi và đội ngũ kiến trúc sư trưởng.
+- [Liên hệ & Đăng ký tư vấn](https://axhome-architecture.vercel.app/contact): Đặt lịch khảo sát thực địa và nhận phương án mặt bằng, dự toán sơ bộ miễn phí.

@@ -18,6 +18,14 @@ export interface MetricRibbonItem {
   subLabel?: string;
 }
 export const PROJECT_DONE_COUNT = 80;
+
+const resolvedSiteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://axhome-architecture.vercel.app")
+).replace(/\/+$/, "");
+
 export const COMPANY_INFO = {
   brandName: "AXHOME",
   shortName: "Axhome",
@@ -31,9 +39,7 @@ export const COMPANY_INFO = {
   hotline: "0947712626",
   hotlineFormatted: "0947 712 626",
   email: "Kientrucaxhome@gmail.com",
-  website: (
-    process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://axhome.vn"
-  ).replace(/\/+$/, ""),
+  website: resolvedSiteUrl,
   workingHours: "Thứ Hai – Thứ Bảy: 08:00 – 18:00 (Hỗ trợ Hotline 24/7)",
 
   offices: [

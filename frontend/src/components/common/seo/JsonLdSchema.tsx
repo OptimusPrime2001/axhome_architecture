@@ -10,6 +10,16 @@ function serializeJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
+function JsonLdScript({ data }: { data: unknown }) {
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Safe escaped JSON-LD payload for SEO structured data
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
+    />
+  );
+}
+
 export function LocalBusinessJsonLd() {
   const baseUrl = COMPANY_INFO.website.replace(/\/+$/, "");
   const mainOffice = COMPANY_INFO.offices[0];
@@ -58,7 +68,7 @@ export function LocalBusinessJsonLd() {
     },
   };
 
-  return <script type="application/ld+json">{serializeJsonLd(jsonLd)}</script>;
+  return <JsonLdScript data={jsonLd} />;
 }
 
 export function FaqJsonLd({ items }: { items: ContactFaqItem[] }) {
@@ -77,7 +87,7 @@ export function FaqJsonLd({ items }: { items: ContactFaqItem[] }) {
     })),
   };
 
-  return <script type="application/ld+json">{serializeJsonLd(jsonLd)}</script>;
+  return <JsonLdScript data={jsonLd} />;
 }
 
 export function ProjectDetailJsonLd({ project }: { project: Project }) {
@@ -130,10 +140,8 @@ export function ProjectDetailJsonLd({ project }: { project: Project }) {
 
   return (
     <>
-      <script type="application/ld+json">
-        {serializeJsonLd(creativeWork)}
-      </script>
-      <script type="application/ld+json">{serializeJsonLd(breadcrumb)}</script>
+      <JsonLdScript data={creativeWork} />
+      <JsonLdScript data={breadcrumb} />
     </>
   );
 }

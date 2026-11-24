@@ -161,10 +161,10 @@ export const ProjectDetailGallery: React.FC<ProjectDetailGalleryProps> = ({
                   <Image
                     src={img.url}
                     alt={`${projectTitle} — ${img.caption}`}
+                    title={`${projectTitle} — ${img.caption}`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
                     className={styles.tileImage}
-                    unoptimized
                   />
                   <div className={styles.tileScrim} aria-hidden="true" />
                   <span className={styles.zoomBadge} aria-hidden="true">
@@ -229,10 +229,10 @@ export const ProjectDetailGallery: React.FC<ProjectDetailGalleryProps> = ({
               <Image
                 src={activeImage.url}
                 alt={activeImage.caption}
+                title={activeImage.caption}
                 fill
                 sizes="90vw"
                 className={styles.lightboxImage}
-                unoptimized
               />
             </div>
 

@@ -48,10 +48,10 @@ export const ContactFormSection: React.FC = () => {
                 <Image
                   src={CONTACT_REFERENCE_PROJECT.imageUrl}
                   alt={CONTACT_REFERENCE_PROJECT.imageAlt}
+                  title={CONTACT_REFERENCE_PROJECT.title}
                   fill
                   sizes="(max-width: 1024px) 100vw, 420px"
                   className={styles.refImage}
-                  unoptimized
                 />
               </div>
               <div className={styles.refFooter}>
