@@ -53,7 +53,11 @@ export function trackGenerateLead(params: {
 
   pushGtmEvent("generate_lead", payload);
 
-  if (GOOGLE_ADS_ID && GOOGLE_ADS_LEAD_LABEL && typeof window.gtag === "function") {
+  if (
+    GOOGLE_ADS_ID &&
+    GOOGLE_ADS_LEAD_LABEL &&
+    typeof window.gtag === "function"
+  ) {
     window.gtag("event", "conversion", {
       send_to: `${GOOGLE_ADS_ID}/${GOOGLE_ADS_LEAD_LABEL}`,
     });
