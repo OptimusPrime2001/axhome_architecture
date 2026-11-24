@@ -1,7 +1,7 @@
 import { Spinner } from "@components";
-import styles from "./AppSystemStates.module.scss";
+import styles from "../AppSystemStates.module.scss";
 
-export default function GlobalLoading() {
+export default function AdminLoading() {
   return (
     <div className={styles.loadingWrap} aria-live="polite">
       <Spinner className={styles.spinnerIcon} />

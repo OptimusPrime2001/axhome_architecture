@@ -1,10 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
   htmlLimitedBots:
-    /SEOptimer|AhrefsBot|SemrushBot|DotBot|Rogerbot|Screaming Frog|Zalo|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|TelegramBot|WhatsApp|Discordbot|Pinterestbot|Google-InspectionTool/i,
+    /SeobilityBot|SEOptimer|AhrefsBot|SemrushBot|DotBot|Rogerbot|Screaming Frog|Zalo|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|TelegramBot|WhatsApp|Discordbot|Pinterestbot|Google-InspectionTool/i,
   compress: true,
   poweredByHeader: false,
   images: {
