@@ -5,6 +5,7 @@ import (
 	"axhome_server/internal/middleware"
 	"axhome_server/internal/module"
 	"axhome_server/internal/router"
+	"axhome_server/internal/service"
 	"axhome_server/internal/utils"
 	"bytes"
 	"context"
@@ -46,11 +47,12 @@ func TestRouterEndpoints(t *testing.T) {
 		},
 	}
 
+	storageSvc := service.NewStorageService(cfg.R2)
 	rateLimiter := middleware.NewIPRateLimiter(ctx, 100, 100, time.Minute, time.Minute)
 	authModule := module.NewAuthModule(nil, module.WithAuthConfig(cfg))
-	projectModule := module.NewProjectModule(nil)
+	projectModule := module.NewProjectModule(nil, storageSvc)
 	leadModule := module.NewLeadModule(nil)
-	mediaModule := module.NewMediaModule(cfg.R2)
+	mediaModule := module.NewMediaModule(storageSvc)
 
 	engine := router.New(
 		&router.Modules{
@@ -196,41 +198,67 @@ func TestRouterEndpoints(t *testing.T) {
 	}
 
 	t.Run("authenticated media upload accepts valid PNG and returns url", func(t *testing.T) {
-		var buf bytes.Buffer
-		writer := multipart.NewWriter(&buf)
-		_ = writer.WriteField("category", "gallery")
-		part, err := writer.CreateFormFile("file", "villa-render.png")
-		if err != nil {
-			t.Fatalf("failed to create form file: %v", err)
-		}
-		// Minimal valid PNG header signature
-		pngHeader := []byte{0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D}
-		_, _ = part.Write(pngHeader)
-		_ = writer.Close()
-
-		req := httptest.NewRequest(http.MethodPost, "/api/v1/admin/media/upload", &buf)
-		req.Header.Set("Content-Type", writer.FormDataContentType())
-		req.Header.Set("Authorization", "Bearer "+validToken)
-
-		rec := httptest.NewRecorder()
-		engine.ServeHTTP(rec, req)
-
-		if rec.Code != http.StatusOK {
-			t.Fatalf("expected 200 on media upload, got %d (body: %s)", rec.Code, rec.Body.String())
+		uploadCases := []struct {
+			category       string
+			expectedPrefix string
+		}{
+			{category: "gallery", expectedPrefix: "projects/gallery/"},
+			{category: "cover", expectedPrefix: "projects/cover/"},
+			{category: "floor-plan", expectedPrefix: "projects/floor-plan/"},
+			{category: "banner", expectedPrefix: "banner/"},
+			{category: "avatar", expectedPrefix: "avatar/"},
 		}
 
-		var resp struct {
-			Code int `json:"code"`
-			Data struct {
-				URL string `json:"url"`
-				Key string `json:"key"`
-			} `json:"data"`
-		}
-		if err := json.Unmarshal(rec.Body.Bytes(), &resp); err != nil {
-			t.Fatalf("failed to unmarshal media upload response: %v", err)
-		}
-		if resp.Data.URL == "" || !strings.Contains(resp.Data.Key, "axhome/gallery/") {
-			t.Fatalf("unexpected upload response data: %+v", resp.Data)
+		for _, tc := range uploadCases {
+			var buf bytes.Buffer
+			writer := multipart.NewWriter(&buf)
+			_ = writer.WriteField("category", tc.category)
+			part, err := writer.CreateFormFile("file", "villa-render.png")
+			if err != nil {
+				t.Fatalf("failed to create form file: %v", err)
+			}
+			// Minimal valid PNG header signature
+			pngHeader := []byte{0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D}
+			_, _ = part.Write(pngHeader)
+			_ = writer.Close()
+
+			req := httptest.NewRequest(http.MethodPost, "/api/v1/admin/media/upload", &buf)
+			req.Header.Set("Content-Type", writer.FormDataContentType())
+			req.Header.Set("Authorization", "Bearer "+validToken)
+
+			rec := httptest.NewRecorder()
+			engine.ServeHTTP(rec, req)
+
+			if rec.Code != http.StatusOK {
+				t.Fatalf("[%s] expected 200 on media upload, got %d (body: %s)", tc.category, rec.Code, rec.Body.String())
+			}
+
+			var resp struct {
+				Code int `json:"code"`
+				Data struct {
+					URL string `json:"url"`
+					Key string `json:"key"`
+				} `json:"data"`
+			}
+			if err := json.Unmarshal(rec.Body.Bytes(), &resp); err != nil {
+				t.Fatalf("[%s] failed to unmarshal media upload response: %v", tc.category, err)
+			}
+			if resp.Data.URL == "" || !strings.HasPrefix(resp.Data.Key, tc.expectedPrefix) {
+				t.Fatalf("[%s] expected key prefix %q, got %+v", tc.category, tc.expectedPrefix, resp.Data)
+			}
+
+			// Delete the uploaded image via DELETE /api/v1/admin/media
+			delBody, _ := json.Marshal(map[string]string{"url": resp.Data.URL})
+			delReq := httptest.NewRequest(http.MethodDelete, "/api/v1/admin/media", bytes.NewReader(delBody))
+			delReq.Header.Set("Content-Type", "application/json")
+			delReq.Header.Set("Authorization", "Bearer "+validToken)
+
+			delRec := httptest.NewRecorder()
+			engine.ServeHTTP(delRec, delReq)
+
+			if delRec.Code != http.StatusOK {
+				t.Fatalf("[%s] expected 200 on media delete, got %d (body: %s)", tc.category, delRec.Code, delRec.Body.String())
+			}
 		}
 	})
 }

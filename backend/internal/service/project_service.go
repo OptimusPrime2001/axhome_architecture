@@ -28,12 +28,14 @@ type ProjectService interface {
 }
 
 type projectService struct {
-	repo repository.ProjectRepository
+	repo    repository.ProjectRepository
+	storage StorageService
 }
 
-func NewProjectService(repo repository.ProjectRepository) ProjectService {
+func NewProjectService(repo repository.ProjectRepository, storage StorageService) ProjectService {
 	return &projectService{
-		repo: repo,
+		repo:    repo,
+		storage: storage,
 	}
 }
 
@@ -187,6 +189,13 @@ func (s *projectService) CreateProject(ctx context.Context, req dto.SaveProjectR
 }
 
 func (s *projectService) UpdateProject(ctx context.Context, id uuid.UUID, req dto.SaveProjectRequest) (*dto.ProjectResponse, error) {
+	var oldURLs []string
+	if s.storage != nil {
+		if existing, err := s.repo.GetBundleByID(ctx, id); err == nil && existing != nil {
+			oldURLs = collectProjectMediaURLs(existing)
+		}
+	}
+
 	slug, err := s.resolveUniqueSlug(ctx, req.Slug, req.Title, &id)
 	if err != nil {
 		return nil, err
@@ -233,6 +242,14 @@ func (s *projectService) UpdateProject(ctx context.Context, id uuid.UUID, req dt
 		return nil, err
 	}
 
+	if s.storage != nil && len(oldURLs) > 0 {
+		newURLs := collectProjectMediaURLs(bundle)
+		removed := diffRemovedURLs(oldURLs, newURLs)
+		if len(removed) > 0 {
+			s.storage.DeleteImagesByURLs(ctx, removed)
+		}
+	}
+
 	res := mapProjectBundleToDTO(bundle)
 	return &res, nil
 }
@@ -247,7 +264,68 @@ func (s *projectService) UpdateProjectStatus(ctx context.Context, id uuid.UUID, 
 }
 
 func (s *projectService) DeleteProject(ctx context.Context, id uuid.UUID) error {
-	return s.repo.Delete(ctx, id)
+	var oldURLs []string
+	if s.storage != nil {
+		if existing, err := s.repo.GetBundleByID(ctx, id); err == nil && existing != nil {
+			oldURLs = collectProjectMediaURLs(existing)
+		}
+	}
+
+	if err := s.repo.Delete(ctx, id); err != nil {
+		return err
+	}
+
+	if s.storage != nil && len(oldURLs) > 0 {
+		s.storage.DeleteImagesByURLs(ctx, oldURLs)
+	}
+
+	return nil
+}
+
+func collectProjectMediaURLs(bundle *repository.ProjectBundle) []string {
+	if bundle == nil {
+		return nil
+	}
+	urls := make([]string, 0, 1+len(bundle.Images)+len(bundle.FloorPlans)+len(bundle.Milestones))
+	if u := strings.TrimSpace(bundle.Project.CoverImage); u != "" {
+		urls = append(urls, u)
+	}
+	for _, img := range bundle.Images {
+		if u := strings.TrimSpace(img.Url); u != "" {
+			urls = append(urls, u)
+		}
+	}
+	for _, fp := range bundle.FloorPlans {
+		if u := strings.TrimSpace(fp.ImageUrl); u != "" {
+			urls = append(urls, u)
+		}
+	}
+	for _, ms := range bundle.Milestones {
+		if ms.PhotoUrl != nil {
+			if u := strings.TrimSpace(*ms.PhotoUrl); u != "" {
+				urls = append(urls, u)
+			}
+		}
+	}
+	return urls
+}
+
+func diffRemovedURLs(oldURLs, newURLs []string) []string {
+	active := make(map[string]struct{}, len(newURLs))
+	for _, u := range newURLs {
+		active[strings.TrimSpace(u)] = struct{}{}
+	}
+	removed := make([]string, 0)
+	for _, u := range oldURLs {
+		trimmed := strings.TrimSpace(u)
+		if trimmed == "" {
+			continue
+		}
+		if _, stillUsed := active[trimmed]; !stillUsed {
+			removed = append(removed, trimmed)
+		}
+	}
+	return removed
 }
 
 func (s *projectService) resolveUniqueSlug(ctx context.Context, rawSlug, title string, excludeID *uuid.UUID) (string, error) {

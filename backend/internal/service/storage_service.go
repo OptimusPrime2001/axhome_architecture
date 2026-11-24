@@ -20,10 +20,13 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/rs/zerolog/log"
 )
 
 type StorageService interface {
 	UploadImage(ctx context.Context, fileHeader *multipart.FileHeader, category string, serverBaseURL string) (*dto.UploadMediaResponse, error)
+	DeleteImageByURL(ctx context.Context, imageURL string) (string, error)
+	DeleteImagesByURLs(ctx context.Context, imageURLs []string)
 }
 
 type storageService struct {
@@ -45,6 +48,49 @@ var allowedImageMimeTypes = map[string]string{
 	"image/png":  ".png",
 	"image/webp": ".webp",
 	"image/avif": ".avif",
+}
+
+var managedMediaPrefixes = []string{
+	"projects/",
+	"banner/",
+	"avatar/",
+	"general/",
+	"axhome/", // legacy prefix kept for backward-compatible deletion of previously uploaded objects
+}
+
+// resolveMediaFolder maps an upload category to its Cloudflare R2 folder prefix
+// inside the configured bucket (e.g. axhome-media/projects/cover, axhome-media/banner).
+func resolveMediaFolder(cleanCategory string) string {
+	switch cleanCategory {
+	case "cover", "project-cover":
+		return "projects/cover"
+	case "gallery", "project-gallery":
+		return "projects/gallery"
+	case "floor-plan", "floorplan":
+		return "projects/floor-plan"
+	case "milestone", "project-milestone":
+		return "projects/milestone"
+	case "project", "projects":
+		return "projects"
+	case "banner", "banners":
+		return "banner"
+	case "avatar", "avatars":
+		return "avatar"
+	default:
+		return "general"
+	}
+}
+
+func isManagedMediaKey(key string) bool {
+	if key == "" || strings.Contains(key, "..") {
+		return false
+	}
+	for _, prefix := range managedMediaPrefixes {
+		if strings.HasPrefix(key, prefix) {
+			return true
+		}
+	}
+	return false
 }
 
 func (s *storageService) UploadImage(
@@ -90,9 +136,11 @@ func (s *storageService) UploadImage(
 		cleanBase = "image"
 	}
 
+	folder := resolveMediaFolder(cleanCategory)
+
 	objectKey := fmt.Sprintf(
-		"axhome/%s/%d-%s-%s%s",
-		cleanCategory,
+		"%s/%d-%s-%s%s",
+		folder,
 		time.Now().UTC().Unix(),
 		uuid.New().String()[:8],
 		cleanBase,
@@ -229,6 +277,183 @@ func (s *storageService) putObjectToR2(ctx context.Context, objectKey string, pa
 		publicBase = fmt.Sprintf("%s/%s", strings.TrimRight(endpoint, "/"), s.r2Cfg.BucketName)
 	}
 	return fmt.Sprintf("%s/%s", publicBase, strings.TrimLeft(objectKey, "/")), nil
+}
+
+// DeleteImageByURL deletes a single managed media object (by URL or direct object key)
+// from Cloudflare R2 (or local ./uploads in dev mode). External URLs are safely ignored.
+func (s *storageService) DeleteImageByURL(ctx context.Context, rawURLOrKey string) (string, error) {
+	objectKey, ok := s.extractObjectKey(rawURLOrKey)
+	if !ok {
+		return "", nil
+	}
+
+	if s.r2Cfg.IsConfigured() {
+		if err := s.deleteObjectFromR2(ctx, objectKey); err != nil {
+			return "", err
+		}
+		return objectKey, nil
+	}
+
+	localPath := filepath.Join("uploads", filepath.FromSlash(objectKey))
+	if err := os.Remove(localPath); err != nil && !os.IsNotExist(err) {
+		return "", utils.WrapAppError(err, utils.MsgInternalServer, utils.ErrCodeInternal)
+	}
+	return objectKey, nil
+}
+
+// DeleteImagesByURLs performs best-effort cleanup of multiple managed media URLs.
+// Errors are logged without failing the parent DB operation.
+func (s *storageService) DeleteImagesByURLs(ctx context.Context, imageURLs []string) {
+	seen := make(map[string]struct{}, len(imageURLs))
+	for _, raw := range imageURLs {
+		trimmed := strings.TrimSpace(raw)
+		if trimmed == "" {
+			continue
+		}
+		if _, exists := seen[trimmed]; exists {
+			continue
+		}
+		seen[trimmed] = struct{}{}
+
+		if _, err := s.DeleteImageByURL(ctx, trimmed); err != nil {
+			log.Warn().Err(err).Str("media_url", trimmed).Msg("Failed to delete orphan media object")
+		}
+	}
+}
+
+func (s *storageService) extractObjectKey(rawURLOrKey string) (string, bool) {
+	trimmed := strings.TrimSpace(rawURLOrKey)
+	if trimmed == "" {
+		return "", false
+	}
+
+	// Direct managed key (e.g., "projects/gallery/12345-abc-img.webp", "banner/...", or legacy "axhome/...")
+	directKey := strings.TrimLeft(trimmed, "/")
+	if isManagedMediaKey(directKey) {
+		return directKey, true
+	}
+
+	parsed, err := url.Parse(trimmed)
+	if err != nil {
+		return "", false
+	}
+
+	// Local dev uploads path: http://.../uploads/<managed-key>
+	if idx := strings.Index(parsed.Path, "/uploads/"); idx >= 0 {
+		key := strings.TrimLeft(parsed.Path[idx+len("/uploads/"):], "/")
+		if isManagedMediaKey(key) {
+			return key, true
+		}
+	}
+
+	// Cloudflare R2 public URL prefix
+	if publicBase := strings.TrimRight(s.r2Cfg.PublicBaseURL, "/"); publicBase != "" {
+		if strings.HasPrefix(trimmed, publicBase+"/") {
+			key := strings.TrimLeft(strings.TrimPrefix(trimmed, publicBase+"/"), "/")
+			if isManagedMediaKey(key) {
+				return key, true
+			}
+		}
+	}
+
+	// Cloudflare R2 endpoint/bucket URL prefix
+	if endpoint := strings.TrimRight(s.r2Cfg.ResolvedEndpoint(), "/"); endpoint != "" && s.r2Cfg.BucketName != "" {
+		bucketBase := fmt.Sprintf("%s/%s", endpoint, strings.Trim(s.r2Cfg.BucketName, "/"))
+		if strings.HasPrefix(trimmed, bucketBase+"/") {
+			key := strings.TrimLeft(strings.TrimPrefix(trimmed, bucketBase+"/"), "/")
+			if isManagedMediaKey(key) {
+				return key, true
+			}
+		}
+	}
+
+	return "", false
+}
+
+// deleteObjectFromR2 deletes an object from Cloudflare R2 using S3-compatible AWS Signature V4.
+func (s *storageService) deleteObjectFromR2(ctx context.Context, objectKey string) error {
+	endpoint := s.r2Cfg.ResolvedEndpoint()
+	parsedEndpoint, err := url.Parse(endpoint)
+	if err != nil || parsedEndpoint.Host == "" {
+		return utils.NewError(utils.MsgStorageNotConfigured, utils.ErrCodeInternal)
+	}
+
+	canonicalURI := fmt.Sprintf("/%s/%s", strings.Trim(s.r2Cfg.BucketName, "/"), strings.TrimLeft(objectKey, "/"))
+	targetURL := fmt.Sprintf("%s%s", strings.TrimRight(endpoint, "/"), canonicalURI)
+
+	now := time.Now().UTC()
+	amzDate := now.Format("20060102T150405Z")
+	dateStamp := now.Format("20060102")
+	region := "auto"
+	serviceName := "s3"
+
+	emptyHashBytes := sha256.Sum256(nil)
+	payloadHash := hex.EncodeToString(emptyHashBytes[:])
+
+	host := parsedEndpoint.Host
+	canonicalHeaders := fmt.Sprintf(
+		"host:%s\nx-amz-content-sha256:%s\nx-amz-date:%s\n",
+		host,
+		payloadHash,
+		amzDate,
+	)
+	signedHeaders := "host;x-amz-content-sha256;x-amz-date"
+
+	canonicalRequest := strings.Join([]string{
+		http.MethodDelete,
+		canonicalURI,
+		"",
+		canonicalHeaders,
+		signedHeaders,
+		payloadHash,
+	}, "\n")
+
+	canonicalReqHash := sha256.Sum256([]byte(canonicalRequest))
+	credentialScope := fmt.Sprintf("%s/%s/%s/aws4_request", dateStamp, region, serviceName)
+	stringToSign := strings.Join([]string{
+		"AWS4-HMAC-SHA256",
+		amzDate,
+		credentialScope,
+		hex.EncodeToString(canonicalReqHash[:]),
+	}, "\n")
+
+	signingKey := deriveSigV4Key(s.r2Cfg.SecretAccessKey, dateStamp, region, serviceName)
+	signature := hex.EncodeToString(hmacSHA256(signingKey, []byte(stringToSign)))
+
+	authHeader := fmt.Sprintf(
+		"AWS4-HMAC-SHA256 Credential=%s/%s, SignedHeaders=%s, Signature=%s",
+		s.r2Cfg.AccessKeyID,
+		credentialScope,
+		signedHeaders,
+		signature,
+	)
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, targetURL, nil)
+	if err != nil {
+		return utils.WrapAppError(err, utils.MsgInternalServer, utils.ErrCodeInternal)
+	}
+
+	req.Header.Set("x-amz-content-sha256", payloadHash)
+	req.Header.Set("x-amz-date", amzDate)
+	req.Header.Set("Authorization", authHeader)
+
+	resp, err := s.httpClient.Do(req)
+	if err != nil {
+		return utils.WrapAppError(err, "Không thể xóa tệp trên Cloudflare R2", utils.ErrCodeInternal)
+	}
+	defer resp.Body.Close()
+
+	// R2/S3 returns 204 No Content (or 200 OK); 404 is treated as already deleted (idempotent)
+	if resp.StatusCode == http.StatusNotFound || (resp.StatusCode >= 200 && resp.StatusCode < 300) {
+		return nil
+	}
+
+	bodyBytes, _ := io.ReadAll(io.LimitReader(resp.Body, 2048))
+	return utils.WrapAppError(
+		fmt.Errorf("r2 delete status %d: %s", resp.StatusCode, string(bodyBytes)),
+		"Cloudflare R2 từ chối yêu cầu xóa tệp",
+		utils.ErrCodeInternal,
+	)
 }
 
 func hmacSHA256(key, data []byte) []byte {
