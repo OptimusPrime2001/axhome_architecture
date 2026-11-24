@@ -29,8 +29,32 @@ import { Suspense } from "react";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
+  title: `${COMPANY_INFO.brandName} — Thiết Kế Kiến Trúc Biệt Thự & Thi Công Trọn Gói`,
+  description: COMPANY_INFO.description,
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    url: "/",
+    siteName: COMPANY_INFO.brandName,
+    title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
+    description: COMPANY_INFO.description,
+    images: [
+      {
+        url: `${R2_IMG_URL}/banner/hero_background.jpg`,
+        width: 1200,
+        height: 630,
+        alt: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
+    description: COMPANY_INFO.description,
+    images: [`${R2_IMG_URL}/banner/hero_background.jpg`],
   },
 };
 
@@ -81,6 +105,7 @@ async function FeaturedProjectsGrid() {
               <Image
                 src={project.coverImage}
                 alt={project.title}
+                title={project.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className={styles.cardImage}
@@ -128,19 +153,20 @@ export default function HomePage() {
     <>
       {/* 1. HERO SECTION (Figma node 1:1294) */}
       <section className={styles.heroSection}>
-        <div className={styles.heroVisualBackdrop} aria-hidden="true">
+        <div className={styles.heroVisualBackdrop}>
           <Image
             src={`${R2_IMG_URL}/banner/hero_background.jpg`}
-            alt=""
+            alt="Biệt thự kiến trúc đương đại thiết kế và thi công trọn gói bởi AXHOME"
+            title="AXHOME Architecture — Thiết kế kiến trúc biệt thự & thi công trọn gói"
             fill
             priority
             fetchPriority="high"
-            quality={85}
+            quality={75}
             sizes="100vw"
             className={styles.heroBackgroundImage}
           />
-          <div className={styles.heroScrimOverlay} />
-          <div className={styles.heroBottomGradient} />
+          <div className={styles.heroScrimOverlay} aria-hidden="true" />
+          <div className={styles.heroBottomGradient} aria-hidden="true" />
         </div>
 
         <Container>
@@ -149,22 +175,27 @@ export default function HomePage() {
               <span className={styles.badgeDot} aria-hidden="true" />
               <span>{COMPANY_INFO.slogan}</span>
             </div>
-            <MorphingText
-              className={styles.heroTitle}
-              text={[
-                "Kiến tạo không gian",
-                "Xây dựng công trình",
-                "Đặt tâm huyết vào",
-              ]}
-              loop
-            />
+            <h1 className={styles.srOnlyHeading}>
+              Thiết Kế Kiến Trúc Biệt Thự & Thi Công Xây Dựng Trọn Gói — AXHOME
+            </h1>
+            <div className={styles.heroMorphGroup} aria-hidden="true">
+              <MorphingText
+                className={styles.heroTitle}
+                text={[
+                  "Kiến tạo không gian",
+                  "Xây dựng công trình",
+                  "Đặt tâm huyết vào",
+                ]}
+                loop
+              />
 
-            {/* Dòng 2 */}
-            <MorphingText
-              className={styles.heroTitle}
-              text={["sống hiện đại", "chuyên nghiệp", "từng bản thiết kế"]}
-              loop
-            />
+              {/* Dòng 2 */}
+              <MorphingText
+                className={styles.heroTitle}
+                text={["sống hiện đại", "chuyên nghiệp", "từng bản thiết kế"]}
+                loop
+              />
+            </div>
             <p className={styles.heroSubtitle}>
               Nơi nghệ thuật kiến trúc độc bản giao thoa cùng kỷ luật thi công
               chuẩn mực — kiến tạo những dinh thự và không gian sống di sản bền

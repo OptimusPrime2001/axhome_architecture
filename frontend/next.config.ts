@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  htmlLimitedBots:
+    /SEOptimer|AhrefsBot|SemrushBot|DotBot|Rogerbot|Screaming Frog|Zalo|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|TelegramBot|WhatsApp|Discordbot|Pinterestbot|Google-InspectionTool/i,
   compress: true,
   poweredByHeader: false,
   images: {
@@ -41,6 +43,25 @@ const nextConfig: NextConfig = {
   sassOptions: {
     implementation: "sass-embedded",
     prependData: `@use  "@styles/utils/index.scss" as *;`,
+  },
+  async redirects() {
+    return [
+      {
+        source: "/index.html",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/index.htm",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/index.php",
+        destination: "/",
+        permanent: true,
+      },
+    ];
   },
   async headers() {
     return [

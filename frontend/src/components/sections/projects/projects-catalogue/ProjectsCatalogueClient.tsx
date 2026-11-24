@@ -253,10 +253,10 @@ export const ProjectsCatalogueClient: React.FC<
                     <Image
                       src={project.coverImage}
                       alt={project.title}
+                      title={project.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className={styles.cardImage}
-                      unoptimized
                     />
                     <div className={styles.topBadge}>
                       <Badge variant={getBadgeVariant(project.projectType)}>

@@ -50,10 +50,10 @@ export const CompanyIntro: React.FC = () => {
               <Image
                 src={image.url}
                 alt={image.alt}
+                title={image.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 540px"
                 className={styles.studioImage}
-                unoptimized
               />
             </div>
 

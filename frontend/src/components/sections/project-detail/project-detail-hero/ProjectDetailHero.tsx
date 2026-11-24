@@ -117,11 +117,11 @@ export const ProjectDetailHero: React.FC<ProjectDetailHeroProps> = ({
             <Image
               src={project.coverImage}
               alt={project.title}
+              title={project.title}
               fill
               priority
               sizes="(max-width: 1280px) 100vw, 1120px"
               className={styles.showcaseImage}
-              unoptimized
             />
             <div className={styles.showcaseScrim} aria-hidden="true" />
             <span className={styles.showcaseTag}>{heroOverlayLabel}</span>

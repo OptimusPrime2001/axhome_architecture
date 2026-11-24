@@ -78,10 +78,10 @@ export const ProjectFloorPlans: React.FC<ProjectFloorPlansProps> = ({
                 <Image
                   src={activePlan.imageUrl}
                   alt={activePlan.name}
+                  title={activePlan.name}
                   fill
                   sizes="(max-width: 1024px) 100vw, 640px"
                   className={styles.planImage}
-                  unoptimized
                 />
                 <span className={styles.zoomHint} aria-hidden="true">
                   <Expand size={14} />
@@ -149,10 +149,10 @@ export const ProjectFloorPlans: React.FC<ProjectFloorPlansProps> = ({
               <Image
                 src={activePlan.imageUrl}
                 alt={activePlan.name}
+                title={activePlan.name}
                 fill
                 sizes="95vw"
                 className={styles.lightboxImage}
-                unoptimized
               />
             </div>
             <p className={styles.lightboxCaption}>

@@ -41,10 +41,10 @@ export const ServicesSection: React.FC = () => {
                 <Image
                   src={service.imageUrl}
                   alt={service.imageAlt}
+                  title={service.title}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className={styles.cardImage}
-                  unoptimized
                 />
                 <span className={styles.badge}>{service.badge}</span>
               </div>
