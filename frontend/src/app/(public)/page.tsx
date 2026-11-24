@@ -13,7 +13,6 @@ import {
   ScrollReveal,
   SectionHeader,
   ServicesSection,
-  Skeleton,
   StaggerGroup,
   StaggerItem,
   TestimonialsSection,
@@ -25,11 +24,14 @@ import type { Project } from "@shared-types";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import styles from "./page.module.scss";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
-  title: `${COMPANY_INFO.brandName} — Thiết Kế Kiến Trúc Biệt Thự & Thi Công Trọn Gói`,
+  title: {
+    absolute: `${COMPANY_INFO.brandName} — Thiết Kế Kiến Trúc & Thi Công Biệt Thự`,
+  },
   description: COMPANY_INFO.description,
   alternates: {
     canonical: "/",
@@ -69,16 +71,6 @@ function getStatusBadge(type: string) {
     default:
       return <Badge variant="neutral">Dự Án</Badge>;
   }
-}
-
-function FeaturedProjectsSkeleton() {
-  return (
-    <div className={styles.projectsGrid}>
-      {[1, 2, 3].map((key) => (
-        <Skeleton key={key} style={{ height: "420px", borderRadius: "12px" }} />
-      ))}
-    </div>
-  );
 }
 
 async function FeaturedProjectsGrid() {
@@ -254,9 +246,7 @@ export default function HomePage() {
             />
           </ScrollReveal>
 
-          <Suspense fallback={<FeaturedProjectsSkeleton />}>
-            <FeaturedProjectsGrid />
-          </Suspense>
+          <FeaturedProjectsGrid />
 
           <ScrollReveal delay={0.1}>
             <div className={styles.viewAllContainer}>
