@@ -8,7 +8,8 @@ import type { ConsultationServiceType } from "@shared-types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { trackGenerateLead } from "../../../../lib/analytics";
+import { trackGenerateLead } from "@lib/analytics";
+import { buildAttributedSourcePage } from "@lib/utm";
 
 const deepConsultSchema = z.object({
   fullName: z.string().trim().min(1, "Vui lòng nhập họ và tên."),
@@ -66,7 +67,7 @@ export function useDeepConsultForm() {
   const { submitLeadMutation, isPending } = useSubmitConsultationLead({
     successCb: (saved) => {
       trackGenerateLead({
-        sourcePage: "/contact",
+        sourcePage: saved.sourcePage || buildAttributedSourcePage("/contact"),
         serviceType: saved.serviceType,
       });
       form.reset();
@@ -95,7 +96,7 @@ export function useDeepConsultForm() {
       message: [data.serviceType, data.notes?.trim()]
         .filter(Boolean)
         .join(" — "),
-      sourcePage: "/contact",
+      sourcePage: buildAttributedSourcePage("/contact"),
     });
   };
 

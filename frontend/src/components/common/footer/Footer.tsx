@@ -1,9 +1,12 @@
+"use client";
+
 import { Container } from "@components";
 import {
   COMPANY_INFO,
   FOOTER_QUICK_LINKS,
   FOOTER_SERVICES_LINKS,
 } from "@constants";
+import { trackContactClick } from "@lib/analytics";
 import Link from "next/link";
 import type React from "react";
 import Logo from "../logo/Logo";
@@ -68,6 +71,7 @@ export const Footer: React.FC = () => {
               <a
                 href={`tel:${COMPANY_INFO.hotline}`}
                 className={styles.hotlineNumber}
+                onClick={() => trackContactClick("hotline")}
               >
                 {COMPANY_INFO.hotlineFormatted}
               </a>

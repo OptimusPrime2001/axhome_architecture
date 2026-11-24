@@ -1,3 +1,4 @@
+import { R2_IMG_URL } from "@constants";
 import type {
   AboutCapabilityGroup,
   AboutCapabilityMetric,
@@ -27,11 +28,10 @@ export const ABOUT_HERO_CONTENT: AboutHeroContent = {
   bentoImages: {
     primary: {
       id: "bento-primary",
-      eyebrow: "DINH THỰ THẢO ĐIỀN • HOÀN THÀNH 2025",
+      eyebrow: "BIỆT THỰ 3 TẦNG GÁC MÁI • HOÀN THÀNH 2025",
       title: "Sự giao thoa giữa ánh sáng tự nhiên và chất liệu bản địa",
-      imageUrl:
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Dinh thự Thảo Điền hoàn thành năm 2025 bởi Axhome",
+      imageUrl: `${R2_IMG_URL}/banner/anh_nha.jpg`,
+      imageAlt: "Biệt thự 3 tầng hoàn thành năm 2025 bởi Axhome",
       badge: "Turnkey Scope",
     },
     secondaryTop: {
@@ -272,8 +272,7 @@ export const ABOUT_TEAM_MEMBERS: AboutTeamMember[] = [
     role: "SÁNG LẬP & ĐỒNG GIÁM ĐỐC THIẾT KẾ",
     bio: "15+ năm kinh nghiệm. Cựu tu nghiệp Trường Kiến trúc Paris - Belleville (Pháp). Chủ trì hơn 120 dự án biệt thự tư gia và khu nghỉ dưỡng cao cấp.",
     credential: "Thạc sĩ Kiến trúc sư • Hội KTS VN",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
+    avatarUrl: `${R2_IMG_URL}/avatars/kts_a.jpg`,
   },
   {
     id: "member-mai",
@@ -290,8 +289,7 @@ export const ABOUT_TEAM_MEMBERS: AboutTeamMember[] = [
     role: "GIÁM ĐỐC THI CÔNG & GIÁM SÁT KỸ THUẬT",
     bio: "16+ năm kinh nghiệm làm chỉ huy trưởng tại các tổng thầu xây dựng hạng I. Trực tiếp điều phối và nghiệm thu kỹ thuật hơn 90 công trình biệt thự cao tầng.",
     credential: "Kỹ sư Xây dựng Cầu đường",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
+    avatarUrl: `${R2_IMG_URL}/avatars/kts_b.jpg`,
   },
   {
     id: "member-quan",
@@ -299,8 +297,7 @@ export const ABOUT_TEAM_MEMBERS: AboutTeamMember[] = [
     role: "CHUYÊN GIA QUY HOẠCH & KIẾN TRÚC XANH",
     bio: "10+ năm kinh nghiệm tư vấn chứng chỉ công trình xanh LOTUS và LEED. Tiên phong giải pháp thông gió chéo tự nhiên và tối ưu sử dụng năng lượng mặt trời.",
     credential: "Chứng chỉ KTS Xanh Quốc Tế",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
+    avatarUrl: `${R2_IMG_URL}/avatars/kts_c.jpg`,
   },
 ];
 

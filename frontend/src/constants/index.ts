@@ -6,6 +6,7 @@ export * from "./contact";
 export * from "./enums";
 export * from "./fonts";
 export * from "./home";
+export * from "./image";
 export * from "./navigation";
 export * from "./projects";
 export * from "./query-keys";

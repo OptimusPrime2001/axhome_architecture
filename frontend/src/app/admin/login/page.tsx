@@ -1,5 +1,5 @@
 import { AdminLoginForm } from "@components/admin";
-import { ADMIN_LOGIN_COPY, COMPANY_INFO } from "@constants";
+import { ADMIN_LOGIN_COPY, COMPANY_INFO, R2_IMG_URL } from "@constants";
 import { BadgeCheck, Building2, Lock } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -9,6 +9,10 @@ import styles from "./LoginPage.module.scss";
 export const metadata: Metadata = {
   title: "Đăng nhập Quản trị",
   description: "Cổng đăng nhập hệ thống quản trị nội dung Axhome Architecture.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function AdminLoginPage() {
@@ -27,7 +31,7 @@ export default function AdminLoginPage() {
               aria-label="Giới thiệu cổng quản trị"
             >
               <Image
-                src="https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg"
+                src={`${R2_IMG_URL}/banner/hero_background.jpg`}
                 alt="Không gian kiến trúc Axhome Architecture"
                 fill
                 priority

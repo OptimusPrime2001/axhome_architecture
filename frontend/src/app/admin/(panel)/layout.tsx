@@ -6,6 +6,10 @@ export const metadata: Metadata = {
     default: "Quản trị hệ thống",
     template: "%s | Axhome Admin",
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function AdminPanelLayout({

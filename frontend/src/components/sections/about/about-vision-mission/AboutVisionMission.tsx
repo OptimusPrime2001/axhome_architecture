@@ -40,10 +40,7 @@ export const AboutVisionMission: React.FC = () => {
               <StaggerItem key={item.id}>
                 <AnimateHoverItem as="article" className={styles.card}>
                   <div className={styles.cardBody}>
-                    <span
-                      className={`${styles.iconBox} ${isDark ? styles.iconBoxDark : ""}`}
-                      aria-hidden="true"
-                    >
+                    <span className={styles.iconBox} aria-hidden="true">
                       {isDark ? <ShieldCheck size={20} /> : <Eye size={20} />}
                     </span>
 

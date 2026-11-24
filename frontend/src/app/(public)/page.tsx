@@ -20,12 +20,19 @@ import {
   WhyChooseUs,
   WorkingProcess,
 } from "@components";
-import { COMPANY_INFO, PROJECT_TYPES } from "@constants";
+import { COMPANY_INFO, PROJECT_TYPES, R2_IMG_URL } from "@constants";
 import type { Project } from "@shared-types";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import styles from "./page.module.scss";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 function getStatusBadge(type: string) {
   switch (type) {
@@ -123,7 +130,7 @@ export default function HomePage() {
       <section className={styles.heroSection}>
         <div className={styles.heroVisualBackdrop} aria-hidden="true">
           <Image
-            src="https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg"
+            src={`${R2_IMG_URL}/banner/hero_background.jpg`}
             alt=""
             fill
             priority

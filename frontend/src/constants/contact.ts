@@ -5,9 +5,10 @@ import type {
   ContactSocialLink,
   ContactStartStep,
 } from "@shared-types";
+import { R2_IMG_URL } from "./image";
 
 export const MESSENGER_ID = "61570966773480";
-export const ZALO_PHONE = "0767247666";
+export const ZALO_PHONE = "0984601388";
 export const MESSENGER_LINK = `https://m.me/${MESSENGER_ID}`;
 export const ZALO_LINK = `https://zalo.me/${ZALO_PHONE}`;
 export const CONTACT_HERO_CONTENT = {
@@ -84,11 +85,10 @@ export const CONTACT_START_PROCESS = {
 
 export const CONTACT_REFERENCE_PROJECT: ContactReferenceProject = {
   eyebrow: "DỰ ÁN THAM CHIẾU",
-  title: "An Yen Villa – Thảo Điền (820 m²)",
+  title: "Biệt thự 3 tầng – Ba Đình (820 m²)",
   href: "/projects",
-  imageUrl:
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
-  imageAlt: "An Yen Villa – Thảo Điền (820 m²)",
+  imageUrl: `${R2_IMG_URL}/banner/nha_noi_bat.jpg`,
+  imageAlt: "Biệt thự 3 tầng (820 m²)",
 };
 
 export const CONTACT_FORM_COPY = {

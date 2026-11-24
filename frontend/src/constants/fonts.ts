@@ -1,7 +1,6 @@
 import {
   Be_Vietnam_Pro,
   Google_Sans,
-  Playfair_Display,
   Poppins,
   Space_Grotesk,
 } from "next/font/google";
@@ -13,11 +12,11 @@ export const FONT_BE_VIETNAM_PRO = Be_Vietnam_Pro({
   variable: "--font-be_vietnam",
 });
 
-export const FONT_PLAYFAIR = Playfair_Display({
-  subsets: ["latin", "vietnamese"],
-  display: "swap",
-  variable: "--font-playfair",
-});
+// export const FONT_PLAYFAIR = Playfair_Display({
+//   subsets: ["latin", "vietnamese"],
+//   display: "swap",
+//   variable: "--font-playfair",
+// });
 
 export const FONT_POPPINS = Poppins({
   weight: "400",
@@ -37,4 +36,5 @@ export const FONT_GOOGLE_SANS = Google_Sans({
   subsets: ["latin", "vietnamese"],
   variable: "--font-google-sans",
   display: "swap",
+  fallback: ["Arial", "sans-serif"],
 });
