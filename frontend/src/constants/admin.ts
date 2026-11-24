@@ -1,12 +1,5 @@
 import type { AdminNavItem, DashboardMonthlyStat } from "@shared-types";
 
-export const ADMIN_ARCHITECT_OPTIONS: string[] = [
-  "KTS. Trần Hoàng Lâm",
-  "KTS. Nguyễn Minh Quân",
-  "KTS. Phạm Quang Huy",
-  "KS. Lê Đức Thành",
-];
-
 export const ADMIN_DASHBOARD_MONTHLY_STATS: DashboardMonthlyStat[] = [
   { monthLabel: "Tháng 6", projectViews: 2450, consultationLeads: 14 },
   { monthLabel: "Tháng 7", projectViews: 2890, consultationLeads: 18 },

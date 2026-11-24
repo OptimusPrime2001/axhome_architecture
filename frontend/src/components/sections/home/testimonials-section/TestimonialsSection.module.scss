@@ -1,12 +1,13 @@
 // ==============================================================================
-// Section 8 — Testimonials Section (Figma node 1:1863, 1280 × 721)
+// Section 8 — Testimonials Section (Figma node 1:1863)
 // - Header: centered 768px
-// - Grid: 3 cards × 346.67px, gap 40px = 1120px
+// - Dual-row opposite-direction Marquee with pause-on-hover and edge fade masks
 // ==============================================================================
 
 .section {
   padding: 96px 0;
   background-color: $color-surface-muted;
+  overflow: hidden;
 
   @include media-breakpoint-down(md) {
     padding: 64px 0;
@@ -49,31 +50,66 @@
   color: $color-text-secondary;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px;
-  margin-top: 64px;
-  padding: 0;
-  list-style: none;
+.marqueeContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 56px;
+  width: 100%;
 
-  @include media-breakpoint-down(lg) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
+  @include media-breakpoint-down(sm) {
+    gap: 14px;
+    margin-top: 36px;
+  }
+}
+
+.marqueeRow {
+  --duration: 48s;
+  --gap: 24px;
+  padding: 8px 0;
+
+  @include media-breakpoint-down(sm) {
+    --duration: 38s;
+    --gap: 16px;
+  }
+}
+
+.fadeLeft,
+.fadeRight {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+
+  @include media-breakpoint-down(md) {
+    width: 64px;
   }
 
   @include media-breakpoint-down(sm) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-    margin-top: 40px;
+    width: 32px;
   }
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(to right, $color-surface-muted, transparent);
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(to left, $color-surface-muted, transparent);
 }
 
 .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px;
+  width: 380px;
+  flex-shrink: 0;
+  padding: 28px;
   background-color: $color-surface-card;
   border: 1px solid $color-surface-border;
   border-radius: $radius-md;
@@ -89,6 +125,16 @@
     background-color: $color-surface-hover;
     border-color: $color-brand-light;
     box-shadow: $shadow-md;
+  }
+
+  @include media-breakpoint-down(md) {
+    width: 340px;
+    padding: 24px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    width: 300px;
+    padding: 20px;
   }
 }
 
@@ -125,22 +171,6 @@
   margin-top: 24px;
   padding-top: 20px;
   border-top: 1px solid $color-surface-border;
-}
-
-.avatarWrapper {
-  position: relative;
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: $color-surface-muted;
-}
-
-.avatar {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .authorMeta {

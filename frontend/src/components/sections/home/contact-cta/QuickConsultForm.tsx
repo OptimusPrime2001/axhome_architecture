@@ -120,10 +120,7 @@ export const QuickConsultForm: React.FC = () => {
               control={control}
               name="projectNeed"
               render={({ field }) => (
-                <Select
-                  value={field.value || undefined}
-                  onValueChange={field.onChange}
-                >
+                <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger
                     id="contact-project-need"
                     invalid={!!errors.projectNeed}

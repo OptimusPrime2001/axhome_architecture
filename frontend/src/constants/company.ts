@@ -17,7 +17,7 @@ export interface MetricRibbonItem {
   suffix: string;
   subLabel?: string;
 }
-
+export const PROJECT_DONE_COUNT = 80;
 export const COMPANY_INFO = {
   brandName: "AXHOME",
   shortName: "Axhome",
@@ -45,9 +45,9 @@ export const COMPANY_INFO = {
   // Floating metrics in Hero section
   metrics: [
     {
-      value: 150,
+      value: PROJECT_DONE_COUNT,
       suffix: "+",
-      label: "Biệt thự cao cấp",
+      label: "Công trình hoàn thiện",
       subLabel: "Đã bàn giao",
     },
     {

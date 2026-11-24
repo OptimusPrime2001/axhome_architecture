@@ -1,6 +1,7 @@
 "use client";
 
-import { uploadProjectImage } from "@lib/media-upload";
+import { useDeleteMedia, useUploadMedia } from "@hooks";
+import { validateImageFile } from "@lib";
 import { useRef, useState } from "react";
 import { type UseFormReturn, useFieldArray } from "react-hook-form";
 import type { ProjectEditorFormValues } from "./project-editor.schema";
@@ -32,6 +33,7 @@ export function useProjectGalleryBuilder(
 
   const coverInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
+  const sessionUploadedUrlsRef = useRef<Set<string>>(new Set());
 
   const [isDraggingCover, setIsDraggingCover] = useState(false);
   const [isDraggingGallery, setIsDraggingGallery] = useState(false);
@@ -40,20 +42,62 @@ export function useProjectGalleryBuilder(
   const [coverUrlDraft, setCoverUrlDraft] = useState("");
   const [galleryUrlDraft, setGalleryUrlDraft] = useState("");
 
+  const { uploadMediaMutation } = useUploadMedia();
+  const { deleteMediaMutation } = useDeleteMedia();
+
   const defaultImageType =
     projectType === "concept" ? "render_3d" : "real_photo";
 
+  const deleteIfSessionUploaded = (
+    urlToCheck: string | undefined,
+    remainingUrls: string[],
+  ) => {
+    const trimmed = (urlToCheck ?? "").trim();
+    if (!trimmed || !sessionUploadedUrlsRef.current.has(trimmed)) {
+      return;
+    }
+    if (remainingUrls.includes(trimmed)) {
+      return;
+    }
+    sessionUploadedUrlsRef.current.delete(trimmed);
+    deleteMediaMutation.mutate({ url: trimmed });
+  };
+
   const handleCoverFiles = async (fileList: FileList | null) => {
     if (!fileList || fileList.length === 0) return;
+    const file = fileList[0];
+    const validationError = validateImageFile(file);
+    if (validationError) {
+      setUploadError(validationError);
+      return;
+    }
+
     setUploadError(null);
     setIsUploading(true);
 
     try {
-      const uploaded = await uploadProjectImage(fileList[0], "cover");
+      const previousCover = watch("coverImage");
+      const uploaded = await uploadMediaMutation.mutateAsync({
+        file,
+        category: "cover",
+      });
+      if (!uploaded?.url) {
+        throw new Error(
+          "Phản hồi từ máy chủ lưu trữ không chứa đường dẫn ảnh.",
+        );
+      }
+
+      sessionUploadedUrlsRef.current.add(uploaded.url);
       setValue("coverImage", uploaded.url, {
         shouldDirty: true,
         shouldValidate: true,
       });
+
+      const currentGalleryUrls = (watch("gallery") ?? []).map((g) => g.url);
+      deleteIfSessionUploaded(previousCover, [
+        uploaded.url,
+        ...currentGalleryUrls,
+      ]);
     } catch (err) {
       setUploadError(
         err instanceof Error ? err.message : "Không thể tải ảnh đại diện.",
@@ -71,7 +115,22 @@ export function useProjectGalleryBuilder(
     try {
       const files = Array.from(fileList);
       for (const file of files) {
-        const uploaded = await uploadProjectImage(file, "gallery");
+        const validationError = validateImageFile(file);
+        if (validationError) {
+          throw new Error(validationError);
+        }
+
+        const uploaded = await uploadMediaMutation.mutateAsync({
+          file,
+          category: "gallery",
+        });
+        if (!uploaded?.url) {
+          throw new Error(
+            "Phản hồi từ máy chủ lưu trữ không chứa đường dẫn ảnh.",
+          );
+        }
+
+        sessionUploadedUrlsRef.current.add(uploaded.url);
         const baseCaption = file.name.replace(/\.[^/.]+$/, "");
         appendGallery({
           id: `img-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
@@ -98,13 +157,37 @@ export function useProjectGalleryBuilder(
     }
   };
 
+  const handleRemoveCover = () => {
+    const previousCover = watch("coverImage");
+    setValue("coverImage", "", {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    const currentGalleryUrls = (watch("gallery") ?? []).map((g) => g.url);
+    deleteIfSessionUploaded(previousCover, currentGalleryUrls);
+  };
+
+  const handleRemoveGalleryItem = (index: number) => {
+    const removedUrl = galleryValues[index]?.url;
+    removeGallery(index);
+
+    const remainingUrls = [
+      watch("coverImage") ?? "",
+      ...galleryValues.filter((_, idx) => idx !== index).map((g) => g.url),
+    ];
+    deleteIfSessionUploaded(removedUrl, remainingUrls);
+  };
+
   const handleApplyCoverUrl = () => {
     const trimmed = coverUrlDraft.trim();
     if (!trimmed) return;
+    const previousCover = watch("coverImage");
     setValue("coverImage", trimmed, {
       shouldDirty: true,
       shouldValidate: true,
     });
+    const currentGalleryUrls = (watch("gallery") ?? []).map((g) => g.url);
+    deleteIfSessionUploaded(previousCover, [trimmed, ...currentGalleryUrls]);
     setCoverUrlDraft("");
   };
 
@@ -149,7 +232,6 @@ export function useProjectGalleryBuilder(
     setValue,
     errors,
     galleryFields,
-    removeGallery,
     moveGallery,
     coverImage,
     galleryValues,
@@ -167,6 +249,8 @@ export function useProjectGalleryBuilder(
     setGalleryUrlDraft,
     handleCoverFiles,
     handleGalleryFiles,
+    handleRemoveCover,
+    handleRemoveGalleryItem,
     handleApplyCoverUrl,
     handleAddGalleryUrl,
     handleSetAsCover,

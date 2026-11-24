@@ -3,6 +3,7 @@
 // Nguồn: Figma node 1:1342 (Section - 2. COMPANY INTRODUCTION)
 // ==============================================================================
 
+import { PROJECT_DONE_COUNT } from "@constants";
 import type { CompanyIntroContent, CompanyStatItem } from "@shared-types";
 
 export const COMPANY_INTRO_CONTENT: CompanyIntroContent = {
@@ -29,14 +30,14 @@ export const COMPANY_INTRO_CONTENT: CompanyIntroContent = {
 export const COMPANY_STATS: CompanyStatItem[] = [
   {
     id: "experience",
-    value: 12,
+    value: 4,
     type: "plus",
     label: "Năm kinh nghiệm",
     description: "Tiên phong phân khúc biệt thự & dinh thự",
   },
   {
     id: "projects",
-    value: 280,
+    value: PROJECT_DONE_COUNT,
     type: "plus",
     label: "Công trình hoàn thiện",
     description: "Hiện diện tại khắp các tỉnh thành cả nước",

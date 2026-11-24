@@ -15,7 +15,7 @@ import {
   SelectValue,
   Textarea,
 } from "@components";
-import { ADMIN_ARCHITECT_OPTIONS } from "@constants";
+import { useAdminUsers } from "@hooks";
 import type { ConsultationLead, ConsultationLeadStatus } from "@shared-types";
 import {
   Building2,
@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./ContactDetailPanel.module.scss";
 
 export interface ContactDetailPanelProps {
@@ -69,6 +69,32 @@ export const ContactDetailPanel: React.FC<ContactDetailPanelProps> = ({
   );
   const [notes, setNotes] = useState<string>(lead.internalNotes ?? "");
   const [isSaved, setIsSaved] = useState(false);
+
+  const { data: usersData, isLoading: isLoadingUsers } = useAdminUsers({
+    params: { limit: 100, offset: 0 },
+  });
+
+  const architectOptions = useMemo(() => {
+    const seen = new Set<string>();
+    const options: { value: string; label: string }[] = [];
+
+    for (const user of usersData?.items ?? []) {
+      const displayName = user.full_name.trim() || user.email.trim();
+      if (!displayName || seen.has(displayName)) continue;
+      seen.add(displayName);
+      options.push({ value: displayName, label: displayName });
+    }
+
+    const currentAssigned = lead.assignedArchitect?.trim();
+    if (currentAssigned && !seen.has(currentAssigned)) {
+      options.push({
+        value: currentAssigned,
+        label: `${currentAssigned} (Hiện tại)`,
+      });
+    }
+
+    return options;
+  }, [usersData?.items, lead.assignedArchitect]);
 
   const handleSave = (event: React.FormEvent) => {
     event.preventDefault();
@@ -225,15 +251,21 @@ export const ContactDetailPanel: React.FC<ContactDetailPanelProps> = ({
                 }
               >
                 <SelectTrigger id="lead-architect-select">
-                  <SelectValue placeholder="-- Chưa phân công --" />
+                  <SelectValue
+                    placeholder={
+                      isLoadingUsers
+                        ? "Đang tải danh sách nhân sự..."
+                        : "-- Chưa phân công --"
+                    }
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value={UNASSIGNED_ARCHITECT}>
                     -- Chưa phân công --
                   </SelectItem>
-                  {(ADMIN_ARCHITECT_OPTIONS ?? []).map((name) => (
-                    <SelectItem key={name} value={name}>
-                      {name}
+                  {architectOptions.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
                     </SelectItem>
                   ))}
                 </SelectContent>

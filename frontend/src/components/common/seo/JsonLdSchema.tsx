@@ -17,7 +17,7 @@ export function LocalBusinessJsonLd() {
     description: COMPANY_INFO.description,
     url: baseUrl,
     logo: `${baseUrl}/images/axhome_logo.png`,
-    image: `${baseUrl}/images/hero_background.png`,
+    image: "https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg",
     telephone: COMPANY_INFO.hotline,
     email: COMPANY_INFO.email,
     slogan: COMPANY_INFO.slogan,

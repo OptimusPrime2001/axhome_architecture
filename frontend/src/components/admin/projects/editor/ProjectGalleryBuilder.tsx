@@ -38,10 +38,8 @@ export const ProjectGalleryBuilder: React.FC<ProjectGalleryBuilderProps> = ({
   const {
     register,
     control,
-    setValue,
     errors,
     galleryFields,
-    removeGallery,
     moveGallery,
     coverImage,
     galleryValues,
@@ -59,6 +57,8 @@ export const ProjectGalleryBuilder: React.FC<ProjectGalleryBuilderProps> = ({
     setGalleryUrlDraft,
     handleCoverFiles,
     handleGalleryFiles,
+    handleRemoveCover,
+    handleRemoveGalleryItem,
     handleApplyCoverUrl,
     handleAddGalleryUrl,
     handleSetAsCover,
@@ -134,12 +134,7 @@ export const ProjectGalleryBuilder: React.FC<ProjectGalleryBuilderProps> = ({
               <button
                 type="button"
                 className={styles.coverActionBtn}
-                onClick={() =>
-                  setValue("coverImage", "", {
-                    shouldDirty: true,
-                    shouldValidate: true,
-                  })
-                }
+                onClick={handleRemoveCover}
               >
                 Gỡ ảnh
               </button>
@@ -355,7 +350,7 @@ export const ProjectGalleryBuilder: React.FC<ProjectGalleryBuilderProps> = ({
 
                         <button
                           type="button"
-                          onClick={() => removeGallery(index)}
+                          onClick={() => handleRemoveGalleryItem(index)}
                           className={`${styles.thumbIconBtn} ${styles.thumbIconDanger}`}
                           title="Xóa góc nhìn này"
                           aria-label="Xóa ảnh khỏi thư viện"

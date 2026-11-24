@@ -6,6 +6,7 @@ import (
 	"axhome_server/internal/middleware"
 	"axhome_server/internal/module"
 	"axhome_server/internal/router"
+	"axhome_server/internal/service"
 	"context"
 	"errors"
 	"net/http"
@@ -54,11 +55,12 @@ func NewApplication(cfg *config.Config) (*Application, error) {
 		cfg.RateLimit.ClientTTL,
 	)
 
+	storageSvc := service.NewStorageService(cfg.R2)
 	authModule := module.NewAuthModule(store, module.WithAuthConfig(cfg))
 	userModule := module.NewUserModule(store)
-	projectModule := module.NewProjectModule(store)
+	projectModule := module.NewProjectModule(store, storageSvc)
 	leadModule := module.NewLeadModule(store)
-	mediaModule := module.NewMediaModule(cfg.R2)
+	mediaModule := module.NewMediaModule(storageSvc)
 
 	engine := router.New(
 		&router.Modules{

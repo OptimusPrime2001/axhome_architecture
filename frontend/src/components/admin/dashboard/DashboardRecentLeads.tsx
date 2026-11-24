@@ -1,6 +1,14 @@
 "use client";
 
-import { Badge, type BadgeProps, Button, Card, CardContent } from "@components";
+import {
+  Badge,
+  type BadgeProps,
+  Button,
+  Card,
+  CardContent,
+  Skeleton,
+} from "@components";
+import { CONSULTATION_LEAD_STATUSES } from "@constants";
 import { useAdminLeads } from "@hooks";
 import type { ConsultationLeadStatus } from "@shared-types";
 import { ChevronRight, ExternalLink } from "lucide-react";
@@ -26,10 +34,12 @@ const getInitial = (fullName: string) => {
 };
 
 export const DashboardRecentLeads: React.FC = () => {
-  const { data: leadsData } = useAdminLeads({ params: { limit: 100 } });
+  const { data: leadsData, isLoading } = useAdminLeads({
+    params: { limit: 100 },
+  });
   const leads = leadsData?.items ?? [];
   const pendingCount = leads.filter(
-    (lead) => lead.leadStatus === "pending",
+    (lead) => lead.leadStatus === CONSULTATION_LEAD_STATUSES.PENDING,
   ).length;
   const recentLeads = leads.slice(0, 4);
 
@@ -55,33 +65,51 @@ export const DashboardRecentLeads: React.FC = () => {
           </Link>
         </div>
 
-        <ul className={styles.leadList}>
-          {recentLeads.map((lead) => {
-            const statusMeta = LEAD_STATUS_META[lead.leadStatus];
-            return (
-              <li key={lead.id} className={styles.leadItem}>
-                <div className={styles.avatar} aria-hidden="true">
-                  {getInitial(lead.fullName)}
-                </div>
-
-                <div className={styles.leadInfo}>
-                  <div className={styles.leadTop}>
-                    <span className={styles.leadName}>{lead.fullName}</span>
-                    <span className={styles.leadPhone}>• {lead.phone}</span>
+        {isLoading ? (
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
+            {[1, 2, 3].map((key) => (
+              <Skeleton
+                key={key}
+                style={{ height: "56px", borderRadius: "8px" }}
+              />
+            ))}
+          </div>
+        ) : recentLeads.length === 0 ? (
+          <p className={styles.subtitle} style={{ padding: "16px 0" }}>
+            Hiện chưa có yêu cầu tư vấn nào từ khách hàng.
+          </p>
+        ) : (
+          <ul className={styles.leadList}>
+            {recentLeads.map((lead) => {
+              const statusMeta =
+                LEAD_STATUS_META[lead.leadStatus] ?? LEAD_STATUS_META.pending;
+              return (
+                <li key={lead.id} className={styles.leadItem}>
+                  <div className={styles.avatar} aria-hidden="true">
+                    {getInitial(lead.fullName)}
                   </div>
-                  <p className={styles.leadService}>{lead.serviceLabel}</p>
-                </div>
 
-                <div className={styles.leadMeta}>
-                  <Badge variant={statusMeta.badgeVariant}>
-                    {statusMeta.label}
-                  </Badge>
-                  <span className={styles.leadTime}>{lead.relativeTime}</span>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                  <div className={styles.leadInfo}>
+                    <div className={styles.leadTop}>
+                      <span className={styles.leadName}>{lead.fullName}</span>
+                      <span className={styles.leadPhone}>• {lead.phone}</span>
+                    </div>
+                    <p className={styles.leadService}>{lead.serviceLabel}</p>
+                  </div>
+
+                  <div className={styles.leadMeta}>
+                    <Badge variant={statusMeta.badgeVariant}>
+                      {statusMeta.label}
+                    </Badge>
+                    <span className={styles.leadTime}>{lead.relativeTime}</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
 
         <Button
           href="/admin/contacts"

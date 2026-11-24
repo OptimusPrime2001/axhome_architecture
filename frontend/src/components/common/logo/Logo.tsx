@@ -1,4 +1,5 @@
 import { COMPANY_INFO } from "@constants";
+import { cn } from "@lib";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Logo.module.scss";
@@ -22,7 +23,10 @@ const Logo: React.FC<LogoProps> = ({ size = "medium" }) => {
   return (
     <Link
       href="/"
-      className={styles.brand}
+      className={cn(
+        styles.brand,
+        size === "large" ? styles.logoLarge : styles.logoMedium,
+      )}
       aria-label={`${COMPANY_INFO.brandName} Trang Chủ`}
     >
       <div className={styles.brandLogo} aria-hidden="true">
@@ -31,6 +35,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium" }) => {
             src="/images/axhome_logo.png"
             alt={`${COMPANY_INFO.brandName} logo`}
             className={styles.logoImage}
+            sizes={size === "large" ? "120px" : "90px"}
             priority
             fill
           />

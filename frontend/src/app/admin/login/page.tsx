@@ -27,7 +27,7 @@ export default function AdminLoginPage() {
               aria-label="Giới thiệu cổng quản trị"
             >
               <Image
-                src="/images/hero_background.png"
+                src="https://pub-424f5f8ac3444fe59d92297920603ce6.r2.dev/banner/hero_background.jpg"
                 alt="Không gian kiến trúc Axhome Architecture"
                 fill
                 priority

@@ -10,6 +10,7 @@ import type {
   AboutTimelineItem,
   AboutVisionMissionItem,
 } from "@shared-types";
+import { PROJECT_DONE_COUNT } from "./company";
 
 export const ABOUT_HERO_CONTENT: AboutHeroContent = {
   badge: "VỀ CHÚNG TÔI • HƠN MỘT THẬP KỶ KIẾN TẠO",
@@ -17,7 +18,7 @@ export const ABOUT_HERO_CONTENT: AboutHeroContent = {
   description:
     "Hành trình định hình chuẩn mực sống thượng lưu qua những công trình kiến trúc độc bản, bền vững cùng thời gian và tối ưu giá trị đầu tư cho từng gia chủ.",
   statCard: {
-    value: 280,
+    value: 80,
     suffix: "+",
     label: "CÔNG TRÌNH HOÀN TẤT",
     description:
@@ -103,7 +104,7 @@ export const ABOUT_TIMELINE: AboutTimelineItem[] = [
     id: "milestone-now",
     year: "Hiện tại",
     milestoneTag: "KHẲNG ĐỊNH VỊ THẾ",
-    title: "Hơn 280+ Dinh thự Biệt thự & Giải thưởng Kiến trúc",
+    title: `Hơn ${PROJECT_DONE_COUNT}+ Dinh thự Biệt thự & Giải thưởng Kiến trúc`,
     description:
       "Chi nhánh hoạt động vững mạnh tại cả 2 đầu mối Hà Nội & TP. Hồ Chí Minh với hơn 65 kiến trúc sư, kỹ sư kết cấu và 300+ thợ tay nghề bậc cao.",
   },
@@ -122,7 +123,7 @@ export const ABOUT_VISION_MISSION: AboutVisionMissionItem[] = [
     eyebrow: "TẦM NHÌN CHIẾN LƯỢC",
     title: "Biểu tượng kiến trúc cao cấp hàng đầu Việt Nam",
     description:
-      "Trở thành thương hiệu kiến trúc – tổng thầu xây dựng phân khúc cao cấp hàng đầu Việt Nam, biểu trưng cho sự chuẩn xác kỹ thuật tuyệt đối và thẩm mỹ vượt đời trường tồn. Chúng tôi định hình mỗi công trình trở thành di sản truyền đời cho thế hệ tiếp nối.",
+      "Trở thành thương hiệu kiến trúc – tổng thầu xây dựng phân khúc cao cấp hàng đầu Việt Nam, biểu trưng cho sự chuẩn xác kỹ thuật tuyệt đối. Chúng tôi định hình mỗi công trình trở thành di sản truyền đời cho thế hệ tiếp nối.",
     footerNote: "Chuẩn mực kỹ thuật châu Âu • Hơi thở văn hóa Việt Nam",
     iconVariant: "light",
   },
@@ -187,7 +188,7 @@ export const ABOUT_CAPABILITIES_HEADER = {
 } as const;
 
 export const ABOUT_CAPABILITY_METRICS: AboutCapabilityMetric[] = [
-  { value: 12, suffix: "+", label: "Năm kinh nghiệm" },
+  { value: 4, suffix: "+", label: "Năm kinh nghiệm" },
   { value: 100, suffix: "%", label: "Kỹ sư chính quy ĐH" },
   { value: 0, suffix: "%", label: "Phát sinh chi phí HĐ" },
 ];
@@ -268,7 +269,7 @@ export const ABOUT_TEAM_MEMBERS: AboutTeamMember[] = [
   {
     id: "member-lam",
     name: "KTS. Trần Hoàng Lâm",
-    role: "SÁNG LẬP & GIÁM ĐỐC THIẾT KẾ",
+    role: "SÁNG LẬP & ĐỒNG GIÁM ĐỐC THIẾT KẾ",
     bio: "15+ năm kinh nghiệm. Cựu tu nghiệp Trường Kiến trúc Paris - Belleville (Pháp). Chủ trì hơn 120 dự án biệt thự tư gia và khu nghỉ dưỡng cao cấp.",
     credential: "Thạc sĩ Kiến trúc sư • Hội KTS VN",
     avatarUrl:
@@ -278,7 +279,7 @@ export const ABOUT_TEAM_MEMBERS: AboutTeamMember[] = [
     id: "member-mai",
     name: "KTS. Lê Phương Mai",
     role: "TRƯỞNG PHÒNG NỘI THẤT & CẢNH QUAN",
-    bio: "12+ năm kinh nghiệm chuyên sâu về nội thất xa xỉ và thiết kế vi khí hậu sinh thái. Chuyển giao phối hợp chất liệu bản địa với phong cách Wabi-Sabi hiện đại.",
+    bio: "4+ năm kinh nghiệm chuyên sâu về nội thất xa xỉ và thiết kế vi khí hậu sinh thái. Chuyển giao phối hợp chất liệu bản địa với phong cách Wabi-Sabi hiện đại.",
     credential: "Cử nhân ĐH Kiến trúc Hà Nội",
     avatarUrl:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
@@ -288,7 +289,7 @@ export const ABOUT_TEAM_MEMBERS: AboutTeamMember[] = [
     name: "KS. Nguyễn Quốc Dũng",
     role: "GIÁM ĐỐC THI CÔNG & GIÁM SÁT KỸ THUẬT",
     bio: "16+ năm kinh nghiệm làm chỉ huy trưởng tại các tổng thầu xây dựng hạng I. Trực tiếp điều phối và nghiệm thu kỹ thuật hơn 90 công trình biệt thự cao tầng.",
-    credential: "Kỹ sư Xây dựng Cầu đường & Dân dụng",
+    credential: "Kỹ sư Xây dựng Cầu đường",
     avatarUrl:
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
   },
@@ -297,7 +298,7 @@ export const ABOUT_TEAM_MEMBERS: AboutTeamMember[] = [
     name: "KTS. Đặng Minh Quân",
     role: "CHUYÊN GIA QUY HOẠCH & KIẾN TRÚC XANH",
     bio: "10+ năm kinh nghiệm tư vấn chứng chỉ công trình xanh LOTUS và LEED. Tiên phong giải pháp thông gió chéo tự nhiên và tối ưu sử dụng năng lượng mặt trời.",
-    credential: "Chứng chỉ KTS Xanh Quốc Tế (LEED AP)",
+    credential: "Chứng chỉ KTS Xanh Quốc Tế",
     avatarUrl:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
   },
@@ -332,7 +333,7 @@ export const ABOUT_PROCESS_STEPS: AboutProcessStep[] = [
     number: "03",
     title: "Hồ sơ kỹ thuật thi công",
     description:
-      "Xuất bộ hồ sơ dày hơn 300 trang bao gồm: chi tiết kết cấu móng cột, hệ thống cơ điện thông minh (M&E), chi tiết ốp lát, bố trí cấp thoát nước và hồ sơ xin cấp phép xây dựng.",
+      "Xuất bộ hồ sơ dày hơn 300 trang bao gồm: chi tiết kết cấu móng cột, hệ thống cơ điện thông minh (M&E), bố trí cấp thoát nước và hồ sơ xin cấp phép xây dựng.",
     durationLabel: "Thời gian: 25 - 30 ngày",
   },
   {

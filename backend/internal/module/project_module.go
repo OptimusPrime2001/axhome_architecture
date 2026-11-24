@@ -13,9 +13,9 @@ type ProjectModule struct {
 	handler *handler.ProjectHandler
 }
 
-func NewProjectModule(store db.Store) *ProjectModule {
+func NewProjectModule(store db.Store, storageSvc service.StorageService) *ProjectModule {
 	repo := repository.NewProjectRepository(store)
-	svc := service.NewProjectService(repo)
+	svc := service.NewProjectService(repo, storageSvc)
 	h := handler.NewProjectHandler(svc)
 
 	return &ProjectModule{

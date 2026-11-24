@@ -1,22 +1,20 @@
 // ==============================================================================
-// Axhome Architecture - Media Upload Service (Axios + Cloudflare R2 Ready)
+// Axhome Architecture - Media Upload Helper (WebP Compression + Cloudflare R2)
 // ==============================================================================
 
-import { apiClient, isApiConfigured, unwrapResponse } from "./api-client";
+import { type MediaUploadCategory, uploadAdminMedia } from "@apis";
+import { compressImageForUpload } from "@utils";
 
-export type MediaUploadCategory = "cover" | "gallery" | "floor-plan";
+export type { MediaUploadCategory };
 
 export interface MediaUploadResult {
   url: string;
+  key?: string;
   fileName: string;
   sizeBytes: number;
+  originalSizeBytes: number;
   mimeType: string;
-  storageProvider: "cloudflare-r2" | "local-preview";
-}
-
-interface UploadMediaEndpointDTO {
-  url: string;
-  key?: string;
+  storageProvider: "cloudflare-r2";
 }
 
 const ALLOWED_IMAGE_MIME_TYPES = new Set([
@@ -41,8 +39,8 @@ export function validateImageFile(file: File): string | null {
 }
 
 /**
- * Uploads an image via the Go Backend API to Cloudflare R2 using the shared
- * Axios `apiClient` (`withCredentials: true` for HttpOnly `access_token` cookie).
+ * Validates, compresses to WebP on client, and uploads an image to Cloudflare R2
+ * via the Go Backend API.
  */
 export async function uploadProjectImage(
   file: File,
@@ -53,41 +51,21 @@ export async function uploadProjectImage(
     throw new Error(validationError);
   }
 
-  if (isApiConfigured()) {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("category", category);
+  const originalSizeBytes = file.size;
+  const optimizedFile = await compressImageForUpload(file, category);
+  const data = await uploadAdminMedia(optimizedFile, category);
 
-    const data = await unwrapResponse<UploadMediaEndpointDTO>(
-      apiClient.post("/admin/media/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }),
-    );
-
-    if (!data?.url) {
-      throw new Error("Phản hồi từ máy chủ lưu trữ không chứa đường dẫn ảnh.");
-    }
-
-    return {
-      url: data.url,
-      fileName: file.name,
-      sizeBytes: file.size,
-      mimeType: file.type,
-      storageProvider: "cloudflare-r2",
-    };
+  if (!data?.url) {
+    throw new Error("Phản hồi từ máy chủ lưu trữ không chứa đường dẫn ảnh.");
   }
 
-  // Fallback local preview simulation when NEXT_PUBLIC_API_URL is not configured
-  await new Promise((resolve) => setTimeout(resolve, 220));
-  const previewUrl = URL.createObjectURL(file);
-
   return {
-    url: previewUrl,
-    fileName: file.name,
-    sizeBytes: file.size,
-    mimeType: file.type,
-    storageProvider: "local-preview",
+    url: data.url,
+    key: data.key,
+    fileName: optimizedFile.name,
+    sizeBytes: optimizedFile.size,
+    originalSizeBytes,
+    mimeType: optimizedFile.type,
+    storageProvider: "cloudflare-r2",
   };
 }
