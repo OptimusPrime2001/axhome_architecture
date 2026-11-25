@@ -194,8 +194,10 @@
   border-top: 1px solid rgba($color-surface-card, 0.08);
   padding-top: 24px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   font-size: $text-xs;
   color: $color-text-inverse-muted;
 
@@ -203,5 +205,25 @@
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+.shareGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shareLabel {
+  color: $color-text-inverse-muted;
+}
+
+.shareLink {
+  color: $color-text-inverse-muted;
+  font-weight: 500;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $color-brand-light;
   }
 }

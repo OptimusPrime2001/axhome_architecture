@@ -79,7 +79,7 @@ export const CompanyIntro: React.FC = () => {
                 <CountingNumber number={stat.value} inView />
                 {stat.type === "percent" ? "%" : "+"}
               </span>
-              <h3 className={styles.statLabel}>{stat.label}</h3>
+              <p className={styles.statLabel}>{stat.label}</p>
               <p className={styles.statDescription}>{stat.description}</p>
             </StaggerItem>
           ))}

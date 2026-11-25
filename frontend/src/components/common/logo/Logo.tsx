@@ -6,9 +6,10 @@ import styles from "./Logo.module.scss";
 
 type LogoProps = {
   size?: "medium" | "large";
+  asLink?: boolean;
 };
 
-const Logo: React.FC<LogoProps> = ({ size = "medium" }) => {
+const Logo: React.FC<LogoProps> = ({ size = "medium", asLink = true }) => {
   const logoSize = () => {
     if (size === "large")
       return {
@@ -20,15 +21,14 @@ const Logo: React.FC<LogoProps> = ({ size = "medium" }) => {
       width: "90px",
     };
   };
-  return (
-    <Link
-      href="/"
-      className={cn(
-        styles.brand,
-        size === "large" ? styles.logoLarge : styles.logoMedium,
-      )}
-      aria-label={`${COMPANY_INFO.brandName} Trang Chủ`}
-    >
+
+  const classNames = cn(
+    styles.brand,
+    size === "large" ? styles.logoLarge : styles.logoMedium,
+  );
+
+  const innerContent = (
+    <>
       <div className={styles.brandLogo} aria-hidden="true">
         <div className={styles.logoWrapper} style={logoSize()}>
           <Image
@@ -46,6 +46,20 @@ const Logo: React.FC<LogoProps> = ({ size = "medium" }) => {
         <span className={styles.brandName}>Axhome</span>
         <span className={styles.brandTagline}>{COMPANY_INFO.logoTagline}</span>
       </div>
+    </>
+  );
+
+  if (!asLink) {
+    return <div className={classNames}>{innerContent}</div>;
+  }
+
+  return (
+    <Link
+      href="/"
+      className={classNames}
+      aria-label={`${COMPANY_INFO.brandName} Trang Chủ`}
+    >
+      {innerContent}
     </Link>
   );
 };

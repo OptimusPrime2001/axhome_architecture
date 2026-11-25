@@ -4,6 +4,7 @@
 
 ## Thông Tin Liên Hệ
 - **Thương hiệu**: AXHOME Architecture
+- **Website chính thức**: https://axhome.vn
 - **Trụ sở chính**: D20 TT14 Khu Đô Thị Văn Quán - Hà Đông, Hà Nội, Việt Nam
 - **Hotline 24/7**: 0947 712 626
 - **Email**: Kientrucaxhome@gmail.com
@@ -15,7 +16,7 @@
 - **Tổng thầu thi công trọn gói (Design & Build)**: Chìa khóa trao tay, dự toán bóc tách minh bạch không phát sinh chi phí, bảo hành kết cấu 10 năm.
 
 ## Danh Mục Trang Chính
-- [Trang chủ](https://axhome-architecture.vercel.app/): Tổng quan năng lực, quy trình làm việc, dịch vụ và các công trình tiêu biểu.
-- [Dự án tiêu biểu](https://axhome-architecture.vercel.app/projects): Bộ sưu tập thiết kế 3D và công trình thực tế (Biệt thự, Nhà phố, Dinh thự).
-- [Giới thiệu](https://axhome-architecture.vercel.app/about): Câu chuyện thương hiệu, tầm nhìn, sứ mệnh, 4 giá trị cốt lõi và đội ngũ kiến trúc sư trưởng.
-- [Liên hệ & Đăng ký tư vấn](https://axhome-architecture.vercel.app/contact): Đặt lịch khảo sát thực địa và nhận phương án mặt bằng, dự toán sơ bộ miễn phí.
+- [Trang chủ](https://axhome.vn/): Tổng quan năng lực, quy trình làm việc, dịch vụ và các công trình tiêu biểu.
+- [Dự án tiêu biểu](https://axhome.vn/projects): Bộ sưu tập thiết kế 3D và công trình thực tế (Biệt thự, Nhà phố, Dinh thự).
+- [Giới thiệu](https://axhome.vn/about): Câu chuyện thương hiệu, tầm nhìn, sứ mệnh, 4 giá trị cốt lõi và đội ngũ kiến trúc sư trưởng.
+- [Liên hệ & Đăng ký tư vấn](https://axhome.vn/contact): Đặt lịch khảo sát thực địa và nhận phương án mặt bằng, dự toán sơ bộ miễn phí.

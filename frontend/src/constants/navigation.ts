@@ -30,7 +30,7 @@ export const MOBILE_BOTTOM_NAV_ITEMS: MobileBottomNavItem[] = [
 
 export const FOOTER_SERVICES_LINKS: NavItem[] = [
   { label: "Thiết Kế Kiến Trúc Biệt Thự", href: "/projects?type=concept" },
-  { label: "Thiết Kế Nội Thất Cao Cấp", href: "/projects?style=interior" },
+  { label: "Thiết Kế Biệt Thự & Dinh Thự", href: "/projects?category=villa" },
   {
     label: "Thi Công Xây Dựng Trọn Gói",
     href: "/projects?type=under_construction",

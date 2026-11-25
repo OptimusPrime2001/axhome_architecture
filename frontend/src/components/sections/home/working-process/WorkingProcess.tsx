@@ -62,7 +62,7 @@ export const WorkingProcess: React.FC<WorkingProcessProps> = ({ id }) => {
                     {STEP_ICONS[index]}
                   </span>
                 </div>
-                <h3 className={styles.cardTitle}>{step.title}</h3>
+                <p className={styles.cardTitle}>{step.title}</p>
                 <p className={styles.cardDescription}>{step.description}</p>
               </AnimateHoverItem>
             </StaggerItem>
