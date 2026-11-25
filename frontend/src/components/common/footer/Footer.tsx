@@ -50,11 +50,7 @@ export const Footer: React.FC = () => {
             <ul className={styles.linkList}>
               {FOOTER_SERVICES_LINKS.map((item) => (
                 <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    rel={item.href.includes("?") ? "nofollow" : undefined}
-                    className={styles.linkItem}
-                  >
+                  <Link href={item.href} className={styles.linkItem}>
                     {item.label}
                   </Link>
                 </li>
@@ -116,7 +112,7 @@ export const Footer: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 aria-label={item.ariaLabel}
                 className={styles.shareLink}
               >

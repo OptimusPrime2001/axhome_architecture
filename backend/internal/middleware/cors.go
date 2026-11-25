@@ -12,7 +12,12 @@ import (
 func CORS(cfg config.CORSConfig) gin.HandlerFunc {
 	origins := cfg.AllowedOrigins
 	if len(origins) == 0 {
-		origins = []string{"http://localhost:3000", "http://127.0.0.1:3000"}
+		origins = []string{
+			"https://axhome.vn",
+			"https://www.axhome.vn",
+			"http://localhost:3000",
+			"http://127.0.0.1:3000",
+		}
 	}
 
 	return cors.New(cors.Config{

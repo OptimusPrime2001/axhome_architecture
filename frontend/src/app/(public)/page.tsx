@@ -28,9 +28,11 @@ import styles from "./page.module.scss";
 
 export const revalidate = 60;
 
+const HOME_SEO_TITLE = `${COMPANY_INFO.brandName} — Thiết Kế Kiến Trúc & Thi Công Biệt Thự Trọn Gói`;
+
 export const metadata: Metadata = {
   title: {
-    absolute: `${COMPANY_INFO.brandName} — Thiết Kế Kiến Trúc & Thi Công Biệt Thự`,
+    absolute: HOME_SEO_TITLE,
   },
   description: COMPANY_INFO.description,
   alternates: {
@@ -41,20 +43,20 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     url: "/",
     siteName: COMPANY_INFO.brandName,
-    title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
+    title: HOME_SEO_TITLE,
     description: COMPANY_INFO.description,
     images: [
       {
         url: `${R2_IMG_URL}/banner/hero_background.jpg`,
         width: 1200,
         height: 630,
-        alt: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
+        alt: HOME_SEO_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${COMPANY_INFO.brandName} — ${COMPANY_INFO.slogan}`,
+    title: HOME_SEO_TITLE,
     description: COMPANY_INFO.description,
     images: [`${R2_IMG_URL}/banner/hero_background.jpg`],
   },
@@ -172,7 +174,7 @@ export default function HomePage() {
               <span>{COMPANY_INFO.slogan}</span>
             </div>
             <h1 className={styles.srOnlyHeading}>
-              Thiết Kế Kiến Trúc Biệt Thự & Thi Công Xây Dựng Trọn Gói — AXHOME
+              Thiết Kế Kiến Trúc & Thi Công Biệt Thự Trọn Gói — AXHOME
             </h1>
             <div className={styles.heroMorphGroup} aria-hidden="true">
               <MorphingText
@@ -245,7 +247,7 @@ export default function HomePage() {
             <SectionHeader
               tag="DỰ ÁN TIÊU BIỂU"
               title="Dấu Ấn Qua Từng Công Trình"
-              description="Tuyển tập các công trình thực tế đã bàn giao và phương án thiết kế độc bản do đội ngũ Kiến trúc sư & Kỹ sư trưởng Architectura trực tiếp kiến tạo."
+              description="Tuyển tập các công trình thực tế đã bàn giao và phương án thiết kế kiến trúc độc bản do đội ngũ Kiến trúc sư & Kỹ sư trưởng AXHOME trực tiếp kiến tạo."
               align="center"
             />
           </ScrollReveal>

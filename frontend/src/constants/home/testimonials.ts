@@ -10,7 +10,7 @@ import type { TestimonialItem } from "@shared-types";
 
 export const HOME_TESTIMONIALS_HEADER = {
   eyebrow: "ĐÁNH GIÁ TỪ GIA CHỦ",
-  title: "Khách hàng nói về chúng tôi",
+  title: "Khách hàng nói về AXHOME",
   description:
     "Sự hài lòng và niềm tự hào của mỗi gia chủ khi nhận bàn giao tổ ấm chính là thước đo giá trị lớn nhất cho uy tín của Axhome.",
 } as const;
@@ -21,7 +21,7 @@ export const HOME_TESTIMONIALS: TestimonialItem[] = [
     quote:
       "“Điều tôi hài lòng nhất ở Axhome là sự chuẩn xác đến kinh ngạc giữa bản vẽ 3D và căn biệt thự thực tế hoàn thiện. Dự toán chi phí minh bạch đến từng viên gạch, không hề phát sinh thêm bất cứ khoản nào ngoài hợp đồng.”",
     authorName: "Anh Đặng Quốc Thái",
-    authorRole: "Chủ đầu tư Villa Thảo Điền — TP. Thủ Đức",
+    authorRole: "Gia chủ Biệt thự Thảo Điền — TP. Thủ Đức",
     avatarUrl: `${R2_IMG_URL}/avatars/ava_1.jpg`,
     rating: 5,
   },
@@ -30,7 +30,7 @@ export const HOME_TESTIMONIALS: TestimonialItem[] = [
     quote:
       "“Gia đình tôi rất kỹ tính trong việc lựa chọn vật liệu và đón ánh sáng tự nhiên. Các KTS đã xử lý vi khí hậu cực kỳ tinh tế, ngôi nhà mát mẻ quanh năm mà vẫn giữ trọn sự riêng tư tĩnh tại. Tiến độ bàn giao còn sớm hơn 2 tuần.”",
     authorName: "Chị Nguyễn Hoàng Yến",
-    authorRole: "Chủ đầu tư Ecopark Lakefront Villa — Hưng Yên",
+    authorRole: "Gia chủ Ecopark Lakefront — Hưng Yên",
     avatarUrl:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
     rating: 5,
@@ -40,7 +40,7 @@ export const HOME_TESTIMONIALS: TestimonialItem[] = [
     quote:
       "“Là một nhà đầu tư bất động sản lâu năm, tôi đánh giá rất cao kỷ luật công trường và tay nghề đội ngũ thi công của Axhome. Từng mối nối đá, chi tiết gỗ hay đường ống âm đều chuẩn chỉ như một tác phẩm thủ công.”",
     authorName: "Anh Vũ Đình Trọng",
-    authorRole: "Chủ đầu tư Ocean Breeze Retreat — Nha Trang",
+    authorRole: "Gia chủ Ocean Breeze Retreat — Nha Trang",
     avatarUrl: `${R2_IMG_URL}/avatars/ava_2.jpg`,
     rating: 5,
   },
@@ -49,7 +49,7 @@ export const HOME_TESTIMONIALS: TestimonialItem[] = [
     quote:
       "“Axhome tư vấn rất thẳng thắn về phương án kết cấu và vật liệu, không đẩy tôi vào những hạng mục đắt tiền không cần thiết. Mỗi tuần đều có báo cáo tiến độ kèm hình ảnh thực tế nên tôi yên tâm theo dõi dù ở xa.”",
     authorName: "Chị Trần Thu Linh",
-    authorRole: "Chủ đầu tư Villa Đồi Thông — Đà Lạt",
+    authorRole: "Gia chủ Biệt thự Đồi Thông — Đà Lạt",
     avatarUrl: `${R2_IMG_URL}/avatars/ava_women_1.jpg`,
     rating: 5,
   },

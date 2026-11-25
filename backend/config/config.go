@@ -124,6 +124,8 @@ func NewConfig() *Config {
 		},
 		CORS: CORSConfig{
 			AllowedOrigins: parseCSVEnv("CORS_ALLOWED_ORIGINS", []string{
+				"https://axhome.vn",
+				"https://www.axhome.vn",
 				"http://localhost:3000",
 				"http://127.0.0.1:3000",
 			}),
