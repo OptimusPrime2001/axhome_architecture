@@ -20,10 +20,7 @@ export interface MetricRibbonItem {
 export const PROJECT_DONE_COUNT = 80;
 
 const resolvedSiteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "https://axhome-architecture.vercel.app")
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://axhome.vn"
 ).replace(/\/+$/, "");
 
 export const COMPANY_INFO = {

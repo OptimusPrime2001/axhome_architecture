@@ -6,7 +6,7 @@ import {
 } from "next/font/google";
 
 export const FONT_BE_VIETNAM_PRO = Be_Vietnam_Pro({
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
   subsets: ["latin", "vietnamese"],
   display: "swap",
   variable: "--font-be_vietnam",
@@ -34,7 +34,8 @@ export const FONT_SPACE_GROTESK = Space_Grotesk({
 
 export const FONT_GOOGLE_SANS = Google_Sans({
   subsets: ["latin", "vietnamese"],
-  variable: "--font-google-sans",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font_google-sans",
   display: "swap",
   fallback: ["Arial", "sans-serif"],
 });

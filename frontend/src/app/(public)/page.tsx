@@ -89,10 +89,7 @@ async function FeaturedProjectsGrid() {
     <StaggerGroup className={styles.projectsGrid}>
       {featuredProjects.map((project) => (
         <StaggerItem key={project.id}>
-          <Link
-            href={`/projects/${project.slug}`}
-            className={styles.projectCard}
-          >
+          <article className={styles.projectCard}>
             <div className={styles.imageWrapper}>
               <Image
                 src={project.coverImage}
@@ -109,7 +106,14 @@ async function FeaturedProjectsGrid() {
 
             <div className={styles.cardContent}>
               <span className={styles.metaLocation}>{project.city}</span>
-              <h3 className={styles.cardTitle}>{project.title}</h3>
+              <h3 className={styles.cardTitle}>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className={styles.cardStretchLink}
+                >
+                  {project.title}
+                </Link>
+              </h3>
               <p className={styles.cardExcerpt}>{project.excerpt}</p>
 
               <div className={styles.specRow}>
@@ -133,7 +137,7 @@ async function FeaturedProjectsGrid() {
                 </div>
               </div>
             </div>
-          </Link>
+          </article>
         </StaggerItem>
       ))}
     </StaggerGroup>

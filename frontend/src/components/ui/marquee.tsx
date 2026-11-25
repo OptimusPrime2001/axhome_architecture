@@ -1,4 +1,7 @@
+"use client";
+
 import type { ComponentPropsWithoutRef } from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -42,8 +45,18 @@ export function Marquee({
   repeat = 4,
   ...props
 }: MarqueeProps) {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Render a single track during SSR so search crawlers see zero duplicate text blocks,
+  // then seamlessly mount clone tracks on client hydration for infinite loop animation.
+  const effectiveRepeat = isHydrated ? repeat : 1;
+
   const copyIds = Array.from(
-    { length: repeat },
+    { length: effectiveRepeat },
     (_, copyNumber) => `marquee-track-${copyNumber + 1}`,
   );
 
