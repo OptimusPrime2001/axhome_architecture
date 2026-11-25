@@ -8,7 +8,7 @@ import type { HomeServiceItem } from "@shared-types";
 
 export const HOME_SERVICES_HEADER = {
   eyebrow: "GIẢI PHÁP TOÀN DIỆN",
-  title: "Dịch vụ cốt lõi",
+  title: "Dịch vụ thiết kế & thi công trọn gói",
   description:
     "Hệ sinh thái dịch vụ khép kín từ tư vấn quy hoạch, thiết kế kiến trúc độc bản đến thi công tổng thầu trọn gói với quy chuẩn kỹ thuật khắt khe.",
 } as const;

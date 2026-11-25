@@ -31,7 +31,7 @@ export const COMPANY_INFO = {
   logoTagline: "Architecture",
   slogan: "Bản vẽ chuẩn — Tối ưu chi phí — Thi công trọn gói",
   description:
-    "Văn phòng kiến trúc và tổng thầu xây dựng các công trình biệt thự, tư gia và không gian nghỉ dưỡng cao cấp tại Việt Nam. Tinh hoa kết cấu và vật liệu tự nhiên.",
+    "AXHOME chuyên thiết kế kiến trúc và thi công biệt thự trọn gói tại Việt Nam. Bản vẽ chuẩn, dự toán minh bạch, tối ưu chi phí và bảo hành kết cấu 10 năm.",
 
   hotline: "0947712626",
   hotlineFormatted: "0947 712 626",
