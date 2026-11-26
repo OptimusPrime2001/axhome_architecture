@@ -20,6 +20,91 @@ function JsonLdScript({ data }: { data: unknown }) {
   );
 }
 
+export function WebSiteJsonLd() {
+  const baseUrl = COMPANY_INFO.website.replace(/\/+$/, "");
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: COMPANY_INFO.brandName,
+    alternateName: [
+      `${COMPANY_INFO.brandName} Architecture`,
+      COMPANY_INFO.shortName,
+      "axhome.vn",
+    ],
+    url: `${baseUrl}/`,
+    inLanguage: "vi-VN",
+  };
+
+  return <JsonLdScript data={jsonLd} />;
+}
+
+export function SiteNavigationJsonLd() {
+  const baseUrl = COMPANY_INFO.website.replace(/\/+$/, "");
+
+  const navItems = [
+    {
+      name: "Dự Án Kiến Trúc & Thi Công",
+      url: `${baseUrl}/projects`,
+    },
+    {
+      name: "Giới Thiệu AXHOME",
+      url: `${baseUrl}/about`,
+    },
+    {
+      name: "Liên Hệ Tư Vấn & Dự Toán",
+      url: `${baseUrl}/contact`,
+    },
+  ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: navItems.map((item, index) => ({
+      "@type": "SiteNavigationElement",
+      position: index + 1,
+      name: item.name,
+      url: item.url,
+    })),
+  };
+
+  return <JsonLdScript data={jsonLd} />;
+}
+
+export interface PageBreadcrumbItem {
+  name: string;
+  path: string;
+}
+
+export function PageBreadcrumbJsonLd({
+  items,
+}: {
+  items: PageBreadcrumbItem[];
+}) {
+  const baseUrl = COMPANY_INFO.website.replace(/\/+$/, "");
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Trang chủ",
+        item: `${baseUrl}/`,
+      },
+      ...items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 2,
+        name: item.name,
+        item: `${baseUrl}${item.path}`,
+      })),
+    ],
+  };
+
+  return <JsonLdScript data={jsonLd} />;
+}
+
 export function LocalBusinessJsonLd() {
   const baseUrl = COMPANY_INFO.website.replace(/\/+$/, "");
   const mainOffice = COMPANY_INFO.offices[0];

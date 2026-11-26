@@ -1,4 +1,5 @@
 import {
+  PageBreadcrumbJsonLd,
   ProjectsCatalogue,
   ProjectsCtaBanner,
   ProjectsHero,
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <>
+      <PageBreadcrumbJsonLd items={[{ name: "Dự Án", path: "/projects" }]} />
       <ProjectsHero />
       <ProjectsCatalogue />
       <ProjectsStandards />

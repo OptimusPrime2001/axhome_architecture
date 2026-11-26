@@ -45,7 +45,7 @@ export const AboutProcess: React.FC = () => {
         <StaggerGroup className={styles.grid}>
           {ABOUT_PROCESS_STEPS.map((step, index) => (
             <StaggerItem key={step.id}>
-              <AnimateHoverItem className={styles.card}>
+              <AnimateHoverItem as="div" className={styles.card}>
                 <div className={styles.cardTop}>
                   <div className={styles.cardHead}>
                     <span className={styles.number} aria-hidden="true">

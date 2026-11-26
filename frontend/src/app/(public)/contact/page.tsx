@@ -5,6 +5,7 @@ import {
   ContactMapSection,
   ContactSocialStrip,
   FaqJsonLd,
+  PageBreadcrumbJsonLd,
 } from "@components";
 import { COMPANY_INFO, CONTACT_FAQ_ITEMS } from "@constants";
 import type { Metadata } from "next";
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <PageBreadcrumbJsonLd items={[{ name: "Liên Hệ", path: "/contact" }]} />
       <FaqJsonLd items={CONTACT_FAQ_ITEMS} />
       <ContactHero />
       <ContactFormSection />

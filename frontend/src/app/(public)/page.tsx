@@ -13,11 +13,12 @@ import {
   ScrollReveal,
   SectionHeader,
   ServicesSection,
+  SiteNavigationJsonLd,
   StaggerGroup,
   StaggerItem,
   TestimonialsSection,
+  WebSiteJsonLd,
   WhyChooseUs,
-  WorkingProcess,
 } from "@components";
 import { COMPANY_INFO, PROJECT_TYPES, R2_IMG_URL } from "@constants";
 import type { Project } from "@shared-types";
@@ -149,6 +150,8 @@ async function FeaturedProjectsGrid() {
 export default function HomePage() {
   return (
     <>
+      <WebSiteJsonLd />
+      <SiteNavigationJsonLd />
       {/* 1. HERO SECTION (Figma node 1:1294) */}
       <section className={styles.heroSection}>
         <div className={styles.heroVisualBackdrop}>
@@ -268,7 +271,7 @@ export default function HomePage() {
       <WhyChooseUs />
 
       {/* 7. WORKING PROCESS SECTION */}
-      <WorkingProcess />
+      {/* <WorkingProcess /> */}
 
       {/* 8. TESTIMONIALS SECTION */}
       <TestimonialsSection />

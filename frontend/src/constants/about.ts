@@ -314,7 +314,7 @@ export const ABOUT_PROCESS_STEPS: AboutProcessStep[] = [
     number: "01",
     title: "Khảo sát & Tư vấn sâu",
     description:
-      "Trực tiếp đo đạc địa hình bằng máy laser, thẩm định thổ nhưỡng, quan trắc hướng nắng, hướng gió và phỏng vấn chi tiết thói quen sinh hoạt của từng thành viên trong gia đình.",
+      "Trực tiếp đo đạc địa hình bằng máy laser, thẩm định thổ nhưỡng, quan trắc hướng nắng, hướng gió và chi tiết thói quen sinh hoạt của từng thành viên trong gia đình.",
     durationLabel: "Thời gian: 3 - 5 ngày",
   },
   {

@@ -6,7 +6,7 @@
   box-shadow: $shadow-lg;
 
   @include media-breakpoint-down(sm) {
-    padding: 24px;
+    padding: 24px 15px;
   }
 }
 

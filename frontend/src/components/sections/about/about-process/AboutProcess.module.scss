@@ -60,24 +60,49 @@
 }
 
 .card {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
   padding: 28px;
   background-color: $color-surface-muted;
   border: 1px solid $color-surface-border;
   border-radius: $radius-md;
+  box-shadow: $shadow-sm;
   transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.25s ease;
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      $color-brand-primary 0%,
+      $color-brand-light 100%
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
   &:hover {
+    transform: translateY(-6px);
     background-color: $color-surface-muted-hover;
     border-color: $color-brand-light;
-    transform: translateY(-2px);
-    box-shadow: $shadow-md;
+    box-shadow: $shadow-lg;
+
+    &::before {
+      transform: scaleX(1);
+    }
   }
 }
 
@@ -99,10 +124,13 @@
   font-weight: 600;
   line-height: 1;
   color: $color-brand-light;
-  transition: color 0.25s ease;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
 
   .card:hover & {
     color: $color-brand-primary;
+    transform: translateY(-2px);
   }
 }
 
@@ -116,6 +144,18 @@
   border-radius: $radius-sm;
   background-color: $color-surface-card;
   color: $color-brand-primary;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  .card:hover & {
+    background-color: $color-brand-primary;
+    color: $color-text-inverse;
+    transform: scale(1.05);
+    box-shadow: $shadow-sm;
+  }
 }
 
 .cardTitle {
@@ -123,6 +163,11 @@
   font-size: $text-xl;
   line-height: 26px;
   margin-bottom: 10px;
+  transition: color 0.25s ease;
+
+  .card:hover & {
+    color: $color-brand-dark;
+  }
 }
 
 .cardDesc {

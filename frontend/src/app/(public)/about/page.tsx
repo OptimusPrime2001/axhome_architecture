@@ -7,6 +7,7 @@ import {
   AboutStoryTimeline,
   AboutTeam,
   AboutVisionMission,
+  PageBreadcrumbJsonLd,
 } from "@components";
 import { COMPANY_INFO } from "@constants";
 import type { Metadata } from "next";
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <PageBreadcrumbJsonLd items={[{ name: "Giới Thiệu", path: "/about" }]} />
       <AboutHero />
       <AboutStoryTimeline />
       <AboutVisionMission />
