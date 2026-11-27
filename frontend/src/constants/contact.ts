@@ -9,6 +9,7 @@ import { R2_IMG_URL } from "./image";
 
 export const MESSENGER_ID = "61570966773480";
 export const ZALO_PHONE = "0984601388";
+export const FACEBOOK_PAGE_URL = `https://www.facebook.com/profile.php?id=${MESSENGER_ID}`;
 export const MESSENGER_LINK = `https://m.me/${MESSENGER_ID}`;
 export const ZALO_LINK = `https://zalo.me/${ZALO_PHONE}`;
 export const CONTACT_HERO_CONTENT = {

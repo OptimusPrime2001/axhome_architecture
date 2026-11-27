@@ -19,14 +19,24 @@ const NAV_ICONS: Record<MobileBottomNavIconKey, React.ReactNode> = {
   ),
 };
 
+const HOME_PATHNAMES = new Set(["", "/", "/index", "/index.html", "/(public)"]);
+
 export const MobileBottomNav: React.FC = () => {
   const pathname = usePathname();
+  const normalizedPathname =
+    !pathname || HOME_PATHNAMES.has(pathname)
+      ? "/"
+      : pathname.length > 1 && pathname.endsWith("/")
+        ? pathname.slice(0, -1)
+        : pathname;
 
   const isRouteActive = (href: string): boolean => {
     if (href === "/") {
-      return pathname === "/";
+      return normalizedPathname === "/";
     }
-    return pathname === href || pathname.startsWith(`${href}/`);
+    return (
+      normalizedPathname === href || normalizedPathname.startsWith(`${href}/`)
+    );
   };
 
   return (

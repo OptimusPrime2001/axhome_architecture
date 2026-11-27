@@ -1,5 +1,6 @@
 import {
   COMPANY_INFO,
+  FACEBOOK_PAGE_URL,
   MESSENGER_LINK,
   R2_IMG_URL,
   ZALO_LINK,
@@ -146,7 +147,7 @@ export function LocalBusinessJsonLd() {
         closes: "18:00",
       },
     ],
-    sameAs: [MESSENGER_LINK, ZALO_LINK],
+    sameAs: [FACEBOOK_PAGE_URL, MESSENGER_LINK, ZALO_LINK],
     areaServed: {
       "@type": "Country",
       name: "Vietnam",

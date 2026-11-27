@@ -20,15 +20,24 @@ import Logo from "../logo/Logo";
 import { MobileDrawer } from "../mobile-drawer";
 import styles from "./Header.module.scss";
 
+const HOME_PATHNAMES = new Set(["", "/", "/index", "/index.html", "/(public)"]);
+
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
+  const normalizedPathname =
+    !pathname || HOME_PATHNAMES.has(pathname)
+      ? "/"
+      : pathname.length > 1 && pathname.endsWith("/")
+        ? pathname.slice(0, -1)
+        : pathname;
+
   const isActive = (href: string) => {
     if (href === "/") {
-      return pathname === "/";
+      return normalizedPathname === "/";
     }
-    return pathname.startsWith(href);
+    return normalizedPathname.startsWith(href);
   };
 
   const activeNavHref =
@@ -113,7 +122,7 @@ export const Header: React.FC = () => {
       <MobileDrawer
         isOpen={isMobileOpen}
         onClose={() => setIsMobileOpen(false)}
-        activePath={pathname}
+        activePath={normalizedPathname}
       />
     </>
   );
