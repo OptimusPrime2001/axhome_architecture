@@ -1,10 +1,10 @@
 "use client";
 
 import { ScrollReveal } from "@components/animate-ui";
+import { SafeImage } from "@components/common";
 import { Container } from "@components/ui";
 import type { FloorPlan } from "@shared-types";
 import { CheckCircle2, Expand, Layers, X } from "lucide-react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./ProjectFloorPlans.module.scss";
 
@@ -75,7 +75,7 @@ export const ProjectFloorPlans: React.FC<ProjectFloorPlansProps> = ({
                 onClick={() => setIsZoomOpen(true)}
                 aria-label={`Phóng to bản vẽ ${activePlan.name}`}
               >
-                <Image
+                <SafeImage
                   src={activePlan.imageUrl}
                   alt={activePlan.name}
                   title={activePlan.name}
@@ -146,7 +146,7 @@ export const ProjectFloorPlans: React.FC<ProjectFloorPlansProps> = ({
               <X size={20} />
             </button>
             <div className={styles.lightboxMedia}>
-              <Image
+              <SafeImage
                 src={activePlan.imageUrl}
                 alt={activePlan.name}
                 title={activePlan.name}

@@ -1,10 +1,10 @@
 "use client";
 
 import { ScrollReveal } from "@components/animate-ui";
+import { SafeImage } from "@components/common";
 import { Container } from "@components/ui";
 import type { GallerySpaceCategory, ProjectImage } from "@shared-types";
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
-import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./ProjectDetailGallery.module.scss";
 
@@ -158,7 +158,7 @@ export const ProjectDetailGallery: React.FC<ProjectDetailGalleryProps> = ({
                   onClick={() => setLightboxIndex(idx)}
                   aria-label={`Phóng to: ${img.caption}`}
                 >
-                  <Image
+                  <SafeImage
                     src={img.url}
                     alt={`${projectTitle} — ${img.caption}`}
                     title={`${projectTitle} — ${img.caption}`}
@@ -226,7 +226,7 @@ export const ProjectDetailGallery: React.FC<ProjectDetailGalleryProps> = ({
             )}
 
             <div className={styles.lightboxMedia}>
-              <Image
+              <SafeImage
                 src={activeImage.url}
                 alt={activeImage.caption}
                 title={activeImage.caption}

@@ -5,6 +5,7 @@ import {
   Container,
   ScrollReveal,
 } from "@components";
+import { SafeImage } from "@components/common";
 import {
   PROJECT_CATEGORY_LABELS,
   PROJECT_STYLE_LABELS,
@@ -12,7 +13,6 @@ import {
 } from "@constants";
 import type { Project, ProjectType } from "@shared-types";
 import { Calendar, Home, MapPin } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 import styles from "./ProjectDetailHero.module.scss";
@@ -114,7 +114,7 @@ export const ProjectDetailHero: React.FC<ProjectDetailHeroProps> = ({
 
         <ScrollReveal>
           <div className={styles.showcase}>
-            <Image
+            <SafeImage
               src={project.coverImage}
               alt={project.title}
               title={project.title}

@@ -31,6 +31,16 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
       {
+        protocol: "https",
+        hostname: "**.axhome.vn",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "axhome.vn",
+        pathname: "/**",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         port: "8080",

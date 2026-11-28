@@ -10,6 +10,7 @@ import {
   CompanyIntro,
   ContactCta,
   Container,
+  SafeImage,
   ScrollReveal,
   SectionHeader,
   ServicesSection,
@@ -94,7 +95,7 @@ async function FeaturedProjectsGrid() {
         <StaggerItem key={project.id}>
           <article className={styles.projectCard}>
             <div className={styles.imageWrapper}>
-              <Image
+              <SafeImage
                 src={project.coverImage}
                 alt={project.title}
                 title={project.title}

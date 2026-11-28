@@ -1,3 +1,4 @@
+import { isValidImageSrc } from "@lib";
 import type {
   FloorPlan,
   GallerySpaceCategory,
@@ -7,6 +8,16 @@ import type {
   ProjectMilestone,
 } from "@shared-types";
 import { z } from "zod";
+
+const imageUrlStringSchema = (emptyMsg: string) =>
+  z
+    .string()
+    .trim()
+    .min(1, emptyMsg)
+    .refine(
+      isValidImageSrc,
+      "Đường dẫn ảnh phải bắt đầu bằng https://, http:// hoặc /",
+    );
 
 export const SPACE_CATEGORY_OPTIONS: ReadonlyArray<{
   value: GallerySpaceCategory;
@@ -35,7 +46,7 @@ export function slugifyVietnamese(input: string): string {
 
 export const galleryItemSchema = z.object({
   id: z.string(),
-  url: z.string().trim().min(1, "Vui lòng chọn hoặc nhập đường dẫn ảnh."),
+  url: imageUrlStringSchema("Vui lòng chọn hoặc nhập đường dẫn ảnh."),
   caption: z.string().trim().min(1, "Vui lòng nhập chú thích cho góc nhìn."),
   type: z.enum(["render_3d", "real_photo"]),
   spaceCategory: z.enum([
@@ -59,7 +70,7 @@ export const floorPlanItemSchema = z.object({
     .string()
     .trim()
     .min(1, "Vui lòng nhập tên tầng (VD: Mặt bằng Tầng 1)."),
-  imageUrl: z.string().trim().min(1, "Vui lòng tải ảnh hoặc nhập link bản vẽ."),
+  imageUrl: imageUrlStringSchema("Vui lòng tải ảnh hoặc nhập link bản vẽ."),
   areaSquareMeters: z
     .number()
     .refine((v) => !Number.isNaN(v) && v > 0, "Diện tích tầng phải lớn hơn 0."),
@@ -162,10 +173,9 @@ export const projectEditorSchema = z.object({
   testimonialRole: z.string(),
   testimonialQuote: z.string(),
 
-  coverImage: z
-    .string()
-    .trim()
-    .min(1, "Vui lòng tải lên hoặc chọn Ảnh đại diện chính (16:9)."),
+  coverImage: imageUrlStringSchema(
+    "Vui lòng tải lên hoặc chọn Ảnh đại diện chính (16:9).",
+  ),
   gallery: z.array(galleryItemSchema),
   floorPlans: z.array(floorPlanItemSchema),
   milestones: z.array(milestoneItemSchema),

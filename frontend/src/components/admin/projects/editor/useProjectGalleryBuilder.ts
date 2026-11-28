@@ -1,7 +1,7 @@
 "use client";
 
 import { useDeleteMedia, useUploadMedia } from "@hooks";
-import { validateImageFile } from "@lib";
+import { isValidImageSrc, validateImageFile } from "@lib";
 import { useRef, useState } from "react";
 import { type UseFormReturn, useFieldArray } from "react-hook-form";
 import type { ProjectEditorFormValues } from "./project-editor.schema";
@@ -181,6 +181,13 @@ export function useProjectGalleryBuilder(
   const handleApplyCoverUrl = () => {
     const trimmed = coverUrlDraft.trim();
     if (!trimmed) return;
+    if (!isValidImageSrc(trimmed)) {
+      setUploadError(
+        "Đường dẫn ảnh đại diện không hợp lệ. Vui lòng nhập URL bắt đầu bằng https://, http:// hoặc /",
+      );
+      return;
+    }
+    setUploadError(null);
     const previousCover = watch("coverImage");
     setValue("coverImage", trimmed, {
       shouldDirty: true,
@@ -194,6 +201,13 @@ export function useProjectGalleryBuilder(
   const handleAddGalleryUrl = () => {
     const trimmed = galleryUrlDraft.trim();
     if (!trimmed) return;
+    if (!isValidImageSrc(trimmed)) {
+      setUploadError(
+        "Đường dẫn ảnh thư viện không hợp lệ. Vui lòng nhập URL bắt đầu bằng https://, http:// hoặc /",
+      );
+      return;
+    }
+    setUploadError(null);
     appendGallery({
       id: `img-${Date.now()}`,
       url: trimmed,

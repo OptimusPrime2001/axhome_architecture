@@ -16,6 +16,7 @@ import {
   StaggerGroup,
   StaggerItem,
 } from "@components/animate-ui";
+import { SafeImage } from "@components/common";
 import {
   PROJECT_CATEGORY_LABELS,
   PROJECT_STYLE_LABELS,
@@ -29,7 +30,6 @@ import {
   MapPin,
   Search,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./ProjectsCatalogue.module.scss";
 import { useProjectsCatalogue } from "./useProjectsCatalogue";
@@ -250,7 +250,7 @@ export const ProjectsCatalogueClient: React.FC<
                   className={styles.card}
                 >
                   <div className={styles.mediaWrapper}>
-                    <Image
+                    <SafeImage
                       src={project.coverImage}
                       alt={project.title}
                       title={project.title}

@@ -6,4 +6,5 @@ export * from "./logo";
 export * from "./mobile-bottom-nav";
 export * from "./mobile-drawer";
 export * from "./query-provider";
+export * from "./safe-image";
 export * from "./seo";

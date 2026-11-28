@@ -7,9 +7,9 @@ import {
   StaggerGroup,
   StaggerItem,
 } from "@components";
+import { SafeImage } from "@components/common";
 import { PROJECT_STYLE_LABELS, PROJECT_TYPE_LABELS } from "@constants";
 import type { Project, ProjectType } from "@shared-types";
-import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 import styles from "./RelatedProjects.module.scss";
@@ -61,7 +61,7 @@ export const RelatedProjects: React.FC<RelatedProjectsProps> = ({
             <StaggerItem key={project.id}>
               <Link href={`/projects/${project.slug}`} className={styles.card}>
                 <div className={styles.mediaWrapper}>
-                  <Image
+                  <SafeImage
                     src={project.coverImage}
                     alt={project.title}
                     title={project.title}

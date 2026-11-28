@@ -1,8 +1,8 @@
 "use client";
 
-import { Button, Input, Label, Textarea } from "@components";
+import { Button, Input, Label, SafeImage, Textarea } from "@components";
 import { useDeleteMedia, useUploadMedia } from "@hooks";
-import { validateImageFile } from "@lib";
+import { isValidImageSrc, validateImageFile } from "@lib";
 import {
   ArrowDown,
   ArrowUp,
@@ -12,7 +12,6 @@ import {
   Upload,
   X,
 } from "lucide-react";
-import Image from "next/image";
 import type React from "react";
 import { useRef, useState } from "react";
 import { type UseFormReturn, useFieldArray } from "react-hook-form";
@@ -233,8 +232,8 @@ export const ProjectFloorPlansBuilder: React.FC<
                   {/* Blueprint Image Upload & Preview */}
                   <div className={styles.blueprintCol}>
                     <div className={styles.blueprintFrame}>
-                      {currentImg ? (
-                        <Image
+                      {currentImg && isValidImageSrc(currentImg) ? (
+                        <SafeImage
                           src={currentImg}
                           alt={
                             floorPlansValues[index]?.name ||
